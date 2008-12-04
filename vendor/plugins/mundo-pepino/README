@@ -1,0 +1,15 @@
+# mundo-pepino
+
+## Required gems
+* cucumber
+* webrat
+* rspec
+* rspec-rails
+
+## Required plugins 
+* fixture_replacement (http://replacefixtures.rubyforge.org/)
+
+    $ script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
+    $ script/generate fixture_replacement
+
+

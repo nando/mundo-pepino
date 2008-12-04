@@ -1,0 +1,26 @@
+class String
+  %w{ number model }.each do |name|
+    cattr_accessor(name + '_mappings')
+    eval('@@' +  name + '_mappings = {}')
+
+    define_method 'to_' +  name do
+      mapping = nil
+      String.send(name + '_mappings').each do |key, value|
+        regexp = if key.is_a?(Regexp)
+          key
+        else
+          Regexp.new(key.to_s, Regexp::IGNORECASE)
+        end
+        (mapping = value) && break if self =~ regexp
+      end
+      mapping || self.send('default_' + name)
+    end
+  end
+
+  def default_number
+    self.to_i
+  end
+
+  def default_model
+  end
+end
