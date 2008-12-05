@@ -1,5 +1,5 @@
 class String
-  %w{ number model }.each do |name|
+  %w{ number model field }.each do |name|
     cattr_accessor(name + '_mappings')
     eval('@@' +  name + '_mappings = {}')
 
@@ -13,7 +13,11 @@ class String
         end
         (mapping = value) && break if self =~ regexp
       end
-      mapping || self.send('default_' + name)
+      mapping || if self.respond_to?('default_' + name)
+        self.send('default_' + name)
+      else
+        nil
+      end
     end
   end
 
@@ -21,6 +25,4 @@ class String
     self.to_i
   end
 
-  def default_model
-  end
 end

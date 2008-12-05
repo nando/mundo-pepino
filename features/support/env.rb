@@ -21,6 +21,10 @@ String.model_mappings = {
   /huert[oa]s?/i => Orchard
 }
 
+String.field_mappings = {
+  /nombres?/i => :name
+}
+
 World do
   MundoPepino.new
 end

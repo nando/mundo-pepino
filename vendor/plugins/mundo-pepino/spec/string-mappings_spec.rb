@@ -1,8 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../../config/environment')
-require File.expand_path(File.dirname(__FILE__)) + '/../lib/string-mappings'
+require File.expand_path(File.dirname(__FILE__)) + '/../lib/string_mappings'
 require 'spec'
 
 describe 'String mapping' do
+  # NUMBERS ###########################################
   it 'should translate numbers' do
     # With a regexp...
     String.number_mappings[/una?/i] = 1 
@@ -22,6 +23,7 @@ describe 'String mapping' do
     'ningún'.to_number.should == 0
   end
 
+  # MODELS ###########################################
   it 'should translate models' do
     String.model_mappings[:vector] = Array
     'Vector'.to_model.should == Array
@@ -30,4 +32,16 @@ describe 'String mapping' do
   it 'should translate unmapped models to nil' do
     'Tabla'.to_model.should == nil
   end
+
+  # FIELDS (column names) ############################
+  it 'should translate fields (column names)' do
+    String.field_mappings[/nombres?/i] = :name
+    'Nombre'.to_field.should == :name
+    'nombreS'.to_field.should == :name
+  end
+
+  it 'should translate unmapped fields to nil' do
+    'Apellidos'.to_field.should == nil
+  end
+
 end
