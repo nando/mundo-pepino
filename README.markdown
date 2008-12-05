@@ -2,7 +2,7 @@
 
 ## What's in this world...
 
-Expresing our app behavour with a natural language has to deal with the fact that **one sentence can be expresed in many other ways**.
+Expresing our app behavour with a natural language has to deal with the fact that **one sentence can be expresed in many different ways**.
 
 This fact can easily drive us towards an **explosion of the step definitions** making the maintenance of our app more difficult. 
 
