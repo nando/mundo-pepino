@@ -11,7 +11,6 @@ require 'cucumber/rails/rspec'
 #require 'webrat/rspec-rails'
 
 require 'mundo-pepino'
-
 String.number_mappings = {
   /una?/i => 1,
   :dos    => 2,
@@ -23,6 +22,10 @@ String.model_mappings = {
 
 String.field_mappings = {
   /nombres?/i => :name
+}
+
+String.url_mappings = {
+  /la (portada|home)/i => '/'
 }
 
 World do

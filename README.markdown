@@ -8,13 +8,19 @@ This fact can easily drive us towards an **explosion of the step definitions** m
 
 At the same time, to describe an app **there is a group of sentences that we're very likely to need**, like for example those which refer to posible interactions of the user while browsing a site.
 
-Currently 'script/generate cucumber' give to **English** cucumberists a proposal for some of those common steps in step_definitions/webrat_steps.rb
+Currently `script/generate cucumber` give to **English** cucumberists a proposal for some of those common steps in `step_definitions/webrat_steps.rb`.
 
-mundo-pepino will be an already implemented set of step definitions frequently needed while writin a feature in **Spanish**, hopefully with all the 'script/generate cucumber' proposals translated inside.
+mundo-pepino will be an already implemented set of step definitions frequently needed while writin a feature in **Spanish**, hopefully with all the `script/generate cucumber` proposals translated inside.
 
 Bon appetit!
 
 ## Dado el contexto (Givens)
 
-Escenarios definidos/implementados:
-* Creación de uno o varios registros con un nombre opcional
+* Creación de uno o varios registros asignándoles opcionalmente un nombre
+
+## Cuando algo ocurre (Whens)
+
+* Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
+
+
+(*) Paso "oficialmente" común (generado en inglés por `script/generate cucumber`)

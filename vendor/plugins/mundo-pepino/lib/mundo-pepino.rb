@@ -1,5 +1,7 @@
 require 'string_mappings'
 require 'definiciones/dado_contexto'
+require 'definiciones/cuando_ocurre'
+require 'definiciones/entonces_pasa'
 
 class MundoPepino < Cucumber::Rails::World
   include FixtureReplacement
@@ -17,4 +19,22 @@ class MundoPepino < Cucumber::Rails::World
     @resources ||= []
     @resources << factory(resource, attributes)
   end
+
+
+  def shouldify(should_or_not)
+    should_or_not.downcase == 'debo' ? :should : :should_not
+  end
+
+  def not_shouldify(should_or_not)
+    shouldify(should_or_not) == :should ? :should_not : :should
+  end
+
+  def unquote(string_or_array)
+    if string_or_array.is_a?(Array)
+      string_or_array.map { |str| unquote(str) }
+    else
+      string_or_array =~ /^['"](.*)['"]$/ ? $1 : string_or_array
+    end
+  end
+  
 end

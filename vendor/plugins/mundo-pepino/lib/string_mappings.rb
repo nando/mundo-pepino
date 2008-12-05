@@ -1,5 +1,5 @@
 class String
-  %w{ number model field }.each do |name|
+  %w{ number model field url }.each do |name|
     cattr_accessor(name + '_mappings')
     eval('@@' +  name + '_mappings = {}')
 
@@ -25,4 +25,7 @@ class String
     self.to_i
   end
 
+  def default_url
+    self
+  end
 end

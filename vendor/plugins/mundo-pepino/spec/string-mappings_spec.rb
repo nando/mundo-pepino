@@ -44,4 +44,15 @@ describe 'String mapping' do
     'Apellidos'.to_field.should == nil
   end
 
+  # URLs #############################################
+  it 'should translate URLs' do
+    String.url_mappings[/la (portada|home)/i] = '/'
+    'la portada'.to_url.should == '/'
+    'LA HOME'.to_url.should == '/'
+  end
+
+  it 'should translate unmapped URLs to themselves' do
+    '/index.html'.to_url.should == '/index.html'
+  end
+
 end
