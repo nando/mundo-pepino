@@ -7,8 +7,11 @@ Característica: implementación de pasos genéricos
 # Dado el contexto (Givens)
 ##########################################################################
 
+  Escenario: Creación de uno o varios registros con un nombre opcional
   ########################################################################
-  # Patrón: Dado que hay _numero_ _modelo_( llamado _nombre_)
+  # Patrón: 
+  #   Dado que hay _numero_ _modelo_( llamado _nombre_)
+  #
   # Descripción:
   #   Nos crea una o más instancias de un modelo con la posibilidad de 
   #   asociar a las mismas un _nombre_ determinado.
@@ -23,7 +26,6 @@ Característica: implementación de pasos genéricos
   #   haría que dichas asignaciones se llevasen a cabo sobre el campo
   #   "title" en lugar de sobre "name".
   ########################################################################
-  Escenario: Creación de uno o varios registros con un nombre opcional
     Dado que hay un huerto
        Y que hay una huerta
        Y que hay un huerto "En el río"
@@ -43,30 +45,20 @@ Característica: implementación de pasos genéricos
 ##########################################################################
 # Cuando algo ocurre (Whens)
 ##########################################################################
+
+  Escenario: Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
   ########################################################################
-  # Patrón: Cuando visito _url_o_nombre_
+  # Patrón: 
+  #   Entonces visito _url_o_nombre_
+  #
   # Descripción:
   #   Solicita la URL referida comprobando previamente si el valor de la 
   #   misma ha sido mapeado en String.url_mappings.
   #
-  #   Por ejemplo:
-  #  
-  #     Cuando visito /
-  #
-  #   Sería equivalente a tener definido el siguente mapeo:
-  #
-  #     String.url_mappings[/la (portada|home)/i] = '/'
-  #
-  #   y escribir:
-  #     
-  #     Cuando visito la portada
-  #   
-  #   o:
-  # 
-  #     Cuando visito La Home
-  #
+  # Ejemplos:
+  #   Cuando visito /
+  #   Cuando visito la portada
   ########################################################################
-  Escenario: Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
     Cuando visito /
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
     Y visito la portada
@@ -75,3 +67,30 @@ Característica: implementación de pasos genéricos
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
 
 
+##########################################################################
+# Entonces pasa (Thens)
+##########################################################################
+
+  Escenario: Tenemos una etiqueta HTML opcionalmente con un contenido concreto
+  ########################################################################
+  # Patrón: 
+  #   Entonces (no) debo ver la etiqueta _selector_( con el valor "_valor_")
+  #
+  # Descripción:
+  #   Comprueba la existencia o inexistencia de una etiqueta/selector que
+  # opcionalmente debe tener un contenido concreto (case sensitive).
+  #
+  # Ejemplos:
+  #  
+  #     Entonces debo ver la etiqueta H1
+  #     Entonces no debo ver la etiqueta div#title con el valor "Tomate"
+  #
+  ########################################################################
+    Cuando visito la portada
+    Entonces debo ver la etiqueta H1
+    Entonces no debo ver la etiqueta HR
+    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+    Entonces no debo ver la etiqueta H1 con el valor "PORTADA DE MUNDO PEPINO"
+    Entonces debo ver la etiqueta DIV#slogan con el valor "Todo un huerto para ti"
+    Entonces no debo ver la etiqueta DIV#title con el valor "Todo un huerto para ti"
+    

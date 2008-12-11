@@ -22,5 +22,7 @@ Bon appetit!
 
 * Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
 
+## Entonces pasa (Thens)
 
-(*) Paso "oficialmente" común (generado en inglés por `script/generate cucumber`)
+* Tenemos (o no) una etiqueta HTML opcionalmente con un contenido concreto
+
