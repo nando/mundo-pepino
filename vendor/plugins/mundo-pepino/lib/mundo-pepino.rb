@@ -1,7 +1,17 @@
-require 'string_mappings'
+require 'string-mapper'
 require 'definiciones/dado_contexto'
 require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'
+
+String.add_mapper :model
+String.add_mapper :field
+String.add_mapper(:url, 
+  /la (portada|home)/i => '/') { |string| string }
+String.add_mapper(:number, { 
+  /una?/i => 1,
+  :dos    => 2,
+  :tres   => 3,
+  :cuatro => 4 }) { |string| string.to_i }
 
 class MundoPepino < Cucumber::Rails::World
   include FixtureReplacement

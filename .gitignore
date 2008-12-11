@@ -1,3 +1,5 @@
 log
 tmp
 db/schema.rb
+vendor/plugins/string-mapper
+vendor/plugins/fixture_replacement2

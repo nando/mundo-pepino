@@ -12,4 +12,6 @@
     $ script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
     $ script/generate fixture_replacement
 
+* string-mapper (http://github.com/nando/string-mapper)
 
+    $ script/plugin install git://github.com/nando/string-mapper.git
