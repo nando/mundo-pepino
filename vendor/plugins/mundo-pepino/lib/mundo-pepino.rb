@@ -13,8 +13,23 @@ String.add_mapper(:number, {
   :tres   => 3,
   :cuatro => 4 }) { |string| string.to_i }
 
+
 class MundoPepino < Cucumber::Rails::World
   include FixtureReplacement
+
+  class ResourceNotFound < RuntimeError
+    def initialize(resource_info=nil)
+      @resource_info = resource_info && " (#{resource_info})"
+    end
+    def message
+      "Resource not found#{@resource_info}"
+    end
+  end
+  class WithoutResources < ResourceNotFound
+    def initialize
+      super 'there is no resources'
+    end
+  end
 
   def factory(model_or_modelo, attributes = {})
     model = if model_or_modelo.is_a?(String)
@@ -55,7 +70,7 @@ class MundoPepino < Cucumber::Rails::World
     if res = last_resource
       eval("#{res.class.name.downcase}_path(#{res.id})")
     else
-      raise 'No resources found!!!'
+      raise WithoutResources
     end
   end
 end
