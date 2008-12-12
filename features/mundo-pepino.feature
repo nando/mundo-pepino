@@ -7,7 +7,7 @@ Característica: implementación de pasos genéricos
 # Dado el contexto (Givens)
 ##########################################################################
 
-  Escenario: Creación de uno o varios registros con un nombre opcional
+  Escenario: Creación de uno o varios recursos con un nombre opcional
   ########################################################################
   # Patrón: 
   #   Dado que hay _numero_ _modelo_( llamado _nombre_)
@@ -15,6 +15,12 @@ Característica: implementación de pasos genéricos
   # Descripción:
   #   Nos crea una o más instancias de un modelo con la posibilidad de 
   #   asociar a las mismas un _nombre_ determinado.
+  #
+  #   Si se solicita la creación de más de una instancia es posible de
+  #   asignar un nombre distinto a cada una separándolos en _nombre_ con
+  #   con "," o "y". Si _nombre_ no contiene comas o el número de partes
+  #   resultantes no coincide con _numero_, _nombre_ será asignado a
+  #   todas las instancias.
   #
   #   Dicha asignación se llevará a cabo sobre el campo "name" si no se
   #   indica lo contrario mapeando "nombre" en String.field_mappings.
@@ -41,12 +47,52 @@ Característica: implementación de pasos genéricos
        Y que hay 2 huertos "Regadío"
        Y que hay 2 huertos llamados "Secano"
        Y que hay 2 huertas llamadas "Secano"
-    Entonces existen 14 huertos
+       Y que hay 3 huertas llamadas "H-01, H-02 y H-03"
+    Entonces existen 17 huertos
            Y existe un huerto "En el río"
            Y existe una huerta "En el castro"
            Y existen 3 huertos "Regadío"
            Y existen 5 huertas "Secano"
+           Y existe un huerto "H-01"
+           Y existe un huerto "H-02"
+           Y existe un huerto "H-03"
 
+  Escenario: Asignación de un valor en un campo de los últimos recursos definidos
+  ########################################################################
+  # Patrón: 
+  #   Dado que dicho/a (_modelo_)? tiene/n como _campo_ "_valor_" (_unidades_)?
+  #
+  # Ejemplos:
+  #   Dado que dicho huerto tiene como área "25" hectáreas
+  #   Dado que dichas huertas tienen como abono "Nitrogenado de 1ª calidad"
+  #
+  # Descripción:
+  #     Asigna un _valor_ a un _campo_ del último o últimos recursos definidos
+  #   del _modelo_ mencionado
+  #
+  #     Dicha asignación se llevará a cabo de acuerdo con lo siguiente:
+  #
+  #   - Si _campo_ está mapeado con un modelo el valor será el registro de 
+  #     dicho modelo cuyo nombre sea _valor_, creándolo si no existe aún.
+  #
+  #   - En caso contrario se asignará directamente _valor_ a _campo_.to_field 
+  #
+  #   Ejemplo de mapeo de campo:
+  #
+  #     String.field_mappings[/[áa]rea/i] = 'area'
+  #
+  #   Ejemplo de mapeo de modelo:
+  #
+  #     String.model_mappings[/(abono|fertilizante)s?$/i] = Fertilizer
+  #
+  ########################################################################
+  #  Dado que hay un huerto llamado "H-01"
+  #     Y que dicho huerto tiene como área "60" hectáreas
+  #     Y que dicho huerto tiene como latitud "N 40° 44,340"
+  #     Y que dicho huerto tiene como longitud "W 003° 48,730"
+  #     Y que dicho huerto tiene como abono "Nitrogenado de 2ª calidad"
+  #     Y que hay tres huertos llamados "H-02, H-03 y H-04"
+  
 ##########################################################################
 # Cuando algo ocurre (Whens)
 ##########################################################################
