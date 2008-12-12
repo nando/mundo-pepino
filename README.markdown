@@ -21,6 +21,7 @@ Bon appetit!
 ## Cuando algo ocurre (Whens)
 
 * Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
+* Solicitud de la URL asociada al último recurso definido
 
 ## Entonces pasa (Thens)
 

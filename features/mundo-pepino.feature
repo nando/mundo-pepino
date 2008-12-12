@@ -49,7 +49,7 @@ Característica: implementación de pasos genéricos
   Escenario: Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
   ########################################################################
   # Patrón: 
-  #   Entonces visito _url_o_nombre_
+  #   Cuando visito _url_o_nombre_
   #
   # Descripción:
   #   Solicita la URL referida comprobando previamente si el valor de la 
@@ -61,10 +61,28 @@ Característica: implementación de pasos genéricos
   ########################################################################
     Cuando visito /
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
-    Y visito la portada
+    Cuando visito la portada
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
-    Y visito la HOME
+    Cuando visito la HOME
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+
+  Escenario: Solicitud de la URL asociada al último recurso definido
+  ########################################################################
+  # Patrón: 
+  #   Cuando visito su página
+  #
+  # Descripción:
+  #   Solicita la ruta correspondiente al último recurso (instancia de AR 
+  # en @resources) a partir de su mapeo en routes.rb 
+  #
+  # Ejemplo:
+  #   Cuando visito su página
+  #
+  ########################################################################
+    Dado que hay un huerto "Esplendoroso"
+    Cuando visito su página
+    Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
+           Y debo ver la etiqueta H2 con el valor "Esplendoroso"
 
 
 ##########################################################################

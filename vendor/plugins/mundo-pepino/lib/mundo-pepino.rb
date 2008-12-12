@@ -47,4 +47,15 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
+  def last_resource
+    @resources && @resources.last
+  end
+
+  def last_resource_url
+    if res = last_resource
+      eval("#{res.class.name.downcase}_path(#{res.id})")
+    else
+      raise 'No resources found!!!'
+    end
+  end
 end

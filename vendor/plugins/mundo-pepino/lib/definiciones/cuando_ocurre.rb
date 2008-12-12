@@ -2,6 +2,11 @@ module Cucumber::StepMethods
   alias_method :Cuando, :When
 end
 
-Cuando /^visito (.+)$/i do |url_o_nombre|
-  visit url_o_nombre.to_url
+Cuando /^visito (.+)$/i do |pagina|
+  visit case pagina
+  when /su p[áa]gina$/i, /su portada$/i:
+    last_resource_url
+  else
+    pagina.to_url
+  end
 end
