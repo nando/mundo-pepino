@@ -25,9 +25,30 @@ class MundoPepino < Cucumber::Rails::World
       "Resource not found#{@resource_info}"
     end
   end
+
   class WithoutResources < ResourceNotFound
     def initialize
       super 'there is no resources'
+    end
+  end
+
+  class NotMapped < RuntimeError
+    def initialize(type, string)
+      @type = type
+      @string = string
+    end
+    def message
+      "#{@type} not mapped '#{@string}'"
+    end
+  end
+  class ModelNotMapped < NotMapped
+    def initialize(string)
+      super('Field', string)
+    end
+  end
+  class FieldNotMapped < NotMapped
+    def initialize(string)
+      super('Field', string)
     end
   end
 
@@ -42,7 +63,7 @@ class MundoPepino < Cucumber::Rails::World
 
   def add_resource(resource, attributes={})
     @resources ||= []
-    @resources << factory(resource, attributes)
+    @resources.unshift factory(resource, attributes)
   end
 
 
@@ -63,7 +84,7 @@ class MundoPepino < Cucumber::Rails::World
   end
   
   def last_resource
-    @resources && @resources.last
+    @resources && @resources.first
   end
 
   def last_resource_url
@@ -73,4 +94,26 @@ class MundoPepino < Cucumber::Rails::World
       raise WithoutResources
     end
   end
+
+  def last_resource_of(modelo)
+    if model = modelo.to_model
+      detect_first @resources, :is_a?, model
+    else
+      raise ModelNotMapped.new(modelo)
+    end
+  end
+
+  def detect_first(arr, method, value)
+    if value.is_a? String
+      method ||= :name
+      arr.detect { |r| r.respond_to?(method) && (r.send(method) =~ /#{value}/i) }
+    elsif value.is_a? Class
+      method ||= :is_a?
+      arr.detect { |r| r.respond_to?(method) && r.send(method, value) }
+    else
+      method ||= :id
+      arr.detect { |r| r.respond_to?(method) && r.send(method) == value }
+    end
+  end
+  
 end

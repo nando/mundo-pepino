@@ -13,7 +13,14 @@ require 'cucumber/rails/rspec'
 require 'mundo-pepino'
 
 String.model_mappings = {
-  /huert[oa]s?/i => Orchard
+  /huert[oa]s?/i => Orchard,
+  /(abono|fertilizante)s?/i => Fertilizer
+}
+
+String.field_mappings = {
+  /[áa]reas?/i => 'area',
+  /latitud(es)?/i => 'latitude',
+  /longitud(es)?/i => 'longitude'
 }
 
 World do

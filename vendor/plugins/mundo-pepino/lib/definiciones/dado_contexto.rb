@@ -17,3 +17,14 @@ Dado /^que hay (un|una|\d+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |n
   end
   attribs.each { |hash| add_resource(modelo.to_model, hash) }
 end
+
+Dado /^que dicho (.+) tiene como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
+  if resource = last_resource_of(modelo)
+    if child_model = campo.to_model
+    elsif field = campo.to_field
+      resource.update_attribute field, valor
+    else
+      raise MundoPepino::FieldNotMapped.new(campo)
+    end
+  end
+end

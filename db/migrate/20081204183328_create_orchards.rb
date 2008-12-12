@@ -3,8 +3,9 @@ class CreateOrchards < ActiveRecord::Migration
     create_table :orchards do |t|
       t.string :name
       t.date :since
-      t.integer :longitude
-      t.integer :latitude
+      t.integer :area
+      t.string :longitude
+      t.string :latitude
 
       t.timestamps
     end
