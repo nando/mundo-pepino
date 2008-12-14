@@ -20,5 +20,10 @@ Then /^el (.+) "(.+)" tiene como (.+) "(.+)"$/ do |modelo, nombre, campo, valor|
 end
 
 Then /^como (.+) "(.+)"$/ do |campo, valor|
-  (@then_resource.send campo.to_field).to_s.should == valor
+  if child_model = campo.to_model
+    child = child_model.find_by_name(valor)
+    (@then_resource.send child_model.name.downcase).should == child
+  else
+    (@then_resource.send campo.to_field).to_s.should == valor
+  end
 end

@@ -7,6 +7,8 @@ class CreateOrchards < ActiveRecord::Migration
       t.string :longitude
       t.string :latitude
 
+      t.integer :fertilizer_id
+
       t.timestamps
     end
   end

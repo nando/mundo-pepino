@@ -5,6 +5,7 @@ require 'definiciones/entonces_pasa'
 
 String.add_mapper :model
 String.add_mapper :field
+String.add_mapper :name_field
 String.add_mapper(:url, 
   /la (portada|home)/i => '/') { |string| string }
 String.add_mapper(:number, { 
@@ -64,9 +65,12 @@ class MundoPepino < Cucumber::Rails::World
   def add_resource(resource, attributes={})
     @resources ||= []
     @resources.unshift factory(resource, attributes)
+    @resources.first
   end
-
-
+  
+  def name_field_for(modelo)
+    modelo.to_name_field || 'nombre'.to_field || 'name'
+  end
   def shouldify(should_or_not)
     should_or_not.downcase == 'debo' ? :should : :should_not
   end

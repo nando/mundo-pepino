@@ -5,7 +5,7 @@ end
 Dado /^que hay (un|una|\d+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   number = numero.to_number
   attribs = if nombre
-    field = ('nombre'.to_field || 'name')
+    field = name_field_for(modelo)
     names = nombre.split(/ ?, | y /)
     if names.size == number
       names.map { |name| { field => name } }
@@ -20,8 +20,13 @@ end
 
 Dado /^que dicho (.+) tiene como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
   if resource = last_resource_of(modelo)
-    if child_model = campo.to_model
-    elsif field = campo.to_field
+    field = if child_model = campo.to_model
+      valor = add_resource(child_model, name_field_for(modelo) => valor)
+      child_model.name.downcase
+    else 
+      campo.to_field
+    end
+    if field
       resource.update_attribute field, valor
     else
       raise MundoPepino::FieldNotMapped.new(campo)

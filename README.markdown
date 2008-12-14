@@ -17,6 +17,7 @@ Bon appetit!
 ## Dado el contexto (Givens)
 
 * Creación de uno o varios registros asignándoles opcionalmente un nombre
+* Asignación de un valor en un campo del último (o últimos) recurso definido
 
 ## Cuando algo ocurre (Whens)
 

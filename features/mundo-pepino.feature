@@ -86,16 +86,16 @@ Característica: implementación de pasos genéricos
   #     String.model_mappings[/(abono|fertilizante)s?$/i] = Fertilizer
   #
   ########################################################################
-    Dado que hay un huerto llamado "H-01"
+    Dado que hay un huerto llamado "HU-01"
        Y que dicho huerto tiene como área "60" hectáreas
        Y que dicho huerto tiene como latitud "N 40° 44,340"
        Y que dicho huerto tiene como longitud "W 003° 48,730"
-  #     Y que dicho huerto tiene como abono "Nitrogenado de 2ª calidad"
+       Y que dicho huerto tiene como abono "Nitrogenado de 2ª calidad"
   #     Y que hay tres huertos llamados "H-02, H-03 y H-04"
-    Entonces el huerto "H-01" tiene como área "60"
+    Entonces el huerto "HU-01" tiene como área "60"
            Y como latitud "N 40° 44,340"
            Y como longitud "W 003° 48,730"
-  #         Y como abono "Nitrogenado de 2ª calidad"
+           Y como abono "Nitrogenado de 2ª calidad"
 
 ##########################################################################
 # Cuando algo ocurre (Whens)
