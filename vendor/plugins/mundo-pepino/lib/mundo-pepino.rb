@@ -53,18 +53,36 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
-  def factory(model_or_modelo, attributes = {})
+  def create(model, attributes = {})
+    self.send "create_#{model.name.downcase}", attributes
+  end
+
+  def find_or_create(model_or_modelo, attribs = {}) 
     model = if model_or_modelo.is_a?(String)
       model_or_modelo.to_model
     else
       model_or_modelo
     end
-    self.send "create_#{model.name.downcase}", attributes
+    if attribs.any? and (obj = model.find(:first, :conditions =>
+       [attribs.keys.map{|s| s+'=?'}.join(' AND ')] + attribs.values ))
+      obj
+    else
+      create model, attribs
+    end
   end
 
-  def add_resource(resource, attributes={})
+  def add_resource(model, attribs=[])
     @resources ||= []
-    @resources.unshift factory(resource, attributes)
+    attributes = if attribs.is_a?(Hash)
+      [ attribs ] 
+    else
+      attribs
+    end
+    @resources.unshift(if attributes.size == 1
+      find_or_create(model, attributes.first)
+    else
+      attributes.map {|hash| find_or_create(model, hash) }
+    end)
     @resources.first
   end
   
@@ -101,7 +119,13 @@ class MundoPepino < Cucumber::Rails::World
 
   def last_resource_of(modelo)
     if model = modelo.to_model
-      detect_first @resources, :is_a?, model
+      if (array = last_resource) and 
+         (array.is_a?(Array)) and
+         (array.first.is_a?(model))
+        array
+      else
+        detect_first @resources, :is_a?, model
+      end
     else
       raise ModelNotMapped.new(modelo)
     end

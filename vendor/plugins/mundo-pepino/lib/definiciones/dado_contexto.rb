@@ -4,6 +4,7 @@ end
 
 Dado /^que hay ([^ ]+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   number = numero.to_number
+  model = modelo.to_model
   attribs = if nombre
     field = name_field_for(modelo)
     names = nombre.split(/ ?, | y /)
@@ -15,19 +16,35 @@ Dado /^que hay ([^ ]+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero
   else
     [{}] * number
   end
-  attribs.each { |hash| add_resource(modelo.to_model, hash) }
+  add_resource(model, attribs)
 end
 
-Dado /^que dicho (.+) tiene como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
+Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
   if resource = last_resource_of(modelo)
-    field = if child_model = campo.to_model
-      valor = add_resource(child_model, name_field_for(modelo) => valor)
+    values = if resource.is_a?(Array)
+      valores = valor.split(/ ?, | y /)
+      if valores.size == resource.size
+        valores
+      else
+        [ valor ] * resource.size
+      end
+    else
+      resource = [ resource ]
+      [ valor ]
+    end
+    field = if (child_model = campo.to_model)
+      child_name_field = name_field_for(modelo)
+      values = add_resource(child_model, 
+        values.map { |val| { child_name_field => val } })
+      values = [ values ] unless values.is_a?(Array)
       child_model.name.downcase
     else 
       campo.to_field
     end
     if field
-      resource.update_attribute field, valor
+      resource.each_with_index do |r, i| 
+        r.update_attribute field, values[i] 
+      end
     else
       raise MundoPepino::FieldNotMapped.new(campo)
     end
