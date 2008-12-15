@@ -16,9 +16,9 @@ Bon appetit!
 
 ## Dado el contexto (Givens)
 
-* [Creación de uno o varios registros asignándoles opcionalmente un nombre](features/creacion.feature)
-* Creación de uno o varios recursos a partir de una **step table**
-* Asignación de un valor en un campo del último (o últimos) recurso mencionados
+* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/features/creacion-simple.feature)
+* [Creación de uno o varios recursos a partir de una **step table**](master/features/creacion-desde-step-table.feature)
+* [Asignación de un valor en un campo del último (o últimos) recurso mencionados](master/features/asignacion-de-valor.feature)
 
 ## Cuando algo ocurre (Whens)
 

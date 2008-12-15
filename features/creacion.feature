@@ -1,3 +1,5 @@
+Característica: Creación simple
+
   Escenario: Creación de uno o varios recursos con un nombre opcional
   ########################################################################
   # Patrón: 
