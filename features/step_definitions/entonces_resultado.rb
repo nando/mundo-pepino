@@ -1,5 +1,3 @@
-
-
 Given /^que tengo la expectiva de recibir 3 veces "visits" con "\/"$/ do
   webrat = mock()
   ActionController::Integration::Session.any_instance.stubs(:new).returns(webrat)
@@ -14,16 +12,12 @@ Then /^existen? (un|una|\d+) ([^ ]+)(?: ['"](.+)["'])?$/ do |numero, modelo, nom
   end.size.should == numero.to_number
 end
 
-Then /^el (.+) "(.+)" tiene como (.+) "(.+)"$/ do |modelo, nombre, campo, valor|
-  @then_resource = modelo.to_model.find_by_name(nombre)
-  (@then_resource.send campo.to_field).to_s.should == valor
+Then /^como (.+) "(.+)"$/ do |campo, valor|
+  entonces_campo_valor(campo, valor)
 end
 
-Then /^como (.+) "(.+)"$/ do |campo, valor|
-  if child_model = campo.to_model
-    child = child_model.find_by_name(valor)
-    (@then_resource.send child_model.name.downcase).should == child
-  else
-    (@then_resource.send campo.to_field).to_s.should == valor
-  end
+Then /^el (.+) "(.+)" tiene como (.+) "(.+)"$/ do |modelo, nombre, campo, valor|
+  @then_resource = modelo.to_model.find_by_name(nombre)
+  entonces_campo_valor(campo, valor)
 end
+

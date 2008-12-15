@@ -12,6 +12,11 @@ require 'cucumber/rails/rspec'
 
 require 'mundo-pepino'
 
+Before do
+  Orchard.destroy_all
+  Fertilizer.destroy_all
+end
+
 String.model_mappings = {
   /huert[oa]s?/i => Orchard,
   /(abono|fertilizante)s?/i => Fertilizer
@@ -23,6 +28,19 @@ String.field_mappings = {
   /longitud(es)?/i => 'longitude'
 }
 
+
+class MiMundo < MundoPepino 
+  def entonces_campo_valor(campo, valor)
+    if child_model = campo.to_model
+      child = child_model.find_by_name(valor)
+      (@then_resource.send child_model.name.downcase).should == child
+    else
+      (@then_resource.send campo.to_field).to_s.should == valor
+    end
+  end
+end
+
+
 World do
-  MundoPepino.new
+  MiMundo.new
 end

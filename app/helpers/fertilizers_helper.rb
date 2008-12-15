@@ -1,0 +1,2 @@
+module FertilizersHelper
+end

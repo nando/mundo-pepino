@@ -9,7 +9,7 @@ String.add_mapper :name_field
 String.add_mapper(:url, 
   /la (portada|home)/i => '/') { |string| string }
 String.add_mapper(:number, { 
-  /una?/i => 1,
+  /un[oa]?$/i => 1,
   :dos    => 2,
   :tres   => 3,
   :cuatro => 4 }) { |string| string.to_i }
