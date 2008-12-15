@@ -4,7 +4,7 @@ require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'
 
 String.add_mapper :model
-String.add_mapper :field
+String.add_mapper :field, :nombre => 'name'
 String.add_mapper :name_field
 String.add_mapper(:url, 
   /la (portada|home)/i => '/') { |string| string }
@@ -57,17 +57,30 @@ class MundoPepino < Cucumber::Rails::World
     self.send "create_#{model.name.downcase}", attributes
   end
 
-  def find_or_create(model_or_modelo, attribs = {}) 
+  def find_or_create(model_or_modelo, attributes = {}) 
     model = if model_or_modelo.is_a?(String)
       model_or_modelo.to_model
     else
       model_or_modelo
     end
-    if attribs.any? and (obj = model.find(:first, :conditions =>
+    if attributes.any?
+      attribs = Hash.new
+      attributes.each do |key, value|
+        if child_model = key.to_model
+          child = add_resource(child_model, name_field_for(key) => value)
+          attribs[child_model.name.downcase + '_id'] = child.id
+        else
+          attribs[key] = value
+        end
+      end
+      if (obj = model.find(:first, :conditions =>
        [attribs.keys.map{|s| s+'=?'}.join(' AND ')] + attribs.values ))
-      obj
+        obj
+      else
+        create model, attribs
+      end
     else
-      create model, attribs
+      create model
     end
   end
 
@@ -131,6 +144,19 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
+  # Cucumber::Model::Table's hashes traduciendo nombres de campo
+  def translated_hashes(step_table)
+    header = step_table[0].map { |campo| campo.to_field || campo }
+    step_table[1..-1].map do |row|
+      h = {}
+      row.each_with_index do |v,n|
+        key = header[n]
+        h[key] = v
+      end
+      h
+    end
+  end
+
   def detect_first(arr, method, value)
     if value.is_a? String
       method ||= :name
@@ -143,5 +169,29 @@ class MundoPepino < Cucumber::Rails::World
       arr.detect { |r| r.respond_to?(method) && r.send(method) == value }
     end
   end
+
+  def resources_and_their_values(resource, valor)
+    if resource.is_a?(Array)
+      valores = valor.split(/ ?, | y /)
+      if valores.size == resource.size
+        [resource, valores]
+      else
+        [resource, [ valor ] * resource.size]
+      end
+    else
+      [[ resource ], [ valor ]]
+    end
+  end
   
+  def field_and_values(modelo, campo, valores)
+    field = if (child_model = campo.to_model)
+      child_name_field = name_field_for(modelo)
+      values = add_resource(child_model,
+        valores.map { |val| { child_name_field => val } })
+      values = [ values ] unless values.is_a?(Array)
+      [ child_model.name.downcase, values ]
+    else
+      [ campo.to_field, valores ]
+    end 
+  end 
 end

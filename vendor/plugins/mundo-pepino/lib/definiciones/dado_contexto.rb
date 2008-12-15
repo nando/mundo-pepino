@@ -19,30 +19,17 @@ Dado /^que hay ([^ ]+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero
   add_resource(model, attribs)
 end
 
+Dado /^(?:el|la|los|las) siguientes? (.+):$/ do |modelo, tabla|
+  model = unquote(modelo).to_model
+  add_resource model, translated_hashes(tabla.raw)
+end 
+
 Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
   if resource = last_resource_of(modelo)
-    values = if resource.is_a?(Array)
-      valores = valor.split(/ ?, | y /)
-      if valores.size == resource.size
-        valores
-      else
-        [ valor ] * resource.size
-      end
-    else
-      resource = [ resource ]
-      [ valor ]
-    end
-    field = if (child_model = campo.to_model)
-      child_name_field = name_field_for(modelo)
-      values = add_resource(child_model, 
-        values.map { |val| { child_name_field => val } })
-      values = [ values ] unless values.is_a?(Array)
-      child_model.name.downcase
-    else 
-      campo.to_field
-    end
+    resources, values = resources_and_their_values(resource, valor)
+    field,     values = field_and_values(modelo, campo, values)
     if field
-      resource.each_with_index do |r, i| 
+      resources.each_with_index do |r, i| 
         r.update_attribute field, values[i] 
       end
     else

@@ -22,11 +22,11 @@ String.model_mappings = {
   /(abono|fertilizante)s?/i => Fertilizer
 }
 
-String.field_mappings = {
+String.field_mappings.merge!({
   /[áa]reas?/i => 'area',
   /latitud(es)?/i => 'latitude',
   /longitud(es)?/i => 'longitude'
-}
+})
 
 
 class MiMundo < MundoPepino 
