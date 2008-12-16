@@ -28,8 +28,10 @@ Característica: solicitud de URL específica
   ########################################################################
     Cuando visito /
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+    Cuando visito "/"
+    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
     Cuando visito la portada
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
-    Cuando visito la HOME
+    Cuando visito "la HOME"
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
 

@@ -3,11 +3,11 @@ module Cucumber::StepMethods
 end
 
 Cuando /^visito (.+)$/i do |pagina|
-  visit case pagina
+  visit case unquoted = unquote(pagina)
   when /su p[áa]gina$/i, /su portada$/i:
     last_resource_url
   else
-    pagina.to_url
+    unquoted.to_url
   end
 end
 
