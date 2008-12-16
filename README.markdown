@@ -19,32 +19,47 @@ Bon appetit!
     $ script/plugin install git://github.com/nando/mundo-pepino.git
 
 ### Dependencias
-  Además de los clásicos **cucumber**, **webrat**, **rspec** y **rspec-rails** es necesaria la instalación los plugins de FixtureReplacement y StringMapper:
 
-* fixture_replacement (http://replacefixtures.rubyforge.org/)
+  Además de las clásicas gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails** es necesaria la instalación los siguientes plugins:
+
+#### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
 
     $ script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
     $ script/generate fixture_replacement
 
-* string-mapper (http://github.com/nando/string-mapper)
+#### [StringMapper](http://github.com/nando/string-mapper)
 
     $ script/plugin install git://github.com/nando/string-mapper.git
 
-## Definiciones en MundoPepino
+## Definiciones implementadas en MundoPepino
+
+**Cada definición** existente en MundoPepino tiene **al menos un escenario** que comprueba:
+* por un lado que la expresión regular *machea* las posibles formas de expresarla,
+* y por otro que la implementación lleva a cabo lo que se supone que debe hacer.
+
+Para todos los escenarios podríamos tener una narrativa genérica que expresase algo como lo siguiente:
+
+    Característica: implementación de pasos genéricos
+      Para escribir sólo la definición de los pasos específicos de mi proyecto
+      Como usuario de Cucumber
+      Quiero tener una serie de definiciones genéricas implementadas
+
+Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde el siguiente índice de las mismas:
+
 ### Dado el contexto (Givens)
 
-* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/features/creacion-simple.feature)
-* [Creación de uno o varios recursos a partir de una **step table**](master/features/creacion-desde-step-table.feature)
-* [Asignación de un valor en un campo del último (o últimos) recurso mencionados](master/features/asignacion-de-valor.feature)
+* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/spec/features/creacion-simple.feature)
+* [Creación de uno o varios recursos a partir de una **step table**](master/spec/features/creacion-desde-step-table.feature)
+* [Asignación de un valor en un campo del último (o últimos) recurso mencionados](master/spec/features/asignacion-de-valor.feature)
 
 ### Cuando algo ocurre (Whens)
 
-* Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
-* Solicitud de la URL asociada al último recurso definido
+* [Solicitud de una URL específica opcionalmente indicada con un nombre coloquial](master/spec/features/url-especifica.feature)
+* [Solicitud de la URL asociada al último recurso definido](master/spec/features/url-de-recurso.feature)
 
 ### Entonces pasa (Thens)
 
-* Tenemos (o no) una etiqueta HTML opcionalmente con un contenido concreto
+* [Tenemos (o no) una etiqueta HTML opcionalmente con un contenido concreto](master/spec/features/etiqueta-con-valor.feature)
 
 ## License
 
