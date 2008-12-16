@@ -19,7 +19,7 @@ Dado /^que hay ([^ ]+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero
   add_resource(model, attribs)
 end
 
-Dado /^(?:el|la|los|las) siguientes? (.+):$/ do |modelo, tabla|
+Dado /^(?:que tenemos )?(?:el|la|los|las) (?:siguientes? )?(.+):$/ do |modelo, tabla|
   model = unquote(modelo).to_model
   add_resource model, translated_hashes(tabla.raw)
 end 
