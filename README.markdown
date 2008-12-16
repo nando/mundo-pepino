@@ -44,25 +44,34 @@ Para todos los escenarios podríamos tener una narrativa genérica que expresase
       Como usuario de Cucumber
       Quiero tener una serie de definiciones genéricas implementadas
 
-Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde el siguiente índice de las mismas:
+Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice. Los **asteriscos (\*)** al final de la definición hacen referencia a las **definiciones *oficialmente comunes* **generadas en inglés por `script/generate cucumber`.
 
 ### Dado el contexto (Givens)
 
-* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/spec/features/creacion-simple.feature)
-* [Creación de uno o varios recursos a partir de una **step table**](master/spec/features/creacion-desde-step-table.feature)
-* [Asignación de un valor en un campo del último (o últimos) recurso mencionados](master/spec/features/asignacion-de-valor.feature)
+* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/spec/features/contexto-creacion-simple.feature)
+* [Creación de uno o varios recursos a partir de una **step table**](master/spec/features/contexto-creacion-desde-step-table.feature)
+* [Asignación de un valor en un campo del último (o últimos) recurso mencionados](master/spec/features/contexto-asignacion-de-valor.feature)
 
 ### Cuando algo ocurre (Whens)
 
-* [Solicitud de una URL específica opcionalmente indicada con un nombre coloquial](master/spec/features/url-especifica.feature)
-* [Solicitud de la URL asociada al último recurso definido](master/spec/features/url-de-recurso.feature)
+* [Solicitud de una URL específica opcionalmente indicada con un nombre coloquial](master/spec/features/cuando-visito-url-especifica.feature)
+* [Solicitud de la URL asociada al último recurso definido](master/spec/features/cuando-visito-url-de-recurso.feature)
+* [Pincho en un enlace \*](master/spec/features/cuando-pulso-el-enlace.feature)
+* [Pincho en un bóton (*submit*) \*](master/spec/features/cuando-pulso-el-boton.feature)
+* [Adjunto un fichero (*file*) \*](master/spec/features/cuando-.feature)
+* [Elijo una opción (*radiobutton*) \*](master/spec/features/cuando-elijo-de-radiobutton.feature)
+* [Marco (o desmarco) una casilla (*checkbox*) \*](master/spec/features/cuando-marco-el-checkbox.feature)
+* [Relleno un campo con un texto (*text* o *textarea*) \*](master/spec/features/cuando-relleno-el-campo.feature)
+* [Selecciono una opción de una lista (*select*) \*](master/spec/features/cuando-selecciono-en-listado.feature)
 
 ### Entonces pasa (Thens)
 
-* [Tenemos (o no) una etiqueta HTML opcionalmente con un contenido concreto](master/spec/features/etiqueta-con-valor.feature)
+* [Veo (o no) un texto \*](master/spec/features/veo-el-texto.feature)
+* [Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto](master/spec/features/veo-etiqueta-con-valor.feature)
+* [Veo marcada (o desmarcada) una casilla (*checkbox*) \*](master/spec/features/veo-el-checkbox.feature)
 
 ## License
 
 Copyright 2008, Fernando García Samblas <fernando.garcia at the-cocktail.com>
 
-This software is released under the GPL License (see license agreement in COPYING).
+This is free software released under the GPL License (see license agreement in COPYING).

@@ -1,6 +1,6 @@
 Característica: etiqueta/selector con valor
 
-  Escenario: Tenemos una etiqueta HTML opcionalmente con un contenido concreto
+  Escenario: Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto 
   ########################################################################
   # Patrón: 
   #   Entonces (no) debo ver la etiqueta _selector_( con el valor "_valor_")
