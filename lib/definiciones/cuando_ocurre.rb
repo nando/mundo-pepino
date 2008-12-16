@@ -10,3 +10,8 @@ Cuando /^visito (.+)$/i do |pagina|
     pagina.to_url
   end
 end
+
+Cuando /^(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|
+  clicks_button(unquote(boton))
+end
+

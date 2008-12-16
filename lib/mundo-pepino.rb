@@ -103,7 +103,7 @@ class MundoPepino < Cucumber::Rails::World
     modelo.to_name_field || 'nombre'.to_field || 'name'
   end
   def shouldify(should_or_not)
-    should_or_not.downcase == 'debo' ? :should : :should_not
+    should_or_not =~ /^(?:debo|debo ver|veo)$/i ? :should : :should_not
   end
 
   def not_shouldify(should_or_not)

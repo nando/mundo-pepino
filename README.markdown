@@ -44,7 +44,7 @@ Para todos los escenarios podríamos tener una narrativa genérica que expresase
       Como usuario de Cucumber
       Quiero tener una serie de definiciones genéricas implementadas
 
-Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice. Los **asteriscos (\*)** al final de la definición hacen referencia a las **definiciones *oficialmente comunes* **generadas en inglés por `script/generate cucumber`.
+Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice. Los **asteriscos (\*)** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`.
 
 ### Dado el contexto (Givens)
 

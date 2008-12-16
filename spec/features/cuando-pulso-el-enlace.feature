@@ -9,7 +9,6 @@ Característica: pulso el enlace
   # Descripción:
   #
   ########################################################################
-
 #When /^I follow "(.*)"$/ do |link|
 #  click_link(link)
 #end
