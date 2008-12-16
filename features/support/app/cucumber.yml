@@ -1,0 +1,1 @@
+default: --require ../env.rb --require ../steps.rb --language=es ../../../features

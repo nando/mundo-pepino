@@ -48,27 +48,27 @@ Sin embargo cada definición ha sido separada en un fichero `.feature` específi
 
 ### Dado el contexto (Givens)
 
-* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/spec/features/contexto-creacion-simple.feature)
-* [Creación de uno o varios recursos a partir de una **step table**](master/spec/features/contexto-creacion-desde-step-table.feature)
-* [Asignación de un valor en un campo del último (o últimos) recurso mencionados](master/spec/features/contexto-asignacion-de-valor.feature)
+* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/features/contexto-creacion-simple.feature)
+* [Creación de uno o varios recursos a partir de una **step table**](master/features/contexto-creacion-desde-step-table.feature)
+* [Asignación de un valor en un campo del último (o últimos) recurso mencionados](master/features/contexto-asignacion-de-valor.feature)
 
 ### Cuando algo ocurre (Whens)
 
-* [Solicitud de una URL específica opcionalmente indicada con un nombre coloquial](master/spec/features/cuando-visito-url-especifica.feature)
-* [Solicitud de la URL asociada al último recurso definido](master/spec/features/cuando-visito-url-de-recurso.feature)
-* [Pincho en un enlace \*](master/spec/features/cuando-pulso-el-enlace.feature)
-* [Pincho en un bóton (*submit*) \*](master/spec/features/cuando-pulso-el-boton.feature)
-* [Adjunto un fichero (*file*) \*](master/spec/features/cuando-.feature)
-* [Elijo una opción (*radiobutton*) \*](master/spec/features/cuando-elijo-de-radiobutton.feature)
-* [Marco (o desmarco) una casilla (*checkbox*) \*](master/spec/features/cuando-marco-el-checkbox.feature)
-* [Relleno un campo con un texto (*text* o *textarea*) \*](master/spec/features/cuando-relleno-el-campo.feature)
-* [Selecciono una opción de una lista (*select*) \*](master/spec/features/cuando-selecciono-en-listado.feature)
+* [Solicitud de una URL específica opcionalmente indicada con un nombre coloquial](master/features/cuando-visito-url-especifica.feature)
+* [Solicitud de la URL asociada al último recurso definido](master/features/cuando-visito-url-de-recurso.feature)
+* [Pincho en un enlace \*](master/features/cuando-pulso-el-enlace.feature)
+* [Pincho en un bóton (*submit*) \*](master/features/cuando-pulso-el-boton.feature)
+* [Adjunto un fichero (*file*) \*](master/features/cuando-.feature)
+* [Elijo una opción (*radiobutton*) \*](master/features/cuando-elijo-de-radiobutton.feature)
+* [Marco (o desmarco) una casilla (*checkbox*) \*](master/features/cuando-marco-el-checkbox.feature)
+* [Relleno un campo con un texto (*text* o *textarea*) \*](master/features/cuando-relleno-el-campo.feature)
+* [Selecciono una opción de una lista (*select*) \*](master/features/cuando-selecciono-en-listado.feature)
 
 ### Entonces pasa (Thens)
 
-* [Veo (o no) un texto \*](master/spec/features/veo-el-texto.feature)
-* [Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto](master/spec/features/veo-etiqueta-con-valor.feature)
-* [Veo marcada (o desmarcada) una casilla (*checkbox*) \*](master/spec/features/veo-el-checkbox.feature)
+* [Veo (o no) un texto \*](master/features/veo-el-texto.feature)
+* [Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto](master/features/veo-etiqueta-con-valor.feature)
+* [Veo marcada (o desmarcada) una casilla (*checkbox*) \*](master/features/veo-el-checkbox.feature)
 
 ## License
 

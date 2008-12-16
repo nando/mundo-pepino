@@ -1,7 +1,7 @@
 nbproject
-spec/app/log
-spec/app/tmp
-spec/app/vendor
-spec/app/db/schema.rb
-spec/app/vendor/plugins/string-mapper
-spec/app/vendor/plugins/fixture_replacement2
+features/support/app/log
+features/support/app/tmp
+features/support/app/vendor
+features/support/app/db/schema.rb
+features/support/app/vendor/plugins/string-mapper
+features/support/app/vendor/plugins/fixture_replacement2
