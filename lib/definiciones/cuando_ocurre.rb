@@ -28,3 +28,7 @@ end
 Cuando /^(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, valor|
   fill_in unquote(campo), :with => valor
 end
+
+Cuando /^elijo (?:la|el)? ?(.+)$/i do |campo|
+  chooses(unquote(campo).downcase.gsub(/ +/, '_'))
+end

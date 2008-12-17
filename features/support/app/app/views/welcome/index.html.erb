@@ -4,8 +4,17 @@
 
 <%= link_to 'Registro', :action => 'signup' %>
 <% form_tag( :action => :form_action ) do %>
-  <%= text_field_tag :text_field %>
-  <%= text_area_tag :textarea %>
-  <%= submit_tag( "Galleta de la Fortuna" ) %>
+  <div><%= text_field_tag :text_field %></div>
+  <div><%= text_area_tag :textarea %></div>
+  <div>
+    <%= radio_button_tag :nacionalidad, "Española" %>
+    <%= radio_button_tag :nacionalidad, "Pakistaní" %>
+  </div>
+  <div>
+    <%= radio_button_tag :color, "verde" %>
+    <%= radio_button_tag :color, "rojo" %>
+    <%= radio_button_tag :color, "gris" %>
+  </div>
+  <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
 <% end %>
                    
