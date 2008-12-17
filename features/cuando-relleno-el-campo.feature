@@ -11,7 +11,8 @@ Característica: relleno el campo
   #
   # Descripción:
   #   Rellena el campo de texto _nombre_ con _valor_, siendo _nombre_ el 
-  # atributo *name* del *input* (<input type="text" name="_nombre_" />).
+  # atributo *name* del campo (<input type="text" name="_nombre_" /> o 
+  # <textarea name="_nombre_">) .
   #
   #   Las comillas para el valor son obligatorias para el valor (simples
   # o dobles) pero opcionales para el nombre del campo de texto.
@@ -25,6 +26,11 @@ Característica: relleno el campo
          Y completo text_field con el valor "Berenjenas"
          Y pincho en el botón "Galleta de la fortuna"
     Entonces veo el tag div#text_field con el valor "Berenjenas"
+    
+    Cuando visito la portada
+         Y completo "textarea" con el valor "Garbanzos"
+         Y pincho en el botón "Galleta de la fortuna"
+    Entonces veo el tag div#textarea con el valor "Garbanzos"
     
          
 
