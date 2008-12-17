@@ -1,20 +1,22 @@
 Característica: veo (o no) un texto
 
-  Escenario: Veo (o no) un texto  
+  Escenario: Veo (o no) un texto 
   ########################################################################
-  # Patrón: 
+  # Patrón:
+  #   Entonces (no) debo ver el texto _texto_
+  # o:
+  #   Entonces (no) veo el texto _texto_
   #
   # Ejemplos:
+  #   Entonces debo ver el texto "IVA incluido"
+  #   Entonces veo el texto "IVA no incluido"
   #
   # Descripción:
+  #   Comprueba que _texto_ está presente en el cuerpo del documento.
   #
   ########################################################################
-#
-#
-#Then /^I should see "(.*)"$/ do |text|
-#  response.body.should =~ /#{text}/m
-#end
-#
-#Then /^I should not see "(.*)"$/ do |text|
-#  response.body.should_not =~ /#{text}/m
-#end
+    Cuando visito la portada
+    Entonces veo el texto Portada
+           Y debo ver el texto "Mundo Pepino"
+           Y no debo ver el texto Cucumber
+           Y no veo el texto "Rocks"
