@@ -30,5 +30,13 @@ Cuando /^(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, 
 end
 
 Cuando /^elijo (?:la|el)? ?(.+)$/i do |campo|
-  chooses(unquote(campo).downcase.gsub(/ +/, '_'))
+  chooses(unquote(campo).downcase.to_underscores)
+end
+
+Cuando /^marco (?:la|el)? ?(.+)$/i do |campo|
+  checks(unquote(campo).to_underscores)
+end
+
+Cuando /^desmarco (?:la|el)? ?(.+)$/i do |campo|
+  unchecks(unquote(campo).to_underscores)
 end

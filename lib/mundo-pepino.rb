@@ -13,6 +13,7 @@ String.add_mapper(:number, {
   :dos    => 2,
   :tres   => 3,
   :cuatro => 4 }) { |string| string.to_i }
+String.add_mapper(:underscores) { |string| string.gsub(/ +/, '_') }
 
 
 class MundoPepino < Cucumber::Rails::World

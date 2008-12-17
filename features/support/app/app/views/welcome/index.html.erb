@@ -15,6 +15,10 @@
     <%= radio_button_tag :color, "rojo" %>
     <%= radio_button_tag :color, "gris" %>
   </div>
+  <div>
+    <%= check_box_tag :check_seleccionado, "Seleccionado", true %>
+    <%= check_box_tag :check_sin_seleccionar, "Sin seleccionar", false %>
+  </div>
   <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
 <% end %>
                    
