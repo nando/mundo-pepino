@@ -12,6 +12,15 @@ Cuando /^visito (.+)$/i do |pagina|
 end
 
 Cuando /^(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|
-  clicks_button(unquote(boton))
+  click_button(unquote(boton))
 end
 
+Cuando /^(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+)$/i do |tipo, enlace|
+  options = {}
+  options[:wait] = case tipo.downcase
+  when 'enlace con efectos' then :effects
+  when 'enlace ajax' then :ajax
+  else :page
+  end
+  click_link(unquote(enlace), options)
+end

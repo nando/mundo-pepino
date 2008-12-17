@@ -184,7 +184,7 @@ class MundoPepino < Cucumber::Rails::World
   end
   
   def field_and_values(modelo, campo, valores)
-    field = if (child_model = campo.to_model)
+    if (child_model = campo.to_model)
       child_name_field = name_field_for(modelo)
       values = add_resource(child_model,
         valores.map { |val| { child_name_field => val } })

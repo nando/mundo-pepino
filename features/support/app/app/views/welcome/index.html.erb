@@ -2,6 +2,7 @@
 <div id="slogan">Todo un huerto para ti</div>
 <p>Find me in app/views/welcome/index.html.erb</p>
 
+<%= link_to 'Registro', :action => 'signup' %>
 <% form_tag( :action => :cookies ) do %>
   <%#= text_field_tag( :text_to_display, @params[:text_to_display] ) %>
   <%= submit_tag( "Galleta de la Fortuna" ) %>
