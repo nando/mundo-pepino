@@ -24,3 +24,7 @@ Cuando /^(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+
   end
   click_link(unquote(enlace), options)
 end
+
+Cuando /^(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, valor|
+  fill_in unquote(campo), :with => valor
+end

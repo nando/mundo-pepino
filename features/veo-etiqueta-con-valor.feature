@@ -4,6 +4,10 @@ Característica: etiqueta/selector con valor
   ########################################################################
   # Patrón: 
   #   Entonces (no) debo ver la etiqueta _selector_( con el valor "_valor_")
+  # o:
+  #   Entonces (no) veo la etiqueta _selector_( con el valor "_valor_")
+  # o:
+  #   Entonces (no) veo el tag _selector_( con el valor "_valor_")
   #
   # Descripción:
   #   Comprueba la existencia o inexistencia de una etiqueta/selector que
