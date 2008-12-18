@@ -17,7 +17,9 @@
   </div>
   <div>
     <%= check_box_tag :check_seleccionado, "Seleccionado", true %>
+      <%= label_tag :check_seleccionado, "Seleccionado" %>
     <%= check_box_tag :check_sin_seleccionar, "Sin seleccionar", false %>
+      <%= label_tag :check_sin_seleccionar, "Sin seleccionar" %>
   </div>
   <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
 <% end %>
