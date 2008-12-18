@@ -40,3 +40,7 @@ end
 Cuando /^desmarco (?:la|el)? ?(.+)$/i do |campo|
   unchecks(unquote(campo).to_underscores)
 end
+
+Cuando /^adjunto el fichero ['"](.*)['"] (?:a|en) (.*)$/ do |ruta, campo|
+  attach_file(unquote(campo), ruta.to_local_path)
+end

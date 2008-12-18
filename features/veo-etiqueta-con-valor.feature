@@ -5,6 +5,8 @@ Característica: etiqueta/selector con valor
   # Patrón: 
   #   Entonces (no) debo ver la etiqueta _selector_( con el valor "_valor_")
   # o:
+  #   Entonces (no) debo ver en la etiqueta _selector_( el valor "_valor_")
+  # o:
   #   Entonces (no) veo la etiqueta _selector_( con el valor "_valor_")
   # o:
   #   Entonces (no) veo el tag _selector_( con el valor "_valor_")

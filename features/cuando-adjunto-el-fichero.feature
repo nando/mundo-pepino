@@ -1,17 +1,12 @@
 Característica: adjunto el fichero
 
-  Escenario: Adjunto un fichero 
+  Escenario: Adjunto un fichero local en un campo de formulario
   ########################################################################
   # Patrón: 
-  #
-  # Ejemplos:
-  #
-  # Descripción:
+  #   Cuando adjunto el fichero "_ruta_local_" en _campo_
   #
   ########################################################################
-
-
-#When /^I attach the file at "(.*)" to "(.*)" $/ do |path, field|
-#  attach_file(field, path)
-#end
-#
+    Cuando visito la portada
+         Y adjunto el fichero "config/database.yml" en file_field
+         Y pincho en el botón "Galleta de la fortuna"
+    Entonces veo en la etiqueta div#file_filename el valor "database.yml"
