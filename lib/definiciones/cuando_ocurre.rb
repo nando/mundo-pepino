@@ -34,11 +34,11 @@ Cuando /^elijo (?:la|el)? ?(.+)$/i do |campo|
 end
 
 Cuando /^marco (?:la|el)? ?(.+)$/i do |campo|
-  checks(unquote(campo).to_underscored)
+  checks(campo_to_field(campo))
 end
 
 Cuando /^desmarco (?:la|el)? ?(.+)$/i do |campo|
-  unchecks(unquote(campo).to_underscored)
+  unchecks(campo_to_field(campo))
 end
 
 Cuando /^adjunto el fichero ['"](.*)['"] (?:a|en) (.*)$/ do |ruta, campo|

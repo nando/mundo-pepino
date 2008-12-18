@@ -20,13 +20,13 @@ Característica: marco el checkbox
     # Pre-checking
     Cuando visito la portada
          Y pincho en el botón "Galleta de la fortuna"
-    Entonces veo el tag div#check_seleccionado con el valor "Seleccionado"
-           Y no veo el tag div#check_sin_seleccionar con el valor "Sin seleccionar"
+    Entonces veo el tag div#selected_check con el valor "Seleccionado"
+           Y no veo el tag div#unselected_check con el valor "Sin seleccionar"
 
     # Let's go for it...
     Cuando visito la portada
-         Y desmarco el check_seleccionado
-         Y marco el check sin seleccionar
+         Y desmarco la casilla seleccionada
+         Y marco la casilla sin seleccionar
          Y pincho en el botón "Galleta de la fortuna"
-    Entonces no veo el tag div#check_seleccionado con el valor "Seleccionado"
-           Y veo el tag div#check_sin_seleccionar con el valor "Sin seleccionar"
+    Entonces no veo el tag div#selected_check con el valor "Seleccionado"
+           Y veo el tag div#unselected_check con el valor "Sin seleccionar"

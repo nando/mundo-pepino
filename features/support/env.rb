@@ -28,7 +28,9 @@ String.field_mappings.merge!({
   /longitud(es)?/i => 'longitude',
   /campos? de texto/i => 'text_field',
   /[áa]reas? de texto/i => 'textarea',
-  /tipos? de cultivos?/i => 'orchard_type'
+  /tipos? de cultivos?/i => 'orchard_type',
+  /casilla seleccionada/i => 'selected_check',
+  /casilla sin seleccionar/i => 'unselected_check'
 })
 
 
