@@ -24,11 +24,13 @@ String.model_mappings = {
 
 String.field_mappings.merge!({
   /[áa]reas?$/i => 'area',
+  /color(es)?$/i => 'color',
   /latitud(es)?$/i => 'latitude',
   /longitud(es)?/i => 'longitude',
   /campos? de texto/i => 'text_field',
   /[áa]reas? de texto/i => 'textarea',
   /tipos? de cultivos?/i => 'orchard_type',
+  /nacionalidad/i => 'nationality',
   /casilla seleccionada/i => 'selected_check',
   /casilla sin seleccionar/i => 'unselected_check'
 })

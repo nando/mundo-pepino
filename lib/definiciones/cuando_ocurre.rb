@@ -29,8 +29,8 @@ Cuando /^(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, 
   fill_in campo_to_field(campo), :with => valor
 end
 
-Cuando /^elijo (?:la|el)? ?(.+)$/i do |campo|
-  chooses(unquote(campo).downcase.to_underscored)
+Cuando /^elijo (?:la|el)? ?(.+) ["'](.+)["']$/i do |campo, valor|
+  chooses(campo_to_field(campo) + '_' + valor.downcase)
 end
 
 Cuando /^marco (?:la|el)? ?(.+)$/i do |campo|
