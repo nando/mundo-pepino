@@ -4,7 +4,11 @@ require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'
 
 String.add_mapper :model
-String.add_mapper :field, :nombre => 'name'
+String.add_mapper(:field, :nombre => 'name') do |string|
+  if model = string.to_model
+    "#{model.name.downcase}_id"
+  end
+end
 String.add_mapper :name_field
 String.add_mapper(:url, 
   /la (portada|home)/i => '/') { |string| string }
@@ -14,7 +18,8 @@ String.add_mapper(:number, {
   :tres   => 3,
   :cuatro => 4 }) { |string| string.to_i }
 String.add_mapper(:local_path) { |string| string }
-String.add_mapper(:underscores) { |string| string.gsub(/ +/, '_') }
+String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
+String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 
 
 class MundoPepino < Cucumber::Rails::World

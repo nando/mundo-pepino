@@ -21,6 +21,10 @@
     <%= check_box_tag :check_sin_seleccionar, "Sin seleccionar", false %>
       <%= label_tag :check_sin_seleccionar, "Sin seleccionar" %>
   </div>
+  <div>
+     <%= label_tag :orchard_type, "Tipo de cultivo" %>
+     <%= select_tag "orchard_type", options_for_select(['Mixto', 'Hortalizas', 'Frutales']) %>
+  </div>
   <div><%= file_field_tag :file_field %></div>
   <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
 <% end %>
