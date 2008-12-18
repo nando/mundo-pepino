@@ -31,6 +31,7 @@ String.field_mappings.merge!({
   /[áa]reas? de texto/i => 'textarea',
   /tipos? de cultivos?/i => 'orchard_type',
   /nacionalidad/i => 'nationality',
+  /fichero adjunto/i => 'file_field',
   /casilla seleccionada/i => 'selected_check',
   /casilla sin seleccionar/i => 'unselected_check'
 })

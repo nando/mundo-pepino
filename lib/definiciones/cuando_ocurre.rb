@@ -30,7 +30,7 @@ Cuando /^(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, 
 end
 
 Cuando /^elijo (?:la|el)? ?(.+) ["'](.+)["']$/i do |campo, valor|
-  chooses(campo_to_field(campo) + '_' + valor.downcase)
+  chooses(campo_to_field(campo) + '_' + valor.downcase.to_underscored)
 end
 
 Cuando /^marco (?:la|el)? ?(.+)$/i do |campo|
@@ -42,7 +42,7 @@ Cuando /^desmarco (?:la|el)? ?(.+)$/i do |campo|
 end
 
 Cuando /^adjunto el fichero ['"](.*)['"] (?:a|en) (.*)$/ do |ruta, campo|
-  attach_file(unquote(campo), ruta.to_local_path)
+  attach_file(campo_to_field(campo), ruta.to_local_path)
 end
 
 Cuando /^selecciono ["'](.+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|

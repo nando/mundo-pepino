@@ -7,6 +7,6 @@ Característica: adjunto el fichero
   #
   ########################################################################
     Cuando visito la portada
-         Y adjunto el fichero "config/database.yml" en file_field
+         Y adjunto el fichero "config/database.yml" en Fichero Adjunto
          Y pincho en el botón "Galleta de la fortuna"
     Entonces veo en la etiqueta div#file_filename el valor "database.yml"
