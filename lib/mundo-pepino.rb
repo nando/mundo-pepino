@@ -200,5 +200,15 @@ class MundoPepino < Cucumber::Rails::World
     else
       [ campo.to_field, valores ]
     end 
-  end 
+  end
+  
+  def campo_to_field(campo)
+    unless campo.nil? 
+      if field = campo.to_unquoted.to_field
+        field
+      else
+        raise MundoPepino::FieldNotMapped.new(campo.to_unquoted) 
+      end
+    end
+  end
 end

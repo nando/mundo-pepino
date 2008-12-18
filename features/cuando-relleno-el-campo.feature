@@ -19,16 +19,16 @@ Característica: relleno el campo
   #
   ########################################################################
     Cuando visito la portada
-         Y relleno "text_field" con "Fertilizador"
+         Y relleno "campo de texto" con "Fertilizador"
          Y pincho en el botón "Galleta de la fortuna"
     Entonces veo el tag div#text_field con el valor "Fertilizador"
     Cuando visito la portada
-         Y completo text_field con el valor "Berenjenas"
+         Y completo Campo de texto con el valor "Berenjenas"
          Y pincho en el botón "Galleta de la fortuna"
     Entonces veo el tag div#text_field con el valor "Berenjenas"
     
     Cuando visito la portada
-         Y completo "textarea" con el valor "Garbanzos"
+         Y completo "área de texto" con el valor "Garbanzos"
          Y pincho en el botón "Galleta de la fortuna"
     Entonces veo el tag div#textarea con el valor "Garbanzos"
     

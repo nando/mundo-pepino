@@ -26,7 +26,7 @@ Cuando /^(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+
 end
 
 Cuando /^(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, valor|
-  fill_in unquote(campo), :with => valor
+  fill_in campo_to_field(campo), :with => valor
 end
 
 Cuando /^elijo (?:la|el)? ?(.+)$/i do |campo|
@@ -46,13 +46,7 @@ Cuando /^adjunto el fichero ['"](.*)['"] (?:a|en) (.*)$/ do |ruta, campo|
 end
 
 Cuando /^selecciono ["'](.+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
-# Ejemplo: Cuando selecciono 'Andorra' en 'País' (<select name="País">)
-# Otros:
-#   Cuando selecciono "Fontanero" en el listado de Profesiones
-  unless campo.nil? || (field = campo.to_unquoted.to_field)
-    raise MundoPepino::FieldNotMapped.new(campo.to_unquoted) 
-  end
-  selects(valor, :from => field)
+  selects(valor, :from => campo_to_field(campo))
 end
 
 
