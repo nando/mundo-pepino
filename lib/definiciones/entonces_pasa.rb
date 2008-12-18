@@ -14,6 +14,6 @@ Entonces /^(veo|no veo|debo ver|no debo ver) (?:la etiqueta|el tag) ([^ ]+)(?: c
   end
 end
 
-Entonces /^(veo|no veo|debo ver|no debo ver) marcad[ao] (?:la casilla )?(.+)$/ do |should, campo|
+Entonces /^(veo|no veo|debo ver|no debo ver) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
   field_labeled(unquote(campo)).send shouldify(should), be_checked
 end
