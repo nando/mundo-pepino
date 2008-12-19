@@ -16,12 +16,12 @@ Dado /^que hay ([^ ]+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero
   else
     [{}] * number
   end
-  add_resource(model, attribs)
+  add_resource(model, attribs, :force_creation => true)
 end
 
 Dado /^(?:que tenemos )?(?:el|la|los|las) (?:siguientes? )?(.+):$/ do |modelo, tabla|
   model = unquote(modelo).to_model
-  add_resource model, translated_hashes(tabla.raw)
+  add_resource model, translated_hashes(tabla.raw), :force_creation => true
 end 
 
 Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|

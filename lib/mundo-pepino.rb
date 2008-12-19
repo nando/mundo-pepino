@@ -4,11 +4,7 @@ require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'
 
 String.add_mapper :model
-String.add_mapper(:field, :nombre => 'name') do |string|
-  if model = string.to_model
-    "#{model.name.downcase}_id"
-  end
-end
+String.add_mapper(:field, :nombre => 'name')
 String.add_mapper :name_field
 String.add_mapper(:url, 
   /la (portada|home)/i => '/') { |string| string }
@@ -16,7 +12,8 @@ String.add_mapper(:number, {
   /un[oa]?$/i => 1,
   :dos    => 2,
   :tres   => 3,
-  :cuatro => 4 }) { |string| string.to_i }
+  :cuatro => 4,
+  :cinco  => 5}) { |string| string.to_i }
 String.add_mapper(:local_path) { |string| string }
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
@@ -64,7 +61,7 @@ class MundoPepino < Cucumber::Rails::World
     self.send "create_#{model.name.downcase}", attributes
   end
 
-  def find_or_create(model_or_modelo, attributes = {}) 
+  def find_or_create(model_or_modelo, attributes = {}, options = {}) 
     model = if model_or_modelo.is_a?(String)
       model_or_modelo.to_model
     else
@@ -80,8 +77,9 @@ class MundoPepino < Cucumber::Rails::World
           attribs[key] = value
         end
       end
-      if (obj = model.find(:first, :conditions =>
-       [attribs.keys.map{|s| s+'=?'}.join(' AND ')] + attribs.values ))
+      if (options[:force_creation].nil?  &&
+          obj = model.find(:first, :conditions =>
+          [attribs.keys.map{|s| s+'=?'}.join(' AND ')] + attribs.values ))
         obj
       else
         create model, attribs
@@ -91,7 +89,8 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
-  def add_resource(model, attribs=[])
+  # options: :force_creation 
+  def add_resource(model, attribs=[], options = {})
     @resources ||= []
     attributes = if attribs.is_a?(Hash)
       [ attribs ] 
@@ -99,15 +98,17 @@ class MundoPepino < Cucumber::Rails::World
       attribs
     end
     @resources.unshift(if attributes.size == 1
-      find_or_create(model, attributes.first)
+      find_or_create(model, attributes.first, options)
     else
-      attributes.map {|hash| find_or_create(model, hash) }
+      attributes.map do |hash| 
+        find_or_create(model, hash, options) 
+      end
     end)
     @resources.first
   end
   
-  def name_field_for(modelo)
-    modelo.to_name_field || 'nombre'.to_field || 'name'
+  def name_field_for(model_name)
+    model_name.to_name_field || 'nombre'.to_field || 'name'
   end
   def shouldify(should_or_not)
     should_or_not =~ /^(?:debo|debo ver|veo)$/i ? :should : :should_not

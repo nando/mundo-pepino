@@ -5,11 +5,14 @@ Given /^que tengo la expectiva de recibir 3 veces "visits" con "\/"$/ do
 end
 
 
-Then /^existen? (un|una|\d+) ([^ ]+)(?: ['"](.+)["'])?$/ do |numero, modelo, nombre|
+Then /^(?:existen? )?(un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: ['"](.+)["'])?$/ do |numero, modelo, nombre|
   model = modelo.to_model
-  @resources.flatten.select do |resource|
-    resource.is_a?(model) and (nombre.nil? or (nombre == resource.name)) 
-  end.size.should == numero.to_number
+  conditions = if nombre
+    {:conditions => [ name_field_for(model.name) + '=?', nombre ]}
+  else
+    :all
+  end
+  model.count(conditions).should == numero.to_number
 end
 
 Then /^como (.+) "(.+)"$/ do |campo, valor|

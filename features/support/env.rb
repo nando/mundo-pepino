@@ -13,8 +13,11 @@ require 'cucumber/rails/rspec'
 require 'mundo-pepino'
 
 Before do
-  Orchard.destroy_all
-  Fertilizer.destroy_all
+  [ Orchard,
+    Terrace,
+    Crop,
+    Fertilizer
+  ].each { |model| model.destroy_all }
 end
 
 String.model_mappings = {

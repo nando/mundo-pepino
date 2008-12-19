@@ -40,7 +40,8 @@ Característica: creación desde step-table
            | Regadío-1 | 15   | N 41° 35 | W 003° 48 |
            | Regadío-2 | 42   | N 41° 35 | W 003° 48 |
        Y que dichos huertos tienen como abono "HDR-102"
-    Entonces existen 5 huertos
+    Entonces existen cinco huertos
+           Y cuatro fertilizantes
            Y el huerto "Secano-1" tiene como abono "FSF-315"
            Y el huerto "Secano-2" tiene como abono "FSF-317"
            Y el huerto "Secano-3" tiene como abono "FSF-319"
