@@ -51,7 +51,7 @@ Sin embargo cada definición ha sido separada en un fichero `.feature` específi
 * [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/features/contexto-creacion-simple.feature)
 * [Creación de uno o varios recursos a partir de una **step table**](master/features/contexto-creacion-desde-step-table.feature)
 * [Asignación de un valor en un campo del último (o últimos) recurso mencionado](master/features/contexto-asignacion-de-valor.feature)
-* [Asignación de valores en un campo **has_many** del último recurso mencionado](master/features/contexto-asignacion-de-valores-has-many.feature)
+* [Asignación de valores en un campo **has\_many** del último recurso mencionado](master/features/contexto-asignacion-de-valores-has-many.feature)
 
 ### Cuando algo ocurre (Whens)
 
