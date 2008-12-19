@@ -18,15 +18,19 @@ Before do
 end
 
 String.model_mappings = {
-  /huert[oa]s?/i => Orchard,
+  /huert[oa]s?/i            => Orchard,
+  /bancal(es)?$/i           => Terrace,
+  /cultivos?$/i             => Crop,
   /(abono|fertilizante)s?/i => Fertilizer
 }
 
 String.field_mappings.merge!({
-  /[áa]reas?$/i => 'area',
-  /color(es)?$/i => 'color',
+  /[áa]reas?$/i    => 'area',
+  /color(es)?$/i   => 'color',
   /latitud(es)?$/i => 'latitude',
   /longitud(es)?/i => 'longitude',
+  /metros?$/i      => 'meters',
+  /matas?$/i       => 'plants',
   /campos? de texto/i => 'text_field',
   /[áa]reas? de texto/i => 'textarea',
   /tipos? de cultivos?/i => 'orchard_type',
@@ -44,6 +48,17 @@ class MiMundo < MundoPepino
       (@then_resource.send child_model.name.downcase).should == child
     else
       (@then_resource.send campo.to_field).to_s.should == valor
+    end
+  end
+  
+  def entonces_tiene_hijo(hijo, nombre)
+    if child_model = hijo.to_model
+      child = child_model.find_by_name(nombre)
+      (@then_resource.send child_model.table_name).detect do |c|
+        c.id == child.id 
+      end.should_not be_nil
+    else
+      MundoPepino::ModelNotMapped.new(hijo)
     end
   end
 end

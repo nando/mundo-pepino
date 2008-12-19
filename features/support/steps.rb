@@ -21,3 +21,7 @@ Then /^el (.+) "(.+)" tiene como (.+) "(.+)"$/ do |modelo, nombre, campo, valor|
   entonces_campo_valor(campo, valor)
 end
 
+Then /^el (.+) "(.+)" tiene un (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
+  @then_resource = padre.to_model.find_by_name(nombre_del_padre)
+  entonces_tiene_hijo(hijo, nombre_del_hijo)
+end

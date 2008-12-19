@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :terraces
+
+  map.resources :crops
+
   map.resources :fertilizers
 
   map.resources :orchards

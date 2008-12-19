@@ -152,10 +152,15 @@ class MundoPepino < Cucumber::Rails::World
   end
 
   # Cucumber::Model::Table's hashes traduciendo nombres de campo
-  def translated_hashes(step_table)
+  def translated_hashes(step_table, options = {})
+    base_hash = if options[:parent]
+      { options[:parent].class.name.downcase + '_id' => options[:parent].id }
+    else
+      {}
+    end
     header = step_table[0].map { |campo| campo.to_field || campo }
     step_table[1..-1].map do |row|
-      h = {}
+      h = base_hash.dup
       row.each_with_index do |v,n|
         key = header[n]
         h[key] = v

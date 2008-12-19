@@ -37,3 +37,10 @@ Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, cam
     end
   end
 end
+
+Dado /^que dicho (.+) tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
+  if resource = last_resource_of(modelo_padre)
+    children_model = unquote(modelo_hijos).to_model
+    add_resource children_model, translated_hashes(tabla.raw, :parent => resource)
+  end
+end

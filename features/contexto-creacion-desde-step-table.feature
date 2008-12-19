@@ -15,6 +15,11 @@ Característica: creación desde step-table
   #     Nos crea una o más instancias de un modelo a partir de los datos
   #   existentes en una "step table".
   #
+  #     Si el nombre de un campo de la step-table está mapeado con un 
+  #   modelo, se buscará una instancia de dicho modelo cuyo "nombre" sea
+  #   el valor facilitado. Si no existe creará una nueva instancia con 
+  #   dicho valor.
+  #
   #     Si optamos por no escribir "que tenemos" hay que tener en cuenta
   #   que la frase será correcta sólo en aquellas frases que comiencen con
   #   "Y" o, si comienzan con "Dado" haga referencia a una instancia de 

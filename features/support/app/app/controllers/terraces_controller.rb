@@ -1,0 +1,2 @@
+class TerracesController < ApplicationController
+end
