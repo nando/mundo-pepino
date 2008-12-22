@@ -8,14 +8,14 @@ end
 Then /^(?:existen? )?(un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: ['"](.+)["'])?$/ do |numero, modelo, nombre|
   model = modelo.to_model
   conditions = if nombre
-    {:conditions => [ name_field_for(model.name) + '=?', nombre ]}
+    {:conditions => [ field_for(model, 'nombre') + '=?', nombre ]}
   else
     :all
   end
   model.count(conditions).should == numero.to_number
 end
 
-Then /^como (.+) "(.+)"$/ do |campo, valor|
+Then /^como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
   entonces_campo_valor(campo, valor)
 end
 

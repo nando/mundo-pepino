@@ -4,7 +4,7 @@ class CreateTerraces < ActiveRecord::Migration
       t.string :name
       t.integer :orchard_id
       t.integer :crop_id
-      t.integer :meters
+      t.integer :length
       t.integer :plants
 
       t.timestamps

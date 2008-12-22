@@ -33,21 +33,22 @@ String.model_mappings = {
   /pepinos?$/i		    => Pepino
 }
 
-String.field_mappings.merge!({
+String.field_mappings = {
   /[áa]reas?$/i    => 'area',
   /color(es)?$/i   => 'color',
   /latitud(es)?$/i => 'latitude',
   /longitud(es)?/i => 'longitude',
-  /metros?$/i      => 'meters',
   /matas?$/i       => 'plants',
-  /campos? de texto/i => 'text_field',
-  /[áa]reas? de texto/i => 'textarea',
-  /tipos? de cultivos?/i => 'orchard_type',
-  /nacionalidad/i => 'nationality',
-  /fichero adjunto/i => 'file_field',
-  /casilla seleccionada/i => 'selected_check',
-  /casilla sin seleccionar/i => 'unselected_check'
-})
+  /campos? de texto/i         => 'text_field',
+  /[áa]reas? de texto/i       => 'textarea',
+  /tipos? de cultivos?/i      => 'orchard_type',
+  /nacionalidad/i             => 'nationality',
+  /fichero adjunto/i          => 'file_field',
+  /casilla seleccionada/i     => 'selected_check',
+  /casilla sin seleccionar/i  => 'unselected_check',
+  /Terrace::longitud(es)?$/   => 'length'
+}
+
 
 
 class MiMundo < MundoPepino 
@@ -56,7 +57,7 @@ class MiMundo < MundoPepino
       child = child_model.find_by_name(valor)
       (@then_resource.send child_model.name.downcase).should == child
     else
-      (@then_resource.send campo.to_field).to_s.should == valor
+      (@then_resource.send field_for(@then_resource.class, campo)).to_s.should == valor
     end
   end
   

@@ -8,17 +8,14 @@ Característica: implementación de pasos habituales
        Y que dicho huerto tiene tres bancales "Acelgas, Tomates y Pepinos"
        Y que dichos bancales tienen como longitud "2" metros
        Y que el bancal "Acelgas" tiene como matas "7"
-       Y que tiene las siguientes acelgas:
+       Y que dicho bancal tiene las siguientes acelgas:
          | peso | longitud |
-	 |   30 |      115 |
-	 |   23 |       35 |
-	 |   41 |      135 |
-	 |   91 |      215 |
-	 |   65 |      145 |
-	 |   83 |      195 |
-	 |   49 |      155 |
-       Y que dichas acelgas tienen como variedad "blanquilla"
+         |   30 |      115 |
+         |   23 |       35 |
+         |   41 |      135 |
+         |   91 |      215 |
+         |   65 |      145 |
+         |   83 |      195 |
+         |   49 |      155 |
+       Y que dichas acelgas tienen como variedad "Gigante carmesí"
        Y que el bancal "B" tiene como matas "4"
-       Y que tiene como 
-
-       Y que tiene como abono "Hidrogenado HQ"

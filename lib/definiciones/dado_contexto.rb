@@ -17,7 +17,7 @@ end
 Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
   if resource = last_resource_of(modelo)
     resources, values = resources_and_their_values(resource, valor)
-    field,     values = field_and_values(modelo, campo, values)
+    field,     values = field_and_values(modelo.to_model, campo, values)
     if field
       resources.each_with_index do |r, i| 
         r.update_attribute field, values[i] 
@@ -40,6 +40,7 @@ end
 Dado /^que dicho (.+) tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
   if resource = last_resource_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
-    add_resource children_model, translated_hashes(tabla.raw, :parent => resource)
+    add_resource children_model, 
+      translated_hashes(tabla.raw, {:model => children_model, :parent => resource})
   end
 end

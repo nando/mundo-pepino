@@ -4,8 +4,9 @@ require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'
 
 String.add_mapper :model
-String.add_mapper(:field, :nombre => 'name')
+String.add_mapper(:field) { |str| 'name' if str =~ /nombres?/ }
 String.add_mapper :name_field
+String.add_mapper :model_field
 String.add_mapper(:url, 
   /la (portada|home)/i => '/') { |string| string }
 String.add_mapper(:number, { 
@@ -71,7 +72,7 @@ class MundoPepino < Cucumber::Rails::World
       attribs = Hash.new
       attributes.each do |key, value|
         if child_model = key.to_model
-          child = add_resource(child_model, name_field_for(key) => value)
+          child = add_resource(child_model, field_for(child_model, 'nombre') => value)
           attribs[child_model.name.downcase + '_id'] = child.id
         else
           attribs[key] = value
@@ -110,7 +111,7 @@ class MundoPepino < Cucumber::Rails::World
   def names_for_simple_creation(model, number, name_or_names, options = {})
     base_hash = base_hash_for(options)
     if name_or_names
-      field = name_field_for(model.name)
+      field = field_for(model, 'nombre')
       names = name_or_names.split(/ ?, | y /)
       if names.size == number
         names.map { |name| base_hash.dup.merge(field => name) }
@@ -122,8 +123,8 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
-  def name_field_for(model_name)
-    model_name.to_name_field || 'nombre'.to_field || 'name'
+  def field_for(model, campo = 'nombre')
+    "#{model && model.name}::#{campo}".to_field || campo.to_field
   end
   def shouldify(should_or_not)
     should_or_not =~ /^(?:debo|debo ver|veo)$/i ? :should : :should_not
@@ -170,7 +171,9 @@ class MundoPepino < Cucumber::Rails::World
   # Cucumber::Model::Table's hashes traduciendo nombres de campo
   def translated_hashes(step_table, options = {})
     base_hash = base_hash_for(options)
-    header = step_table[0].map { |campo| campo.to_field || campo }
+    header = step_table[0].map do |campo| 
+      field_for(options[:model], campo) || campo 
+    end
     step_table[1..-1].map do |row|
       h = base_hash.dup
       row.each_with_index do |v,n|
@@ -215,15 +218,15 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
-  def field_and_values(modelo, campo, valores)
+  def field_and_values(model, campo, valores)
     if (child_model = campo.to_model)
-      child_name_field = name_field_for(modelo)
+      child_name_field = field_for(model, 'nombre')
       values = add_resource(child_model,
         valores.map { |val| { child_name_field => val } })
       values = [ values ] unless values.is_a?(Array)
       [ child_model.name.downcase, values ]
     else
-      [ campo.to_field, valores ]
+      [ field_for(model, campo), valores ]
     end 
   end
   
