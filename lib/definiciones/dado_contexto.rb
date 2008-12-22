@@ -2,20 +2,10 @@ module Cucumber::StepMethods
   alias_method :Dado, :Given
 end
 
-Dado /^que hay ([^ ]+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
+Dado /^que hay ([^ ]+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   number = numero.to_number
-  model = modelo.to_model
-  attribs = if nombre
-    field = name_field_for(modelo)
-    names = nombre.split(/ ?, | y /)
-    if names.size == number
-      names.map { |name| { field => name } }
-    else
-      [{ field => nombre }] * number
-    end
-  else
-    [{}] * number
-  end
+  model = modelo.to_unquoted.to_model
+  attribs = names_for_simple_creation(model, number, nombre)
   add_resource(model, attribs, :force_creation => true)
 end
 
@@ -38,9 +28,18 @@ Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, cam
   end
 end
 
+Dado /^que dicho (.+) tiene (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
+  if resource = last_resource_of(modelo_padre.to_unquoted)
+    children_model = modelo_hijos.to_unquoted.to_model
+    attribs = names_for_simple_creation(children_model, 
+      numero.to_number, nombres, :parent => resource)
+    add_resource children_model, attribs, :force_creation => nombres.nil?
+  end
+end
+
 Dado /^que dicho (.+) tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
-  if resource = last_resource_of(modelo_padre)
-    children_model = unquote(modelo_hijos).to_model
+  if resource = last_resource_of(modelo_padre.to_unquoted)
+    children_model = modelo_hijos.to_unquoted.to_model
     add_resource children_model, translated_hashes(tabla.raw, :parent => resource)
   end
 end

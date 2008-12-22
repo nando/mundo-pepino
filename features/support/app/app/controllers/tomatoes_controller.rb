@@ -1,0 +1,2 @@
+class TomatoesController < ApplicationController
+end

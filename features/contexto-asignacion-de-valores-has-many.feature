@@ -20,7 +20,7 @@ Característica: asignación de valores para un campo has_many
   #
   # Descripción:
   #     Crea una instancia de _mod_hijo_ para cada fila de la step-table
-  #   asociándolas a la último recurso mendionado de _mod_padre_
+  #   asociándolas al último recurso mencionado cuyo modelo sea _mod_padre_
   # 
   #     De forma similar a la asignación de valores a un recurso desde
   #   una step-table, si el nombre de un campo de la step-table está 

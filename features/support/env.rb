@@ -16,7 +16,10 @@ Before do
   [ Orchard,
     Terrace,
     Crop,
-    Fertilizer
+    Fertilizer,
+    Tomato,
+    Chard,
+    Pepino
   ].each { |model| model.destroy_all }
 end
 
@@ -24,7 +27,10 @@ String.model_mappings = {
   /huert[oa]s?/i            => Orchard,
   /bancal(es)?$/i           => Terrace,
   /cultivos?$/i             => Crop,
-  /(abono|fertilizante)s?/i => Fertilizer
+  /(abono|fertilizante)s?/i => Fertilizer,
+  /tomates?$/i		    => Tomato,
+  /acelgas?$/i		    => Chard,
+  /pepinos?$/i		    => Pepino
 }
 
 String.field_mappings.merge!({

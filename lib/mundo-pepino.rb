@@ -77,7 +77,7 @@ class MundoPepino < Cucumber::Rails::World
           attribs[key] = value
         end
       end
-      if (options[:force_creation].nil?  &&
+      if ((options[:force_creation].nil? || !options[:force_creation])  &&
           obj = model.find(:first, :conditions =>
           [attribs.keys.map{|s| s+'=?'}.join(' AND ')] + attribs.values ))
         obj
@@ -106,7 +106,22 @@ class MundoPepino < Cucumber::Rails::World
     end)
     @resources.first
   end
-  
+ 
+  def names_for_simple_creation(model, number, name_or_names, options = {})
+    base_hash = base_hash_for(options)
+    if name_or_names
+      field = name_field_for(model.name)
+      names = name_or_names.split(/ ?, | y /)
+      if names.size == number
+        names.map { |name| base_hash.dup.merge(field => name) }
+      else
+        [base_hash.dup.merge(field => name_or_names)] * number
+      end
+    else
+      [base_hash] * number
+    end
+  end
+
   def name_field_for(model_name)
     model_name.to_name_field || 'nombre'.to_field || 'name'
   end
@@ -154,11 +169,7 @@ class MundoPepino < Cucumber::Rails::World
 
   # Cucumber::Model::Table's hashes traduciendo nombres de campo
   def translated_hashes(step_table, options = {})
-    base_hash = if options[:parent]
-      { options[:parent].class.name.downcase + '_id' => options[:parent].id }
-    else
-      {}
-    end
+    base_hash = base_hash_for(options)
     header = step_table[0].map { |campo| campo.to_field || campo }
     step_table[1..-1].map do |row|
       h = base_hash.dup
@@ -167,6 +178,14 @@ class MundoPepino < Cucumber::Rails::World
         h[key] = v
       end
       h
+    end
+  end
+
+  def base_hash_for(options) 
+    if options[:parent]
+      { options[:parent].class.name.downcase + '_id' => options[:parent].id }
+    else
+      {}
     end
   end
 

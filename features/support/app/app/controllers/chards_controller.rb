@@ -1,0 +1,2 @@
+class ChardsController < ApplicationController
+end

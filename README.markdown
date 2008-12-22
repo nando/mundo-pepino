@@ -39,10 +39,10 @@ Bon appetit!
 
 Para todos los escenarios podríamos tener una narrativa genérica que expresase algo como lo siguiente:
 
-    Característica: implementación de pasos genéricos
+    Característica: implementación de pasos habituales
       Para escribir sólo la definición de los pasos específicos de mi proyecto
       Como usuario de Cucumber
-      Quiero tener una serie de definiciones genéricas implementadas
+      Quiero tener los pasos más habituales definidos, implementados y bien documentados
 
 Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice. Los **asteriscos (\*)** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`.
 
