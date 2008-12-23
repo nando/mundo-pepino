@@ -13,7 +13,7 @@ Característica: Solicitud de URL de recurso
   #   Cuando visito su página
   #
   ########################################################################
-    Dado que hay un huerto "Esplendoroso"
+    Dado que tenemos un huerto "Esplendoroso"
     Cuando visito su página
     Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
            Y debo ver la etiqueta H2 con el valor "Esplendoroso"

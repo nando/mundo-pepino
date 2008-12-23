@@ -50,16 +50,16 @@ Sin embargo cada definición ha sido separada en un fichero `.feature` específi
 
 Convenciones generales:
 
-* utilización de "que" para comenzar todas las definiciones para evitar falta de concordancia de género y número (p.e. "Dado **que** hay tres personas")
-* creación de nuevos recursos utilizando el verbo *haber* impersonal (p.e. "Dado que **hay** tres lechugas")
+* utilización de "que" para comenzar todas las definiciones para evitar falta de concordancia de género y número (p.e. "Dado **que** tenemos tres personas")
+* creación de nuevos recursos utilizando verbo **tener** en tercena persona plural (p.e. "Dado que **tenemos** tres lechugas")
 * asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
 
 #### Creación de uno o varios registros asignándoles opcionalmente un nombre
-    Dado que hay Un Producto llamado "Acelgas" 
+    Dado que tenemos Un Producto llamado "Acelgas" 
 [más ejemplos](master/features/contexto-creacion-simple.feature)
 
 #### Creación de uno o varios recursos a partir de una **step table**
-    Dado que hay el siguiente Huerto:
+    Dado que tenemos el siguiente Huerto:
            | nombre   | área | latitud  | latitud   | abono   |
            | Secano-1 | 35   | N 40° 44 | W 003° 48 | FSF-315 |
 [más ejemplos](master/features/contexto-creacion-desde-step-table.feature)

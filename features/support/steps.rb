@@ -1,4 +1,4 @@
-Then /^(?:existen? )?(un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: ['"](.+)["'])?$/ do |numero, modelo, nombre|
+Then /^existen? (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: ['"](.+)["'])?$/ do |numero, modelo, nombre|
   model = modelo.to_model
   conditions = if nombre
     {:conditions => [ field_for(model, 'nombre') + '=?', nombre ]}

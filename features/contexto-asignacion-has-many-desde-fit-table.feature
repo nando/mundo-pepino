@@ -33,15 +33,15 @@ Característica: asignación de valores para un campo has_many
   #     String.model_mappings[/bancal(es)?$/i] = Terrace
   #
   ########################################################################
-    Dado que hay un huerto llamado "H-01"
+    Dado que tenemos un huerto llamado "H-01"
        Y que dicho huerto tiene los siguientes bancales: 
        | nombre | longitud | cultivo |  matas |
        |  A-01  |    12    | Patatas |     16 |
        |  A-02  |    12    | Tomates |     28 |
        |  B-01  |    10    | Berzas  |     18 |
     Entonces existe un huerto
-           Y tres bancales
-           Y tres cultivos
+           Y existen tres bancales
+           Y existen tres cultivos
            Y el huerto "H-01" tiene un bancal "A-01"
            Y el bancal "A-01" tiene como cultivo "Patatas"
            Y como longitud "12" metros

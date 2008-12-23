@@ -3,7 +3,7 @@ Característica: Creación simple
   Escenario: Creación de uno o varios recursos con un nombre opcional
   ########################################################################
   # Patrón: 
-  #   Dado que hay _numero_ _modelo_( llamado _nombre_)
+  #   Dado (que tenemos)? _numero_ _modelo_( llamado _nombre_)
   #
   # Descripción:
   #   Nos crea una o más instancias de un modelo con la posibilidad de 
@@ -18,6 +18,11 @@ Característica: Creación simple
   #   Dicha asignación se llevará a cabo sobre el campo "name" si no se
   #   indica lo contrario mapeando "nombre" en String.field_mappings.
   #
+  #   Si optamos por no escribir "que tenemos" hay que tener en cuenta
+  #   que la frase será correcta sólo en aquellas frases que comiencen con
+  #   "Y" o, si comienzan con "Dado" haga referencia a una instancia de 
+  #   género másculino (p.e. "Dado un huerto:")
+  #
   #   Por ejemplo:
   #
   #     String.field_mappings[:nombre] = 'title'
@@ -26,21 +31,21 @@ Característica: Creación simple
   #   "title" en lugar de sobre "name".
   #
   # Ejemplos:
-  #   Dado que hay 30 tags
-  #   Dado que hay un producto llamado "Acelga"
+  #   Dado que tenemos 30 etiquetas
+  #   Dado que tenemos un producto llamado "Acelga"
   #
   ########################################################################
-    Dado que hay un huerto
-       Y que hay una huerta
-       Y que hay un huerto "En el río"
-       Y que hay una huerta "En el castro"
-       Y que hay un huerto llamado "Regadío"
-       Y que hay una huerta llamada "Secano"
-       Y que hay 2 huertos
-       Y que hay 2 huertos "Regadío"
-       Y que hay 2 huertos llamados "Secano"
-       Y que hay 2 huertas llamadas "Secano"
-       Y que hay 3 huertas llamadas "H-01, H-02 y H-03"
+    Dado que tenemos un huerto
+       Y una huerta
+       Y un huerto "En el río"
+       Y una huerta "En el castro"
+       Y un huerto llamado "Regadío"
+       Y una huerta llamada "Secano"
+       Y 2 huertos
+       Y 2 huertos "Regadío"
+       Y 2 huertos llamados "Secano"
+       Y 2 huertas llamadas "Secano"
+       Y 3 huertas llamadas "H-01, H-02 y H-03"
     Entonces existen 17 huertos
            Y existe un huerto "En el río"
            Y existe una huerta "En el castro"

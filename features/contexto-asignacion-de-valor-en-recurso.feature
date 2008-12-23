@@ -20,7 +20,7 @@ Característica: asignación de un valor en un recurso concreto
   #   - En caso contrario se asignará directamente _valor_ a _campo_ 
   #
   ########################################################################
-    Dado que hay dos huertos llamados "A y B"
+    Dado que tenemos dos huertos llamados "A y B"
        Y que el huerto "A" tiene como área "12" hectáreas
        Y que dicho huerto tiene como abono "Hidrogenado"
        Y que la huerta "B" tiene como área "8" hectáreas

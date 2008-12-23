@@ -20,13 +20,13 @@ Característica: asignación simple de instancias en campo has_many
   #   completa.
   #
   ########################################################################
-    Dado que hay un huerto "H-01"
+    Dado que tenemos un huerto "H-01"
        Y que dicho huerto tiene tres bancales "Acelgas, Tomates y Pepinos"
-       Y que hay un huerto "H-02"
+       Y que tenemos un huerto "H-02"
        Y que dicho huerto tiene dos bancales llamados "Berzas y Patatas"
-       Y que hay un huerto "H-03"
+       Y que tenemos un huerto "H-03"
        Y que dicho huerto tiene un bancal llamado "Pitos y flautas"
-       Y que hay un huerto "H-04"
+       Y que tenemos un huerto "H-04"
        Y que dicho huerto tiene 10 bancales
     Entonces existen cuatro huertos
            Y 16 bancales

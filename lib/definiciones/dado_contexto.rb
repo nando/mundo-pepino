@@ -2,7 +2,7 @@ module Cucumber::StepMethods
   alias_method :Dado, :Given
 end
 
-Dado /^que hay ([^ ]+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
+Dado /^(?:que tenemos )?(un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   number = numero.to_number
   model = modelo.to_unquoted.to_model
   attribs = names_for_simple_creation(model, number, nombre)
