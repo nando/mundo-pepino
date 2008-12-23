@@ -48,28 +48,91 @@ Sin embargo cada definición ha sido separada en un fichero `.feature` específi
 
 ### Dado el contexto (Givens)
 
-* [Creación de uno o varios registros asignándoles opcionalmente un nombre](master/features/contexto-creacion-simple.feature)
-* [Creación de uno o varios recursos a partir de una **step table**](master/features/contexto-creacion-desde-step-table.feature)
-* [Asignación de un valor en un campo del último (o últimos) recurso mencionado](master/features/contexto-asignacion-de-valor.feature)
-* [Asignación de valores en un campo **has\_many** del último recurso mencionado](master/features/contexto-asignacion-de-valores-has-many.feature)
+Convenciones generales:
+
+* utilización de "que" para comenzar todas las definiciones para evitar falta de concordancia de género y número (p.e. "Dado **que** hay tres personas")
+* creación de nuevos recursos utilizando el verbo *haber* impersonal (p.e. "Dado que **hay** tres lechugas")
+* asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
+
+#### Creación de uno o varios registros asignándoles opcionalmente un nombre
+    Dado que hay Un Producto llamado "Acelgas" 
+[más ejemplos](master/features/contexto-creacion-simple.feature)
+
+#### Creación de uno o varios recursos a partir de una **step table**
+    Dado que hay el siguiente Huerto:
+           | nombre   | área | latitud  | latitud   | abono   |
+           | Secano-1 | 35   | N 40° 44 | W 003° 48 | FSF-315 |
+[más ejemplos](master/features/contexto-creacion-desde-step-table.feature)
+
+#### Asignación de un valor en un campo de un recurso concreto
+    Dado que el Tomate "A" tiene como Variedad "Raf"
+[más ejemplos](master/features/contexto-asignacion-de-valor-en-recurso.feature)
+
+#### Asignación de un valor en un campo del último (o últimos) recurso mencionado
+    Dado que dichas Acelgas tienen como Variedad "Gigante carmesí"
+[más ejemplos](master/features/contexto-asignacion-de-valor-en-ultimo-recurso.feature)
+
+#### Asignación simple a un campo **has\_many** del último recurso mencionado
+    Dado que dicho Huerto tiene Tres Bancales "Acelgas, Tomates y Pepinos"
+[más ejemplos](master/features/contexto-asignacion-has-many-simple.feature)
+
+#### Asignación en campo **has\_many** del último recurso mencionado desde una step-table
+    Dado que dicho Huerto tiene los siguientes Bancales:
+           | nombre | longitud | cultivo |  matas |
+           |  A-01  |    12    | Patatas |     16 |
+           |  A-02  |    12    | Tomates |     18 |
+[más ejemplos](master/features/contexto-asignacion-has-many-desde-fit-table.feature)
 
 ### Cuando algo ocurre (Whens)
 
-* [Solicitud de una URL específica opcionalmente indicada con un nombre coloquial](master/features/cuando-visito-url-especifica.feature)
-* [Solicitud de la URL asociada al último recurso definido](master/features/cuando-visito-url-de-recurso.feature)
-* [Pincho en un enlace \*](master/features/cuando-pulso-el-enlace.feature)
-* [Pincho en un bóton (*submit*) \*](master/features/cuando-pulso-el-boton.feature)
-* [Adjunto un fichero (*file*) \*](master/features/cuando-.feature)
-* [Elijo una opción (*radiobutton*) \*](master/features/cuando-elijo-de-radiobutton.feature)
-* [Marco (o desmarco) una casilla (*checkbox*) \*](master/features/cuando-marco-el-checkbox.feature)
-* [Relleno un campo con un texto (*text* o *textarea*) \*](master/features/cuando-relleno-el-campo.feature)
-* [Selecciono una opción de una lista (*select*) \*](master/features/cuando-selecciono-en-listado.feature)
+Convenciones generales:
+
+* frases escritas en primera persona del singular
+
+#### Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
+    Cuando visito la portada
+[más ejemplos](master/features/cuando-visito-url-especifica.feature)
+#### Solicitud de la URL asociada al último recurso definido
+    Cuando visito su página
+[más ejemplos](master/features/cuando-visito-url-de-recurso.feature)
+#### Pincho en un enlace \*
+    Cuando pulso el enlace "Volver"
+[más ejemplos](master/features/cuando-pulso-el-enlace.feature)
+#### Pincho/pulso un bóton (*submit*) \*
+    Cuando pulso en el botón Enviar
+[más ejemplos](master/features/cuando-pulso-el-boton.feature)
+#### Adjunto un fichero (*file*) \*
+    Cuando adjunto el fichero "images/cucumber.jpg" en Fotografía actual
+[más ejemplos](master/features/cuando-adjunto-el-fichero.feature)
+#### Elijo una opción (*radiobutton*) \*
+    Cuando elijo el color "VERDE"
+[más ejemplos](master/features/cuando-elijo-de-radiobutton.feature)
+#### Marco (o desmarco) una casilla (*checkbox*) \*
+    Cuando marco "color verde"
+[más ejemplos](master/features/cuando-marco-el-checkbox.feature)
+#### Relleno/completo un campo con un texto (*text* o *textarea*) \*
+     Cuando completo 'nombre' con 'Wadus'
+[más ejemplos](master/features/cuando-relleno-el-campo.feature)
+#### Selecciono una opción de una lista (*select*) \*
+[más ejemplos](master/features/cuando-selecciono-en-listado.feature)
+     Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
 
 ### Entonces pasa (Thens)
 
-* [Veo (o no) un texto \*](master/features/veo-el-texto.feature)
-* [Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto](master/features/veo-etiqueta-con-valor.feature)
-* [Veo marcada (o desmarcada) una casilla (*checkbox*) \*](master/features/veo-el-checkbox.feature)
+Convenciones generales:
+
+* frases escritas en primera persona del singular
+* para expresar que algo es visible utiliza "veo" o "debo ver" (o "no veo" y "no debo ver")
+
+#### Veo (o no) un texto \*
+    Entonces debo ver el texto "IVA incluido"
+[más ejemplos](master/features/veo-el-texto.feature)
+#### Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto
+    Entonces no debo ver la etiqueta div#title con el valor "Surco"
+[más ejemplos](master/features/veo-etiqueta-con-valor.feature)
+#### Veo marcada (o desmarcada) una casilla (*checkbox*) \*
+    Y veo marcado "Acepto las condiciones del servicio"
+[más ejemplos](master/features/veo-el-checkbox.feature)
 
 ## License
 

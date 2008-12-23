@@ -14,7 +14,7 @@ Dado /^(?:que tenemos )?(?:el|la|los|las) (?:siguientes? )?(.+):$/ do |modelo, t
   add_resource model, translated_hashes(tabla.raw), :force_creation => true
 end 
 
-Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["']$/ do |modelo, nombre, campo, valor|
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
   if resource = last_resource_of(modelo, nombre)
     if field = field_for(resource.class, campo)
       resource.update_attribute field, valor
