@@ -16,4 +16,20 @@ module FixtureReplacement
   attributes_for :fertilizer do |a|
     name = String.random
   end
+  attributes_for :chard do |a|
+    orchard = default_orchard
+    weight = 0
+    length = 0
+  end
+  attributes_for :tomato do |a|
+    orchard = default_orchard
+    weight = 0
+    diameter = 0
+  end
+  attributes_for :pepino do |a|
+    orchard = default_orchard
+    weight = 0
+    length = 0
+    diameter = 0
+  end
 end

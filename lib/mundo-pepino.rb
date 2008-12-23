@@ -154,15 +154,20 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
-  def last_resource_of(modelo)
+  def last_resource_of(modelo, with_name = nil)
     if model = modelo.to_model
-      if (array = last_resource) and 
-         (array.is_a?(Array)) and
-         (array.first.is_a?(model))
-        array
+      resource = if with_name
+        detect_first @resources.flatten, [model, with_name]
       else
-        detect_first @resources, :is_a?, model
+        if (array = last_resource) and 
+           (array.is_a?(Array)) and
+           (array.first.is_a?(model))
+          array
+        else
+          detect_first @resources.flatten, model
+        end
       end
+      resource || raise(ResourceNotFound.new("model:#{model.name}, name:#{with_name||'nil'}"))
     else
       raise ModelNotMapped.new(modelo)
     end
@@ -192,13 +197,19 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
-  def detect_first(arr, method, value)
+  def detect_first(arr, value, method = nil)
     if value.is_a? String
       method ||= :name
       arr.detect { |r| r.respond_to?(method) && (r.send(method) =~ /#{value}/i) }
     elsif value.is_a? Class
       method ||= :is_a?
       arr.detect { |r| r.respond_to?(method) && r.send(method, value) }
+    elsif value.is_a? Array
+      model, val = value # [ class, value ]
+      name_field = field_for(model, 'nombre')
+      arr.detect do |r| 
+        r.respond_to?(:is_a?) && r.is_a?(model) && r.send(name_field) =~ /#{val}/i
+      end
     else
       method ||= :id
       arr.detect { |r| r.respond_to?(method) && r.send(method) == value }

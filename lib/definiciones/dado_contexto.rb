@@ -14,7 +14,18 @@ Dado /^(?:que tenemos )?(?:el|la|los|las) (?:siguientes? )?(.+):$/ do |modelo, t
   add_resource model, translated_hashes(tabla.raw), :force_creation => true
 end 
 
-Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["']$/ do |modelo, nombre, campo, valor|
+  if resource = last_resource_of(modelo, nombre)
+    if field = field_for(resource.class, campo)
+      resource.update_attribute field, valor
+      @resources.unshift resource
+    else
+      raise MundoPepino::FieldNotMapped.new(campo)
+    end
+  end
+end
+
+Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
   if resource = last_resource_of(modelo)
     resources, values = resources_and_their_values(resource, valor)
     field,     values = field_and_values(modelo.to_model, campo, values)
@@ -28,7 +39,7 @@ Dado /^que dichos? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, cam
   end
 end
 
-Dado /^que dicho (.+) tiene (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
+Dado /^que dich[oa] (.+) tiene (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
   if resource = last_resource_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
     attribs = names_for_simple_creation(children_model, 

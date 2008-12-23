@@ -37,8 +37,11 @@ String.field_mappings = {
   /[áa]reas?$/i    => 'area',
   /color(es)?$/i   => 'color',
   /latitud(es)?$/i => 'latitude',
-  /longitud(es)?/i => 'longitude',
+  /longitud(es)?/i => 'length',
+  /pesos?/i        => 'weight',
+  /di[áa]metros?/i => 'diameter',
   /matas?$/i       => 'plants',
+  /variedad(es)?$/i           => 'variety',
   /campos? de texto/i         => 'text_field',
   /[áa]reas? de texto/i       => 'textarea',
   /tipos? de cultivos?/i      => 'orchard_type',
@@ -46,7 +49,7 @@ String.field_mappings = {
   /fichero adjunto/i          => 'file_field',
   /casilla seleccionada/i     => 'selected_check',
   /casilla sin seleccionar/i  => 'unselected_check',
-  /Terrace::longitud(es)?$/   => 'length'
+  /Orchard::longitud(es)?$/   => 'longitude'
 }
 
 
