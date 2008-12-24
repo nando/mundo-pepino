@@ -46,7 +46,7 @@ Característica: creación desde step-table
            Y el huerto "Secano-2" tiene en bbdd como abono "FSF-317"
            Y el huerto "Secano-3" tiene en bbdd como abono "FSF-319"
            Y el huerto "Regadío-1" tiene en bbdd como abono "HDR-102"
-           Y como área "15"
+           Y tiene en bbdd como área "15" hectáreas
            Y el huerto "Regadío-2" tiene en bbdd como abono "HDR-102"
-           Y como área "42"
+           Y tiene en bbdd como área "42" hectáreas
 

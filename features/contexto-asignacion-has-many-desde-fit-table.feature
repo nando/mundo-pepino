@@ -44,13 +44,13 @@ Característica: asignación de valores para un campo has_many
            Y tenemos en bbdd tres cultivos
            Y el huerto "H-01" tiene en bbdd un bancal "A-01"
            Y el bancal "A-01" tiene en bbdd como cultivo "Patatas"
-           Y como longitud "12" metros
-           Y como matas "16"
+           Y tiene en bbdd como longitud "12" metros
+           Y tiene en bbdd como matas "16"
            Y el huerto "H-01" tiene en bbdd un bancal "A-02"
            Y el bancal "A-02" tiene en bbdd como cultivo "Tomates"
-           Y como longitud "12" metros
-           Y como matas "28"
+           Y tiene en bbdd como longitud "12" metros
+           Y tiene en bbdd como matas "28"
            Y el huerto "H-01" tiene en bbdd un bancal "B-01"
            Y el bancal "B-01" tiene en bbdd como cultivo "Berzas"
-           Y como longitud "10" metros
+           Y tiene en bbdd como longitud "10" metros
            Y el bancal "B-01" tiene en bbdd como matas "18"

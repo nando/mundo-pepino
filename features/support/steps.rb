@@ -9,12 +9,12 @@ Then /^(?:en bbdd tenemos|tenemos en bbdd) (un|una|dos|tres|cuatro|cinco|\d+) ([
 end
 
 
-Then /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"$/ do |modelo, nombre, campo, valor|
+Then /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
   @then_resource = modelo.to_model.find_by_name(nombre)
   entonces_campo_valor(campo, valor)
 end
 
-Then /^como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
+Then /^(?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
   entonces_campo_valor(campo, valor)
 end
 
@@ -23,6 +23,6 @@ Then /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ 
   entonces_tiene_hijo(hijo, nombre_del_hijo)
 end
 
-#Then /^una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
-#  entonces_tiene_hijo(hijo, nombre_del_hijo)
-#end
+Then /^(?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
+  entonces_tiene_hijo(hijo, nombre_del_hijo)
+end
