@@ -25,7 +25,7 @@ Característica: asignación de un valor en un recurso concreto
        Y que dicho huerto tiene como abono "Hidrogenado"
        Y que la huerta "B" tiene como área "8" hectáreas
        Y que dicho huerto tiene como abono "Estiércol líquido"
-    Entonces el huerto "A" tiene como área "12"
+    Entonces el huerto "A" tiene en bbdd como área "12"
            Y como abono "Hidrogenado"
-           Y el huerto "B" tiene como área "8"
+           Y el huerto "B" tiene en bbdd como área "8"
            Y como abono "Estiércol líquido"

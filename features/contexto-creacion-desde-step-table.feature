@@ -13,7 +13,7 @@ Característica: creación desde step-table
   # 
   # Descripción:
   #     Nos crea una o más instancias de un modelo a partir de los datos
-  #   existentes en una "step table".
+  #   tenemos en bbddtes en una "step table".
   #
   #     Si el nombre de un campo de la step-table está mapeado con un 
   #   modelo, se buscará una instancia de dicho modelo cuyo "nombre" sea
@@ -40,13 +40,13 @@ Característica: creación desde step-table
            | Regadío-1 | 15   | N 41° 35 | W 003° 48 |
            | Regadío-2 | 42   | N 41° 35 | W 003° 48 |
        Y que dichos huertos tienen como abono "HDR-102"
-    Entonces existen cinco huertos
-           Y existen cuatro fertilizantes
-           Y el huerto "Secano-1" tiene como abono "FSF-315"
-           Y el huerto "Secano-2" tiene como abono "FSF-317"
-           Y el huerto "Secano-3" tiene como abono "FSF-319"
-           Y el huerto "Regadío-1" tiene como abono "HDR-102"
+    Entonces tenemos en bbdd cinco huertos
+           Y tenemos en bbdd cuatro fertilizantes
+           Y el huerto "Secano-1" tiene en bbdd como abono "FSF-315"
+           Y el huerto "Secano-2" tiene en bbdd como abono "FSF-317"
+           Y el huerto "Secano-3" tiene en bbdd como abono "FSF-319"
+           Y el huerto "Regadío-1" tiene en bbdd como abono "HDR-102"
            Y como área "15"
-           Y el huerto "Regadío-2" tiene como abono "HDR-102"
+           Y el huerto "Regadío-2" tiene en bbdd como abono "HDR-102"
            Y como área "42"
 

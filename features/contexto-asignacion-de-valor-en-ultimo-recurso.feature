@@ -37,14 +37,14 @@ Característica: asignación de un valor
        Y que tenemos tres huertos llamados "H-02, H-03 y H-04"
        Y que dichos huertos tienen como área "20, 32 y 12" hectáreas
        Y que dichos huertos tienen como abono "Nitrogenado de 2ª calidad"
-    Entonces el huerto "H-01" tiene como área "60"
+    Entonces el huerto "H-01" tiene en bbdd como área "60"
            Y como latitud "N 40° 44,340"
            Y como longitud "W 003° 48,730"
            Y como abono "Nitrogenado de 1ª calidad"
-           Y el huerto "H-02" tiene como área "20"
+           Y el huerto "H-02" tiene en bbdd como área "20"
            Y como abono "Nitrogenado de 2ª calidad"
-           Y el huerto "H-03" tiene como área "32"
+           Y el huerto "H-03" tiene en bbdd como área "32"
            Y como abono "Nitrogenado de 2ª calidad"
-           Y el huerto "H-04" tiene como área "12"
+           Y el huerto "H-04" tiene en bbdd como área "12"
            Y como abono "Nitrogenado de 2ª calidad"
 

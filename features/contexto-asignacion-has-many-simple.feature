@@ -28,11 +28,11 @@ Característica: asignación simple de instancias en campo has_many
        Y que dicho huerto tiene un bancal llamado "Pitos y flautas"
        Y que tenemos un huerto "H-04"
        Y que dicho huerto tiene 10 bancales
-    Entonces existen cuatro huertos
+    Entonces tenemos en bbdd cuatro huertos
            Y 16 bancales
-           Y el huerto "H-01" tiene un bancal "Acelgas"
-           Y el huerto "H-01" tiene un bancal "Tomates"
-           Y el huerto "H-01" tiene un bancal "Pepinos"
-           Y el huerto "H-02" tiene un bancal "Berzas"
-           Y el huerto "H-02" tiene un bancal "Patatas"
-           Y el huerto "H-03" tiene un bancal "Pitos y flautas"
+           Y el huerto "H-01" tiene en bbdd un bancal "Acelgas"
+           Y el huerto "H-01" tiene en bbdd un bancal "Tomates"
+           Y el huerto "H-01" tiene en bbdd un bancal "Pepinos"
+           Y el huerto "H-02" tiene en bbdd un bancal "Berzas"
+           Y el huerto "H-02" tiene en bbdd un bancal "Patatas"
+           Y el huerto "H-03" tiene en bbdd un bancal "Pitos y flautas"

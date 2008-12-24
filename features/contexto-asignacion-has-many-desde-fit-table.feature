@@ -39,18 +39,18 @@ Característica: asignación de valores para un campo has_many
        |  A-01  |    12    | Patatas |     16 |
        |  A-02  |    12    | Tomates |     28 |
        |  B-01  |    10    | Berzas  |     18 |
-    Entonces existe un huerto
-           Y existen tres bancales
-           Y existen tres cultivos
-           Y el huerto "H-01" tiene un bancal "A-01"
-           Y el bancal "A-01" tiene como cultivo "Patatas"
+    Entonces tenemos en bbdd un huerto
+           Y tenemos en bbdd tres bancales
+           Y tenemos en bbdd tres cultivos
+           Y el huerto "H-01" tiene en bbdd un bancal "A-01"
+           Y el bancal "A-01" tiene en bbdd como cultivo "Patatas"
            Y como longitud "12" metros
            Y como matas "16"
-           Y el huerto "H-01" tiene un bancal "A-02"
-           Y el bancal "A-02" tiene como cultivo "Tomates"
+           Y el huerto "H-01" tiene en bbdd un bancal "A-02"
+           Y el bancal "A-02" tiene en bbdd como cultivo "Tomates"
            Y como longitud "12" metros
            Y como matas "28"
-           Y el huerto "H-01" tiene un bancal "B-01"
-           Y el bancal "B-01" tiene como cultivo "Berzas"
+           Y el huerto "H-01" tiene en bbdd un bancal "B-01"
+           Y el bancal "B-01" tiene en bbdd como cultivo "Berzas"
            Y como longitud "10" metros
-           Y el bancal "B-01" tiene como matas "18"
+           Y el bancal "B-01" tiene en bbdd como matas "18"

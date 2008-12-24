@@ -24,13 +24,13 @@ Característica: implementación de pasos habituales
        Y que dicho tomate tiene como diámetro "97" milímetros
        Y que el tomate "B" tiene como variedad "Ramo"
        Y que dicho tomate tiene como diámetro "43" milímetros
-    Entonces existe un huerto
-           Y existen 7 acelgas
-           Y existen 4 tomates
-           Y el huerto "Hortalizas" tiene un bancal "Acelgas"
-           Y el bancal "Acelgas" tiene una acelga "F"
-           Y la acelga "F" tiene como peso "83"
+    Entonces tenemos en bbdd un huerto
+           Y tenemos en bbdd 7 acelgas
+           Y tenemos en bbdd 4 tomates
+           Y el huerto "Hortalizas" tiene en bbdd un bancal "Acelgas"
+           Y el bancal "Acelgas" tiene en bbdd una acelga "F"
+           Y la acelga "F" tiene en bbdd como peso "83"
            Y como variedad "Gigante carmesí"
-           Y el bancal "Tomates" tiene un tomate "A"
-           Y el tomate "A" tiene como variedad "Raf"
-           Y el tomate "A" tiene como diámetro "97"
+           Y el bancal "Tomates" tiene en bbdd un tomate "A"
+           Y el tomate "A" tiene en bbdd como variedad "Raf"
+           Y el tomate "A" tiene en bbdd como diámetro "97"
