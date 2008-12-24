@@ -121,8 +121,9 @@ Convenciones generales:
 
 Convenciones generales:
 
-* frases escritas en primera persona del singular
+* frases escritas en primera persona del singular (excepto comprobaciones en bbdd)
 * para expresar que algo es visible utiliza "veo" o "debo ver" (o "no veo" y "no debo ver")
+* las comprobaciones del contenido de la base de datos se escriben haciendo una referencia explícita a la misma en primera persona del plural ("tenemos en base de datos") o en tercera del singular ("tiene en base de datos"). Esta verbosidad es intencionada debido a que [dichas comprobaciones están desaconsejadas](http://github.com/aslakhellesoy/cucumber/wikis/given-when-then), haciendo así menos limpio y un poco más costoso su uso.
 
 #### Veo (o no) un texto \*
     Entonces debo ver el texto "IVA incluido"
@@ -134,8 +135,29 @@ Convenciones generales:
     Y veo marcado "Acepto las condiciones del servicio"
 [más ejemplos](master/features/veo-el-checkbox.feature)
 
+#### Tenemos en BBDD uno o más registros de un modelo opcionalmente con un nombre concreto
+    Entonces tenemos en la base de datos un Abono llamado "FSF-03"
+[más ejemplos](master/features/tenemos-en-bbdd-registros.feature)
+
+#### Tenemos en BBDD un valor en un campo de un registro concreto
+    Entonces el Huerto "H-02" tiene en base de datos como Área "2" hectáreas
+[más ejemplos](master/features/tenemos-en-bbdd-valor-en-campo-de-registro.feature)
+
+#### Tenemos en BBDD un valor en un campo del registro mencionando anteriormente
+    Entonces tiene en base de datos como Área "2" hectáreas
+[más ejemplos](master/features/tenemos-en-bbdd-valor-en-campo-de-registro-mencionado.feature)
+
+#### Tenemos en BBDD una asociación **has\_many** en un registro concreto
+    Entonces el Huerto "H-02" tiene en base de datos un Bancal "A"
+[más ejemplos](master/features/tenemos-en-bbdd-asocioacion-has-many-en-registro.feature)
+
+#### Tenemos en BBDD una asociación **has\_many**  en un registro mencionando anteriormente
+    Entonces tiene en base de datos un Bancal "B"
+[más ejemplos](master/features/tenemos-en-bbdd-asocioacion-has-many-en-registro-mencionado.feature)
+
+
 ## License
 
-Copyright 2008, Fernando García Samblas <fernando.garcia at the-cocktail.com>
+Copyright 2008, The Cocktail Experience. Fernando García Samblas <fernando.garcia at the-cocktail.com>
 
 This is free software released under the GPL License (see license agreement in COPYING).

@@ -34,7 +34,7 @@ String.model_mappings = {
 }
 
 String.field_mappings = {
-  /[áa]reas?$/i    => 'area',
+  /[Ááa]reas?$/i    => 'area',
   /color(es)?$/i   => 'color',
   /latitud(es)?$/i => 'latitude',
   /longitud(es)?/i => 'length',
@@ -53,29 +53,9 @@ String.field_mappings = {
 }
 
 
-
 class MiMundo < MundoPepino 
-  def entonces_campo_valor(campo, valor)
-    if child_model = campo.to_model
-      child = child_model.find_by_name(valor)
-      (@then_resource.send child_model.name.downcase).should == child
-    else
-      (@then_resource.send field_for(@then_resource.class, campo)).to_s.should == valor
-    end
-  end
-  
-  def entonces_tiene_hijo(hijo, nombre)
-    if child_model = hijo.to_model
-      child = child_model.find_by_name(nombre)
-      (@then_resource.send child_model.table_name).detect do |c|
-        c.id == child.id 
-      end.should_not be_nil
-    else
-      MundoPepino::ModelNotMapped.new(hijo)
-    end
-  end
+  # Helpers específicos de nuestras features
 end
-
 
 World do
   MiMundo.new

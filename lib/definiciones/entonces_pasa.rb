@@ -17,3 +17,34 @@ end
 Entonces /^(veo|no veo|debo ver|no debo ver) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
   field_labeled(unquote(campo)).send shouldify(should), be_checked
 end
+
+
+#BBDD
+
+Entonces /^(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos)) (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: (?:llamad[oa] )?['"](.+)["'])?$/ do |numero, modelo, nombre|
+  model = modelo.to_model
+  conditions = if nombre
+    {:conditions => [ field_for(model, 'nombre') + '=?', nombre ]}
+  else
+    :all
+  end
+  model.count(conditions).should == numero.to_number
+end
+
+Entonces /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
+  @then_resource = modelo.to_model.find_by_name(nombre)
+  entonces_campo_valor(campo, valor)
+end
+
+Entonces /^(?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
+  entonces_campo_valor(campo, valor)
+end
+
+Entonces /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
+  @then_resource = padre.to_model.find_by_name(nombre_del_padre)
+  entonces_tiene_hijo(hijo, nombre_del_hijo)
+end
+
+Entonces /^(?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
+  entonces_tiene_hijo(hijo, nombre_del_hijo)
+end

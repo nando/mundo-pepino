@@ -24,7 +24,7 @@ Característica: implementación de pasos habituales
        Y que dicho tomate tiene como diámetro "97" milímetros
        Y que el tomate "B" tiene como variedad "Ramo"
        Y que dicho tomate tiene como diámetro "43" milímetros
-    Entonces tenemos en bbdd un huerto
+    Entonces tenemos en bbdd un huerto llamado "Hortalizas"
            Y tenemos en bbdd 7 acelgas
            Y tenemos en bbdd 4 tomates
            Y el huerto "Hortalizas" tiene en bbdd un bancal "Acelgas"

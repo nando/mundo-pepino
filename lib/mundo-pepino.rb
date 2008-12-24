@@ -250,4 +250,25 @@ class MundoPepino < Cucumber::Rails::World
       end
     end
   end
+  
+  def entonces_campo_valor(campo, valor)
+    if child_model = campo.to_model
+      child = child_model.find_by_name(valor)
+      (@then_resource.send child_model.name.downcase).should == child
+    else
+      (@then_resource.send field_for(@then_resource.class, campo)).to_s.should == valor
+    end
+  end
+  
+  def entonces_tiene_hijo(hijo, nombre)
+    if child_model = hijo.to_model
+      child = child_model.find_by_name(nombre)
+      (@then_resource.send child_model.table_name).detect do |c|
+        c.id == child.id 
+      end.should_not be_nil
+    else
+      MundoPepino::ModelNotMapped.new(hijo)
+    end
+  end
+  
 end
