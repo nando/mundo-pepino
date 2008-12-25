@@ -37,6 +37,11 @@ class MundoPepino < Cucumber::Rails::World
       super 'there is no resources'
     end
   end
+  class NotFoundInDatabase
+    def initialize(model, value='')
+      super "#{model} #{value} not found in database"
+    end
+  end
 
   class NotMapped < RuntimeError
     def initialize(type, string)
@@ -107,7 +112,17 @@ class MundoPepino < Cucumber::Rails::World
     end)
     @resources.first
   end
- 
+
+  def add_resource_from_database(modelo, nombre)
+    model = modelo.to_unquoted.to_model
+    field = field_for(model, 'nombre')
+    if resource = model.send("find_by_#{field}", nombre)
+      @resources.unshift resource
+    else
+      NotFoundInDatabase.new(model, name)
+    end
+  end
+
   def names_for_simple_creation(model, number, name_or_names, options = {})
     base_hash = base_hash_for(options)
     if name_or_names
@@ -143,15 +158,11 @@ class MundoPepino < Cucumber::Rails::World
   end
   
   def last_resource
-    @resources && @resources.first
+    (@resources && @resources.first) || raise(WithoutResources)
   end
 
   def last_resource_url
-    if res = last_resource
-      eval("#{res.class.name.downcase}_path(#{res.id})")
-    else
-      raise WithoutResources
-    end
+    eval("#{last_resource.class.name.downcase}_path(#{last_resource.id})")
   end
 
   def last_resource_of(modelo, with_name = nil)
@@ -251,23 +262,24 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
-  def entonces_campo_valor(campo, valor)
-    if child_model = campo.to_model
-      child = child_model.find_by_name(valor)
-      (@then_resource.send child_model.name.downcase).should == child
+  def last_resource_should_have_value(field, value)
+    res = last_resource
+    if child_model = field.to_model
+      child = child_model.find_by_name(value)
+      (res.send child_model.name.downcase).should == child
     else
-      (@then_resource.send field_for(@then_resource.class, campo)).to_s.should == valor
+      (res.send field_for(res.class, field)).to_s.should == value
     end
   end
   
-  def entonces_tiene_hijo(hijo, nombre)
-    if child_model = hijo.to_model
-      child = child_model.find_by_name(nombre)
-      (@then_resource.send child_model.table_name).detect do |c|
+  def last_resource_should_have_child(child, name)
+    if child_model = child.to_model
+      child = child_model.find_by_name(name)
+      (last_resource.send child_model.table_name).detect do |c|
         c.id == child.id 
       end.should_not be_nil
     else
-      MundoPepino::ModelNotMapped.new(hijo)
+      MundoPepino::ModelNotMapped.new(child)
     end
   end
   
