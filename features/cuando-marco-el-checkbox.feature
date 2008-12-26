@@ -30,3 +30,11 @@ Característica: marco el checkbox
          Y pincho en el botón "Galleta de la fortuna"
     Entonces no veo el tag div#selected_check con el valor "Seleccionado"
            Y veo el tag div#unselected_check con el valor "Sin seleccionar"
+
+    Escenario: Marco una casilla o checkbox (desde Given)
+    Dado que visito la portada
+       Y que desmarco la casilla seleccionada
+       Y que marco la casilla sin seleccionar
+    Cuando pincho en el botón "Galleta de la fortuna"
+    Entonces no veo el tag div#selected_check con el valor "Seleccionado"
+           Y veo el tag div#unselected_check con el valor "Sin seleccionar"

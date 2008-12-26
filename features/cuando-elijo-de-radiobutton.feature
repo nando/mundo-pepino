@@ -34,3 +34,8 @@ Característica: elijo radiobutton
          Y pincho el botón "Galleta de la fortuna"
     Entonces veo el tag div#color con el valor "verde"
     
+  Escenario: Elijo una opción de un radiobutton (desde Given) 
+    Dado que visito la portada
+       Y que elijo Color "VERDE"
+    Cuando pincho el botón "Galleta de la fortuna"
+    Entonces veo el tag div#color con el valor "verde"

@@ -8,7 +8,7 @@ This fact can easily drive us towards an **explosion of the step definitions** m
 
 At the same time, to describe an app **there is a group of sentences that we're very likely to need**, like for example those which refer to posible interactions of the user while browsing a site.
 
-Currently `script/generate cucumber` give to **English** cucumberists a proposal for some of those common steps in `step_definitions/webrat_steps.rb`.
+Currently `script/generate cucumber` give to **English** cucumberists (or *cucus*, or *cucunuts*, or *cooks* ;) a proposal for some of those common steps in `step_definitions/webrat_steps.rb`.
 
 mundo-pepino will be an already implemented set of step definitions frequently needed while writing a feature in **Spanish**, hopefully with all the `script/generate cucumber` proposals translated inside.
 
@@ -53,6 +53,7 @@ Convenciones generales:
 * utilización de "que" para comenzar todas las definiciones para evitar falta de concordancia de género y número (p.e. "Dado **que** tenemos tres personas")
 * creación de nuevos recursos utilizando verbo **tener** en tercena persona plural (p.e. "Dado que **tenemos** tres lechugas")
 * asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
+* todas las definiciones para "Cuando algo ocurre" (o *Then's*, ver más abajo) son válidas también como "Dado el contexto" incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
 #### Creación de uno o varios registros asignándoles opcionalmente un nombre
     Dado que tenemos Un Producto llamado "Acelgas" 
@@ -88,6 +89,7 @@ Convenciones generales:
 Convenciones generales:
 
 * frases escritas en primera persona del singular
+* todas las definiciones son válidas también para definir contexto (en "Dados" o "Givens") incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
 #### Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
     Cuando visito la portada

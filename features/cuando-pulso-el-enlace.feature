@@ -21,3 +21,7 @@ Característica: pulso el enlace
     Cuando pulso el enlace "Volver"
     Entonces veo la etiqueta H1 con el valor "Portada de Mundo Pepino"
          
+  Escenario: Pincho en un enlace desde Given
+    Dado que visito la home
+       Y que pincho el enlace Registro
+    Entonces veo la etiqueta H1 con el valor "Registro en Mundo Pepino"

@@ -18,3 +18,7 @@ Característica: Solicitud de URL de recurso
     Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
            Y debo ver la etiqueta H2 con el valor "Esplendoroso"
 
+    Dado que tenemos un huerto "Mermado"
+       Y que visito su página
+    Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
+           Y debo ver la etiqueta H2 con el valor "Mermado"

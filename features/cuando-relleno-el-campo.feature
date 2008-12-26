@@ -31,6 +31,10 @@ Característica: relleno el campo
          Y completo "área de texto" con el valor "Garbanzos"
          Y pincho en el botón "Galleta de la fortuna"
     Entonces veo el tag div#textarea con el valor "Garbanzos"
-    
-         
 
+  Escenario: Relleno un campo con un texto (desde Given)
+    Dado que visito la portada
+       Y que completo "área de texto" con el valor "Garbanzos"
+    Cuando pincho en el botón "Galleta de la fortuna"
+    Entonces veo el tag div#textarea con el valor "Garbanzos"
+    

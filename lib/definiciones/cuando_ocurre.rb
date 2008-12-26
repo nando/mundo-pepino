@@ -2,7 +2,7 @@ module Cucumber::StepMethods
   alias_method :Cuando, :When
 end
 
-Cuando /^visito (.+)$/i do |pagina|
+Cuando /^(?:que )?visito (.+)$/i do |pagina|
   visit case unquoted = unquote(pagina)
   when /su p[áa]gina$/i, /su portada$/i:
     last_mentioned_url
@@ -11,11 +11,11 @@ Cuando /^visito (.+)$/i do |pagina|
   end
 end
 
-Cuando /^(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|
+Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|
   click_button(unquote(boton))
 end
 
-Cuando /^(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+)$/i do |tipo, enlace|
+Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+)$/i do |tipo, enlace|
   options = {}
   options[:wait] = case tipo.downcase
   when 'enlace con efectos' then :effects
@@ -25,30 +25,29 @@ Cuando /^(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+
   click_link(unquote(enlace), options)
 end
 
-Cuando /^(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, valor|
+Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, valor|
   fill_in campo_to_field(campo), :with => valor
 end
 
-Cuando /^elijo (?:la|el)? ?(.+) ["'](.+)["']$/i do |campo, valor|
+Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ["\'](.+)["\']$/i do |campo, valor|
   chooses(campo_to_field(campo) + '_' + valor.downcase.to_underscored)
 end
 
-Cuando /^marco (?:la|el)? ?(.+)$/i do |campo|
+Cuando /^(?:que )?marco (?:la|el)? ?(.+)$/i do |campo|
   checks(campo_to_field(campo))
 end
 
-Cuando /^desmarco (?:la|el)? ?(.+)$/i do |campo|
+Cuando /^(?:que )?desmarco (?:la|el)? ?(.+)$/i do |campo|
   unchecks(campo_to_field(campo))
 end
 
-Cuando /^adjunto el fichero ['"](.*)['"] (?:a|en) (.*)$/ do |ruta, campo|
+Cuando /^(?:que )?adjunto el fichero [\'"](.*)[\'"] (?:a|en) (.*)$/ do |ruta, campo|
   attach_file(campo_to_field(campo), ruta.to_local_path)
 end
 
-Cuando /^selecciono ["'](.+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
+Cuando /^(?:que )?selecciono ["'](.+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
   selects(valor, :from => campo_to_field(campo))
 end
-
 
 ## Use this step in conjunction with Rail's datetime_select helper. For example:
 ## When I select "December 25, 2008 10:00" as the date and time

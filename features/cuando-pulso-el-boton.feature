@@ -20,3 +20,8 @@ Característica: pulso el botón
          Y pulso en el botón Galleta de la Fortuna
     Entonces veo la etiqueta H1 con el valor "Sorry, not implemented yet"
      
+  Escenario: Pincho en un bóton (desde Given)
+    Dado que visito la portada
+       Y que pulso en el botón Galleta de la Fortuna
+    Entonces veo la etiqueta H1 con el valor "Sorry, not implemented yet"
+      

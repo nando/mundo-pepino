@@ -35,3 +35,6 @@ Característica: solicitud de URL específica
     Cuando visito "la HOME"
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
 
+  Escenario: Solicitud de una URL específica en definición de contexto "Given"
+    Dado que visito la portada
+    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"

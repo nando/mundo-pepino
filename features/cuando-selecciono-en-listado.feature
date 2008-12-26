@@ -27,3 +27,9 @@ Característica: selecciono en un listado
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
 
+  Escenario: Selecciono una opción de una lista (desde Given) 
+    Dado que visito la portada
+       Y que selecciono 'Hortalizas'
+    Cuando pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#orchard_type con el valor "Hortalizas"
+    

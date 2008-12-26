@@ -10,3 +10,9 @@ Característica: adjunto el fichero
          Y adjunto el fichero "config/database.yml" en Fichero Adjunto
          Y pincho en el botón "Galleta de la fortuna"
     Entonces veo en la etiqueta div#file_filename el valor "database.yml"
+
+  Escenario: Adjunto un fichero local en un campo de formulario (como Given)
+    Dado que visito la portada
+       Y que adjunto el fichero "config/database.yml" en Fichero Adjunto
+    Cuando pincho en el botón "Galleta de la fortuna"
+    Entonces veo en la etiqueta div#file_filename el valor "database.yml"
