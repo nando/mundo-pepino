@@ -33,18 +33,18 @@ end
 
 Entonces /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
   add_resource_from_database(modelo, nombre)
-  last_resource_should_have_value(campo, valor)
+  last_mentioned_should_have_value(campo, valor)
 end
 
 Entonces /^(?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
-  last_resource_should_have_value(campo, valor)
+  last_mentioned_should_have_value(campo, valor)
 end
 
 Entonces /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
   add_resource_from_database(padre, nombre_del_padre)
-  last_resource_should_have_child(hijo, nombre_del_hijo)
+  last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
 
 Entonces /^(?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
-  last_resource_should_have_child(hijo, nombre_del_hijo)
+  last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end

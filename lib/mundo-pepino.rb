@@ -19,10 +19,28 @@ String.add_mapper(:local_path) { |string| string }
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 
-
 class MundoPepino < Cucumber::Rails::World
   include FixtureReplacement
 
+  # API común para las instancias que van referenciándose en el escenario.
+  module Mencionado 
+    def m_instance
+      self.is_a?(Array) ? self.first : self
+    end
+    
+    def m_model
+      self.m_instance.class
+    end
+    
+    def m_singular
+      self.m_model.name.downcase
+    end
+    
+    def m_plural
+      self.m_model.table_name
+    end
+  end
+  
   class ResourceNotFound < RuntimeError
     def initialize(resource_info=nil)
       @resource_info = resource_info && " (#{resource_info})"
@@ -97,30 +115,36 @@ class MundoPepino < Cucumber::Rails::World
 
   # options: :force_creation 
   def add_resource(model, attribs=[], options = {})
-    @resources ||= []
     attributes = if attribs.is_a?(Hash)
       [ attribs ] 
     else
       attribs
     end
-    @resources.unshift(if attributes.size == 1
+    res = if attributes.size == 1
       find_or_create(model, attributes.first, options)
     else
       attributes.map do |hash| 
         find_or_create(model, hash, options) 
       end
-    end)
-    @resources.first
+    end
+    pile_up res
   end
 
   def add_resource_from_database(modelo, nombre)
     model = modelo.to_unquoted.to_model
     field = field_for(model, 'nombre')
     if resource = model.send("find_by_#{field}", nombre)
-      @resources.unshift resource
+      pile_up resource
     else
       NotFoundInDatabase.new(model, name)
     end
+  end
+  
+  def pile_up(mentioned)
+    @resources ||= []
+    mentioned.class.send :include, Mencionado
+    @resources.unshift mentioned
+    mentioned
   end
 
   def names_for_simple_creation(model, number, name_or_names, options = {})
@@ -157,23 +181,21 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
-  def last_resource
+  def last_mentioned
     (@resources && @resources.first) || raise(WithoutResources)
   end
 
-  def last_resource_url
-    eval("#{last_resource.class.name.downcase}_path(#{last_resource.id})")
+  def last_mentioned_url 
+    eval("#{last_mentioned.m_singular}_path(#{last_mentioned.m_instance.id})")
   end
 
-  def last_resource_of(modelo, with_name = nil)
+  def last_mentioned_of(modelo, with_name = nil)
     if model = modelo.to_model
       resource = if with_name
         detect_first @resources.flatten, [model, with_name]
       else
-        if (array = last_resource) and 
-           (array.is_a?(Array)) and
-           (array.first.is_a?(model))
-          array
+        if (last_mentioned.is_a?(Array) and (last_mentioned.m_model == model))
+          last_mentioned
         else
           detect_first @resources.flatten, model
         end
@@ -227,29 +249,27 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
-  def resources_and_their_values(resource, valor)
-    if resource.is_a?(Array)
+  def resources_array_field_and_values(mentioned, campo, valor)
+    resources, valores = if mentioned.is_a?(Array)
       valores = valor.split(/ ?, | y /)
-      if valores.size == resource.size
-        [resource, valores]
+      if valores.size == mentioned.size
+        [mentioned, valores]
       else
-        [resource, [ valor ] * resource.size]
+        [mentioned, [ valor ] * mentioned.size]
       end
     else
-      [[ resource ], [ valor ]]
+      [[ mentioned ], [ valor ]]
     end
-  end
-  
-  def field_and_values(model, campo, valores)
-    if (child_model = campo.to_model)
-      child_name_field = field_for(model, 'nombre')
+    field, values = if (child_model = campo.to_model)
+      child_name_field = field_for(mentioned.m_model, 'nombre')
       values = add_resource(child_model,
         valores.map { |val| { child_name_field => val } })
       values = [ values ] unless values.is_a?(Array)
       [ child_model.name.downcase, values ]
     else
-      [ field_for(model, campo), valores ]
+      [ field_for(mentioned.m_model, campo), valores ]
     end 
+    [resources, field, values]
   end
   
   def campo_to_field(campo)
@@ -262,8 +282,8 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
-  def last_resource_should_have_value(field, value)
-    res = last_resource
+  def last_mentioned_should_have_value(field, value)
+    res = last_mentioned
     if child_model = field.to_model
       child = child_model.find_by_name(value)
       (res.send child_model.name.downcase).should == child
@@ -272,10 +292,10 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
-  def last_resource_should_have_child(child, name)
+  def last_mentioned_should_have_child(child, name)
     if child_model = child.to_model
       child = child_model.find_by_name(name)
-      (last_resource.send child_model.table_name).detect do |c|
+      (last_mentioned.send child_model.table_name).detect do |c|
         c.id == child.id 
       end.should_not be_nil
     else

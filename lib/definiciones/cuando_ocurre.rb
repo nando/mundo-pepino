@@ -5,7 +5,7 @@ end
 Cuando /^visito (.+)$/i do |pagina|
   visit case unquoted = unquote(pagina)
   when /su p[áa]gina$/i, /su portada$/i:
-    last_resource_url
+    last_mentioned_url
   else
     unquoted.to_url
   end

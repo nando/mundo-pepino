@@ -15,10 +15,10 @@ Dado /^(?:que tenemos )?(?:el|la|los|las) (?:siguientes? )?(.+):$/ do |modelo, t
 end 
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
-  if resource = last_resource_of(modelo, nombre)
+  if resource = last_mentioned_of(modelo, nombre)
     if field = field_for(resource.class, campo)
       resource.update_attribute field, valor
-      @resources.unshift resource
+      pile_up resource
     else
       raise MundoPepino::FieldNotMapped.new(campo)
     end
@@ -26,9 +26,8 @@ Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ d
 end
 
 Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
-  if resource = last_resource_of(modelo)
-    resources, values = resources_and_their_values(resource, valor)
-    field,     values = field_and_values(modelo.to_model, campo, values)
+  if res = last_mentioned_of(modelo)
+    resources, field, values = resources_array_field_and_values(res, campo, valor)
     if field
       resources.each_with_index do |r, i| 
         r.update_attribute field, values[i] 
@@ -40,7 +39,7 @@ Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, 
 end
 
 Dado /^que dich[oa] (.+) tiene (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
-  if resource = last_resource_of(modelo_padre.to_unquoted)
+  if resource = last_mentioned_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
     attribs = names_for_simple_creation(children_model, 
       numero.to_number, nombres, :parent => resource)
@@ -49,7 +48,7 @@ Dado /^que dich[oa] (.+) tiene (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:ll
 end
 
 Dado /^que dicho (.+) tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
-  if resource = last_resource_of(modelo_padre.to_unquoted)
+  if resource = last_mentioned_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
     add_resource children_model, 
       translated_hashes(tabla.raw, {:model => children_model, :parent => resource})
