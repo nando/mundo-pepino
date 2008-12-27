@@ -57,7 +57,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_mundo-pepino_session',
+    :session_key => '_mundo_pepino_session',
     :secret      => '28f75a22544c45621008fc80091c7e6276b9eb812f3c850a133547bb23a86a68acf3ed983ce2ca8448c9d16688185466c0082cd3e9105771e6d123b8ce9e2ca5'
   }
 

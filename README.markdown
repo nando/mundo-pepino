@@ -1,4 +1,4 @@
-# mundo-pepino
+# MundoPepino
 
 ## What's in this world...
 
@@ -10,7 +10,7 @@ At the same time, to describe an app **there is a group of sentences that we're 
 
 Currently `script/generate cucumber` give to **English** cucumberists (or *cucus*, or *cucunuts*, or *cooks* ;) a proposal for some of those common steps in `step_definitions/webrat_steps.rb`.
 
-mundo-pepino will be an already implemented set of step definitions frequently needed while writing a feature in **Spanish**, hopefully with all the `script/generate cucumber` proposals translated inside.
+MundoPepino will be an already implemented set of step definitions frequently needed while writing a feature in **Spanish**, hopefully with all the `script/generate cucumber` proposals translated inside.
 
 Bon appetit!
 

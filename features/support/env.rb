@@ -10,7 +10,7 @@ require 'webrat/rails'
 require 'cucumber/rails/rspec'
 #require 'webrat/rspec-rails'
 
-require 'mundo-pepino'
+require 'mundo_pepino'
 
 Before do
   [ Orchard,

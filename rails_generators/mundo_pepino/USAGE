@@ -1,0 +1,13 @@
+Description:
+    Sets up MundoPepino in your Rails project in order to start writing 
+    features in Spanish. After running this generator you will get a new 
+    rake task called "caracteristicas".
+    
+    This also generates the necessary files in the "caracteristicas"
+    directory.
+    
+    Also see the caracteristica generator, which you can use to generate 
+    skeletons for new features in Spanish.
+    
+Examples:
+    `./script/generate mundo_pepino`
