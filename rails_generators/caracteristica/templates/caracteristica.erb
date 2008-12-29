@@ -6,24 +6,26 @@ Característica: Gestión de <%= modelo_en_plural %>
   Escenario: Añadir un/a nuevo/a <%= modelo_en_singular %>
     Dado que visito la página de nuevo/a <%= modelo_en_singular %>
 <% keyword = 'Cuando' -%>
-<% args.map{|a| a.split(':').last }.each do |campo| -%>
+<% campos.each do |campo| -%>
     <%= keyword %> relleno <%= campo %> con "Mi <%= campo %> de <%= modelo_en_singular %>"
 <% keyword = '     Y' -%>
 <% end -%>
          Y pulso el botón "Crear"
 <% keyword = 'Entonces' -%>
-<% args.each do |arg| -%>
-    <%= keyword %> debería ver "Mi <%= arg.split(':').last %> de <%= modelo_en_singular %>"
+<% campos.each do |campo| -%>
+    <%= keyword %> debería ver "Mi <%= campo %> de <%= modelo_en_singular %>"
 <% keyword = '       Y' -%>
 <% end -%>
 
   Escenario: Borrar <%= modelo_en_singular %>
-    Dado que tenemos dos <%= modelo_en_plural %>
-    Cuando borro un <%= modelo_en_singular %>
-    Entonces tenemos en base de datos 2 <%= modelo_en_plural %>
-           Y veo una tabla con 2 filas
-    
-  Más ejemplos:
-    | antes | después |
-    | 100   | 99      |
-    | 1     | 0       |
+    Dado que tenemos los/las siguientes <%= modelo_en_plural %>:
+      |<%= campos.join('|') %>|
+<% (1..4).each do |n| -%>
+      |<%= campos.map{|campo| "#{campo} #{n}"}.join('|') %>|
+<% end -%>
+    Cuando borro el/la <%= modelo_en_singular %> en tercera posición
+    Entonces debería ver los/las siguientes <%= modelo_en_plural %>:
+      |<%= campos.join('|') %>|
+<% [1,2,4].each do |n| -%>
+      |<%= campos.map{|campo| "#{campo} #{n}"}.join('|') %>|
+<% end -%>

@@ -66,7 +66,13 @@ module Rails::Generator::Commands
 end
 
 class CaracteristicaGenerator < Rails::Generator::NamedBase
-  attr_reader :modelo_en_singular
+  attr_reader :modelo_en_singular, :campos
+
+  def initialize(runtime_args, runtime_options = {})
+    super
+    @campos = []
+  end
+  
   def manifest
     record do |m|
       if args.any?
@@ -75,6 +81,7 @@ class CaracteristicaGenerator < Rails::Generator::NamedBase
         m.mp_model_mapping class_name, modelo_en_singular
         args.each do |arg|
           field, campo = arg.split(':')
+          @campos << campo
           m.mp_field_mapping field, campo
         end
       end
@@ -85,6 +92,7 @@ class CaracteristicaGenerator < Rails::Generator::NamedBase
   def modelo_en_plural
     modelo_en_singular + (modelo_en_singular =~ /[aeiou]$/i ? 's' : 'es')
   end
+
 protected
 
   def banner
