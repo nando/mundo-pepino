@@ -1,0 +1,16 @@
+Description:
+    Generates a skeleton for a new feature file written in Spanish (característica) that
+    describes an standard resource management (currently only C and D of the CRUD).
+    This generator should be used with moderation.
+    See http://github.com/aslakhellesoy/cucumber/wikis/feature-coupled-steps-antipattern
+    for details about the dangers involved.
+
+    It takes at least two arguments: the name of a model and its translation to Spanish.
+    
+    This generator can take an optional list of attribute pairs similar to Rails'
+    built-in resource generator but with the field Spanish translation instead of the
+    field types (see an example below). 
+
+Examples:
+    `./script/generate caracteristica Post Artículo` # no attributes
+    `./script/generate caracteristica Post Artículo title:título body:cuerpo published:publicado`
