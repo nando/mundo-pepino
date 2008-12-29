@@ -85,7 +85,8 @@ class CaracteristicaGenerator < Rails::Generator::NamedBase
           m.mp_field_mapping field, campo
         end
       end
-      m.template  'caracteristica.erb', "caracteristicas/gestion_de_#{plural_name}.feature"
+      m.template  'caracteristica.erb',
+        "caracteristicas/gestion_de_#{modelo_en_plural.downcase}.feature"
     end
   end
 
