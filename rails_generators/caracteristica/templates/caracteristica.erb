@@ -13,7 +13,7 @@ Característica: Gestión de <%= modelo_en_plural %>
          Y pulso el botón "Crear"
 <% keyword = 'Entonces' -%>
 <% campos.each do |campo| -%>
-    <%= keyword %> debería ver "Mi <%= campo %> de <%= modelo_en_singular %>"
+    <%= keyword %> debería ver el texto "Mi <%= campo %> de <%= modelo_en_singular %>"
 <% keyword = '       Y' -%>
 <% end -%>
 

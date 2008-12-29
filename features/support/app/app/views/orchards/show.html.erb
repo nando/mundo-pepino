@@ -1,2 +1,21 @@
 <h1>Página de huerto</h1>
 <h2><%= @orchard.name %></h2>
+<p>
+  <b>Área:</b>
+  <%=h @orchard.area %>
+</p>
+
+<p>
+  <b>Longitud:</b>
+  <%=h @orchard.longitude %>
+</p>
+
+<p>
+  <b>Latitud:</b>
+  <%=h @orchard.latitude %>
+</p>
+
+
+<%= link_to 'Editar', edit_orchard_path(@orchard) %> |
+<%= link_to 'Página de Huertos', orchards_path %>
+

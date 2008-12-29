@@ -10,6 +10,7 @@ Cuando /^(?:que )?visito (.+)$/i do |pagina|
     accion, modelo = $1, $2
     model = modelo.to_model or raise(ModelNotMapped.new(modelo))
     action = accion.to_crud_action or raise(CrudActionNotMapped.new(accion))
+    pile_up model.new
     eval("#{action}_#{model.name.downcase}_path")
   else
     unquoted.to_url
@@ -31,7 +32,16 @@ Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efe
 end
 
 Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, valor|
-  fill_in campo_to_field(campo), :with => valor
+  field = campo_to_field(campo, last_mentioned_model)
+  begin
+    fill_in field, :with => valor
+  rescue
+    if singular = last_mentioned_singular
+      fill_in singular + '_' + field, :with => valor
+    else
+      raise
+    end
+  end
 end
 
 Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ["\'](.+)["\']$/i do |campo, valor|

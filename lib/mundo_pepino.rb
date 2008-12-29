@@ -178,7 +178,8 @@ class MundoPepino < Cucumber::Rails::World
     "#{model && model.name}::#{campo}".to_field || campo.to_field
   end
   def shouldify(should_or_not)
-    should_or_not =~ /^(?:debo|debo ver|veo)$/i ? :should : :should_not
+    affirmative = 'debo|debo ver|veo|deber[ií]a|deber[íi]a ver'
+    should_or_not =~ /^(#{affirmative})$/i ? :should : :should_not
   end
 
   def not_shouldify(should_or_not)
@@ -194,11 +195,15 @@ class MundoPepino < Cucumber::Rails::World
   end
   
   def last_mentioned
-    (@resources && @resources.first) || raise(WithoutResources)
+    @resources && @resources.first
   end
 
   def last_mentioned_url 
-    eval("#{last_mentioned.m_singular}_path(#{last_mentioned.m_instance.id})")
+    if mentioned = last_mentioned
+      eval("#{mentioned.m_singular}_path(#{mentioned.m_instance.id})")
+    else
+      raise WithoutResources
+    end
   end
 
   def last_mentioned_of(modelo, with_name = nil)
@@ -284,12 +289,12 @@ class MundoPepino < Cucumber::Rails::World
     [resources, field, values]
   end
   
-  def campo_to_field(campo)
+  def campo_to_field(campo, model = nil)
     unless campo.nil? 
-      if field = campo.to_unquoted.to_field
+      if field = field_for(model, campo.to_unquoted)
         field
       else
-        raise MundoPepino::FieldNotMapped.new(campo.to_unquoted) 
+        raise MundoPepino::FieldNotMapped.new(campo) 
       end
     end
   end
@@ -311,7 +316,19 @@ class MundoPepino < Cucumber::Rails::World
         c.id == child.id 
       end.should_not be_nil
     else
-      MundoPepino::ModelNotMapped.new(child)
+      ModelNotMapped.new(child)
+    end
+  end
+  
+  def method_missing(method, *args, &block)
+    if (method.to_s =~ /^last_mentioned_(.+)$/)
+      if mentioned = last_mentioned
+        last_mentioned.send("m_#{$1}") 
+      else
+        nil
+      end
+    else
+      super
     end
   end
   

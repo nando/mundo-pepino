@@ -1,1 +1,23 @@
 <h1>Alta de Huerta</h1>
+
+<% form_for(@orchard) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :area, "Área" %><br />
+    <%= f.text_field :area %>
+  </p>
+  <p>
+    <%= f.label :longitude, "Longitud" %><br />
+    <%= f.text_field :longitude %>
+  </p>
+  <p>
+    <%= f.label :latitude, "Latitud" %><br />
+    <%= f.text_field :latitude %>
+  </p>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Página de Huertos', orchards_path %>
