@@ -9,7 +9,7 @@ Dado /^(?:que tenemos )?(un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa
   add_resource(model, attribs, :force_creation => true)
 end
 
-Dado /^(?:que tenemos )?(?:el|la|los|las) (?:siguientes? )?(.+):$/ do |modelo, tabla|
+Dado /^(?:que tenemos )?(?:el|la|los|las|el\/la|los\/las) (?:siguientes? )?(.+):$/ do |modelo, tabla|
   model = unquote(modelo).to_model
   add_resource model, translated_hashes(tabla.raw), :force_creation => true
 end 

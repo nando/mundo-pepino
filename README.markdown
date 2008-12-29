@@ -97,6 +97,9 @@ Convenciones generales:
 #### Solicitud de la URL asociada al último recurso definido
     Cuando visito su página
 [más ejemplos](master/features/cuando-visito-url-de-recurso.feature)
+#### Solicitud de la URL de creación de un recurso
+    Cuando visito la página de nuevo Tomate
+[más ejemplos](master/features/cuando-visito-url-de-creacion.feature)
 #### Pincho en un enlace \*
     Cuando pulso el enlace "Volver"
 [más ejemplos](master/features/cuando-pulso-el-enlace.feature)

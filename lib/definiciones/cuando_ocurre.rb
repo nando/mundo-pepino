@@ -6,6 +6,11 @@ Cuando /^(?:que )?visito (.+)$/i do |pagina|
   visit case unquoted = unquote(pagina)
   when /su p[áa]gina$/i, /su portada$/i:
     last_mentioned_url
+  when /la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i:
+    accion, modelo = $1, $2
+    model = modelo.to_model or raise(ModelNotMapped.new(modelo))
+    action = accion.to_crud_action or raise(CrudActionNotMapped.new(accion))
+    eval("#{action}_#{model.name.downcase}_path")
   else
     unquoted.to_url
   end

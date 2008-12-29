@@ -15,6 +15,13 @@ String.add_mapper(:number, {
   :tres   => 3,
   :cuatro => 4,
   :cinco  => 5}) { |string| string.to_i }
+String.add_mapper(:crud_action,
+  /alta$/                   => 'new',
+  /creaci[óo]n$/            => 'new',
+  /nuev(?:o|a|o\/a|a\/o)$/  => 'new',
+  /cambio$/                 => 'edit',
+  /modificaci[oó]n$/        => 'edit',
+  /edici[oó]n$/             => 'edit')
 String.add_mapper(:local_path) { |string| string }
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
@@ -78,6 +85,11 @@ class MundoPepino < Cucumber::Rails::World
   class FieldNotMapped < NotMapped
     def initialize(string)
       super('Field', string)
+    end
+  end
+  class CrudActionNotMapped < NotMapped
+    def initialize(string)
+      super('CRUD Action', string)
     end
   end
 
