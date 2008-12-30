@@ -147,8 +147,16 @@ Convenciones generales:
     Entonces no debo ver la etiqueta div#title con el valor "Surco"
 [más ejemplos](master/features/veo-etiqueta-con-valor.feature)
 #### Veo marcada (o desmarcada) una casilla (*checkbox*) \*
-    Y veo marcado "Acepto las condiciones del servicio"
+    Entonces veo marcado "Acepto las condiciones del servicio"
 [más ejemplos](master/features/veo-el-checkbox.feature)
+
+#### Veo una tabla con determinados valores en sus celdas (*table>tr>td*) \*
+    Entonces veo una tabla con el siguiente contenido:
+      | nombre | longitud | cultivo |  matas |
+      |  A-01  |    12    | Patatas |     16 |
+      |  A-02  |    12    | Tomates |     18 |
+[más ejemplos](master/features/veo-una-tabla-con-determinado-contenido.feature)
+
 
 #### Tenemos en BBDD uno o más registros de un modelo opcionalmente con un nombre concreto
     Entonces tenemos en la base de datos un Abono llamado "FSF-03"

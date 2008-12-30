@@ -24,7 +24,7 @@ Característica: Gestión de <%= modelo_en_plural %>
       |<%= named_args.map{ |arg| arg.value(n) }.join('|') %>|
 <% end -%>
     Cuando borro el/la <%= modelo_en_singular %> en la tercera posición
-    Entonces debería ver los/las siguientes <%= modelo_en_plural %>:
+    Entonces debería ver una tabla con los siguientes contenidos:
       |<%= named_args.map(&:nombre).join('|') %>|
 <% [1,2,4].each do |n| -%>
       |<%= named_args.map{ |arg| arg.value(n) }.join('|') %>|

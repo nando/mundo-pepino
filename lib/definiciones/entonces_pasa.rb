@@ -20,6 +20,20 @@ Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |shou
   field_labeled(unquote(campo)).send shouldify(should), be_checked
 end
 
+Entonces /^(#{veo_o_no}) una tabla con (?:el|los) siguientes? (?:valore?s?|contenidos?):$/ do |should, valores|
+  Webrat.configuration.parse_with_nokogiri = false # nokogiri have_selector fails on linux???
+  shouldified = shouldify(should)
+  valores.raw[1..-1].each_with_index do |row, i|
+    row.each_with_index do |cell, j|
+      response.send(shouldified, 
+          have_selector("table > tr:nth-child(#{i+2}) > td:nth-child(#{j+1})")) do |td|
+        td.inner_text.send(shouldified, be(cell))
+      end  
+    end
+  end
+  Webrat.configuration.parse_with_nokogiri = true # ufff!
+end
+
 #BBDD
 en_bbdd_tenemos = '(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos))'
 Entonces /^#{en_bbdd_tenemos} (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
