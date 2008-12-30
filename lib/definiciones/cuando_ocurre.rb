@@ -2,19 +2,21 @@ module Cucumber::StepMethods
   alias_method :Cuando, :When
 end
 
-Cuando /^(?:que )?visito (.+)$/i do |pagina|
-  visit case unquoted = unquote(pagina)
-  when /su p[áa]gina$/i, /su portada$/i:
-    last_mentioned_url
-  when /la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i:
-    accion, modelo = $1, $2
-    model = modelo.to_model or raise(ModelNotMapped.new(modelo))
-    action = accion.to_crud_action or raise(CrudActionNotMapped.new(accion))
-    pile_up model.new
-    eval("#{action}_#{model.name.downcase}_path")
-  else
-    unquoted.to_url
-  end
+
+Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, modelo|
+  model = modelo.to_model or raise(ModelNotMapped.new(modelo))
+  action = accion.to_crud_action or raise(CrudActionNotMapped.new(accion))
+  pile_up model.new
+  visit eval("#{action}_#{model.name.downcase}_path")
+end
+
+Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do 
+  visit last_mentioned_url
+end
+
+negative_lookahead = 'la p[áa]gina de |su p[aá]gina|su portada'
+Cuando /^(?:que )?visito (?!#{negative_lookahead})(.+)$/i do |pagina|
+  visit pagina.to_unquoted.to_url
 end
 
 Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|

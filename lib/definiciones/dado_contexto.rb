@@ -11,7 +11,7 @@ end
 
 Dado /^(?:que tenemos )?(?:el|la|los|las|el\/la|los\/las) (?:siguientes? )?(.+):$/ do |modelo, tabla|
   model = unquote(modelo).to_model
-  add_resource model, translated_hashes(tabla.raw), :force_creation => true
+  add_resource model, translated_hashes(tabla.raw, :model => model), :force_creation => true
 end 
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|

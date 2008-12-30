@@ -27,16 +27,16 @@ Característica: creación desde step-table
   #
   ########################################################################
     Dado que tenemos el huerto:
-           | nombre   | área | latitud  | latitud   | abono   |
+           | nombre   | área | longitud  | latitud   | abono   |
            | Secano-1 | 35   | N 40° 44 | W 003° 48 | FSF-315 |
        Y la huerta:
-           | nombre   | área | latitud  | latitud   | abono   |
+           | nombre   | área | longitud  | latitud   | abono   |
            | Secano-2 | 15   | N 41° 44 | W 002° 48 | FSF-317 |
        Y el siguiente huerto:
-           | nombre   | área | latitud  | latitud   | abono   |
+           | nombre   | área | longitud  | latitud   | abono   |
            | Secano-3 | 20   | N 42° 41 | W 004° 48 | FSF-319 |
        Y las siguientes huertas:
-           | nombre    | área | latitud  | latitud   |
+           | nombre    | área | longitud  | latitud   |
            | Regadío-1 | 15   | N 41° 35 | W 003° 48 |
            | Regadío-2 | 42   | N 41° 35 | W 003° 48 |
        Y que dichos huertos tienen como abono "HDR-102"
