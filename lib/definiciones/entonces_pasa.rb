@@ -20,10 +20,9 @@ Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |shou
   field_labeled(unquote(campo)).send shouldify(should), be_checked
 end
 
-
 #BBDD
-
-Entonces /^(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos)) (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: (?:llamad[oa] )?['"](.+)["'])?$/ do |numero, modelo, nombre|
+en_bbdd_tenemos = '(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos))'
+Entonces /^#{en_bbdd_tenemos} (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
   model = modelo.to_model
   conditions = if nombre
     {:conditions => [ field_for(model, 'nombre') + '=?', nombre ]}

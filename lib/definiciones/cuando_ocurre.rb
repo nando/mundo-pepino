@@ -66,6 +66,15 @@ Cuando /^(?:que )?selecciono ["'](.+?)["'](?: en (?:el listado de )?(.+))?$/i do
   selects(valor, :from => campo_to_field(campo))
 end
 
+Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ do |modelo, posicion|
+  pile_up modelo.to_unquoted.to_model.new
+  visit last_mentioned_url
+  within("table > tr:nth-child(#{posicion.to_number+1})") do
+    click_link "Borrar"
+  end
+end
+
+
 ## Use this step in conjunction with Rail's datetime_select helper. For example:
 ## When I select "December 25, 2008 10:00" as the date and time
 #When /^I select "(.*)" as the date and time$/ do |time|

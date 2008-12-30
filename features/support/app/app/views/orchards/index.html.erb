@@ -1,0 +1,24 @@
+<h1>Listado de Huertos</h1>
+
+<table>
+  <tr>
+    <th>Área</th>
+    <th>Longitud</th>
+    <th>Latitud</th>
+  </tr>
+
+<% for orchard in @orchards %>
+  <tr>
+    <td><%=h orchard.area %></td>
+    <td><%=h orchard.longitude %></td>
+    <td><%=h orchard.latitude %></td>
+    <td><%= link_to 'Ver', orchard %></td>
+    <td><%= link_to 'Editar', edit_orchard_path(orchard) %></td>
+    <td><%= link_to 'Borrar', orchard, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New orchard', new_orchard_path %>

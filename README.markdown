@@ -44,7 +44,13 @@ Para todos los escenarios podríamos tener una narrativa genérica que expresase
       Como usuario de Cucumber
       Quiero tener los pasos más habituales definidos, implementados y bien documentados
 
-Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice. Los **asteriscos (\*)** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`.
+Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice.
+
+Los **asteriscos (\*)** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`. Dos asteríscos (\*\*) hacen referencia a una definición presente en la feature autogenerada por `script/generate feature`.
+
+Como **convención general** los nombres correspondientes a modelos y campos pueden ir sin comillas pero los valores deben ir entre comillas (simples o dobles). Por ejemplo:
+
+    Dado que tenemos un artículo que tiene como título "Título del artículo"
 
 ### Dado el contexto (Givens)
 
@@ -88,7 +94,7 @@ Convenciones generales:
 
 Convenciones generales:
 
-* frases escritas en primera persona del singular
+* frases escritas en tiempo presente en primera persona del singular
 * todas las definiciones son válidas también para definir contexto (en "Dados" o "Givens") incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
 #### Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
@@ -119,8 +125,12 @@ Convenciones generales:
      Cuando completo 'nombre' con 'Wadus'
 [más ejemplos](master/features/cuando-relleno-el-campo.feature)
 #### Selecciono una opción de una lista (*select*) \*
-[más ejemplos](master/features/cuando-selecciono-en-listado.feature)
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
+[más ejemplos](master/features/cuando-selecciono-en-listado.feature)
+
+#### Borro el enésimo recurso desde la página de su índice (index) \*\*
+     Cuando borro el Bancal en 6ª posición
+[más ejemplos](master/features/cuando-borro-el-enesimo-recurso.feature)
 
 ### Entonces pasa (Thens)
 

@@ -10,11 +10,16 @@ String.add_mapper :model_field
 String.add_mapper(:url, 
   /la (portada|home)/i => '/') { |string| string }
 String.add_mapper(:number, { 
-  /un[oa]?$/i => 1,
-  :dos    => 2,
-  :tres   => 3,
-  :cuatro => 4,
-  :cinco  => 5}) { |string| string.to_i }
+  /un[oa]?$/i     => 1,
+  /primer[oa]?$/i => 1,
+  :dos            => 2,
+  /segund[oa]?$/i => 2,
+  :tres         => 3,
+  /tercer[ao]/i => 3,
+  :cuatro      => 4,
+  /cuart[ao]/i => 4,
+  :cinco       => 5,
+  /quit[ao]/i => 5}) { |string| string.to_i }
 String.add_mapper(:crud_action,
   /alta$/                   => 'new',
   /creaci[óo]n$/            => 'new',
@@ -33,6 +38,10 @@ class MundoPepino < Cucumber::Rails::World
   module Mencionado 
     def m_instance
       self.is_a?(Array) ? self.first : self
+    end
+    
+    def m_new_record?
+      self.m_instance.new_record?
     end
     
     def m_model
@@ -200,7 +209,11 @@ class MundoPepino < Cucumber::Rails::World
 
   def last_mentioned_url 
     if mentioned = last_mentioned
-      eval("#{mentioned.m_singular}_path(#{mentioned.m_instance.id})")
+      if mentioned.m_new_record?
+        eval("#{mentioned.m_plural}_path")
+      else
+        eval("#{mentioned.m_singular}_path(#{mentioned.m_instance.id})")
+      end
     else
       raise WithoutResources
     end

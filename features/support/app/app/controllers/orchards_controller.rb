@@ -1,4 +1,8 @@
 class OrchardsController < ApplicationController
+  def index
+    @orchards = Orchard.find(:all)
+  end      
+
   def show
     @orchard = Orchard.find(params[:id])
   end
@@ -15,5 +19,11 @@ class OrchardsController < ApplicationController
     else
       render :action => "new"
     end
+  end
+
+  def destroy
+    @orchard = Orchard.find(params[:id])
+    @orchard.destroy
+    redirect_to(orchards_url) 
   end
 end
