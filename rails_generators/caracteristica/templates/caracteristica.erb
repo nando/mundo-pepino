@@ -6,26 +6,26 @@ Característica: Gestión de <%= modelo_en_plural %>
   Escenario: Añadir un/a nuevo/a <%= modelo_en_singular %>
     Dado que visito la página de nuevo/a <%= modelo_en_singular %>
 <% keyword = 'Cuando' -%>
-<% campos.each do |campo| -%>
-    <%= keyword %> relleno <%= campo %> con "Mi <%= campo %> de <%= modelo_en_singular %>"
+<% named_args.each do |arg| -%>
+    <%= keyword %> relleno <%= arg.nombre %> con "<%= arg.value %>"
 <% keyword = '     Y' -%>
 <% end -%>
          Y pulso el botón "Crear"
 <% keyword = 'Entonces' -%>
-<% campos.each do |campo| -%>
-    <%= keyword %> debería ver el texto "Mi <%= campo %> de <%= modelo_en_singular %>"
+<% named_args.each do |arg| -%>
+    <%= keyword %> debería ver el texto "<%= arg.value %>"
 <% keyword = '       Y' -%>
 <% end -%>
 
   Escenario: Borrar <%= modelo_en_singular %>
     Dado que tenemos los/las siguientes <%= modelo_en_plural %>:
-      |<%= campos.join('|') %>|
+      |<%= named_args.map(&:nombre).join('|') %>|
 <% (1..4).each do |n| -%>
-      |<%= campos.map{|campo| "#{campo} #{n}"}.join('|') %>|
+      |<%= named_args.map{ |arg| arg.value(n) }.join('|') %>|
 <% end -%>
     Cuando borro el/la <%= modelo_en_singular %> en tercera posición
     Entonces debería ver los/las siguientes <%= modelo_en_plural %>:
-      |<%= campos.join('|') %>|
+      |<%= named_args.map(&:nombre).join('|') %>|
 <% [1,2,4].each do |n| -%>
-      |<%= campos.map{|campo| "#{campo} #{n}"}.join('|') %>|
+      |<%= named_args.map{ |arg| arg.value(n) }.join('|') %>|
 <% end -%>

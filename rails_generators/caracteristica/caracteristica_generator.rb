@@ -7,11 +7,11 @@ module Rails::Generator::Commands
                    '(TODO: quitar la coma final si no es correcta)\n"'
 
   MODEL_MAPPING = '"\n  # MAPEO DE MODELO AUTO-GENERADO (#{model})\n' +
-                  '  /#{modelo.downcase}s?$/i => #{model},' + 
+                  '  /#{regexp}$/i => #{model},' + 
                   ' # (TODO: validar RegExp para forma plural y coma final)\n"'
 
   FIELD_MAPPING = '"\n  # MAPEO DE CAMPO AUTO-GENERADO (#{field})\n' +
-                  '  /#{campo.downcase}s?$/i => \'#{field}\',' + 
+                  '  /#{regexp}$/i => \'#{field}\',' + 
                   ' # (TODO: validar RegExp para forma plural y coma final)\n"'
 
   class Create < Base
@@ -20,14 +20,14 @@ module Rails::Generator::Commands
       logger.model_cleaning "added Before { #{model}.destroy_all }"
     end
 
-    def mp_model_mapping(model, modelo)
+    def mp_model_mapping(model, regexp)
       add_to_mundo_pepino_env 'String.model_mappings = {', eval(MODEL_MAPPING)
-      logger.model_mapping " added /#{modelo.downcase}s?$/i => #{model}"
+      logger.model_mapping " added /#{regexp}$/i => #{model}"
     end
 
-    def mp_field_mapping(field, campo)
+    def mp_field_mapping(field, regexp)
       add_to_mundo_pepino_env 'String.field_mappings = {', eval(FIELD_MAPPING)
-      logger.field_mapping " added /#{campo}s?$/i => #{field}"
+      logger.field_mapping " added /#{regexp}$/i => #{field}"
     end
 
     private
@@ -46,14 +46,14 @@ module Rails::Generator::Commands
       logger.model_cleaning "removing Before { #{model}.destroy_all }"
     end
 
-    def mp_model_mapping(model, modelo)
+    def mp_model_mapping(model, regexp)
       remove_from_mundo_pepino_env eval(MODEL_MAPPING)
-      logger.model_mapping " removing /#{modelo.downcase}s?$/i => #{model}"
+      logger.model_mapping " removing /#{regexp}$/i => #{model}"
     end
 
-    def mp_field_mapping(field, campo)
+    def mp_field_mapping(field, regexp)
       remove_from_mundo_pepino_env eval(FIELD_MAPPING)
-      logger.model_mapping " removing /#{campo}s?$/i => #{field}"
+      logger.model_mapping " removing /#{regexp}$/i => #{field}"
     end
 
     private
@@ -68,21 +68,14 @@ end
 class CaracteristicaGenerator < Rails::Generator::NamedBase
   attr_reader :modelo_en_singular, :campos
 
-  def initialize(runtime_args, runtime_options = {})
-    super
-    @campos = []
-  end
-  
   def manifest
     record do |m|
       if args.any?
         @modelo_en_singular = args.shift
         m.mp_model_cleaning class_name
-        m.mp_model_mapping class_name, modelo_en_singular
-        args.each do |arg|
-          field, campo = arg.split(':')
-          @campos << campo
-          m.mp_field_mapping field, campo
+        m.mp_model_mapping class_name, plural_regexp(modelo_en_singular)
+        named_args.each do |arg|
+          m.mp_field_mapping arg.name, plural_regexp(arg.nombre)
         end
       end
       m.template  'caracteristica.erb',
@@ -90,13 +83,44 @@ class CaracteristicaGenerator < Rails::Generator::NamedBase
     end
   end
 
+  def named_args
+    @named_args ||= args.map{|arg| NamedArg.new(arg)}
+  end
+
   def modelo_en_plural
     modelo_en_singular + (modelo_en_singular =~ /[aeiou]$/i ? 's' : 'es')
+  end
+
+  def plural_regexp(nombre)
+    suffix = if nombre =~ /[aeiou]$/i
+      's?'
+    else
+      '(es)?'
+    end
+    nombre.downcase + suffix
+  end
+
+  class NamedArg
+    attr_reader :name, :nombre
+
+    def initialize(s)
+      @name, @type, @nombre = *s.split(':')
+    end
+
+    def value(n=0)
+      if @type == 'boolean'
+        (n % 2) == 0
+      elsif @type == 'integer'
+        n
+      else
+        "#{@nombre} #{n}"
+      end
+    end
   end
 
 protected
 
   def banner
-    "Usage: #{$0} caracteristica ModelName NombreDelModelo [field:campo, field:campo]"
+    "Usage: #{$0} caracteristica ModelName NombreDelModelo [field:type:campo, field:type:campo]"
   end
 end
