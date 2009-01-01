@@ -20,7 +20,7 @@ Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |shou
   field_labeled(unquote(campo)).send shouldify(should), be_checked
 end
 
-Entonces /^(#{veo_o_no}) una tabla con (?:el|los) siguientes? (?:valore?s?|contenidos?):$/ do |should, valores|
+Entonces /^(#{veo_o_no}) una tabla con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, valores|
   Webrat.configuration.parse_with_nokogiri = false # nokogiri have_selector fails on linux???
   shouldified = shouldify(should)
   valores.raw[1..-1].each_with_index do |row, i|

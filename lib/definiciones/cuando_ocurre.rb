@@ -3,8 +3,16 @@ module Cucumber::StepMethods
 end
 
 
+
+Cuando /^(?:que )?visito la (?:p[áa]gina|portada) de ([\w\/]+)$/i do |modelo|
+  model = modelo.to_unquoted.to_model or raise(ModelNotMapped.new(modelo))
+  pile_up model.new
+  visit eval("#{model.table_name}_path")
+end
+
+
 Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, modelo|
-  model = modelo.to_model or raise(ModelNotMapped.new(modelo))
+  model = modelo.to_unquoted.to_model or raise(ModelNotMapped.new(modelo))
   action = accion.to_crud_action or raise(CrudActionNotMapped.new(accion))
   pile_up model.new
   visit eval("#{action}_#{model.name.downcase}_path")
