@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Nombre</th>
     <th>Área</th>
     <th>Longitud</th>
     <th>Latitud</th>
@@ -9,6 +10,7 @@
 
 <% for orchard in @orchards %>
   <tr>
+    <td><%=h orchard.name %></td>
     <td><%=h orchard.area %></td>
     <td><%=h orchard.longitude %></td>
     <td><%=h orchard.latitude %></td>

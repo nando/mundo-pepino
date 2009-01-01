@@ -1,6 +1,6 @@
 class OrchardsController < ApplicationController
   def index
-    @orchards = Orchard.find(:all)
+    @orchards = Orchard.find(:all, :order => :id)
   end      
 
   def show
