@@ -103,8 +103,11 @@ Convenciones generales:
 #### Solicitud de la URL asociada al último recurso definido
     Cuando visito su página
 [más ejemplos](master/features/cuando-visito-url-de-recurso.feature)
+#### Solicitud de la URL del índice (index) de un tipo de recurso (modelo)
+    Cuando visito la página de Tomates
+[más ejemplos](master/features/cuando-visito-url-de-indice-de-tipo-de-recurso.feature)
 #### Solicitud de la URL de creación de un recurso
-    Cuando visito la página de nuevo Tomate
+    Cuando visito la página de creación de Tomate
 [más ejemplos](master/features/cuando-visito-url-de-creacion.feature)
 #### Pincho en un enlace \*
     Cuando pulso el enlace "Volver"

@@ -4,7 +4,7 @@ end
 
 
 
-Cuando /^(?:que )?visito la (?:p[áa]gina|portada) de ([\w\/]+)$/i do |modelo|
+Cuando /^(?:que )?visito (?:el|la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de ([\w\/]+)$/i do |modelo|
   model = modelo.to_unquoted.to_model or raise(ModelNotMapped.new(modelo))
   pile_up model.new
   visit eval("#{model.table_name}_path")
@@ -22,7 +22,7 @@ Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do
   visit last_mentioned_url
 end
 
-negative_lookahead = 'la p[áa]gina de |su p[aá]gina|su portada'
+negative_lookahead = '(?:la|el) \w+ de |su p[aá]gina|su portada'
 Cuando /^(?:que )?visito (?!#{negative_lookahead})(.+)$/i do |pagina|
   visit pagina.to_unquoted.to_url
 end
