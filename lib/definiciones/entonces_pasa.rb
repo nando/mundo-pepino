@@ -36,30 +36,35 @@ end
 
 #BBDD
 en_bbdd_tenemos = '(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos))'
+tiene_en_bbdd = '(?:tiene en (?:la )?bbdd|en (?:la )?bbdd tiene|tiene en (?:la )?base de datos|en (?:la )?base de datos tiene)'
 Entonces /^#{en_bbdd_tenemos} (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
-  model = modelo.to_model
+  model = modelo.to_unquoted.to_model
   conditions = if nombre
-    {:conditions => [ field_for(model, 'nombre') + '=?', nombre ]}
+    {:conditions => [ "#{field_for(model, 'nombre')}=?", nombre ]}
   else
-    :all
+    {}
   end
-  model.count(conditions).should == numero.to_number
+  resources = model.find(:all, conditions)
+  resources.size.should == numero.to_number
+  if resources.size > 0
+    pile_up (resources.size == 1 ? resources.first : resources)
+  end
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
+Entonces /^(?:el|la) (.+) "(.+)" #{tiene_en_bbdd} como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
   add_resource_from_database(modelo, nombre)
   last_mentioned_should_have_value(campo, valor)
 end
 
-Entonces /^(?:tiene en bbdd|en bbdd tiene) como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
+Entonces /^#{tiene_en_bbdd} como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
   last_mentioned_should_have_value(campo, valor)
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" (?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
+Entonces /^(?:el|la) (.+) "(.+)" #{tiene_en_bbdd} una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
   add_resource_from_database(padre, nombre_del_padre)
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
 
-Entonces /^(?:tiene en bbdd|en bbdd tiene) una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
+Entonces /^#{tiene_en_bbdd} una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end

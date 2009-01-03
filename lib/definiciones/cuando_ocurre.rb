@@ -41,21 +41,21 @@ Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efe
   click_link(unquote(enlace), options)
 end
 
-Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?["'](.+)["']$/i do |campo, valor|
+Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
   field = campo_to_field(campo, last_mentioned_model)
   begin
     fill_in field, :with => valor
   rescue
     if singular = last_mentioned_singular
-      fill_in singular + '_' + field, :with => valor
+      fill_in singular + '_' + field.to_s, :with => valor
     else
       raise
     end
   end
 end
 
-Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ["\'](.+)["\']$/i do |campo, valor|
-  chooses(campo_to_field(campo) + '_' + valor.downcase.to_underscored)
+Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|
+  chooses(campo_to_field(campo).to_s + '_' + valor.downcase.to_underscored)
 end
 
 Cuando /^(?:que )?marco (?:la|el)? ?(.+)$/i do |campo|

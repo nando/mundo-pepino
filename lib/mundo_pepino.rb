@@ -4,7 +4,7 @@ require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'
 
 String.add_mapper :model
-String.add_mapper(:field) { |str| 'name' if str =~ /nombres?/ }
+String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
 String.add_mapper :name_field
 String.add_mapper :model_field
 String.add_mapper(:url, 
@@ -32,7 +32,7 @@ String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 
 class MundoPepino < Cucumber::Rails::World
-  include FixtureReplacement
+  #include FixtureReplacement
 
   # API común para las instancias que van referenciándose en el escenario.
   module Mencionado 
@@ -88,7 +88,7 @@ class MundoPepino < Cucumber::Rails::World
   end
   class ModelNotMapped < NotMapped
     def initialize(string)
-      super('Field', string)
+      super('Model', string)
     end
   end
   class FieldNotMapped < NotMapped
@@ -103,7 +103,19 @@ class MundoPepino < Cucumber::Rails::World
   end
 
   def create(model, attributes = {})
-    self.send "create_#{model.name.downcase}", attributes
+    if defined?(FixtureReplacement)
+      attribs_for_fr = {}
+      attributes.each do |k, v|
+        if k =~ /^(.+)_id$/
+          attribs_for_fr[$1.to_sym] = eval($1.capitalize).find(v.to_i)
+        else
+          attribs_for_fr[k] = v
+        end
+      end
+      self.send "create_#{model.name.downcase}", attribs_for_fr
+    else
+      model.create! attributes
+    end
   end
 
   def find_or_create(model_or_modelo, attributes = {}, options = {}) 
@@ -115,7 +127,7 @@ class MundoPepino < Cucumber::Rails::World
     if attributes.any?
       attribs = Hash.new
       attributes.each do |key, value|
-        if child_model = key.to_model
+        if child_model = key.to_s.to_model
           child = add_resource(child_model, field_for(child_model, 'nombre') => value)
           attribs[child_model.name.downcase + '_id'] = child.id
         else
@@ -124,7 +136,7 @@ class MundoPepino < Cucumber::Rails::World
       end
       if ((options[:force_creation].nil? || !options[:force_creation])  &&
           obj = model.find(:first, :conditions =>
-          [attribs.keys.map{|s| s+'=?'}.join(' AND ')] + attribs.values ))
+          [attribs.keys.map{|s| "#{s}=?"}.join(' AND ')] + attribs.values ))
         obj
       else
         create model, attribs
@@ -312,13 +324,15 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
-  def last_mentioned_should_have_value(field, value)
+  def last_mentioned_should_have_value(campo, valor)
     res = last_mentioned
-    if child_model = field.to_model
-      child = child_model.find_by_name(value)
+    if child_model = campo.to_model
+      child = child_model.find_by_name(valor)
       (res.send child_model.name.downcase).should == child
+    elsif field = field_for(res.class, campo)
+      (res.send field).to_s.should == valor
     else
-      (res.send field_for(res.class, field)).to_s.should == value
+      raise FieldNotMapped.new(campo)
     end
   end
   
@@ -329,7 +343,7 @@ class MundoPepino < Cucumber::Rails::World
         c.id == child.id 
       end.should_not be_nil
     else
-      ModelNotMapped.new(child)
+      raise ModelNotMapped.new(child)
     end
   end
   

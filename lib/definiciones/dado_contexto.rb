@@ -2,11 +2,22 @@ module Cucumber::StepMethods
   alias_method :Dado, :Given
 end
 
-Dado /^(?:que tenemos )?(un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
-  number = numero.to_number
-  model = modelo.to_unquoted.to_model
-  attribs = names_for_simple_creation(model, number, nombre)
-  add_resource(model, attribs, :force_creation => true)
+numero = 'un|una|dos|tres|cuatro|cinco|\d+'
+cuyo = '(?:cuy[oa]s?|que tienen? como)'
+# Creación simple con nombre opcional
+Dado /^(?:que tenemos )?(#{numero}) (?!.+ #{cuyo})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
+  if model = modelo.to_unquoted.to_model
+    number = numero.to_number
+    attribs = names_for_simple_creation(model, number, nombre)
+    add_resource(model, attribs, :force_creation => true)
+  else
+    raise MundoPepino::ModelNotMapped.new(modelo)
+  end
+end
+# Creación con asignación de valor en campo
+Dado /^(?:que tenemos )?(#{numero}) (.+) #{cuyo} (.+?) (?:(?:es|son) (?:de )?)?['"](.+)["'](?: .+)?$/i do |numero, modelo, campo, valor|
+  Dado "que tenemos #{numero} #{modelo}"
+  Dado "que dichos #{modelo} tienen como #{campo} '#{valor}'"
 end
 
 Dado /^(?:que tenemos )?(?:el|la|los|las|el\/la|los\/las) (?:siguientes? )?(.+):$/ do |modelo, tabla|

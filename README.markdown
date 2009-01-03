@@ -52,6 +52,7 @@ Como **convención general** los nombres correspondientes a modelos y campos pue
 
     Dado que tenemos un artículo que tiene como título "Título del artículo"
 
+
 ### Dado el contexto (Givens)
 
 Convenciones generales:
@@ -65,6 +66,10 @@ Convenciones generales:
     Dado que tenemos Un Producto llamado "Acelgas" 
 [más ejemplos](master/features/contexto-creacion-simple.feature)
 
+#### Creación de uno o varios registros con un valor en un campo
+    Dado que tenemos un huerto cuya área es de "1200" metros cuadrados
+[más ejemplos](master/features/contexto-creacion-con-asignacion.feature)
+
 #### Creación de uno o varios recursos a partir de una **step table**
     Dado que tenemos el siguiente Huerto:
            | nombre   | área | latitud  | latitud   | abono   |
@@ -72,7 +77,7 @@ Convenciones generales:
 [más ejemplos](master/features/contexto-creacion-desde-step-table.feature)
 
 #### Asignación de un valor en un campo de un recurso concreto
-    Dado que el Tomate "A" tiene como Variedad "Raf"
+    Dado que el Tomate "A" tiene como variedad "Raf"
 [más ejemplos](master/features/contexto-asignacion-de-valor-en-recurso.feature)
 
 #### Asignación de un valor en un campo del último (o últimos) recurso mencionado
