@@ -20,16 +20,65 @@ Bon appetit!
 
 ### Dependencias
 
-  Además de las clásicas gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails** es necesaria la instalación los siguientes plugins:
-
-#### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
-
-    $ script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
-    $ script/generate fixture_replacement
+  Además de las clásicas gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails** es necesario el plugin StringMapper:
 
 #### [StringMapper](http://github.com/nando/string-mapper)
 
     $ script/plugin install git://github.com/nando/string-mapper.git
+
+#### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
+
+De fábrica MundoPepino utiliza ActiveRecord para incorporar a la BBDD los datos que soliciten los escenarios. 
+
+Opcionalmente MundoPepino puede utilizar FixtureReplacement haciendo dicha tarea más simple y permitiéndo que los textos se centren en los objetivos de los escenarios sin preocuparse por el modelo de datos subyacente.
+
+Para ello por un lado tenemos que instalar el plugin:
+
+    $ script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
+    $ script/generate fixture_replacement
+
+...y por otro, al final de nuestro `env.rb` tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más abajo, en *Uso*, más sobre esto):
+
+    class MiMundo < MundoPepino
+      include FixtureReplacement
+    end
+    
+    World do
+      MiMundo.new
+    end 
+
+### Uso
+
+Al final de nuestro `env.rb` incorporamos lo siguiente:
+
+    require 'mundo_pepino'
+    String.model_mappings = {} # Mapeo castellano-inglés de modelos
+    String.field_mappings = {} # Mapeo castellano-inglés de campos
+    
+    World do
+      MundoPepino.new
+    end
+
+Es recomendable también vaciar el contenido de la BBDD antes de comenzar la evaluación de un nuevo escenario para que los datos que pueda haber de otros escenarios no alteren su resultado. La función *Before* nos puede ayudar para conseguirlo, haciendo algo como:
+
+    Before do
+      MiModelo.destroy_all
+      MiOtroModelo.destroy_all # etc.
+    end 
+
+#### generate mundo_pepino
+
+    MundoPepino::Models = %w{
+      MiModelo
+      MiOtroModelo
+    }
+
+    Before do
+      MundoPepino::Models.each { |model| eval(model).destroy_all }
+    end
+
+#### generate caracteristica
+
 
 ## Definiciones implementadas en MundoPepino
 
