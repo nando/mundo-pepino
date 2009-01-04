@@ -1,3 +1,4 @@
+require 'cucumber/rails/world'
 require 'string-mapper'
 require 'definiciones/dado_contexto'
 require 'definiciones/cuando_ocurre'
