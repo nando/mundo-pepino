@@ -68,17 +68,75 @@ Es recomendable también vaciar el contenido de la BBDD antes de comenzar la eva
 
 #### generate mundo_pepino
 
-    MundoPepino::Models = %w{
-      MiModelo
-      MiOtroModelo
-    }
+    rails_root$ script/generate mundo_pepino
+          create  caracteristicas/support
+          create  caracteristicas/support/mundo_pepino_env.rb
+          exists  lib/tasks
+          create  lib/tasks/mundo_pepino.rake
 
-    Before do
-      MundoPepino::Models.each { |model| eval(model).destroy_all }
-    end
+El principio de `mundo_pepino_env.rb` es el contenido del `env.rb` generado por `generate cucumber`, tras el cual añade lo siguiente:
+
+    require 'mundo_pepino'          # Cargamos MundoPepino...
+    MundoPepino::ModelsToClean = [] # Array con los modelos que serán limpiados 
+                                    # antes de lanzar cada escenario.
+    String.model_mappings = {}      # Hash con el mapeo de los modelos a partir
+                                    # de sus equivalencias en castellano.
+    String.field_mappings = {}      # Hash con el mapeo de los campos.
+    class MiMundo < MundoPepino     # Ejemplo de uso del MundoPepio con herencia. 
+      # include FixtureReplacement  # FR listo para entrar en acción. Meter aquí 
+      # def mi_funcion; ...; end    # las funciones específicas que necesitemos
+    end                             # desde nuestras definiciones.
+    Before do                       # Limpieza de modelos propiamente dicha... 
+      MundoPepino::ModelsToClean.each { |model| model.destroy_all }
+    end                             
+    World do                        # Finalmente le pedimos a Cucumber que
+      MiMundo.new                   # utilice nuestro mundo como contexto de 
+    end                             # nuestros escenarios.
+
+`mundo_pepino.rake` añade una tarea llamada **caracteristicas** que lanza con la opción `--language es` todos los ficheros con extensión `.feature` que tengamos dentro del directorio `caracteristicas`.
 
 #### generate caracteristica
 
+Como  trata del generador equivalente a `script/generate feature` de Cucumber:
+    $ script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área used:boolean:usado
+    model_cleaning  added Orchard (Orchard.destroy_all call before each scenario)
+    model_mapping   added /huertos?$/i => Orchard
+    field_mapping   added /nombres?$/i => :name
+    field_mapping   added /áreas?$/i => :area
+    field_mapping   added /usados?$/i => :used
+          create  caracteristicas/gestion_de_huertos.feature
+
+El fichero `gestion_de_huertos.feature` tendría:
+    Característica: Gestión de Huertos
+      Para [beneficio]
+      Como [sujeto]
+      Quiero [característica/comportamiento]
+    
+      Escenario: Añadir un/a nuevo/a Huerto
+        Dado que visito la página de nuevo/a Huerto
+        Cuando relleno nombre con "nombre 0"
+             Y relleno área con "0"
+             Y relleno usado con "true"
+             Y pulso el botón "Crear"
+        Entonces debería ver el texto "nombre 0"
+               Y debería ver el texto "0"
+               Y debería ver el texto "true"
+    
+      Escenario: Borrar Huerto
+        Dado que tenemos los/las siguientes Huertos:
+          |nombre|área|usado|
+          |nombre 1|1|false|
+          |nombre 2|2|true|
+          |nombre 3|3|false|
+          |nombre 4|4|true|
+        Cuando borro el/la Huerto en la tercera posición
+        Entonces debería ver una tabla con los siguientes contenidos:
+          |nombre|área|usado|
+          |nombre 1|1|false|
+          |nombre 2|2|true|
+          |nombre 4|4|true|
+
+A diferencia de `generate feature` aquí no se crea un fichero `step_definitions.rb` ya que las mismas se encuentran dentro de las definidas e implementadas en MundoPepino.
 
 ## Definiciones implementadas en MundoPepino
 

@@ -12,16 +12,15 @@ require 'webrat/rspec-rails'
 
 require 'mundo_pepino'
 
-Before do
-  [ Orchard,
-    Terrace,
-    Crop,
-    Fertilizer,
-    Tomato,
-    Chard,
-    Pepino
-  ].each { |model| model.destroy_all }
-end
+MundoPepino::ModelsToClean = [
+  Orchard,
+  Terrace,
+  Crop,
+  Fertilizer,
+  Tomato,
+  Chard,
+  Pepino
+]
 
 String.model_mappings = {
   /huert[oa]s?$/i            => Orchard,
@@ -56,6 +55,10 @@ String.field_mappings = {
 class MiMundo < MundoPepino
   include FixtureReplacement
   # Helpers específicos de nuestras features
+end
+
+Before do
+  MundoPepino::ModelsToClean.each { |model| model.destroy_all }
 end
 
 World do

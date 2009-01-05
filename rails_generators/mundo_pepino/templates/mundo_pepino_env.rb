@@ -12,12 +12,11 @@ require 'webrat/rspec-rails'
 
 require 'mundo_pepino'
 
-Before do
-  [ 
-  # MODELOS AQUÍ, por ejemplo:
+MundoPepino::ModelsToClean = [
+  # MODELOS PARA LIMPIAR antes de cada escenario,
+  # por ejemplo:
   # Orchard, Terrace, Crop...
-  ].each { |model| model.destroy_all }
-end
+]
 
 String.model_mappings = {
   # TRADUCCIÓN DE MODELOS AQUÍ, por ejemplo:
@@ -37,8 +36,13 @@ String.field_mappings = {
   # /Orchard::longitud(es)?$/   => 'longitude'
 }
 
-class MiMundo < MundoPepino 
+class MiMundo < MundoPepino
   # Helpers específicos de nuestras features
+  # include FixtureReplacement
+end
+
+Before do
+  MundoPepino::ModelsToClean.each { |model| model.destroy_all }
 end
 
 World do

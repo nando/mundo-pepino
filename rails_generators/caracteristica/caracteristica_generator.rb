@@ -4,20 +4,20 @@ module Rails::Generator::Commands
 
   MODEL_CLEANING = '"\n    # ENTRADA AUTO-GENERADA PARA #{model}\n' +
                    '    #{model}, # ' +
-                   '(TODO: quitar la coma final si no es correcta)\n"'
+                   '(TODO: quitar la coma final si es el primer modelo)\n"'
 
   MODEL_MAPPING = '"\n  # MAPEO DE MODELO AUTO-GENERADO (#{model})\n' +
                   '  /#{regexp}$/i => #{model},' + 
                   ' # (TODO: validar RegExp para forma plural y coma final)\n"'
 
   FIELD_MAPPING = '"\n  # MAPEO DE CAMPO AUTO-GENERADO (#{field})\n' +
-                  '  /#{regexp}$/i => \'#{field}\',' + 
+                  '  /#{regexp}$/i => :#{field},' + 
                   ' # (TODO: validar RegExp para forma plural y coma final)\n"'
 
   class Create < Base
     def mp_model_cleaning(model)
-      add_to_mundo_pepino_env "Before do\n  [", eval(MODEL_CLEANING)
-      logger.model_cleaning "added Before { #{model}.destroy_all }"
+      add_to_mundo_pepino_env "MundoPepino::ModelsToClean = [", eval(MODEL_CLEANING)
+      logger.model_cleaning "added #{model} (#{model}.destroy_all call before each scenario)"
     end
 
     def mp_model_mapping(model, regexp)
@@ -27,7 +27,7 @@ module Rails::Generator::Commands
 
     def mp_field_mapping(field, regexp)
       add_to_mundo_pepino_env 'String.field_mappings = {', eval(FIELD_MAPPING)
-      logger.field_mapping " added /#{regexp}$/i => #{field}"
+      logger.field_mapping " added /#{regexp}$/i => :#{field}"
     end
 
     private
