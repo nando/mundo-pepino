@@ -14,9 +14,10 @@ MundoPepino will be an already implemented set of step definitions frequently ne
 
 Bon appetit!
 
-## Quick start
+## Toma de contacto o *playground*
 
-Por ejemplo:
+Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-rails**, **webrat** (gema de Aslak o última versión de Brynary como plugin. Más información [aquí](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails**:
+
     rails mi_app; cd mi_app
     script/plugin install git://github.com/nando/string-mapper.git
     script/plugin install git://github.com/nando/mundo-pepino.git
@@ -30,11 +31,13 @@ Por ejemplo:
 
 En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold* genera las vistas en inglés y el generador de *caracteristica* los espera en castellano. El primero es el botón "Create" y el segundo el enlace "Destroy":
 
-    vim app/views/orchards/index.html.erb # Borrar
-    vim app/views/orchards/new.html.erb # Crear 
+    $EDITOR app/views/orchards/index.html.erb # "Borrar" por "Destroy"
+    $EDITOR app/views/orchards/new.html.erb # "Crear" por "Create"
     rake caracteristicas
 
-Ahora sí deberíamos ver todo verde, sin errores ni definiciones pendientes.
+Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes.
+
+La intención del generador de características es más didáctica que pragmática. Ofrece un ejemplo simple que podemos toquetear para probar el plugin. Por otro lado se limita a hacer exactamente lo mismo que hace `generate feature` exceptuando el hecho de que no genera un fichero de **definiciones específicas** para la nueva *caracteristica* (ya que las utilizadas están comprendidas dentro de las **definiciones genéricas** ya implementadas en MundoPepino).
 
 Dentro del plugin, en `features/support/app` está la aplicación que el MundoPepino utiliza para probarse a si mismo. En particular la característica `features/mundo-pepino.feature` pretente ser un compendio de escenarios que muestren las posibilidades que ofrece.
 
@@ -44,7 +47,7 @@ Dentro del plugin, en `features/support/app` está la aplicación que el MundoPe
 
 ### Dependencias
 
-  Además de las clásicas gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails** es necesario el plugin StringMapper:
+  Además de las clásicas gemas o plugins de **cucumber**, **webrat** (gema de Aslak o última versión de Brynary como plugin. Más información [aquí](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)), **rspec** y **rspec-rails** es necesario el plugin StringMapper:
 
 #### [StringMapper](http://github.com/nando/string-mapper)
 
@@ -121,7 +124,7 @@ El principio de `mundo_pepino_env.rb` es el contenido del `env.rb` generado por 
 
 #### generate caracteristica
 
-Como  trata del generador equivalente a `script/generate feature` de Cucumber:
+Se trata del generador equivalente a `script/generate feature` de Cucumber:
     $ script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área used:boolean:usado
     model_cleaning  added Orchard (Orchard.destroy_all call before each scenario)
     model_mapping   added /huertos?$/i => Orchard
@@ -160,7 +163,7 @@ El fichero `gestion_de_huertos.feature` tendría:
           |nombre 2|2|true|
           |nombre 4|4|true|
 
-A diferencia de `generate feature` aquí no se crea un fichero `step_definitions.rb` ya que las mismas se encuentran dentro de las definidas e implementadas en MundoPepino.
+A diferencia de `generate feature` aquí no se crea un fichero `step_definitions.rb` con definiciones e implementaciones específicas ya que las mismas se encuentran dentro de las tratadas genéricamente dentro del MundoPepino.
 
 ## Definiciones implementadas en MundoPepino
 
