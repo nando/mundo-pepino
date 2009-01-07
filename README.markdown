@@ -187,6 +187,7 @@ Como **convención general** los nombres correspondientes a modelos y campos pue
 
     Dado que tenemos un artículo que tiene como título "Título del artículo"
 
+En el ejemplo, "artículo" y "título" hacen referencia a un modelo y a un campo respectivamente y no van entre comillas (aunque podrían ir si quisiéramos) mientras que "Título del artículo" es el valor que se asignará en "título" y como tal va entrecomillado (y si quitásemos sus comillas la expresión no sería reconocida o lo sería incorrectamente). 
 
 ### Dado el contexto (Givens)
 
