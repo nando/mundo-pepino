@@ -113,14 +113,14 @@ El principio de `mundo_pepino_env.rb` es el contenido del `env.rb` generado por 
       # include FixtureReplacement  # FR listo para entrar en acción. Meter aquí 
       # def mi_funcion; ...; end    # las funciones específicas que necesitemos
     end                             # desde nuestras definiciones.
-    Before do                       # Limpieza de modelos propiamente dicha... 
+    Before do                       # La limpieza de modelos propiamente dicha... 
       MundoPepino::ModelsToClean.each { |model| model.destroy_all }
-    end                             
+    end                             # ...se realizará antes de cada escenario.  
     World do                        # Finalmente le pedimos a Cucumber que
-      MiMundo.new                   # utilice nuestro mundo como contexto de 
-    end                             # nuestros escenarios.
+      MiMundo.new                   # utilice una instancia de nuestro mundo como
+    end                             # ámbito local de nuestros escenarios.
 
-`mundo_pepino.rake` añade una tarea llamada **caracteristicas** que lanza con la opción `--language es` todos los ficheros con extensión `.feature` que tengamos dentro del directorio `caracteristicas`.
+Por otro lado `mundo_pepino.rake` añade una tarea llamada **caracteristicas** que lanza con la opción `--language es` todos los ficheros con extensión `.feature` que tengamos dentro del directorio `caracteristicas`.
 
 #### generate caracteristica
 
