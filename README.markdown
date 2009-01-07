@@ -14,6 +14,30 @@ MundoPepino will be an already implemented set of step definitions frequently ne
 
 Bon appetit!
 
+## Quick start
+
+Por ejemplo:
+    rails mi_app; cd mi_app
+    script/plugin install git://github.com/nando/string-mapper.git
+    script/plugin install git://github.com/nando/mundo-pepino.git
+    script/generate mundo_pepino
+    script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área longitude:string:longitud latitude:string:latitud used:boolean:usado
+    script/generate scaffold Orchard name:string area:integer longitude:string latitude:string used:boolean
+    rake db:create
+    RAILS_ENV=test rake db:create
+    rake db:migrate
+    rake caracteristicas
+
+En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold* genera las vistas en inglés y el generador de *caracteristica* los espera en castellano. El primero es el botón "Create" y el segundo el enlace "Destroy":
+
+    vim app/views/orchards/index.html.erb # Borrar
+    vim app/views/orchards/new.html.erb # Crear 
+    rake caracteristicas
+
+Ahora sí deberíamos ver todo verde, sin errores ni definiciones pendientes.
+
+Dentro del plugin, en `features/support/app` está la aplicación que el MundoPepino utiliza para probarse a si mismo. En particular la característica `features/mundo-pepino.feature` pretente ser un compendio de escenarios que muestren las posibilidades que ofrece.
+
 ## Instalación
 
     $ script/plugin install git://github.com/nando/mundo-pepino.git
