@@ -125,6 +125,7 @@ El principio de `mundo_pepino_env.rb` es el contenido del `env.rb` generado por 
 #### generate caracteristica
 
 Se trata del generador equivalente a `script/generate feature` de Cucumber:
+
     $ script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área used:boolean:usado
     model_cleaning  added Orchard (Orchard.destroy_all call before each scenario)
     model_mapping   added /huertos?$/i => Orchard
