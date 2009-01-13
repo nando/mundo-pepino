@@ -55,15 +55,15 @@ Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?['"](.+)["']$/i do
 end
 
 Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|
-  chooses(campo_to_field(campo).to_s + '_' + valor.downcase.to_underscored)
+  choose(campo_to_field(campo).to_s + '_' + valor.downcase.to_underscored)
 end
 
 Cuando /^(?:que )?marco (?:la|el)? ?(.+)$/i do |campo|
-  checks(campo_to_field(campo))
+  check(campo_to_field(campo))
 end
 
 Cuando /^(?:que )?desmarco (?:la|el)? ?(.+)$/i do |campo|
-  unchecks(campo_to_field(campo))
+  uncheck(campo_to_field(campo))
 end
 
 Cuando /^(?:que )?adjunto el fichero [\'"](.*)[\'"] (?:a|en) (.*)$/ do |ruta, campo|
@@ -71,23 +71,16 @@ Cuando /^(?:que )?adjunto el fichero [\'"](.*)[\'"] (?:a|en) (.*)$/ do |ruta, ca
 end
 
 Cuando /^(?:que )?selecciono ["'](.+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
-  selects(valor, :from => campo_to_field(campo))
+  select(valor, :from => campo_to_field(campo))
 end
 
-Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ do |modelo, posicion|
-  pile_up modelo.to_unquoted.to_model.new
-  visit last_mentioned_url
-  within("table > tr:nth-child(#{posicion.to_number+1})") do
-    click_link "Borrar"
-  end
+# Usar este paso junto con el helper de Rail datetime_select. Por ejemplo:
+# Cuando selecciono "25 de diciembre de 2008, 10:00" como fecha y hora
+When /^selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']? como fecha y hora$/ do |dia, mes, anio, hora|
+  time = Time.parse("#{mes.to_month} #{dia}, #{anio} #{hora}")
+  select_datetime(time)
 end
 
-
-## Use this step in conjunction with Rail's datetime_select helper. For example:
-## When I select "December 25, 2008 10:00" as the date and time
-#When /^I select "(.*)" as the date and time$/ do |time|
-#  select_datetime(time)
-#end
 #
 ## Use this step when using multiple datetime_select helpers on a page or
 ## you want to specify which datetime to select. Given the following view:
@@ -130,3 +123,11 @@ end
 #  select_date(date, :from => date_label)
 #end
                                  
+Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ do |modelo, posicion|
+  pile_up modelo.to_unquoted.to_model.new
+  visit last_mentioned_url
+  within("table > tr:nth-child(#{posicion.to_number+1})") do
+    click_link "Borrar"
+  end
+end
+

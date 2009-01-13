@@ -22,18 +22,30 @@ String.add_mapper(:number, {
   :cinco       => 5,
   /quit[ao]/i => 5}) { |string| string.to_i }
 String.add_mapper(:crud_action,
-  /alta$/                   => 'new',
-  /creaci[óo]n$/            => 'new',
-  /nuev(?:o|a|o\/a|a\/o)$/  => 'new',
-  /cambio$/                 => 'edit',
-  /modificaci[oó]n$/        => 'edit',
-  /edici[oó]n$/             => 'edit')
+  /alta$/i                  => 'new',
+  /creaci[óo]n$/i           => 'new',
+  /nuev(?:o|a|o\/a|a\/o)$/i => 'new',
+  /cambio$/i                => 'edit',
+  /modificaci[oó]n$/i       => 'edit',
+  /edici[oó]n$/i            => 'edit')
+String.add_mapper(:month,
+  :enero           => 'January',
+  :febrero         => 'February',
+  :marzo           => 'March',
+  :abril           => 'April',
+  :mayo            => 'May',
+  :junio           => 'June',
+  :julio           => 'July',
+  :agosto          => 'August',
+  /sep?tiembre$/i  => 'September',
+  :octubre         => 'October',
+  :noviembre       => 'November',
+  :diciembre       => 'December')
 String.add_mapper(:local_path) { |string| string }
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 
 class MundoPepino < Cucumber::Rails::World
-
   # API común para las instancias que van referenciándose en el escenario.
   module Mencionado 
     def m_instance

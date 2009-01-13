@@ -16,7 +16,7 @@ Bon appetit!
 
 ## Toma de contacto o *playground*
 
-Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-rails**, **webrat** (gema de Aslak o última versión de Brynary como plugin. Más información [aquí](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails**:
+Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-rails**, **webrat** (más información sobre las dependencias más abajo y [en la documentacion oficial](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails** (2.x):
 
     rails mi_app; cd mi_app
     script/plugin install git://github.com/nando/string-mapper.git
@@ -24,8 +24,6 @@ Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-r
     script/generate mundo_pepino
     script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área longitude:string:longitud latitude:string:latitud used:boolean:usado
     script/generate scaffold Orchard name:string area:integer longitude:string latitude:string used:boolean
-    rake db:create
-    RAILS_ENV=test rake db:create
     rake db:migrate
     rake caracteristicas
 
@@ -47,11 +45,23 @@ Dentro del plugin, en `features/support/app` está la aplicación que el MundoPe
 
 ### Dependencias
 
-  Además de las clásicas gemas o plugins de **cucumber**, **webrat** (gema de Aslak o última versión de Brynary como plugin. Más información [aquí](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)), **rspec** y **rspec-rails** es necesario el plugin StringMapper:
+  Las clásicas gemas o plugins de **cucumber**, **webrat** (gema de Aslak o última versión de Brynary como plugin. Más información [aquí](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)), **rspec** y **rspec-rails**. Por ejemplo:
+
+    gem install term-ansicolor treetop diff-lcs nokogiri # dependencias de Cucumber
+    git clone git://github.com/aslakhellesoy/cucumber.git vendor/plugins/cucumber
+    git clone git://github.com/brynary/webrat.git vendor/plugins/webrat
+    git clone git://github.com/dchelimsky/rspec.git vendor/plugins/rspec
+    git clone git://github.com/dchelimsky/rspec-rails.git vendor/plugins/rspec-rails
+
+  Además necesitamos instalar como plugin StringMapper (ver más abajo).
+
+  Si hacemos uso de alguno de los pasos que hacen referencia a la selección de un mes como parte de una fecha en un formulario es necesaria la instalación del módulo ruby-locale.
 
 #### [StringMapper](http://github.com/nando/string-mapper)
 
-    $ script/plugin install git://github.com/nando/string-mapper.git
+  StringMapper es una extensión de la clase String para obtener modelos, números, nombres de campo, etc. a partir de sus nombres en castellano.
+
+    script/plugin install git://github.com/nando/string-mapper.git
 
 #### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
 
@@ -61,8 +71,8 @@ Opcionalmente MundoPepino puede utilizar FixtureReplacement haciendo dicha tarea
 
 Para ello por un lado tenemos que instalar el plugin:
 
-    $ script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
-    $ script/generate fixture_replacement
+    script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
+    script/generate fixture_replacement
 
 ...y por otro, al final de nuestro `env.rb` tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más abajo, en *Uso*, más sobre esto):
 
@@ -74,7 +84,37 @@ Para ello por un lado tenemos que instalar el plugin:
       MiMundo.new
     end 
 
-### Uso
+#### [ruby-locale](http://ruby-locale.sourceforge.net/)
+http://sourceforge.net/projects/ruby-locale/)
+
+  Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby esto es sinonimo del nombre del mes en inglés.
+  
+  **ruby-locale** es un (viejo) módulo que añade **soporte para locales en Ruby** al que se hace referencia [desde el wiki de Rails](http://wiki.rubyonrails.org/rails/pages/HowToOutputDatesInAnotherLanguage). Instalándolo en el sistema tendremos la posibilidad de que strftime('%B') devuelva el nombre del mes en castellano.
+
+  Para instalarlo nos bajamos [su código fuente](http://sourceforge.net/project/platformdownload.php?group_id=68254) y lo compilamos e instalamos en el sistema:
+
+    ruby extconf.rb
+    make
+    sudo make install
+    irb
+    irb> require 'locale'
+    => true
+    irb> Time.now.strftime('%B')
+    => "January"
+    irb> Locale.setlocale(Locale::LC_TIME, "es_ES")
+    => "es_ES"
+    irb> Time.now.strftime('%B')
+    => "enero" 
+
+Por último, para que los helpers de Rails relacionados con la selección de fechas muestren los meses en castellano es necesario hacer uso de la opción **:use_month_names**, pasándole en la misma un array con los nombres de los doce meses que deseamos utilizar. Por ejemplo, en algún punto de nuestra aplicación definimos el array con los meses con:
+
+    Meses = %w(enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre)
+
+Y posteriormente en las vistas llamamos al helper con algo parecido a:
+
+    <%= pepino.datetime_select :harvested_at, :use_month_names => Meses %>
+
+## Uso
 
 Al final de nuestro `env.rb` incorporamos lo siguiente:
 
@@ -93,7 +133,7 @@ Es recomendable también vaciar el contenido de la BBDD antes de comenzar la eva
       MiOtroModelo.destroy_all # etc.
     end 
 
-#### generate mundo_pepino
+### generate mundo_pepino
 
     rails_root$ script/generate mundo_pepino
           create  caracteristicas/support
@@ -122,7 +162,7 @@ El principio de `mundo_pepino_env.rb` es el contenido del `env.rb` generado por 
 
 Por otro lado `mundo_pepino.rake` añade una tarea llamada **caracteristicas** que lanza con la opción `--language es` todos los ficheros con extensión `.feature` que tengamos dentro del directorio `caracteristicas`.
 
-#### generate caracteristica
+### generate caracteristica
 
 Se trata del generador equivalente a `script/generate feature` de Cucumber:
 
@@ -268,8 +308,11 @@ Convenciones generales:
 #### Relleno/completo un campo con un texto (*text* o *textarea*) \*
      Cuando completo 'nombre' con 'Wadus'
 [más ejemplos](master/features/cuando-relleno-el-campo.feature)
-#### Selecciono una opción de una lista (*select*) \*
+#### Selecciono opción/opciones
+##### Selecciono una opción de una lista (*select*) \*
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
+##### Selecciono fecha y hora genérica (sin especificar campo concreto) \*
+     Cuando selecciono 1 de setiembre de 1998, 12:46" como fecha y hora
 [más ejemplos](master/features/cuando-selecciono-en-listado.feature)
 
 #### Borro el enésimo recurso desde la página de su índice (index) \*\*

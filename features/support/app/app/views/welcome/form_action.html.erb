@@ -8,4 +8,11 @@
 <div id="unselected_check"><%= params[:unselected_check] %></div>
 <div id="file_filename"><%= params[:file_field].original_filename rescue nil %></div>
 <div id="orchard_type"><%= params[:orchard_type] %></div>
+<div id="fechayhora"><%= params[:welcome]["fechayhora(3i)"] + '/' +
+                         params[:welcome]["fechayhora(2i)"] + '/' +
+                         params[:welcome]["fechayhora(1i)"] + '-' +
+                         params[:welcome]["fechayhora(4i)"] + ':' +
+                         params[:welcome]["fechayhora(5i)"] 
+                         %></div>
+
 <%= link_to 'Volver', :action => 'index' %>

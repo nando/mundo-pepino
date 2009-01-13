@@ -3,6 +3,7 @@ features/support/app/log
 features/support/app/tmp
 features/support/app/vendor
 features/support/app/db/schema.rb
+features/support/app/db/*.sqlite3
 features/support/app/vendor/plugins/string-mapper
 features/support/app/vendor/plugins/fixture_replacement2
 features/support/app/caracteristicas/

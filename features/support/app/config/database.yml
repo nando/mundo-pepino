@@ -1,13 +1,11 @@
 development:
-  adapter: mysql
-  database: mundo_pepino_dev
-  host: localhost
-  username: root
-  password:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
 
 test:
-  adapter: mysql
-  database: mundo_pepino_test
-  host: localhost
-  username: root
-  password:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
