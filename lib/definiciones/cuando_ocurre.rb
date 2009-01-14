@@ -70,30 +70,19 @@ Cuando /^(?:que )?adjunto el fichero [\'"](.*)[\'"] (?:a|en) (.*)$/ do |ruta, ca
   attach_file(campo_to_field(campo), ruta.to_local_path)
 end
 
-Cuando /^(?:que )?selecciono ["'](.+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
+Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
   select(valor, :from => campo_to_field(campo))
 end
 
-# Usar este paso junto con el helper de Rail datetime_select. Por ejemplo:
+Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']? como fecha y hora(?: (?:de )?['"](.+)["'])?$/ do |dia, mes, anio, hora, etiqueta|
 # Cuando selecciono "25 de diciembre de 2008, 10:00" como fecha y hora
-When /^selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']? como fecha y hora$/ do |dia, mes, anio, hora|
+# Cuando selecciono 23 de noviembre de 2004, 11:20 como fecha y hora "Preferida"
+# Cuando selecciono 23 de noviembre de 2004, 11:20 como fecha y hora de "Publicación"
   time = Time.parse("#{mes.to_month} #{dia}, #{anio} #{hora}")
-  select_datetime(time)
+  options = etiqueta ? { :from => etiqueta } : {}
+  select_datetime(time, options)
 end
 
-#
-## Use this step when using multiple datetime_select helpers on a page or
-## you want to specify which datetime to select. Given the following view:
-##   <%= f.label :preferred %><br />
-##   <%= f.datetime_select :preferred %>
-##   <%= f.label :alternative %><br />
-##   <%= f.datetime_select :alternative %>
-## The following steps would fill out the form:
-## When I select "November 23, 2004 11:20" as the "Preferred" data and time
-## And I select "November 25, 2004 10:30" as the "Alternative" data and time
-#When /^I select "(.*)" as the "(.*)" date and time$/ do |datetime, datetime_label|
-#  select_datetime(datetime, :from => datetime_label)
-#end
 #
 ## Use this step in conjuction with Rail's time_select helper. For example:
 ## When I select "2:20PM" as the time

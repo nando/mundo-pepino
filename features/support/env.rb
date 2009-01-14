@@ -11,9 +11,6 @@ require 'cucumber/rails/rspec'
 require 'webrat/rspec-rails'
 
 require 'mundo_pepino'
-require 'locale'
-Locale.setlocale(Locale::LC_TIME, "es_ES")
-MundoPepinoAppMeses = %w(enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre)
 
 MundoPepino::ModelsToClean = [
   Orchard,

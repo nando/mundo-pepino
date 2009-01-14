@@ -85,7 +85,6 @@ Para ello por un lado tenemos que instalar el plugin:
     end 
 
 #### [ruby-locale](http://ruby-locale.sourceforge.net/)
-http://sourceforge.net/projects/ruby-locale/)
 
   Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby esto es sinonimo del nombre del mes en inglés.
   
@@ -101,7 +100,7 @@ http://sourceforge.net/projects/ruby-locale/)
     => true
     irb> Time.now.strftime('%B')
     => "January"
-    irb> Locale.setlocale(Locale::LC_TIME, "es_ES")
+    irb> Locale.setlocale(Locale::LC_TIME, "es_ES.UTF-8")
     => "es_ES"
     irb> Time.now.strftime('%B')
     => "enero" 
@@ -312,7 +311,9 @@ Convenciones generales:
 ##### Selecciono una opción de una lista (*select*) \*
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
 ##### Selecciono fecha y hora genérica (sin especificar campo concreto) \*
-     Cuando selecciono 1 de setiembre de 1998, 12:46" como fecha y hora
+     Cuando selecciono 1 de setiembre de 1998, 12:46 como fecha y hora
+##### Selecciono fecha y hora para un campo concreto \*
+     Cuando selecciono 2 de mayo de 1998, 12:46 como fecha y hora de "Cosechado"
 [más ejemplos](master/features/cuando-selecciono-en-listado.feature)
 
 #### Borro el enésimo recurso desde la página de su índice (index) \*\*

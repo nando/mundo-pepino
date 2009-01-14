@@ -4,6 +4,10 @@
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
+require 'locale'
+Locale.setlocale(Locale::LC_TIME, "es_ES.UTF-8")
+MundoPepinoAppMeses = %w(enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre)
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
@@ -75,3 +79,4 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 end
+
