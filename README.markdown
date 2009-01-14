@@ -88,7 +88,7 @@ Para ello por un lado tenemos que instalar el plugin:
 
   Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby esto es sinonimo del nombre del mes en inglés.
   
-  **ruby-locale** es un (viejo) módulo que añade **soporte para locales en Ruby** al que se hace referencia [desde el wiki de Rails](http://wiki.rubyonrails.org/rails/pages/HowToOutputDatesInAnotherLanguage). Instalándolo en el sistema tendremos la posibilidad de que strftime('%B') devuelva el nombre del mes en castellano.
+  **ruby-locale** es un (viejo) módulo que añade **soporte para locales en Ruby** al que se hace referencia [desde el wiki de Rails](http://wiki.rubyonrails.org/rails/pages/HowToOutputDatesInAnotherLanguage/). Instalándolo en el sistema tendremos la posibilidad de que strftime('%B') devuelva el nombre del mes en castellano.
 
   Para instalarlo nos bajamos [su código fuente](http://sourceforge.net/project/platformdownload.php?group_id=68254) y lo compilamos e instalamos en el sistema:
 
@@ -105,7 +105,7 @@ Para ello por un lado tenemos que instalar el plugin:
     irb> Time.now.strftime('%B')
     => "enero" 
 
-Por último, para que los helpers de Rails relacionados con la selección de fechas muestren los meses en castellano es necesario hacer uso de la opción **:use_month_names**, pasándole en la misma un array con los nombres de los doce meses que deseamos utilizar. Por ejemplo, en algún punto de nuestra aplicación definimos el array con los meses con:
+Por último, para que los helpers de Rails relacionados con la selección de fechas muestren los meses en castellano es necesario hacer uso de la opción **:use\_month\_names**, pasándole en la misma un array con los nombres de los doce meses que deseamos utilizar. Por ejemplo, en algún punto de nuestra aplicación definimos el array con los meses con:
 
     Meses = %w(enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre)
 
