@@ -26,14 +26,14 @@
      <%= select_tag "orchard_type", options_for_select(['Mixto', 'Hortalizas', 'Frutales']) %>
   </div>
   <div><%= file_field_tag :file_field %></div>
-  <div><%= datetime_select :welcome, :fechayhora, :order => [:day, :month, :year], 
-              :start_year => 1992, :use_month_names => MundoPepinoAppMeses %></div>
   <div>
   <%= label :welcome, :preferred, 'Preferida' %><br />
-   <%= datetime_select :welcome, :preferred, :use_month_names => MundoPepinoAppMeses %></div>
+   <%= datetime_select :welcome, :preferred, :order => [:day, :month, :year],
+                 :start_year => 1992, :use_month_names => MundoPepinoAppMeses %></div>
 
   <div><%= label :welcome, :alternative, 'Alternativa' %><br />
-   <%= datetime_select :welcome, :alternative, :use_month_names => MundoPepinoAppMeses %></div>
+   <%= datetime_select :welcome, :alternative, :order => [:day, :month, :year],
+                 :start_year => 1992, :use_month_names => MundoPepinoAppMeses %></div>
  
   <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
 <% end %>

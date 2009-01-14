@@ -83,15 +83,10 @@ Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']?
   select_datetime(time, options)
 end
 
-#
-## Use this step in conjuction with Rail's time_select helper. For example:
-## When I select "2:20PM" as the time
-## Note: Rail's default time helper provides 24-hour time-- not 12 hour time. Webrat
-## will convert the 2:20PM to 14:20 and then select it.
-#When /^I select "(.*)" as the time$/ do |time|
-#  select_time(time)
-#end
-#
+Cuando /^(?:que )?selecciono ['"]?(.*)["']? como (?:la )?hora$/ do |hora|
+  select_time(hora)
+end
+
 ## Use this step when using multiple time_select helpers on a page or you want to
 ## specify the name of the time on the form.  For example:
 ## When I select "7:30AM" as the "Gym" time

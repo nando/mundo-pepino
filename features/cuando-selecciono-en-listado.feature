@@ -1,4 +1,4 @@
-Característica: selecciono en un listado
+Característica: selecciono en listado/s
 
   Escenario: Selecciono una opción de una lista (*select*) 
   ########################################################################
@@ -50,11 +50,13 @@ Característica: selecciono en un listado
     Cuando visito la portada
          Y selecciono "25 de diciembre de 2008, 10:00" como fecha y hora
          Y pulso el botón "Galleta de la fortuna"
-    Entonces veo el tag div#fechayhora con el valor "25/12/2008-10:00"
+    Entonces veo el tag div#fecha-preferida con el valor "25/12/2008"
+           Y veo el tag div#hora-preferida con el valor "10:00"
     Cuando visito la portada
          Y selecciono 1 de setiembre de 1998, 12:46" como fecha y hora
          Y pulso el botón "Galleta de la fortuna"
-    Entonces veo el tag div#fechayhora con el valor "1/9/1998-12:46"
+    Entonces veo el tag div#fecha-preferida con el valor "1/9/1998"
+           Y veo el tag div#hora-preferida con el valor "12:46"
 
   Escenario: Selecciono una fecha y hora en un campo concreto
   ########################################################################
@@ -91,15 +93,47 @@ Característica: selecciono en un listado
          Y selecciono "23 de noviembre de 2004, 11:20" como fecha y hora "Preferida"
          Y selecciono 25 de enero de 2005, 10:30 como fecha y hora de "Alternativa"
          Y pulso el botón "Galleta de la fortuna"
-    Entonces veo el tag div#preferida con el valor "23/11/2004-11:20"
-           Y veo el tag div#alternativa con el valor "25/1/2005-10:30"
+    Entonces veo el tag div#fecha-preferida con el valor "23/11/2004"
+           Y veo el tag div#hora-preferida con el valor "11:20"
+           Y veo el tag div#fecha-alternativa con el valor "25/1/2005"
+           Y veo el tag div#hora-alternativa con el valor "10:30"
+
+  Escenario: Selecciono una hora
+  ########################################################################
+  # Patrón:
+  #   Cuando selecciono "hh:mm(AM/PM)?" como la? hora
+  #
+  # Descripción:
+  #   Selección de una hora en listas de selección generadas con el helper
+  # de Rails time_select.
+  #
+  #   Dicho helper genera una lista con las horas en formato de 24 horas.
+  # Webrat internamente convierte la hora facilitada en formato de 12 horas
+  # (p.e. 2:20PM) a formato 24 horas (14:20) y entonces la selecciona.
+  #
+  # Ejemplos:
+  #   Cuando selecciono "2:20PM" como hora
+  #   Cuando selecciono 14:20 como la hora
+    Cuando visito la portada
+         Y selecciono 16:23 como hora
+         Y pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#hora-preferida con el valor "16:23"
+
+    Cuando visito la portada
+         Y selecciono "4:23PM" como hora
+         Y pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#hora-preferida con el valor "16:23"
+
+
 
   Escenario: Selecciono una opciones desde pasos Given
     Dado que visito la portada
        Y que selecciono 25 de enero de 2009, 10:30 como fecha y hora
-       Y que selecciono "23 de noviembre de 2009, 11:20" como fecha y hora "Preferida"
+       Y que selecciono "23 de noviembre de 2009, 11:20" como fecha y hora "Alternativa"
        Y que selecciono 'Hortalizas'
     Cuando pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
-           Y veo el tag div#fechayhora con el valor "25/1/2009-10:30"
-           Y veo el tag div#preferida con el valor "23/11/2009-11:20"
+           Y veo el tag div#fecha-preferida con el valor "25/1/2009"
+           Y veo el tag div#hora-preferida con el valor "10:30"
+           Y veo el tag div#fecha-alternativa con el valor "23/11/2009"
+           Y veo el tag div#hora-alternativa con el valor "11:20"

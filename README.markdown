@@ -174,6 +174,7 @@ Se trata del generador equivalente a `script/generate feature` de Cucumber:
           create  caracteristicas/gestion_de_huertos.feature
 
 El fichero `gestion_de_huertos.feature` tendría:
+
     Característica: Gestión de Huertos
       Para [beneficio]
       Como [sujeto]
@@ -310,10 +311,12 @@ Convenciones generales:
 #### Selecciono opción/opciones
 ##### Selecciono una opción de una lista (*select*) \*
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
-##### Selecciono fecha y hora genérica (sin especificar campo concreto) \*
+##### Selecciono fecha y hora genérica (sin especificar en que campo) \*
      Cuando selecciono 1 de setiembre de 1998, 12:46 como fecha y hora
 ##### Selecciono fecha y hora para un campo concreto \*
      Cuando selecciono 2 de mayo de 1998, 12:46 como fecha y hora de "Cosechado"
+##### Selecciono una hora genérica (sin especificar en que campo) \*
+     Cuando selecciono 6:45PM como hora
 [más ejemplos](master/features/cuando-selecciono-en-listado.feature)
 
 #### Borro el enésimo recurso desde la página de su índice (index) \*\*
