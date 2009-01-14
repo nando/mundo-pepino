@@ -311,12 +311,14 @@ Convenciones generales:
 #### Selecciono opción/opciones
 ##### Selecciono una opción de una lista (*select*) \*
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
-##### Selecciono fecha y hora genérica (sin especificar en que campo) \*
-     Cuando selecciono 1 de setiembre de 1998, 12:46 como fecha y hora
+##### Selecciono fecha y hora sin especificar en que campo \*
+     Cuando selecciono 1 de septiembre de 1998, 12:46 como fecha y hora
 ##### Selecciono fecha y hora para un campo concreto \*
      Cuando selecciono 2 de mayo de 1998, 12:46 como fecha y hora de "Cosechado"
-##### Selecciono una hora genérica (sin especificar en que campo) \*
+##### Selecciono una hora sin especificar en que campo \*
      Cuando selecciono 6:45PM como hora
+##### Selecciono una hora para un campo concreto \*
+     Cuando selecciono 2:45PM como hora del "café"
 [más ejemplos](master/features/cuando-selecciono-en-listado.feature)
 
 #### Borro el enésimo recurso desde la página de su índice (index) \*\*

@@ -2,14 +2,11 @@ module Cucumber::StepMethods
   alias_method :Cuando, :When
 end
 
-
-
 Cuando /^(?:que )?visito (?:el|la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de ([\w\/]+)$/i do |modelo|
   model = modelo.to_unquoted.to_model or raise(ModelNotMapped.new(modelo))
   pile_up model.new
   visit eval("#{model.table_name}_path")
 end
-
 
 Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, modelo|
   model = modelo.to_unquoted.to_model or raise(ModelNotMapped.new(modelo))
@@ -66,7 +63,7 @@ Cuando /^(?:que )?desmarco (?:la|el)? ?(.+)$/i do |campo|
   uncheck(campo_to_field(campo))
 end
 
-Cuando /^(?:que )?adjunto el fichero [\'"](.*)[\'"] (?:a|en) (.*)$/ do |ruta, campo|
+Cuando /^(?:que )?adjunto el fichero ['"](.*)["'] (?:a|en) (.*)$/ do |ruta, campo|
   attach_file(campo_to_field(campo), ruta.to_local_path)
 end
 
@@ -83,17 +80,11 @@ Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']?
   select_datetime(time, options)
 end
 
-Cuando /^(?:que )?selecciono ['"]?(.*)["']? como (?:la )?hora$/ do |hora|
-  select_time(hora)
+Cuando /^(?:que )?selecciono ['"]?(.*)["']? como (?:la )?hora(?: (?:del? )?['"](.+)["'])?$/ do |hora, etiqueta|
+  options = etiqueta ? { :from => etiqueta } : {}
+  select_time(hora, options)
 end
 
-## Use this step when using multiple time_select helpers on a page or you want to
-## specify the name of the time on the form.  For example:
-## When I select "7:30AM" as the "Gym" time
-#When /^I select "(.*)" as the "(.*)" time$/ do |time, time_label|
-#  select_time(time, :from => time_label)
-#end
-#
 ## Use this step in conjuction with Rail's date_select helper.  For example:
 ## When I select "February 20, 1981" as the date
 #When /^I select "(.*)" as the date$/ do |date|

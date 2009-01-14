@@ -46,7 +46,7 @@ Característica: selecciono en listado/s
   #
   #   Cuando selecciono "25 de diciembre de 2008, 10:00" como fecha y hora
   #
-  ########################################################################
+  # (continua más abajo)
     Cuando visito la portada
          Y selecciono "25 de diciembre de 2008, 10:00" como fecha y hora
          Y pulso el botón "Galleta de la fortuna"
@@ -88,7 +88,7 @@ Característica: selecciono en listado/s
   #   Cuando selecciono 5 de enero de 2008, 10:00 como fecha y hora "Preferida"
   #   Cuando selecciono 1 de abril de 2008, 10:00 como fecha y hora de "cosechado""
   #
-  ########################################################################
+  # (continua más abajo)
     Cuando visito la portada
          Y selecciono "23 de noviembre de 2004, 11:20" como fecha y hora "Preferida"
          Y selecciono 25 de enero de 2005, 10:30 como fecha y hora de "Alternativa"
@@ -114,6 +114,8 @@ Característica: selecciono en listado/s
   # Ejemplos:
   #   Cuando selecciono "2:20PM" como hora
   #   Cuando selecciono 14:20 como la hora
+  #
+  # (continua más abajo)
     Cuando visito la portada
          Y selecciono 16:23 como hora
          Y pulso el botón "Galleta de la fortuna"
@@ -124,7 +126,33 @@ Característica: selecciono en listado/s
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#hora-preferida con el valor "16:23"
 
+  Escenario: Selecciono una hora concreta a partir de su etiqueta asociada
+  ########################################################################
+  # Patrón:
+  #   Cuando selecciono "hh:mm(AM/PM)?" como la? hora de/l? "_etiqueta_"
+  #
+  # Descripción:
+  #   Selección de una hora en listas de selección generadas con el helper
+  # de Rails time_select asociadas con _etiqueta_
+  #
+  # Ejemplos:
+  #   Cuando selecciono "2:20PM" como hora "Preferida"
+  #   Cuando selecciono 13:20 como la hora del "Cafe"
+  #
+  ########################################################################
+    Cuando visito la portada
+         Y selecciono 16:23 como hora de "Salida"
+         Y selecciono "6:32PM" como hora de "Llegada"
+         Y pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#hora-de-salida con el valor "16:23"
+           Y veo el tag div#hora-de-llegada con el valor "18:32"
 
+    Cuando visito la portada
+         Y selecciono 6:23AM como hora "Salida"
+         Y selecciono "16:32" como hora del "Llegada"
+         Y pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#hora-de-salida con el valor "06:23"
+           Y veo el tag div#hora-de-llegada con el valor "16:32"
 
   Escenario: Selecciono una opciones desde pasos Given
     Dado que visito la portada

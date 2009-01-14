@@ -8,13 +8,17 @@
 <div id="unselected_check"><%= params[:unselected_check] %></div>
 <div id="file_filename"><%= params[:file_field].original_filename rescue nil %></div>
 <div id="orchard_type"><%= params[:orchard_type] %></div>
-<% { 
-     :preferred  => 'preferida',
+<% { :preferred  => 'preferida',
      :alternative => 'alternativa' }.each do |field, name| %>
 <div id="fecha-<%= name %>"><%= params[:welcome]["#{field}(3i)"] + '/' +
                         params[:welcome]["#{field}(2i)"] + '/' +
                         params[:welcome]["#{field}(1i)"] %></div>
 <div id="hora-<%= name %>"><%= params[:welcome]["#{field}(4i)"] + ':' +
+                        params[:welcome]["#{field}(5i)"] %></div>
+<% end %>
+<% { :arrival  => 'llegada',
+     :departure => 'salida' }.each do |field, name| %>
+<div id="hora-de-<%= name %>"><%= params[:welcome]["#{field}(4i)"] + ':' +
                         params[:welcome]["#{field}(5i)"] %></div>
 <% end %>
 
