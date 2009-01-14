@@ -27,12 +27,6 @@ Característica: selecciono en un listado
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
 
-  Escenario: Selecciono una opción de una lista (desde Given) 
-    Dado que visito la portada
-       Y que selecciono 'Hortalizas'
-    Cuando pulso el botón "Galleta de la fortuna"
-    Entonces veo el tag div#orchard_type con el valor "Hortalizas"
-
   Escenario: Selecciono una fecha y hora sin indicar un campo específico
   ########################################################################
   # Patrón:
@@ -99,3 +93,13 @@ Característica: selecciono en un listado
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#preferida con el valor "23/11/2004-11:20"
            Y veo el tag div#alternativa con el valor "25/1/2005-10:30"
+
+  Escenario: Selecciono una opciones desde pasos Given
+    Dado que visito la portada
+       Y que selecciono 25 de enero de 2009, 10:30 como fecha y hora
+       Y que selecciono "23 de noviembre de 2009, 11:20" como fecha y hora "Preferida"
+       Y que selecciono 'Hortalizas'
+    Cuando pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#orchard_type con el valor "Hortalizas"
+           Y veo el tag div#fechayhora con el valor "25/1/2009-10:30"
+           Y veo el tag div#preferida con el valor "23/11/2009-11:20"

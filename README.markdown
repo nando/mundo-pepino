@@ -132,7 +132,7 @@ Es recomendable también vaciar el contenido de la BBDD antes de comenzar la eva
       MiOtroModelo.destroy_all # etc.
     end 
 
-### generate mundo_pepino
+### generate mundo\_pepino
 
     rails_root$ script/generate mundo_pepino
           create  caracteristicas/support
