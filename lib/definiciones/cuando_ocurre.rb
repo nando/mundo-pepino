@@ -80,9 +80,15 @@ Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']?
   select_datetime(time, options)
 end
 
-Cuando /^(?:que )?selecciono ['"]?(.*)["']? como (?:la )?hora(?: (?:del? )?['"]?(.+?)["']?)?$/ do |hora, etiqueta|
+Cuando /^(?:que )?selecciono ['"]?(.*)["']? como (?:la )?hora(?: (?:(?:del?|para) (?:la |el )?)?['"]?(.+?)["']?)?$/ do |hora, etiqueta|
   options = etiqueta ? { :from => etiqueta } : {}
   select_time(hora, options)
+end
+
+Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4})["']? como (?:la )?fecha(?: (?:(?:del?|para) (?:la |el )?)?['"]?(.+?)["']?)?$/ do |dia, mes, anio, etiqueta|
+  time = Time.parse("#{mes.to_month} #{dia}, #{anio} 12:00")
+  options = etiqueta ? { :from => etiqueta } : {}
+  select_date(time, options)
 end
 
 ## Use this step in conjuction with Rail's date_select helper.  For example:

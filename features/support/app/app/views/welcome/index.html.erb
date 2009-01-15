@@ -37,13 +37,14 @@
                  :start_year => 1992, :use_month_names => MundoPepinoAppMeses %></div>
  
   <div>
-    <%= label :welcome, :arrival, 'Llegada' %><br />
-    <%= datetime_select :welcome, :arrival %>
+    <%= label :welcome, :grape_harvest, 'Vendimia' %><br />
+    <%= date_select :welcome, :grape_harvest, :order => [:day, :month, :year],
+                 :start_year => 1992, :use_month_names => MundoPepinoAppMeses %>
   </div>
   <div>
-    <%= label :welcome, :departure, 'Salida' %><br />
-    <%= datetime_select :welcome, :departure %>
+    <%= label :welcome, :pruning, 'Poda' %><br />
+    <%= date_select :welcome, :pruning , :order => [:day, :month, :year],
+                 :start_year => 1992, :use_month_names => MundoPepinoAppMeses %>
   </div>
   <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
 <% end %>
-                   

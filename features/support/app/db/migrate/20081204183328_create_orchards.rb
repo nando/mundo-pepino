@@ -6,6 +6,8 @@ class CreateOrchards < ActiveRecord::Migration
       t.integer :area
       t.string :longitude
       t.string :latitude
+      t.time   :start_watering
+      t.time   :stop_watering
 
       t.integer :fertilizer_id
 

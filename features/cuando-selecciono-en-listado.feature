@@ -126,14 +126,14 @@ Característica: selecciono en listado/s
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#hora-preferida con el valor "16:23"
 
-  Escenario: Selecciono una hora concreta a partir de su etiqueta asociada
+  Escenario: Selecciono una hora para un campo específico
   ########################################################################
   # Patrón:
   #   Cuando selecciono "hh:mm(AM/PM)?" como la? hora de/l? "_etiqueta_"
   #
   # Descripción:
   #   Selección de una hora en listas de selección generadas con el helper
-  # de Rails time_select asociadas con _etiqueta_
+  # de Rails time_select asociadas con la label _etiqueta_ 
   #   
   #   Todas las comillas son opcionales. 
   #
@@ -141,25 +141,76 @@ Característica: selecciono en listado/s
   #   Cuando selecciono "2:20PM" como hora "Preferida"
   #   Cuando selecciono 13:20 como la hora del "Cafe"
   #
+  # (continua más abajo)
+    Cuando visito la pagina de creación de huerto
+         Y selecciono 16:23 como hora de Comienzo de riego
+         Y selecciono "6:32PM" como hora para la Finalización de riego
+         Y pulso el botón "Crear"
+    Entonces veo el tag span#riego-comienzo con el valor "16:23"
+           Y veo el tag span#riego-fin con el valor "18:32"
+
+    Cuando visito la pagina de creación de huerto
+         Y selecciono 6:23AM como hora para el "Comienzo de riego"
+         Y selecciono "16:32" como hora de la "Finalización de riego"
+         Y pulso el botón "Crear"
+    Entonces veo el tag span#riego-comienzo con el valor "6:23"
+           Y veo el tag span#riego-fin con el valor "16:32"
+
+  Escenario: Selecciono una fecha
   ########################################################################
+  # Patrón:
+  #   Cuando selecciono "_dia_ de _mes_ de _año_" como la? fecha
+  #
+  # Descripción:
+  #   Selección de una fecha en listas de selección generadas con el helper
+  # de Rails date_select.
+  #
+  # Ejemplos:
+  #   Cuando selecciono "28 de marzo de 2005" como fecha
+  #   Cuando selecciono 1 de mayo de 1995 como la fecha
+  #
+  # (continua más abajo)
     Cuando visito la portada
-         Y selecciono 16:23 como hora de Salida
-         Y selecciono "6:32PM" como hora de "Llegada"
+         Y selecciono "28 de marzo de 2005" como fecha
          Y pulso el botón "Galleta de la fortuna"
-    Entonces veo el tag div#hora-de-salida con el valor "16:23"
-           Y veo el tag div#hora-de-llegada con el valor "18:32"
+    Entonces veo el tag div#fecha-preferida con el valor "28/3/2005"
 
     Cuando visito la portada
-         Y selecciono 6:23AM como hora "Salida"
-         Y selecciono "16:32" como hora del "Llegada"
+         Y selecciono "2 de agosto de 2008" como la fecha
          Y pulso el botón "Galleta de la fortuna"
-    Entonces veo el tag div#hora-de-salida con el valor "06:23"
-           Y veo el tag div#hora-de-llegada con el valor "16:32"
+    Entonces veo el tag div#fecha-preferida con el valor "2/8/2008"
+
+  Escenario: Selecciono una fecha para un campo específico
+  ########################################################################
+  # Patrón:
+  #   Cuando selecciono "_d_ de _m_ de _a_" como la? fecha de/para? el/la? "_etiqueta_"
+  #
+  # Descripción:
+  #   Selección de una fecha en listas de selección generadas con el helper
+  # de Rails date_select asociadas con la label _etiqueta_
+  #   
+  #   Todas las comillas son opcionales. 
+  #
+  # Ejemplos (equivalentes):
+  #   Cuando selecciono "28 de marzo de 2005" como fecha nacimiento
+  #   Cuando selecciono "28 de marzo de 2005" como fecha "nacimiento"
+  #   Cuando selecciono "28 de marzo de 2005" como fecha de nacimiento
+  #   Cuando selecciono 28 de marzo de 2005 como la fecha del nacimiento
+  #   Cuando selecciono 28 de marzo de 2005 como la fecha para el nacimiento
+  #
+  ########################################################################
+    Cuando visito la portada
+         Y selecciono 1 de octubre de 2009 como fecha para la vendimia
+         Y selecciono 15 de marzo de 2010 como fecha de "poda"
+         Y pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#fecha-de-vendimia con el valor "1/10/2009"
+           Y veo el tag div#fecha-de-poda con el valor "15/3/2010"
 
   Escenario: Selecciono una opciones desde pasos Given
     Dado que visito la portada
        Y que selecciono 25 de enero de 2009, 10:30 como fecha y hora
        Y que selecciono "23 de noviembre de 2009, 11:20" como fecha y hora "Alternativa"
+       Y que selecciono 1 de marzo de 2009 como fecha de la poda
        Y que selecciono 'Hortalizas'
     Cuando pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
@@ -167,3 +218,4 @@ Característica: selecciono en listado/s
            Y veo el tag div#hora-preferida con el valor "10:30"
            Y veo el tag div#fecha-alternativa con el valor "23/11/2009"
            Y veo el tag div#hora-alternativa con el valor "11:20"
+           Y veo el tag div#fecha-de-poda con el valor "1/3/2009"

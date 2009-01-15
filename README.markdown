@@ -319,6 +319,10 @@ Convenciones generales:
      Cuando selecciono 6:45PM como hora
 ##### Selecciono una hora para un campo concreto \*
      Cuando selecciono 2:45PM como hora del "café"
+##### Selecciono fecha sin especificar en que campo \*
+     Cuando selecciono 1 de septiembre de 1998 como fecha
+##### Selecciono fecha para un campo concreto \*
+     Cuando selecciono 2 de marzo de 2009 como fecha para el comienzo de la poda
 [más ejemplos](master/features/cuando-selecciono-en-listado.feature)
 
 #### Borro el enésimo recurso desde la página de su índice (index) \*\*

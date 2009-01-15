@@ -20,6 +20,14 @@
     <%= f.text_field :latitude %>
   </p>
   <p>
+    <%= f.label :start_watering, 'Comienzo de riego' %><br />
+    <%= f.time_select :start_watering %>
+  </p>
+  <p>
+    <%= f.label :stop_watering, 'Finalización de riego' %><br />
+    <%= f.time_select :stop_watering %>
+  </p>
+  <p>
     <%= f.submit "Crear" %>
   </p>
 <% end %>

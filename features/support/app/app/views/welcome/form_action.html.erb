@@ -16,10 +16,11 @@
 <div id="hora-<%= name %>"><%= params[:welcome]["#{field}(4i)"] + ':' +
                         params[:welcome]["#{field}(5i)"] %></div>
 <% end %>
-<% { :arrival  => 'llegada',
-     :departure => 'salida' }.each do |field, name| %>
-<div id="hora-de-<%= name %>"><%= params[:welcome]["#{field}(4i)"] + ':' +
-                        params[:welcome]["#{field}(5i)"] %></div>
+<% { :grape_harvest  => 'vendimia',
+     :pruning => 'poda' }.each do |field, name| %>
+<div id="fecha-de-<%= name %>"><%= params[:welcome]["#{field}(3i)"] + '/' +
+                        params[:welcome]["#{field}(2i)"] + '/' +
+                        params[:welcome]["#{field}(1i)"] %></div>
 <% end %>
 
 <%= link_to 'Volver', :action => 'index' %>
