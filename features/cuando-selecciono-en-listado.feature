@@ -82,15 +82,15 @@ Característica: selecciono en listado/s
   #   Cuando selecciono 23 de mayo de 1997, 11:20 como fecha y hora "Preferida"
   #   Y selecciono "1 de abril de 2004, 10:30" como fecha y hora "Alternativa"
   #   
-  #   Las comillas para la fecha y la hora son opcionales. 
+  #   Todas las comillas son opcionales. 
   #
   # Ejemplo:
-  #   Cuando selecciono 5 de enero de 2008, 10:00 como fecha y hora "Preferida"
-  #   Cuando selecciono 1 de abril de 2008, 10:00 como fecha y hora de "cosechado""
+  #   Cuando selecciono "5 de enero de 2008, 10:00" como fecha y hora "Preferida"
+  #   Cuando selecciono 1 de abril de 2008, 10:00 como fecha y hora de cosechado
   #
   # (continua más abajo)
     Cuando visito la portada
-         Y selecciono "23 de noviembre de 2004, 11:20" como fecha y hora "Preferida"
+         Y selecciono "23 de noviembre de 2004, 11:20" como fecha y hora Preferida
          Y selecciono 25 de enero de 2005, 10:30 como fecha y hora de "Alternativa"
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#fecha-preferida con el valor "23/11/2004"
@@ -134,6 +134,8 @@ Característica: selecciono en listado/s
   # Descripción:
   #   Selección de una hora en listas de selección generadas con el helper
   # de Rails time_select asociadas con _etiqueta_
+  #   
+  #   Todas las comillas son opcionales. 
   #
   # Ejemplos:
   #   Cuando selecciono "2:20PM" como hora "Preferida"
@@ -141,7 +143,7 @@ Característica: selecciono en listado/s
   #
   ########################################################################
     Cuando visito la portada
-         Y selecciono 16:23 como hora de "Salida"
+         Y selecciono 16:23 como hora de Salida
          Y selecciono "6:32PM" como hora de "Llegada"
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#hora-de-salida con el valor "16:23"

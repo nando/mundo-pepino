@@ -71,7 +71,7 @@ Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: en (?:el listado de )?(.+))?$/
   select(valor, :from => campo_to_field(campo))
 end
 
-Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']? como fecha y hora(?: (?:de )?['"](.+)["'])?$/ do |dia, mes, anio, hora, etiqueta|
+Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']? como fecha y hora(?: (?:de )?['"]?(.+?)["']?)?$/ do |dia, mes, anio, hora, etiqueta|
 # Cuando selecciono "25 de diciembre de 2008, 10:00" como fecha y hora
 # Cuando selecciono 23 de noviembre de 2004, 11:20 como fecha y hora "Preferida"
 # Cuando selecciono 23 de noviembre de 2004, 11:20 como fecha y hora de "Publicación"
@@ -80,7 +80,7 @@ Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']?
   select_datetime(time, options)
 end
 
-Cuando /^(?:que )?selecciono ['"]?(.*)["']? como (?:la )?hora(?: (?:del? )?['"](.+)["'])?$/ do |hora, etiqueta|
+Cuando /^(?:que )?selecciono ['"]?(.*)["']? como (?:la )?hora(?: (?:del? )?['"]?(.+?)["']?)?$/ do |hora, etiqueta|
   options = etiqueta ? { :from => etiqueta } : {}
   select_time(hora, options)
 end
