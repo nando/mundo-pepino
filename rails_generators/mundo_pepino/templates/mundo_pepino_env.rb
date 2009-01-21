@@ -20,20 +20,20 @@ MundoPepino::ModelsToClean = [
 
 String.model_mappings = {
   # TRADUCCIÓN DE MODELOS AQUÍ, por ejemplo:
-  # /huert[oa]s?/i            => Orchard,
-  # /bancal(es)?$/i           => Terrace,
-  # /cultivos?$/i             => Crop...
+  # /^huert[oa]s?/i            => Orchard,
+  # /^bancal(es)?$/i           => Terrace,
+  # /^cultivos?$/i             => Crop...
 }
 
 String.field_mappings = {
   # TRADUCCIÓN DE CAMPOS AQUÍ:
-  # /[Ááa]reas?$/i    => 'area',
-  # /color(es)?$/i   => 'color',
-  # /latitud(es)?$/i => 'latitude',
-  # /longitud(es)?/i => 'length'
+  # /^[Ááa]reas?$/i    => 'area',
+  # /^color(es)?$/i   => 'color',
+  # /^latitud(es)?$/i => 'latitude',
+  # /^longitud(es)?/i => 'length'
   #
   # TRADUCCIÓN ESPECÍFICA PARA UN MODELO
-  # /Orchard::longitud(es)?$/   => 'longitude'
+  # /^Orchard::longitud(es)?$/   => 'longitude'
 }
 
 class MiMundo < MundoPepino

@@ -9,25 +9,25 @@ String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
 String.add_mapper :name_field
 String.add_mapper :model_field
 String.add_mapper(:url, 
-  /la (portada|home)/i => '/') { |string| string }
+  /^la (portada|home)/i => '/') { |string| string }
 String.add_mapper(:number, { 
-  /un[oa]?$/i     => 1,
-  /primer[oa]?$/i => 1,
+  /^un[oa]?$/i     => 1,
+  /^primer[oa]?$/i => 1,
   :dos            => 2,
-  /segund[oa]?$/i => 2,
+  /^segund[oa]?$/i => 2,
   :tres         => 3,
-  /tercer[ao]/i => 3,
+  /^tercer[ao]/i => 3,
   :cuatro      => 4,
-  /cuart[ao]/i => 4,
+  /^cuart[ao]/i => 4,
   :cinco       => 5,
-  /quit[ao]/i => 5}) { |string| string.to_i }
+  /^quit[ao]/i => 5}) { |string| string.to_i }
 String.add_mapper(:crud_action,
-  /alta$/i                  => 'new',
-  /creaci[óo]n$/i           => 'new',
-  /nuev(?:o|a|o\/a|a\/o)$/i => 'new',
-  /cambio$/i                => 'edit',
-  /modificaci[oó]n$/i       => 'edit',
-  /edici[oó]n$/i            => 'edit')
+  /^alta$/i                  => 'new',
+  /^creaci[óo]n$/i           => 'new',
+  /^nuev(?:o|a|o\/a|a\/o)$/i => 'new',
+  /^cambio$/i                => 'edit',
+  /^modificaci[oó]n$/i       => 'edit',
+  /^edici[oó]n$/i            => 'edit')
 String.add_mapper(:month,
   :enero           => 'January',
   :febrero         => 'February',
@@ -37,7 +37,7 @@ String.add_mapper(:month,
   :junio           => 'June',
   :julio           => 'July',
   :agosto          => 'August',
-  /sep?tiembre$/i  => 'September',
+  /^sep?tiembre$/i  => 'September',
   :octubre         => 'October',
   :noviembre       => 'November',
   :diciembre       => 'December')

@@ -7,11 +7,11 @@ module Rails::Generator::Commands
                    '(TODO: quitar la coma final si es el primer modelo)\n"'
 
   MODEL_MAPPING = '"\n  # MAPEO DE MODELO AUTO-GENERADO (#{model})\n' +
-                  '  /#{regexp}$/i => #{model},' + 
+                  '  /^#{regexp}$/i => #{model},' + 
                   ' # (TODO: validar RegExp para forma plural y coma final)\n"'
 
   FIELD_MAPPING = '"\n  # MAPEO DE CAMPO AUTO-GENERADO (#{field})\n' +
-                  '  /#{regexp}$/i => :#{field},' + 
+                  '  /^#{regexp}$/i => :#{field},' + 
                   ' # (TODO: validar RegExp para forma plural y coma final)\n"'
 
   class Create < Base
@@ -22,12 +22,12 @@ module Rails::Generator::Commands
 
     def mp_model_mapping(model, regexp)
       add_to_mundo_pepino_env 'String.model_mappings = {', eval(MODEL_MAPPING)
-      logger.model_mapping " added /#{regexp}$/i => #{model}"
+      logger.model_mapping " added /^#{regexp}$/i => #{model}"
     end
 
     def mp_field_mapping(field, regexp)
       add_to_mundo_pepino_env 'String.field_mappings = {', eval(FIELD_MAPPING)
-      logger.field_mapping " added /#{regexp}$/i => :#{field}"
+      logger.field_mapping " added /^#{regexp}$/i => :#{field}"
     end
 
     private
@@ -48,12 +48,12 @@ module Rails::Generator::Commands
 
     def mp_model_mapping(model, regexp)
       remove_from_mundo_pepino_env eval(MODEL_MAPPING)
-      logger.model_mapping " removing /#{regexp}$/i => #{model}"
+      logger.model_mapping " removing /^#{regexp}$/i => #{model}"
     end
 
     def mp_field_mapping(field, regexp)
       remove_from_mundo_pepino_env eval(FIELD_MAPPING)
-      logger.model_mapping " removing /#{regexp}$/i => #{field}"
+      logger.model_mapping " removing /^#{regexp}$/i => #{field}"
     end
 
     private
