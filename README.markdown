@@ -354,6 +354,14 @@ Convenciones generales:
       |  A-02  |    12    | Tomates |     18 |
 [más ejemplos](master/features/veo-una-tabla-con-determinado-contenido.feature)
 
+#### Veo un formulario con determinados campos convenientemente etiquetados \*
+    Entonces veo un formulario con los siguientes campos:
+      | Etiqueta   | Tipo      |
+      | Login      | textfield |
+      | Contraseña | password  |
+      | Entrar     | submit    |
+[más ejemplos](master/features/veo-un-formulario-con-los-siguientes-campos.feature)
+
 
 #### Tenemos en BBDD uno o más registros de un modelo opcionalmente con un nombre concreto
     Entonces tenemos en la base de datos un Abono llamado "FSF-03"

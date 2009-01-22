@@ -34,6 +34,21 @@ Entonces /^(#{veo_o_no}) una tabla con (?:el|los) (?:siguientes? )?(?:valore?s?|
   Webrat.configuration.parse_with_nokogiri = true # ufff!
 end
 
+Entonces /^(#{veo_o_no}) un formulario con (?:el|los) (?:siguientes? )?(?:campos?|elementos?):$/ do |should, elementos|
+  shouldified = shouldify(should)
+  response.send(shouldified, have_tag('form')) do
+    elementos.raw[1..-1].each do |row|
+      label, tag = row
+      case tag
+       when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
+       when "password"  then with_tag "input[type='password']"; with_tag("label", label)
+       when "submit"    then with_tag "input[type='submit'][value='#{label}']"
+       else with_tag tag, label
+      end
+    end
+  end
+end
+
 #BBDD
 en_bbdd_tenemos = '(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos))'
 tiene_en_bbdd = '(?:tiene en (?:la )?bbdd|en (?:la )?bbdd tiene|tiene en (?:la )?base de datos|en (?:la )?base de datos tiene)'

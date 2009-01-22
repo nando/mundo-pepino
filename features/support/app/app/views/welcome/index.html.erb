@@ -4,7 +4,18 @@
 
 <%= link_to 'Registro', :action => 'signup' %>
 <% form_tag( :action => :form_action ) do %>
-  <div><%= text_field_tag :text_field %></div>
+  <div>
+    <%= label_tag :login, "Nombre de usuario" %>
+    <%= text_field_tag :login %>
+  </div>
+  <div>
+    <%= label_tag :password, "Contraseña" %>
+    <%= password_field_tag :password %>
+  </div>
+  <div>
+    <%= label_tag :text_field, "Campo de texto" %>
+    <%= text_field_tag :text_field %>
+  </div>
   <div><%= text_area_tag :textarea %></div>
   <div>
     <%= radio_button_tag :nationality, "Española" %>
