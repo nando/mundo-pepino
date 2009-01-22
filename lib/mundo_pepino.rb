@@ -8,8 +8,10 @@ String.add_mapper :model
 String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
 String.add_mapper :name_field
 String.add_mapper :model_field
-String.add_mapper(:url, 
-  /^la (portada|home)/i => '/') { |string| string }
+String.add_mapper(:url, /^la (portada|home)/i => '/') do |string| 
+  string if string =~ /^\/.*$|^https?:\/\//i
+end
+
 String.add_mapper(:number, { 
   /^un[oa]?$/i     => 1,
   /^primer[oa]?$/i => 1,

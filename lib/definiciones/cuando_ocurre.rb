@@ -3,20 +3,21 @@ module Cucumber::StepMethods
 end
 
 pagina_re = '(?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n)'
-Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w\/]+)$/i do |modelo|
-  if model = modelo.to_unquoted.to_model
+Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w\/]+)$/i do |modelo_en_crudo|
+  modelo = modelo_en_crudo.to_unquoted
+  if model = modelo.to_model
     pile_up model.new
     visit eval("#{model.table_name}_path")
-  elsif url = "la página de #{modelo.to_unquoted}".to_url
+  elsif url = "la página de #{modelo}".to_url
     visit url
   else
-    raise(ModelNotMapped.new(modelo))
+    raise MundoPepino::ModelNotMapped.new(modelo)
   end
 end
 
 Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, modelo|
-  model = modelo.to_unquoted.to_model or raise(ModelNotMapped.new(modelo))
-  action = accion.to_crud_action or raise(CrudActionNotMapped.new(accion))
+  model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
+  action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
   pile_up model.new
   visit eval("#{action}_#{model.name.downcase}_path")
 end
