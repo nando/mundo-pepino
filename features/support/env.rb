@@ -12,6 +12,10 @@ require 'webrat/rspec-rails'
 
 require 'mundo_pepino'
 
+Webrat.configure do |config|
+  config.mode = :rails
+end
+
 MundoPepino::ModelsToClean = [
   Orchard,
   Terrace,

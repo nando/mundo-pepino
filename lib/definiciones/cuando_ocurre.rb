@@ -2,10 +2,16 @@ module Cucumber::StepMethods
   alias_method :Cuando, :When
 end
 
-Cuando /^(?:que )?visito (?:el|la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de ([\w\/]+)$/i do |modelo|
-  model = modelo.to_unquoted.to_model or raise(ModelNotMapped.new(modelo))
-  pile_up model.new
-  visit eval("#{model.table_name}_path")
+pagina_re = '(?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n)'
+Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w\/]+)$/i do |modelo|
+  if model = modelo.to_unquoted.to_model
+    pile_up model.new
+    visit eval("#{model.table_name}_path")
+  elsif url = "la página de #{modelo.to_unquoted}".to_url
+    visit url
+  else
+    raise(ModelNotMapped.new(modelo))
+  end
 end
 
 Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, modelo|
