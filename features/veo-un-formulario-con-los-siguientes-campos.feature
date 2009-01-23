@@ -27,10 +27,15 @@ Característica: Veo un formulario con determinados campos
   # es el orden de las columnas). 
   #
   # Ejemplos:
-  #   Para un erb con un formulario en el que tenemos:
+  #   Tanto para un formulario en el cual definimos:
   #
   #     <%= label_tag :password, "Contraseña" %>
   #     <%= password_field_tag :password %>
+  #   
+  #   como para un formulario generado con <% form_for instance do |f| %>
+  #
+  #     <%= f.label :password, "Contraseña" %>
+  #     <%= f.password_field :password %>
   #
   #   Podríamos especificar:
   #     Entonces veo un formulario con el campo:
