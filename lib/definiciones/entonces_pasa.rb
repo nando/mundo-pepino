@@ -21,17 +21,15 @@ Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |shou
 end
 
 Entonces /^(#{veo_o_no}) una tabla con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, valores|
-  Webrat.configuration.parse_with_nokogiri = false # nokogiri have_selector fails on linux???
   shouldified = shouldify(should)
   valores.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.send(shouldified, 
-          have_selector("table > tr:nth-child(#{i+2}) > td:nth-child(#{j+1})")) do |td|
-        td.inner_text.send(shouldified, be(cell))
-      end  
+      response.send shouldified, 
+        have_selector("table > tr:nth-child(#{i+2}) > td:nth-child(#{j+1})") { |td|
+          td.inner_text.should == cell
+        }
     end
   end
-  Webrat.configuration.parse_with_nokogiri = true # ufff!
 end
 
 Entonces /^(#{veo_o_no}) un formulario con (?:el|los) (?:siguientes? )?(?:campos?|elementos?):$/ do |should, elementos|
