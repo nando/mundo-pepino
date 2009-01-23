@@ -38,12 +38,19 @@ Entonces /^(#{veo_o_no}) un formulario con (?:el|los) (?:siguientes? )?(?:campos
   shouldified = shouldify(should)
   response.send(shouldified, have_tag('form')) do
     elementos.raw[1..-1].each do |row|
-      label, tag = row
-      case tag
-       when "textfield" then with_tag "input[type='text']";     with_tag("label", label)
-       when "password"  then with_tag "input[type='password']"; with_tag("label", label)
-       when "submit"    then with_tag "input[type='submit'][value='#{label}']"
-       else with_tag tag, label
+      label, type = row
+      case type
+        when "submit":
+          with_tag "input[type='submit'][value='#{label}']"
+        when "radio":
+          with_tag('div') do
+            with_tag "label", label
+            with_tag "input[type='radio']"
+          end  
+        when "select", "textarea":
+          field_labeled(label).element.name.should == type
+        else  
+          field_labeled(label).element.attributes['type'].should == type
       end
     end
   end

@@ -16,12 +16,16 @@
     <%= label_tag :text_field, "Campo de texto" %>
     <%= text_field_tag :text_field %>
   </div>
-  <div><%= text_area_tag :textarea %></div>
+  <div>
+    <%= label_tag :textarea, "Biografía" %>
+    <%= text_area_tag :textarea %>
+  </div>
   <div>
     <%= radio_button_tag :nationality, "Española" %>
     <%= radio_button_tag :nationality, "Pakistaní" %>
   </div>
   <div>
+    <%= label_tag :color, "Color" %>
     <%= radio_button_tag :color, "verde" %>
     <%= radio_button_tag :color, "rojo" %>
     <%= radio_button_tag :color, "gris" %>
@@ -36,7 +40,10 @@
      <%= label_tag :orchard_type, "Tipo de cultivo" %>
      <%= select_tag "orchard_type", options_for_select(['Mixto', 'Hortalizas', 'Frutales']) %>
   </div>
-  <div><%= file_field_tag :file_field %></div>
+  <div>
+    <%= label_tag :file_field, "Avatar" %>
+    <%= file_field_tag :file_field %>
+  </div>
   <div>
     <%= label :welcome, :preferred, 'Preferida' %><br />
     <%= datetime_select :welcome, :preferred, :order => [:day, :month, :year],
