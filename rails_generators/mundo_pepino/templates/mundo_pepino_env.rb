@@ -12,6 +12,10 @@ require 'webrat/rspec-rails'
 
 require 'mundo_pepino'
 
+Webrat.configure do |config|
+  config.mode = :rails
+end
+
 MundoPepino::ModelsToClean = [
   # MODELOS PARA LIMPIAR antes de cada escenario,
   # por ejemplo:
