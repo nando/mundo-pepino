@@ -33,14 +33,6 @@ En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold*
     $EDITOR app/views/orchards/new.html.erb # "Crear" por "Create"
     rake caracteristicas
 
-En este punto uno de los escenarios todavía fallará debido a que nuestra aplicación todavía no tiene //layout//. Para solucionarlo creamos uno básico en ''app/views/layouts/application.html.erb'':
-
-   <html>
-   <body>
-   <%=  yield %>
-   </body>
-   </html>
-
 Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes.
 
 La intención del generador de características es más didáctica que pragmática. Ofrece un ejemplo simple que podemos toquetear para probar el plugin. Por otro lado se limita a hacer exactamente lo mismo que hace `generate feature` exceptuando el hecho de que no genera un fichero de **definiciones específicas** para la nueva *caracteristica* (ya que las utilizadas están comprendidas dentro de las **definiciones genéricas** ya implementadas en MundoPepino).
