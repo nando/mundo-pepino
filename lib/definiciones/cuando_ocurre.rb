@@ -1,7 +1,3 @@
-module Cucumber::StepMethods
-  alias_method :Cuando, :When
-end
-
 pagina_re = '(?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n)'
 Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w\/]+)$/i do |modelo_en_crudo|
   modelo = modelo_en_crudo.to_unquoted

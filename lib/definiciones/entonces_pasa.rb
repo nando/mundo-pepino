@@ -1,7 +1,3 @@
-module Cucumber::StepMethods
-  alias_method :Entonces, :Then
-end
-
 veo_o_no = '(?:no )?(?:veo|debo ver|debería ver)'
 
 Entonces /^(#{veo_o_no}) el texto (.+)?$/i do |should, text|

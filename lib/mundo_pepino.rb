@@ -1,5 +1,14 @@
 require 'cucumber/rails/world'
 require 'string-mapper'
+begin
+  module Cucumber::StepMethods
+    alias_method :Dado, :Given
+    alias_method :Cuando, :When
+    alias_method :Entonces, :Then
+  end
+rescue
+  # NO NEED TO CREATE ALIASES IN pre-0.2
+end
 require 'definiciones/dado_contexto'
 require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'

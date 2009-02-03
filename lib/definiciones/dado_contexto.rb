@@ -1,7 +1,3 @@
-module Cucumber::StepMethods
-  alias_method :Dado, :Given
-end
-
 numero = 'un|una|dos|tres|cuatro|cinco|\d+'
 cuyo = '(?:cuy[oa]s?|que tienen? como)'
 # Creación simple con nombre opcional
