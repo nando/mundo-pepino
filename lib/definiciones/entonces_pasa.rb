@@ -5,11 +5,13 @@ Entonces /^(#{veo_o_no}) el texto (.+)?$/i do |should, text|
 end
 
 Entonces /^(#{veo_o_no}) (?:en )?(?:la etiqueta|el tag) ([^ ]+)(?:(?: con)? el valor )?["']?([^"']+)?["']?$/ do |should, tag, value |
-  if value
-    response.body.send(shouldify(should), have_tag(tag, value))
-  else
-    response.body.send(shouldify(should), have_tag(tag))
-  end
+  lambda {
+    if value
+      response.should have_tag(tag, value)
+    else
+      response.should have_tag(tag)
+    end
+  }.send(not_shouldify(should), raise_error)  
 end
 
 Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
