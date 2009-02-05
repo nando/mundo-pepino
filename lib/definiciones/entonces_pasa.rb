@@ -7,9 +7,9 @@ end
 Entonces /^(#{veo_o_no}) (?:en )?(?:la etiqueta|el tag) ([^ ]+)(?:(?: con)? el valor )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
     if value
-      response.should have_tag(tag, value)
+      response.should have_tag(tag.to_unquoted, /.*#{value}.*/)
     else
-      response.should have_tag(tag)
+      response.should have_tag(tag.to_unquoted)
     end
   }.send(not_shouldify(should), raise_error)  
 end
