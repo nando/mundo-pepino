@@ -382,4 +382,26 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
   
+  def find_field_and_do_with_webrat(action, campo, options = nil)
+    do_with_webrat action, campo.to_unquoted, options # a pelo (vía localización por labels)
+  rescue Webrat::NotFoundError
+    field = campo_to_field(campo, last_mentioned_model)
+    begin 
+      do_with_webrat action, field, options # campo traducido tal cual...
+    rescue Webrat::NotFoundError
+      if singular = last_mentioned_singular # traducido y con el modelo por delante
+        do_with_webrat action, singular + '_' + field.to_s, options # p.e.: user_name
+      else
+        raise
+      end
+    end
+  end
+
+  def do_with_webrat(action, field, options)
+    if options
+      self.send action, field, options
+    else
+      self.send action, field
+    end
+  end
 end

@@ -42,16 +42,7 @@ Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efe
 end
 
 Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
-  field = campo_to_field(campo, last_mentioned_model)
-  begin
-    fill_in field, :with => valor
-  rescue
-    if singular = last_mentioned_singular
-      fill_in singular + '_' + field.to_s, :with => valor
-    else
-      raise
-    end
-  end
+  find_field_and_do_with_webrat :fill_in, campo, :with => valor
 end
 
 Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|
@@ -59,19 +50,23 @@ Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|
 end
 
 Cuando /^(?:que )?marco (?:la|el)? ?(.+)$/i do |campo|
-  check(campo_to_field(campo))
+  find_field_and_do_with_webrat :check, campo
 end
 
 Cuando /^(?:que )?desmarco (?:la|el)? ?(.+)$/i do |campo|
-  uncheck(campo_to_field(campo))
+  find_field_and_do_with_webrat :uncheck, campo
 end
 
 Cuando /^(?:que )?adjunto el fichero ['"](.*)["'] (?:a|en) (.*)$/ do |ruta, campo|
-  attach_file(campo_to_field(campo), ruta.to_local_path)
+  find_field_and_do_with_webrat :attach_file, campo, ruta.to_local_path
 end
 
 Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
-  select(valor, :from => campo_to_field(campo))
+  begin
+    select(valor, :from => campo)  # Vía label
+  rescue Webrat::NotFoundError
+    select(valor, :from => campo_to_field(campo)) # Sin label
+  end
 end
 
 Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4}), (\d\d?:\d\d)["']? como fecha y hora(?: (?:de )?['"]?(.+?)["']?)?$/ do |dia, mes, anio, hora, etiqueta|
