@@ -29,6 +29,7 @@ Característica: etiqueta/selector con valor
   ########################################################################
     Cuando visito la portada
     Entonces debo ver la etiqueta H1
+    Entonces debo ver la etiqueta "H1"
     Entonces no debo ver la etiqueta HR
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
     Entonces no debo ver la etiqueta H1 con el valor "PORTADA DE MUNDO PEPINO"
