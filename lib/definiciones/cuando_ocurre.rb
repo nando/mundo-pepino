@@ -58,7 +58,8 @@ Cuando /^(?:que )?desmarco (?:la|el)? ?(.+)$/i do |campo|
 end
 
 Cuando /^(?:que )?adjunto el fichero ['"](.*)["'] (?:a|en) (.*)$/ do |ruta, campo|
-  find_field_and_do_with_webrat :attach_file, campo, ruta.to_local_path
+  find_field_and_do_with_webrat :attach_file, campo, 
+    {:path => ruta, :content_type => ruta.to_content_type}
 end
 
 Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|

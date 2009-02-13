@@ -52,7 +52,10 @@ String.add_mapper(:month,
   :octubre         => 'October',
   :noviembre       => 'November',
   :diciembre       => 'December')
-String.add_mapper(:local_path) { |string| string }
+String.add_mapper(:content_type,
+  /\.png$/   => 'image/png',
+  /\.jpe?g$/ => 'image/jpg',
+  /\.gif$/   => 'image/gif')
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 
@@ -383,7 +386,7 @@ class MundoPepino < Cucumber::Rails::World
   end
   
   def find_field_and_do_with_webrat(action, campo, options = nil)
-    do_with_webrat action, campo.to_unquoted, options # a pelo (vía localización por labels)
+    do_with_webrat action, campo.to_unquoted, options # a pelo (localización vía labels)
   rescue Webrat::NotFoundError
     field = campo_to_field(campo, last_mentioned_model)
     begin 
@@ -399,7 +402,11 @@ class MundoPepino < Cucumber::Rails::World
 
   def do_with_webrat(action, field, options)
     if options
-      self.send action, field, options
+      if options[:path] and options[:content_type]
+        self.send action, field, options[:path], options[:content_type]
+      else
+        self.send action, field, options
+      end
     else
       self.send action, field
     end
