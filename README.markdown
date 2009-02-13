@@ -74,7 +74,7 @@ Para ello por un lado tenemos que instalar el plugin:
     script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
     script/generate fixture_replacement
 
-...y por otro, al final de nuestro `env.rb` tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más abajo, en *Uso*, más sobre esto):
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
 
     class MiMundo < MundoPepino
       include FixtureReplacement
@@ -115,7 +115,7 @@ Y posteriormente en las vistas llamamos al helper con algo parecido a:
 
 ## Uso
 
-Al final de nuestro `env.rb` incorporamos lo siguiente:
+Al final de `features/support/env.rb` incorporamos lo siguiente:
 
     require 'mundo_pepino'
     String.model_mappings = {} # Mapeo castellano-inglés de modelos
