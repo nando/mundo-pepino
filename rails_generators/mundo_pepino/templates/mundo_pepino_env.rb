@@ -41,8 +41,9 @@ String.field_mappings = {
 }
 
 class MiMundo < MundoPepino
-  # Helpers específicos de nuestras features
-  # include FixtureReplacement
+  # Helpers específicos de nuestras features, por ejemplo:
+  # include FixtureReplacement # probado!
+  # include Machinist # probado!
 end
 
 Before do

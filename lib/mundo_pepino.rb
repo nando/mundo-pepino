@@ -139,6 +139,8 @@ class MundoPepino < Cucumber::Rails::World
         end
       end
       self.send "create_#{model.name.downcase}", attribs_for_fr
+    elsif defined?(Machinist)
+      model.make attributes
     else
       model.create! attributes
     end
