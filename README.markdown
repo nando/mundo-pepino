@@ -355,6 +355,9 @@ Convenciones generales:
 #### Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto
     Entonces no debo ver la etiqueta div#title con el valor "Surco"
 [más ejemplos](master/features/veo-etiqueta-con-valor.feature)
+#### Veo (o no) un enlace a una URL específica (opcionalmente indicada con un nombre coloquial)
+    Entonces debo ver un enlace a la página de recuperación de contraseña
+[más ejemplos](master/features/veo-enlace-a-url-especifica)
 #### Veo marcada (o desmarcada) una casilla (*checkbox*) \*
     Entonces veo marcado "Acepto las condiciones del servicio"
 [más ejemplos](master/features/veo-el-checkbox.feature)

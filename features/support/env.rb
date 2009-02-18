@@ -55,6 +55,9 @@ String.field_mappings = {
   /^Orchard::longitud(es)?$/   => :longitude
 }
 
+String.url_mappings.merge!(
+  /^la página de registro/i    => '/welcome/signup'
+)
 
 class MiMundo < MundoPepino
   include FixtureReplacement
