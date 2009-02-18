@@ -115,7 +115,17 @@ Y posteriormente en las vistas llamamos al helper con algo parecido a:
 
 ## Uso
 
-Al final de `features/support/env.rb` incorporamos lo siguiente:
+Para utilizar MundoPepino en una aplicación en la que todavía no estamos utilizando Cucumber lo más cómodo es comenzar utilizando los generadores (de forma similar a como se describe más arriba en *Toma de contacto*). Algo como:
+
+    cd miapp-sin-cucumber
+    script/plugin install git://github.com/nando/string-mapper.git
+    script/plugin install git://github.com/nando/mundo-pepino.git
+    script/generate mundo_pepino
+    script/generate caracteristica Model Modelo name:string:nombre used:boolean:usado
+
+Aquí ya deberíamos poder lanzar `rake caracteristicas`, obteniendo eso sí los errores pertinentes relacionados con implementación concreta de nuestro controlador. El fichero `gestion_de_modelo.feature` (que podemos renombrar por algo más chulo) nos servirá de patrón para escribir nuestra /característica/.
+
+Para utilizar MundoPepino en una aplicación en la que ya estamos utilizando Cucumber, al final de `features/support/env.rb` (o equivalente) incorporamos lo siguiente:
 
     require 'mundo_pepino'
     String.model_mappings = {} # Mapeo castellano-inglés de modelos
@@ -130,7 +140,9 @@ Es recomendable también vaciar el contenido de la BBDD antes de comenzar la eva
     Before do
       MiModelo.destroy_all
       MiOtroModelo.destroy_all # etc.
-    end 
+    end
+
+*Before* se ejecutará antes de cada escenario y que los //Antecetentes// ((Background)[http://wiki.github.com/aslakhellesoy/cucumber/background]) de los mismos si los hubiese.
 
 ### generate mundo\_pepino
 

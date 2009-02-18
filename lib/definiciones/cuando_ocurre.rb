@@ -1,10 +1,10 @@
 pagina_re = '(?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n)'
-Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w\/]+)$/i do |modelo_en_crudo|
+Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w]+|['"][\w ]+["'])$/i do |modelo_en_crudo|
   modelo = modelo_en_crudo.to_unquoted
   if model = modelo.to_model
     pile_up model.new
     visit eval("#{model.table_name}_path")
-  elsif url = "la página de #{modelo}".to_url
+  elsif url = "la página de #{modelo_en_crudo}".to_url
     visit url
   else
     raise MundoPepino::ModelNotMapped.new(modelo)
