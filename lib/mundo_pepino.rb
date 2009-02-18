@@ -55,7 +55,7 @@ String.add_mapper(:month,
 String.add_mapper(:content_type,
   /\.png$/   => 'image/png',
   /\.jpe?g$/ => 'image/jpg',
-  /\.gif$/   => 'image/gif')
+  /\.gif$/   => 'image/gif') { |str| 'text/plain' }
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 
