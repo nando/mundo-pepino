@@ -14,7 +14,7 @@ Entonces /^(#{veo_o_no}) (?:en )?(?:la etiqueta|el tag) ([^ ]+)(?:(?: con)? el v
   }.send(not_shouldify(should), raise_error)  
 end
 
-Entonces /^(#{veo_o_no}) un enlace a (.+)?$/i do |should, pagina|
+Entonces /^(#{veo_o_no}) un enlace (?:a|para) (.+)?$/i do |should, pagina|
   lambda {
     response.should have_tag('a[href=?]', pagina.to_unquoted.to_url)
   }.send(not_shouldify(should), raise_error)

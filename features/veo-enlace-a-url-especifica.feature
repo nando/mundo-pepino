@@ -6,6 +6,7 @@ Característica: veo enlace a URL específica
   #   Entonces no? debería ver un enlace a _pagina_
   #   Entonces no? debo ver un enlace a _pagina_
   #   Entonces no? veo un enlace a _pagina_
+  #   Entonces no? veo un enlace para _pagina_
   #
   # Descripción:
   #   Comprueba la presencia de un enlace a URL referida comprobando 
@@ -17,6 +18,10 @@ Característica: veo enlace a URL específica
   # comienza por / o https?://. En caso contrario devuelve nulo.
   #
   # Ejemplos:
+  #
+  #     Entonces veo un enlace para finalizar mi sesión
+  # 
+  #   Otro:
   #
   #     Entonces veo un enlace a /
   #
@@ -36,6 +41,7 @@ Característica: veo enlace a URL específica
     Cuando visito /
     Entonces veo un enlace a la página de registro
            Y debo ver un enlace a la página de registro
+           Y debo ver un enlace para la página de registro
            Y debo ver un enlace a /welcome/signup
            Y debería ver un enlace a la página de registro
            Y no debería ver un enlace a /welcome/goodbye
