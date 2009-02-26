@@ -16,7 +16,8 @@ end
 
 Entonces /^(#{veo_o_no}) un enlace (?:a|para) (.+)?$/i do |should, pagina|
   lambda {
-    response.should have_tag('a[href=?]', pagina.to_unquoted.to_url)
+    href = relative_page(pagina) || pagina.to_unquoted.to_url 
+    response.should have_tag('a[href=?]', href)
   }.send(not_shouldify(should), raise_error)
 end
 

@@ -62,3 +62,4 @@
   </div>
   <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
 <% end %>
+<%= link_to 'Paginación', :page => ( params[:page] ? (params[:page].to_i % 2) + 1 : 2 ) %>

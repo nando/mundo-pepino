@@ -3,9 +3,9 @@ Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w]+|['"][\w ]+["'])$/i do 
   modelo = modelo_en_crudo.to_unquoted
   if model = modelo.to_model
     pile_up model.new
-    visit eval("#{model.table_name}_path")
+    do_visit eval("#{model.table_name}_path")
   elsif url = "la página de #{modelo_en_crudo}".to_url
-    visit url
+    do_visit url
   else
     raise MundoPepino::ModelNotMapped.new(modelo)
   end
@@ -15,16 +15,16 @@ Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, 
   model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
   action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
   pile_up model.new
-  visit eval("#{action}_#{model.name.downcase}_path")
+  do_visit eval("#{action}_#{model.name.downcase}_path")
 end
 
 Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do 
-  visit last_mentioned_url
+  do_visit last_mentioned_url
 end
 
 negative_lookahead = '(?:la|el) \w+ de |su p[aá]gina|su portada'
 Cuando /^(?:que )?visito (?!#{negative_lookahead})(.+)$/i do |pagina|
-  visit pagina.to_unquoted.to_url
+  do_visit pagina.to_unquoted.to_url
 end
 
 Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|
@@ -92,7 +92,7 @@ end
                                  
 Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ do |modelo, posicion|
   pile_up modelo.to_unquoted.to_model.new
-  visit last_mentioned_url
+  do_visit last_mentioned_url
   within("table > tr:nth-child(#{posicion.to_number+1})") do
     click_link "Borrar"
   end

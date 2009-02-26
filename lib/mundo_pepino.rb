@@ -200,6 +200,12 @@ class MundoPepino < Cucumber::Rails::World
       NotFoundInDatabase.new(model, name)
     end
   end
+
+  def do_visit(url)
+    @visits ||= []
+    @visits << url
+    visit url
+  end
   
   def pile_up(mentioned)
     @resources ||= []
@@ -273,6 +279,24 @@ class MundoPepino < Cucumber::Rails::World
       resource || raise(ResourceNotFound.new("model:#{model.name}, name:#{with_name||'nil'}"))
     else
       raise ModelNotMapped.new(modelo)
+    end
+  end
+
+  def last_visited
+    @visits.last
+  end
+
+  def relative_page(pagina)
+    if pagina =~ /la siguiente p[aá]gina|la p[aá]gina anterior/i
+      head, current, tail = if last_visited =~ /(.+page=)(\d+)(.*)/
+        [$1, $2.to_i, $3]
+      else
+        [last_visited + '?page=', 1, '']
+      end
+      (pagina =~ /siguiente/ ? current += 1 : current -= 1)
+      head + current.to_s + tail
+    else
+      nil
     end
   end
 
