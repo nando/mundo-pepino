@@ -141,6 +141,8 @@ class MundoPepino < Cucumber::Rails::World
       self.send "create_#{model.name.downcase}", attribs_for_fr
     elsif defined?(Machinist)
       model.make attributes
+    elsif defined?(Factory)
+      Factory(model.to_s.downcase.to_sym, attributes)
     else
       model.create! attributes
     end

@@ -40,6 +40,11 @@ String.field_mappings = {
   # /^Orchard::longitud(es)?$/   => 'longitude'
 }
 
+# Si utilizas factory_girl # probado!
+#require 'factory_girl'
+# Definición de las factorias equivalente a example_data.rb en fixture_replacement
+#require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
+
 class MiMundo < MundoPepino
   # Helpers específicos de nuestras features, por ejemplo:
   # include FixtureReplacement # probado!

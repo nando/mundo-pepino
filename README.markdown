@@ -84,6 +84,30 @@ Para ello por un lado tenemos que instalar el plugin:
       MiMundo.new
     end 
 
+#### [FactoryGirl](http://github.com/thoughtbot/factory_girl/)
+
+Otra opción es utilizar FactoryGirl
+
+Para ello por un lado tenemos que instalar la gema:
+
+    gem install thoughtbot-factory_girl --source http://gems.github.com
+
+Nota: Para más información consultar http://github.com/thoughtbot/factory_girl/
+
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que incluir factory_girl en nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
+
+    require 'factory_girl'
+    require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
+
+    class MiMundo < MundoPepino
+    end
+    
+    World do
+      MiMundo.new
+    end
+
+También se debe incluir un fichero donde se definan las factories a utilizar en nuestro mundo-pepino, como ejemplo consultar el fichero de factories que se encuentra en el directorio ''features/support/app/db/factories''
+
 #### [ruby-locale](http://ruby-locale.sourceforge.net/)
 
   Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby esto es sinonimo del nombre del mes en inglés.

@@ -59,8 +59,13 @@ String.url_mappings.merge!(
   /^la página de registro/i    => '/welcome/signup'
 )
 
+# Si utilizas factory_girl # probado!
+#require 'factory_girl'
+# Definición de las factorias equivalente a example_data.rb en fixture_replacement
+#require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
+
 class MiMundo < MundoPepino
-  include FixtureReplacement
+  #include FixtureReplacement
   # Helpers específicos de nuestras features
 end
 
