@@ -31,7 +31,7 @@ String.add_mapper(:number, {
   :cuatro      => 4,
   /^cuart[ao]/i => 4,
   :cinco       => 5,
-  /^quit[ao]/i => 5}) { |string| string.to_i }
+  /^quint[ao]/i => 5}) { |string| string.to_i }
 String.add_mapper(:crud_action,
   /^alta$/i                  => 'new',
   /^creaci[óo]n$/i           => 'new',
