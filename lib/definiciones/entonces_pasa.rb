@@ -54,7 +54,7 @@ Entonces /^(#{veo_o_no}) un formulario con (?:el|los) (?:siguientes? )?(?:campos
         when "select", "textarea":
           field_labeled(label).element.name.should == type
         else  
-          field_labeled(label).element.attributes['type'].should == type
+          field_labeled(label).element.attributes['type'].to_s.should == type
       end
     end
   end
