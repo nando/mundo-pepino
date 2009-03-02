@@ -88,23 +88,14 @@ Para ello por un lado tenemos que instalar el plugin:
 
 Otra opción es utilizar FactoryGirl
 
-Para ello por un lado tenemos que instalar la gema:
+Para ello por un lado tenemos que instalar la gema (para más información sobre FactoryGirl consultar (aquí)[http://github.com/thoughtbot/factory_girl/]):
 
     gem install thoughtbot-factory_girl --source http://gems.github.com
 
-Nota: Para más información consultar http://github.com/thoughtbot/factory_girl/
-
-...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que incluir factory_girl en nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que requerir la librería seguida de la definición de nuestras factorias:
 
     require 'factory_girl'
     require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
-
-    class MiMundo < MundoPepino
-    end
-    
-    World do
-      MiMundo.new
-    end
 
 También se debe incluir un fichero donde se definan las factories a utilizar en nuestro mundo-pepino, como ejemplo consultar el fichero de factories que se encuentra en el directorio ''features/support/app/db/factories''
 
