@@ -65,7 +65,7 @@ String.url_mappings.merge!(
 #require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
 
 class MiMundo < MundoPepino
-  #include FixtureReplacement
+  include FixtureReplacement
   # Helpers específicos de nuestras features
 end
 
