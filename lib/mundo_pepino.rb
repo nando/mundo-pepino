@@ -13,10 +13,12 @@ require 'definiciones/dado_contexto'
 require 'definiciones/cuando_ocurre'
 require 'definiciones/entonces_pasa'
 
+String.add_mapper(:real_value, {
+  /^verdader[oa]$/i  => true,
+  /^fals[ao]$/i      => false
+}) { |value| value }
 String.add_mapper :model
 String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
-String.add_mapper :name_field
-String.add_mapper :model_field
 String.add_mapper(:url, /^la (portada|home)/i => '/') do |string| 
   string if string =~ /^\/.*$|^https?:\/\//i
 end
@@ -128,17 +130,22 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 
-  def create(model, attributes = {})
-    if defined?(FixtureReplacement)
-      attribs_for_fr = {}
-      attributes.each do |k, v|
-        if k =~ /^(.+)_id$/
-          attribs_for_fr[$1.to_sym] = eval($1.capitalize).find(v.to_i)
-        else
-          attribs_for_fr[k] = v
-        end
+  def parsed_attributes(raw_attributes)
+    attributes = {}
+    raw_attributes.each do |k, v|
+      if k =~ /^(.+)_id$/
+        attributes[$1.to_sym] = eval($1.capitalize).find(v.to_i)
+      else
+        attributes[k] = v.to_real_value
       end
-      self.send "create_#{model.name.downcase}", attribs_for_fr
+    end
+    attributes
+  end
+
+  def create(model, raw_attributes = {})
+    attributes = parsed_attributes(raw_attributes)
+    if defined?(FixtureReplacement)
+      self.send "create_#{model.name.downcase}", attributes
     elsif defined?(Machinist)
       model.make attributes
     elsif defined?(Factory)
@@ -384,7 +391,7 @@ class MundoPepino < Cucumber::Rails::World
       child = child_model.find_by_name(valor)
       (res.send child_model.name.downcase).should == child
     elsif field = field_for(res.class, campo)
-      (res.send field).to_s.should == valor
+      (res.send field).to_s.should == valor.to_s
     else
       raise FieldNotMapped.new(campo)
     end

@@ -79,11 +79,11 @@ end
 
 Entonces /^(?:el|la) (.+) "(.+)" #{tiene_en_bbdd} como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
   add_resource_from_database(modelo, nombre)
-  last_mentioned_should_have_value(campo, valor)
+  last_mentioned_should_have_value(campo, valor.to_real_value)
 end
 
 Entonces /^#{tiene_en_bbdd} como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
-  last_mentioned_should_have_value(campo, valor)
+  last_mentioned_should_have_value(campo, valor.to_real_value)
 end
 
 Entonces /^(?:el|la) (.+) "(.+)" #{tiene_en_bbdd} una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|

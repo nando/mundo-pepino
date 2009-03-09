@@ -39,7 +39,11 @@ class String
         end
         (mapping = value) && break if self =~ regexp
       end
-      mapping || (def_val_block && def_val_block.call(self))
+      if mapping.nil?
+        (def_val_block && def_val_block.call(self))
+      else
+        mapping 
+      end
     end
   end
 end

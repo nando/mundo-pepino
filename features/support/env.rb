@@ -52,7 +52,8 @@ String.field_mappings = {
   /^fichero adjunto/i          => :file_field,
   /^casilla seleccionada/i     => :selected_check,
   /^casilla sin seleccionar/i  => :unselected_check,
-  /^Orchard::longitud(es)?$/   => :longitude
+  /^Orchard::longitud(es)?$/   => :longitude,
+  /^cultivad[oa]$/             => :cultivated
 }
 
 String.url_mappings.merge!(
