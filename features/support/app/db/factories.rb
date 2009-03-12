@@ -47,3 +47,10 @@ Factory.define :pepino do |f|
   f.diameter 0
 end
 
+# No probado
+#Factory.define :sprinkler do |f|
+#  f.association :sprinklerable, :factory => :orchard
+#  f.flow 0
+#  f.unit_flow "m3"
+#end
+

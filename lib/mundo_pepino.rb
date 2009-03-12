@@ -129,7 +129,7 @@ class MundoPepino < Cucumber::Rails::World
       super('CRUD Action', string)
     end
   end
-
+	
   def parsed_attributes(raw_attributes)
     attributes = {}
     raw_attributes.each do |k, v|
@@ -327,7 +327,12 @@ class MundoPepino < Cucumber::Rails::World
 
   def base_hash_for(options) 
     if options[:parent]
-      { options[:parent].class.name.downcase + '_id' => options[:parent].id }
+      # polymorphic associations
+      if !options[:polymorphic_as].blank?
+        { "#{options[:polymorphic_as]}_id".to_sym => options[:parent].id, "#{options[:polymorphic_as]}_type".to_sym => options[:parent].class.name }
+      else
+        { options[:parent].class.name.downcase + '_id' => options[:parent].id }
+      end
     else
       {}
     end

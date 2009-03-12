@@ -38,4 +38,11 @@ module FixtureReplacement
     a.length = 0
     a.diameter = 0
   end
+
+  attributes_for :sprinkler do |a|
+    a.sprinklerable = default_orchard
+    a.name = String.random
+    a.flow = 10
+    a.flow_units = 'm3'
+  end
 end

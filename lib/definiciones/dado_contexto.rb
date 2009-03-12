@@ -48,8 +48,16 @@ end
 Dado /^que dich[oa] (.+) tiene (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
   if resource = last_mentioned_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
+
+    options = {:parent => resource}
+    # polymorphic associations
+    reflections = resource.class.reflect_on_association(children_model.table_name.to_sym)
+    if reflections && !reflections.options[:as].blank?
+      options.merge!({:polymorphic_as => reflections.options[:as]})
+    end
+
     attribs = names_for_simple_creation(children_model, 
-      numero.to_number, nombres, :parent => resource)
+      numero.to_number, nombres, options)
     add_resource children_model, attribs, :force_creation => nombres.nil?
   end
 end
@@ -57,7 +65,14 @@ end
 Dado /^que dicho (.+) tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
   if resource = last_mentioned_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
+    options = {:model => children_model, :parent => resource}
+    # polymorphic associations
+    reflections = resource.class.reflect_on_association(children_model.table_name.to_sym)
+    if reflections && !reflections.options[:as].blank?
+      options.merge!({:polymorphic_as => reflections.options[:as]})
+    end
+
     add_resource children_model, 
-      translated_hashes(tabla.raw, {:model => children_model, :parent => resource})
+      translated_hashes(tabla.raw, options)
   end
 end
