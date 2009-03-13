@@ -141,7 +141,7 @@ class MundoPepino < Cucumber::Rails::World
           eval($1.capitalize).find(v.to_i)
         end
       else
-        attributes[k] = v.to_real_value
+        attributes[k] = (v.is_a?(String) ? v.to_real_value : v )
       end
     end
     attributes
