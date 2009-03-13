@@ -287,16 +287,18 @@ Convenciones generales:
     Dado que dichas Acelgas tienen como Variedad "Gigante carmesí"
 [más ejemplos](master/features/contexto-asignacion-de-valor-en-ultimo-recurso.feature)
 
-#### Asignación simple a un campo **has\_many** del último recurso mencionado
+#### Asignación simple a un campo **has\_many** (normal o polimórfico) del último recurso mencionado
     Dado que dicho Huerto tiene Tres Bancales "Acelgas, Tomates y Pepinos"
-[más ejemplos](master/features/contexto-asignacion-has-many-simple.feature)
+[más ejemplos (has_many normal)](master/features/contexto-asignacion-has-many-simple.feature) - 
+[más ejemplos (has_many polimórfico)](master/features/contexto-asignacion-has-many-polymorphic-simple.feature)
 
-#### Asignación en campo **has\_many** del último recurso mencionado desde una step-table
+#### Asignación en campo **has\_many** (normal o polimórfico) del último recurso mencionado desde una step-table
     Dado que dicho Huerto tiene los siguientes Bancales:
            | nombre | longitud | cultivo |  matas |
            |  A-01  |    12    | Patatas |     16 |
            |  A-02  |    12    | Tomates |     18 |
-[más ejemplos](master/features/contexto-asignacion-has-many-desde-fit-table.feature)
+[más ejemplos (has_many normal)](master/features/contexto-asignacion-has-many-desde-fit-table.feature) - 
+[más ejemplos (has_many polimórfico)](master/features/contexto-asignacion-has-many-polymorphic-desde-fit-table.feature)
 
 ### Cuando algo ocurre (Whens)
 
