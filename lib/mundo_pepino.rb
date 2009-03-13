@@ -134,7 +134,12 @@ class MundoPepino < Cucumber::Rails::World
     attributes = {}
     raw_attributes.each do |k, v|
       if k =~ /^(.+)_id$/
-        attributes[$1.to_sym] = eval($1.capitalize).find(v.to_i)
+        polymorphic_type = raw_attributes.delete($1 + '_type')
+        attributes[$1.to_sym] = if polymorphic_type
+          eval(polymorphic_type).find(v.to_i)
+        else
+          eval($1.capitalize).find(v.to_i)
+        end
       else
         attributes[k] = v.to_real_value
       end
@@ -329,7 +334,8 @@ class MundoPepino < Cucumber::Rails::World
     if options[:parent]
       # polymorphic associations
       if !options[:polymorphic_as].blank?
-        { "#{options[:polymorphic_as]}_id".to_sym => options[:parent].id, "#{options[:polymorphic_as]}_type".to_sym => options[:parent].class.name }
+        { "#{options[:polymorphic_as]}_id" => options[:parent].id,
+          "#{options[:polymorphic_as]}_type" => options[:parent].class.name }
       else
         { options[:parent].class.name.downcase + '_id' => options[:parent].id }
       end
