@@ -57,7 +57,8 @@ String.field_mappings = {
   /^Orchard::longitud(es)?$/   => :longitude,
   /^cultivad[oa]$/             => :cultivated,
   /^caudal(es)?$/i             => :flow,
-  /^unidad(es)? caudal(es)?$/i => :flow_units
+  /^unidad(es)? caudal(es)?$/i => :flow_units,
+  /^estaci[oó]n(es)?$/i        => :season
 }
 
 String.url_mappings.merge!(
