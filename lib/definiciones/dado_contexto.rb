@@ -24,7 +24,7 @@ end
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
   if resource = last_mentioned_of(modelo, nombre)
     if field = field_for(resource.class, campo)
-      resource.update_attribute field, valor
+      resource.update_attribute field, real_value_for(valor)
       pile_up resource
     else
       raise MundoPepino::FieldNotMapped.new(campo)
@@ -37,7 +37,7 @@ Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, 
     resources, field, values = resources_array_field_and_values(res, campo, valor)
     if field
       resources.each_with_index do |r, i| 
-        r.update_attribute field, values[i] 
+        r.update_attribute field, real_value_for(values[i])
       end
     else
       raise MundoPepino::FieldNotMapped.new(campo)

@@ -130,6 +130,10 @@ class MundoPepino < Cucumber::Rails::World
     end
   end
 	
+  def real_value_for(v)
+    (v.is_a?(String) ? v.to_real_value : v )
+  end
+
   def parsed_attributes(raw_attributes)
     attributes = {}
     raw_attributes.each do |k, v|
@@ -140,7 +144,7 @@ class MundoPepino < Cucumber::Rails::World
           attributes[$1.to_sym] = eval($1.capitalize).find(v.to_i)
         end
       else
-        attributes[k] = (v.is_a?(String) ? v.to_real_value : v )
+        attributes[k] = real_value_for(v)
       end
     end
     attributes
@@ -294,9 +298,11 @@ class MundoPepino < Cucumber::Rails::World
     if model = modelo.to_model
       resource = if with_name
         detect_first @resources.flatten, [model, with_name]
+      elsif(last_mentioned.m_model == model)
+        last_mentioned
       else
-        if (last_mentioned.is_a?(Array) and (last_mentioned.m_model == model))
-          last_mentioned
+        if group = recursive_group_search(model, @resources[1..-1])
+          group
         else
           detect_first @resources.flatten, model
         end
@@ -304,6 +310,16 @@ class MundoPepino < Cucumber::Rails::World
       resource || raise(ResourceNotFound.new("model:#{model.name}, name:#{with_name||'nil'}"))
     else
       raise ModelNotMapped.new(modelo)
+    end
+  end
+
+  def recursive_group_search(model, resources)
+    if lm = resources.shift
+      if(lm.is_a?(Array) and (lm.m_model == model))
+        lm
+      else
+        recursive_group_search(model, resources)
+      end
     end
   end
 
