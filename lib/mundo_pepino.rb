@@ -77,7 +77,7 @@ class MundoPepino < Cucumber::Rails::World
     end
     
     def m_singular
-      self.m_model.name.downcase
+      self.m_model.name.underscore
     end
     
     def m_plural
@@ -134,11 +134,10 @@ class MundoPepino < Cucumber::Rails::World
     attributes = {}
     raw_attributes.each do |k, v|
       if k =~ /^(.+)_id$/
-        polymorphic_type = raw_attributes.delete($1 + '_type')
-        attributes[$1.to_sym] = if polymorphic_type
-          eval(polymorphic_type).find(v.to_i)
-        else
-          eval($1.capitalize).find(v.to_i)
+        if polymorph = raw_attributes.delete($1 + '_type')
+          attributes[$1.to_sym] = eval(polymorph).find(v.to_i)
+        else 
+          attributes[$1.to_sym] = eval($1.capitalize).find(v.to_i)
         end
       else
         attributes[k] = (v.is_a?(String) ? v.to_real_value : v )
@@ -148,16 +147,21 @@ class MundoPepino < Cucumber::Rails::World
   end
 
   def create(model, raw_attributes = {})
+    through = raw_attributes.delete(:through)
     attributes = parsed_attributes(raw_attributes)
-    if defined?(FixtureReplacement)
-      self.send "create_#{model.name.downcase}", attributes
+    obj = if defined?(FixtureReplacement)
+      self.send "create_#{model.name.underscore}", attributes
     elsif defined?(Machinist)
       model.make attributes
     elsif defined?(Factory)
-      Factory(model.to_s.downcase.to_sym, attributes)
+      Factory(model.name.underscore.to_sym, attributes)
     else
       model.create! attributes
     end
+    if(through)
+      create through['model'], through['attributes'].merge(model.name.underscore.to_sym => obj)
+    end
+    obj
   end
 
   def find_or_create(model_or_modelo, attributes = {}, options = {}) 
@@ -171,14 +175,13 @@ class MundoPepino < Cucumber::Rails::World
       attributes.each do |key, value|
         if child_model = key.to_s.to_model
           child = add_resource(child_model, field_for(child_model, 'nombre') => value)
-          attribs[child_model.name.downcase + '_id'] = child.id
+          attribs[child_model.name.underscore + '_id'] = child.id
         else
           attribs[key] = value
         end
       end
       if ((options[:force_creation].nil? || !options[:force_creation])  &&
-          obj = model.find(:first, :conditions =>
-          [attribs.keys.map{|s| "#{s}=?"}.join(' AND ')] + attribs.values ))
+          obj = model.find(:first, :conditions => conditions_from_attributes(attribs)))
         obj
       else
         create model, attribs
@@ -186,6 +189,11 @@ class MundoPepino < Cucumber::Rails::World
     else
       create model
     end
+  end
+
+  def conditions_from_attributes(attributes)
+    attribs = attributes.reject {|k,v| k == :through} 
+    [attribs.keys.map{|s| "#{s}=?"}.join(' AND ')] + attribs.values
   end
 
   # options: :force_creation 
@@ -333,11 +341,17 @@ class MundoPepino < Cucumber::Rails::World
   def base_hash_for(options) 
     if options[:parent]
       # polymorphic associations
-      if !options[:polymorphic_as].blank?
+      if options[:polymorphic_as]
         { "#{options[:polymorphic_as]}_id" => options[:parent].id,
           "#{options[:polymorphic_as]}_type" => options[:parent].class.name }
-      else
-        { options[:parent].class.name.downcase + '_id' => options[:parent].id }
+      else 
+        field_prefix = options[:parent].class.name.underscore
+        if options[:through]
+          {:through => {"model" => eval(options[:through].to_s.classify),
+                        "attributes" => {"#{field_prefix}_id"  => options[:parent].id}}}
+        else
+          { "#{field_prefix}_id" => options[:parent].id }
+        end
       end
     else
       {}
@@ -379,7 +393,7 @@ class MundoPepino < Cucumber::Rails::World
       values = add_resource(child_model,
         valores.map { |val| { child_name_field => val } })
       values = [ values ] unless values.is_a?(Array)
-      [ child_model.name.downcase, values ]
+      [ child_model.name.underscore, values ]
     else
       [ field_for(mentioned.m_model, campo), valores ]
     end 
@@ -400,7 +414,7 @@ class MundoPepino < Cucumber::Rails::World
     res = last_mentioned
     if child_model = campo.to_model
       child = child_model.find_by_name(valor)
-      (res.send child_model.name.downcase).should == child
+      (res.send child_model.name.underscore).should == child
     elsif field = field_for(res.class, campo)
       (res.send field).to_s.should == valor.to_s
     else
@@ -457,4 +471,18 @@ class MundoPepino < Cucumber::Rails::World
       self.send action, field
     end
   end
+
+  def parent_options(parent, child)
+   options = {:parent => parent}
+    # polymorphic associations
+    if reflections = parent.class.reflect_on_association(child.table_name.to_sym)
+      if reflections.options[:as]
+        options.merge!({:polymorphic_as => reflections.options[:as]})
+      elsif reflections.options[:through]
+        options.merge!({:through => reflections.options[:through]})
+      end
+    end
+    options
+  end
+
 end
