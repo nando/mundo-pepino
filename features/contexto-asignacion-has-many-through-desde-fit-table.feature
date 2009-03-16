@@ -1,6 +1,6 @@
 Característica: asignación en campo has_many :through desde fit table
 
-  Escenario: Asignación en campo has_many :through desde fit table
+  Escenario: Asignación en un solo padre
   ########################################################################
   # Patrón: 
   #   Dado que dicho/a _mod_padre_ tiene el/la/los/las siguiente/s _mod_hijo_:
@@ -33,6 +33,23 @@ Característica: asignación en campo has_many :through desde fit table
            Y tenemos en bbdd tres bancales
            Y tenemos en bbdd tres cultivos
            Y el huerto "H-01" tiene en bbdd un cultivo "Patatas"
+           Y tiene en bbdd un cultivo "Pepinos"
+           Y tiene en bbdd un cultivo "Tomates"
+           
+  Escenario: Asignación en varios padres
+    Dado que tenemos dos huerto llamado "A y B"
+    Dado que dichos huertos tienen los siguientes cultivos:
+      |nombre |estación        |
+      |Tomates|verano          |
+      |Pepinos|primavera-verano|
+      |Patatas|invierno        |
+    Entonces tenemos en bbdd 2 huerto
+           Y tenemos en bbdd 6 bancales
+           Y tenemos en bbdd 3 cultivos
+           Y el huerto "A" tiene en bbdd un cultivo "Patatas"
+           Y tiene en bbdd un cultivo "Pepinos"
+           Y tiene en bbdd un cultivo "Tomates"
+           Y el huerto "B" tiene en bbdd un cultivo "Patatas"
            Y tiene en bbdd un cultivo "Pepinos"
            Y tiene en bbdd un cultivo "Tomates"
 

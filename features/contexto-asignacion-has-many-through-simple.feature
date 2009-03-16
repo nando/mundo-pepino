@@ -24,3 +24,19 @@ Característica: asignación simple de instancias en campo has_many :through
            Y el huerto "H-02" tiene en bbdd un cultivo "Patatas"
            Y tiene en bbdd un cultivo "Pepinos"
            Y tiene en bbdd un cultivo "Zanahorias"
+
+  Escenario: Asignación a un grupo de padres
+    Dado que tenemos tres huertos
+       Y que dichos huertos tienen 7 cultivos
+       Y que tenemos dos huertos "A y B"
+       Y que dichos huertos tienen tres cultivos "Patatas, Pepinos y Zanahorias"
+    Entonces tenemos en bbdd 5 huertos
+           Y 36 bancales
+           Y 10 cultivos
+           Y el huerto "A" tiene en bbdd un cultivo "Patatas"
+           Y tiene en bbdd un cultivo "Pepinos"
+           Y tiene en bbdd un cultivo "Zanahorias"
+           Y el huerto "B" tiene en bbdd un cultivo "Patatas"
+           Y tiene en bbdd un cultivo "Pepinos"
+           Y tiene en bbdd un cultivo "Zanahorias"
+

@@ -291,6 +291,7 @@ Convenciones generales:
     Dado que dicho Huerto tiene Tres Bancales "Acelgas, Tomates y Pepinos"
 [más ejemplos (has_many normal)](master/features/contexto-asignacion-has-many-simple.feature) - 
 [más ejemplos (has_many polimórfico)](master/features/contexto-asignacion-has-many-polymorphic-simple.feature)
+[más ejemplos (has_many through)](master/features/contexto-asignacion-has-many-through-simple.feature)
 
 #### Asignación en campo **has\_many** (normal o polimórfico) del último recurso mencionado desde una step-table
     Dado que dicho Huerto tiene los siguientes Bancales:
@@ -299,6 +300,7 @@ Convenciones generales:
            |  A-02  |    12    | Tomates |     18 |
 [más ejemplos (has_many normal)](master/features/contexto-asignacion-has-many-desde-fit-table.feature) - 
 [más ejemplos (has_many polimórfico)](master/features/contexto-asignacion-has-many-polymorphic-desde-fit-table.feature)
+[más ejemplos (has_many through)](master/features/contexto-asignacion-has-many-through-desde-fit-table.feature)
 
 ### Cuando algo ocurre (Whens)
 

@@ -182,6 +182,9 @@ class MundoPepino < Cucumber::Rails::World
       end
       if ((options[:force_creation].nil? || !options[:force_creation])  &&
           obj = model.find(:first, :conditions => conditions_from_attributes(attribs)))
+        if(through = attribs[:through])
+          create through['model'], through['attributes'].merge(model.name.underscore.to_sym => obj)
+        end
         obj
       else
         create model, attribs

@@ -45,19 +45,25 @@ Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, 
   end
 end
 
-Dado /^que dich[oa] (.+) tiene (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
-  if resource = last_mentioned_of(modelo_padre.to_unquoted)
+Dado /^que dich[oa]s? (.+) tienen? (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
+  if mentioned = last_mentioned_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
-    attribs = names_for_simple_creation(children_model, 
-      numero.to_number, nombres, parent_options(resource, children_model))
-    add_resource children_model, attribs, :force_creation => nombres.nil?
+    resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
+    resources.each do |resource|
+      attribs = names_for_simple_creation(children_model, 
+        numero.to_number, nombres, parent_options(resource, children_model))
+      add_resource children_model, attribs, :force_creation => nombres.nil?
+    end
   end
 end
 
-Dado /^que dicho (.+) tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
-  if resource = last_mentioned_of(modelo_padre.to_unquoted)
+Dado /^que dichos? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
+  if mentioned = last_mentioned_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
-    add_resource children_model, 
-      translated_hashes(tabla.raw, parent_options(resource, children_model))
+    resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
+    resources.each do |resource|
+      add_resource children_model, 
+        translated_hashes(tabla.raw, parent_options(resource, children_model))
+    end
   end
 end
