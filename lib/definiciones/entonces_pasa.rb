@@ -4,7 +4,7 @@ Entonces /^(#{veo_o_no}) el texto (.+)?$/i do |should, text|
   eval('response.body.send(shouldify(should))') =~ /#{unquote(text)}/m
 end
 
-Entonces /^(#{veo_o_no}) (?:en )?(?:la etiqueta|el tag) ([^ ]+)(?:(?: con)? el valor )?["']?([^"']+)?["']?$/ do |should, tag, value |
+Entonces /^(#{veo_o_no}) (?:en )?(?:la etiqueta|el tag) ([^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
     if value
       response.should have_tag(tag.to_unquoted, /.*#{value}.*/)

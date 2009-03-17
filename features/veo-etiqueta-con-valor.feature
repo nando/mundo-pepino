@@ -36,4 +36,4 @@ Característica: etiqueta/selector con valor
     Entonces debo ver la etiqueta DIV#slogan con el valor "Todo un huerto para ti"
     Entonces debo ver la etiqueta 'div#slogan' con el valor "Todo un huerto para ti"
     Entonces no debo ver la etiqueta DIV#title con el valor "Todo un huerto para ti"
-    
+    Entonces no debo ver la etiqueta DIV#title con el texto "Todo un huerto para ti"
