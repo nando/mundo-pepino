@@ -57,7 +57,7 @@ Dado /^que dich[oa]s? (.+) tienen? (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (
   end
 end
 
-Dado /^que dichos? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
+Dado /^que dich[ao]s? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
   if mentioned = last_mentioned_of(modelo_padre.to_unquoted)
     children_model = modelo_hijos.to_unquoted.to_model
     resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
