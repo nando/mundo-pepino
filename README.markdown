@@ -285,7 +285,7 @@ Convenciones generales:
 
 #### Asignación de un valor en un campo del último (o últimos) recurso mencionado
     Dado que dichas Acelgas tienen como Variedad "Gigante carmesí"
-[más ejemplos](master/features/contexto-asignacion-de-valor-en-ultimo-recurso.feature)
+[más ejemplos](master/features/contexto-asignacion-de-valor-en-recurso-mencionado.feature)
 
 #### Asignación simple a un campo **has\_many** (normal o polimórfico) del último recurso mencionado
     Dado que dicho Huerto tiene Tres Bancales "Acelgas, Tomates y Pepinos"
@@ -312,9 +312,12 @@ Convenciones generales:
 #### Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
     Cuando visito la portada
 [más ejemplos](master/features/cuando-visito-url-especifica.feature)
+#### Solicitud de la URL asociada a un recurso concreto
+    Cuando visito la página del huerto "H-01"
+[más ejemplos](master/features/cuando-visito-url-de-recurso-especifico.feature)
 #### Solicitud de la URL asociada al último recurso definido
     Cuando visito su página
-[más ejemplos](master/features/cuando-visito-url-de-recurso.feature)
+[más ejemplos](master/features/cuando-visito-url-de-recurso-mencionado.feature)
 #### Solicitud de la URL del índice (index) de un tipo de recurso (modelo)
     Cuando visito la página de Tomates
 [más ejemplos](master/features/cuando-visito-url-de-indice-de-tipo-de-recurso.feature)
