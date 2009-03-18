@@ -29,15 +29,17 @@ Característica: asignación de un valor
   #     String.model_mappings[/(abono|fertilizante)s?$/i] = Fertilizer
   #
   ########################################################################
-    Dado que tenemos un huerto llamado "H-01"
+    Dado que tenemos tres huertos llamados "H-02, H-03 y H-04"
+       Y que dichos huertos tienen como área "20, 32 y 12" hectáreas
+       Y que dichos huertos tienen como abono "Nitrogenado de 2ª calidad"
+       Y que tenemos un huerto llamado "H-01"
        Y que dicho huerto tiene como área "60" hectáreas
        Y que dicho huerto tiene como latitud "N 40° 44,340"
        Y que dicho huerto tiene como longitud "W 003° 48,730"
        Y que dicho huerto tiene como abono "Nitrogenado de 1ª calidad"
-       Y que tenemos tres huertos llamados "H-02, H-03 y H-04"
-       Y que dichos huertos tienen como área "20, 32 y 12" hectáreas
-       Y que dichos huertos tienen como abono "Nitrogenado de 2ª calidad"
-    Entonces el huerto "H-01" tiene en bbdd como área "60"
+    Cuando visito su página
+    Entonces debo ver la etiqueta H2 con el valor "H-01"
+           Y el huerto "H-01" tiene en bbdd como área "60"
            Y tiene en bbdd como latitud "N 40° 44,340"
            Y tiene en bbdd como longitud "W 003° 48,730"
            Y tiene en bbdd como abono "Nitrogenado de 1ª calidad"

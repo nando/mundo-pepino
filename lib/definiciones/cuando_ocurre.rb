@@ -26,7 +26,7 @@ Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, 
   do_visit eval("#{action}_#{model.name.downcase}_path")
 end
 
-Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do 
+Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do
   do_visit last_mentioned_url
 end
 

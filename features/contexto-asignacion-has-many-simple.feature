@@ -28,7 +28,9 @@ Característica: asignación simple de instancias en campo has_many
        Y que dicho huerto tiene un bancal llamado "Pitos y flautas"
        Y que tenemos un huerto "H-04"
        Y que dicho huerto tiene 10 bancales
-    Entonces tenemos en bbdd cuatro huertos
+    Cuando visito su página
+    Entonces debo ver la etiqueta H2 con el valor "H-04"
+           Y tenemos en bbdd cuatro huertos
            Y 16 bancales
            Y el huerto "H-01" tiene en bbdd un bancal "Acelgas"
            Y tiene en bbdd un bancal "Tomates"

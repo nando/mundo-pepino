@@ -39,6 +39,7 @@ Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, 
       resources.each_with_index do |r, i| 
         r.update_attribute field, real_value_for(values[i])
       end
+      pile_up res
     else
       raise MundoPepino::FieldNotMapped.new(campo)
     end
@@ -54,6 +55,7 @@ Dado /^que dich[oa]s? (.+) tienen? (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (
         numero.to_number, nombres, parent_options(resource, children_model))
       add_resource children_model, attribs, :force_creation => nombres.nil?
     end
+    pile_up mentioned
   end
 end
 

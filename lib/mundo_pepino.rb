@@ -238,8 +238,10 @@ class MundoPepino < Cucumber::Rails::World
   
   def pile_up(mentioned)
     @resources ||= []
-    mentioned.class.send :include, Mencionado
-    @resources.unshift mentioned
+    if mentioned != last_mentioned
+      mentioned.class.send :include, Mencionado
+      @resources.unshift mentioned
+    end
     mentioned
   end
 
