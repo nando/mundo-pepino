@@ -61,7 +61,7 @@ String.add_mapper(:content_type,
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 
-class MundoPepino < Cucumber::Rails::World
+module MundoPepino
   # API común para las instancias que van referenciándose en el escenario.
   module Mencionado 
     def m_instance
