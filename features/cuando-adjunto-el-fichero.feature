@@ -1,4 +1,8 @@
 Característica: adjunto el fichero
+  ATENCIÓN: Este test falla con Rails 2.3.2 debido al escapado que aplica
+  ActionController::Integration::Session a las claves de los atributos en
+  las peticiones multipart. Ver ticket #2439 para más info (
+  https://rails.lighthouseapp.com/projects/8994/tickets/2439)
 
   Escenario: Adjunto un fichero local en un campo de formulario
   ########################################################################
