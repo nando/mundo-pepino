@@ -4,7 +4,7 @@ class OrchardsController < ApplicationController
   end      
 
   def show
-    @orchard = Orchard.find(params[:id])
+    @orchard = Orchard.find(params[:id][/^(\d+)-.*$/, 1])
   end
 
   def new

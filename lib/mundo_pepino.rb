@@ -289,7 +289,7 @@ module MundoPepino
       if mentioned.m_new_record?
         eval("#{mentioned.m_plural}_path")
       else
-        eval("#{mentioned.m_singular}_path(#{mentioned.m_instance.id})")
+        eval("#{mentioned.m_singular}_path(mentioned.m_instance)")
       end
     else
       raise WithoutResources
