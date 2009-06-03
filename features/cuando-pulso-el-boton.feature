@@ -17,7 +17,7 @@ Característica: pulso el botón
          Y pincho el botón Galleta de la Fortuna
     Entonces veo la etiqueta H1 con el valor "Sorry, not implemented yet"
     Cuando visito la portada
-         Y pulso en el botón Galleta de la Fortuna
+         Y pulso en el botón app.welcome.cookie_fortune
     Entonces veo la etiqueta H1 con el valor "Sorry, not implemented yet"
      
   Escenario: Pincho en un bóton (desde Given)

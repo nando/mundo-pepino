@@ -18,5 +18,7 @@ Característica: veo (o no) un texto
     Cuando visito la portada
     Entonces veo el texto Portada
            Y debo ver el texto "Mundo Pepino"
+           Y debo ver el texto app.welcome.title
+           Y debo ver el texto app.welcome.interpolated,{ :name => 'Nombre' }
            Y no debo ver el texto Cucumber
            Y no veo el texto "Rocks"

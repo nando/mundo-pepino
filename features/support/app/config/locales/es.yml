@@ -84,6 +84,8 @@ es:
         other: "más de {{count}} años"
  
   activerecord:
+    models:
+      orchard: 'Huerto'
     errors:
       template:
         header:
@@ -151,3 +153,8 @@ es:
   support:
     array:
       sentence_connector: "y"
+  app:
+    welcome:
+      title: 'Portada de Mundo Pepino'
+      cookie_fortune: 'Galleta de la fortuna'
+      interpolated: 'Mensaje con {{name}}'

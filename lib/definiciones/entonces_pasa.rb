@@ -1,13 +1,13 @@
 veo_o_no = '(?:no )?(?:veo|debo ver|debería ver)'
 
 Entonces /^(#{veo_o_no}) el texto (.+)?$/i do |should, text|
-  eval('response.body.send(shouldify(should))') =~ /#{unquote(text)}/m
+  eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
 end
 
 Entonces /^(#{veo_o_no}) (?:en )?(?:la etiqueta|el tag) ([^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
     if value
-      response.should have_tag(tag.to_unquoted, /.*#{value}.*/)
+      response.should have_tag(tag.to_unquoted, /.*#{value.to_translated}.*/)
     else
       response.should have_tag(tag.to_unquoted)
     end
@@ -32,7 +32,7 @@ Entonces /^(#{veo_o_no}) una tabla con (?:el|los) (?:siguientes? )?(?:valore?s?|
     row.each_with_index do |cell, j|
       response.send shouldified, 
         have_selector("table > tr:nth-child(#{i+2}) > td:nth-child(#{j+1})") { |td|
-          td.inner_text.should == cell
+          td.inner_text.should == cell.to_translated
         }
     end
   end
@@ -42,7 +42,7 @@ Entonces /^(#{veo_o_no}) un formulario con (?:el|los) (?:siguientes? )?(?:campos
   shouldified = shouldify(should)
   response.send(shouldified, have_tag('form')) do
     elementos.raw[1..-1].each do |row|
-      label, type = row
+      label, type = row[0].to_translated, row[1]
       case type
         when "submit":
           with_tag "input[type='submit'][value='#{label}']"

@@ -32,6 +32,7 @@ Característica: etiqueta/selector con valor
     Entonces debo ver la etiqueta "H1"
     Entonces no debo ver la etiqueta HR
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+    Entonces debo ver la etiqueta H1 con el valor "app.welcome.title"
     Entonces no debo ver la etiqueta H1 con el valor "PORTADA DE MUNDO PEPINO"
     Entonces debo ver la etiqueta DIV#slogan con el valor "Todo un huerto para ti"
     Entonces debo ver la etiqueta 'div#slogan' con el valor "Todo un huerto para ti"

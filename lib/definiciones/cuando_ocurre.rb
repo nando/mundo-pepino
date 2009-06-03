@@ -36,7 +36,7 @@ Cuando /^(?:que )?visito (?!#{negative_lookahead})(.+)$/i do |pagina|
 end
 
 Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|
-  click_button(unquote(boton))
+  click_button(boton.to_unquoted.to_translated)
 end
 
 Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+)$/i do |tipo, enlace|
@@ -46,7 +46,7 @@ Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efe
   when 'enlace ajax' then :ajax
   else :page
   end
-  click_link(unquote(enlace), options)
+  click_link(enlace.to_unquoted.to_translated, options)
 end
 
 Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
@@ -72,7 +72,11 @@ end
 
 Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
   begin
-    select(valor, :from => campo)  # Vía label
+    if campo
+      select valor, :from => campo.to_unquoted.to_translated  # Vía label
+    else
+      select valor
+    end
   rescue Webrat::NotFoundError
     select(valor, :from => campo_to_field(campo)) # Sin label
   end

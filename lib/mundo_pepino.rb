@@ -60,6 +60,15 @@ String.add_mapper(:content_type,
   /\.gif$/   => 'image/gif') { |str| 'text/plain' }
 String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
+String.add_mapper(:translated) { |str|
+  if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
+    I18n.translate(str)
+  elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
+    I18n.translate($1, eval($2))
+  else
+    str
+  end
+}
 
 module MundoPepino
   # API común para las instancias que van referenciándose en el escenario.
@@ -467,7 +476,7 @@ module MundoPepino
   end
   
   def find_field_and_do_with_webrat(action, campo, options = nil)
-    do_with_webrat action, campo.to_unquoted, options # a pelo (localización vía labels)
+    do_with_webrat action, campo.to_unquoted.to_translated, options # a pelo (localización vía labels)
   rescue Webrat::NotFoundError
     field = campo_to_field(campo, last_mentioned_model)
     begin 
