@@ -256,11 +256,12 @@ Como **convención general** los nombres correspondientes a modelos y campos pue
 
 En el ejemplo, "artículo" y "título" hacen referencia a un modelo y a un campo respectivamente y no van entre comillas (aunque podrían ir si quisiéramos) mientras que "Título del artículo" es el valor que se asignará en "título" y como tal va entrecomillado (y si quitásemos sus comillas la expresión no sería reconocida o lo sería incorrectamente). 
 
-MundoPepino soporta el uso de claves I18n en lugar de literales "hardcoded" en la mayoría de interacciones con el navegador (p.e. "Cuando pincho en el botón app.send" en lugar de "Cuando pincho en el botón 'Enviar'") así como en las comprobaciones de existencia de textos (p.e. "Debería ver el texto 'activerecord.models.user'" en lugar de "Debería ver el texto 'Usuario'").
+MundoPepino soporta el uso de **claves I18n** en lugar de literales "a pincho" (o "hardcoded") en la mayoría de interacciones con el navegador (p.e. "Cuando pincho en el botón app.send" en lugar de "Cuando pincho en el botón 'Enviar'") así como en las comprobaciones de existencia de textos (p.e. "Debería ver el texto 'activerecord.models.user'" en lugar de "Debería ver el texto 'Usuario'").
 
 Se puede utilizar la interpolación separando el hash con los parámetros de la clave con una coma sin espacios. Por ejemplo:
 
-  Entonces debería ver la etiqueta H1 con el valor "app.users.new_friend,{:name => 'Lucas'}"
+    Entonces debería ver la etiqueta H1 con el valor "app.users.new_friend,{:name => 'Lucas'}"
+
 
 ### Dado el contexto (Givens)
 
