@@ -18,6 +18,9 @@ String.add_mapper(:real_value, {
   /^fals[ao]$/i      => false
 }) { |value| value }
 String.add_mapper :model
+String.add_mapper :relation_model, {
+  /^orchard_of_birth$/i => Orchard
+}
 String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
 String.add_mapper(:url, /^la (portada|home)/i => '/') do |string| 
   string if string =~ /^\/.*$|^https?:\/\//i
@@ -149,8 +152,8 @@ module MundoPepino
       if k =~ /^(.+)_id$/
         if polymorph = raw_attributes.delete($1 + '_type')
           attributes[$1.to_sym] = polymorph.constantize.find(v.to_i)
-        else 
-          attributes[$1.to_sym] = $1.camelize.constantize.find(v.to_i)
+        else
+          attributes[$1.to_sym] = ($1.to_relation_model || $1.camelize.constantize).find(v.to_i)
         end
       else
         attributes[k] = real_value_for(v)
@@ -186,9 +189,10 @@ module MundoPepino
     if attributes.any?
       attribs = Hash.new
       attributes.each do |key, value|
-        if child_model = key.to_s.to_model
+        if child_model = (key.to_s.to_model || key.to_s.to_relation_model)
           child = add_resource(child_model, field_for(child_model, 'nombre') => value)
-          attribs[child_model.name.underscore + '_id'] = child.id
+          field_name = key.to_s.to_relation_model ? key : child_model.name.underscore
+          attribs["#{field_name}_id"] = child.id
         else
           attribs[key] = value
         end
@@ -423,7 +427,7 @@ module MundoPepino
       values = add_resource(child_model,
         valores.map { |val| { child_name_field => val } })
       values = [ values ] unless values.is_a?(Array)
-      [ child_model.name.underscore, values ]
+      [ campo.to_field || child_model.name.underscore, values ]
     else
       [ field_for(mentioned.m_model, campo), valores ]
     end 
@@ -444,7 +448,8 @@ module MundoPepino
     res = last_mentioned
     if child_model = campo.to_model
       child = child_model.find_by_name(valor)
-      (res.send child_model.name.underscore).should == child
+      child_field = campo.to_field || child_model.name.underscore
+      (res.send child_field).should == child
     elsif field = field_for(res.class, campo)
       (res.send field).to_s.should == valor.to_s
     else

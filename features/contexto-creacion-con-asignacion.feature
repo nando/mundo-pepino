@@ -56,3 +56,10 @@ Característica: Creación de recurso/s con un valor en alguno de sus campos
            Y el huerto "A" tiene en base de datos como área "12"
            Y el huerto "B" tiene en base de datos como área "12"
 
+  Escenario: Con nombre de relacion que no se corresponde con su modelo asociado
+    Dado que tenemos un huerto llamado "de secano"
+       Y que tenemos una lechuga "seca"
+       Y que dicha lechuga tiene como huerto de nacimiento "de secano"
+    Entonces tenemos en bbdd un huerto
+           Y tenemos en bbdd una lechuga
+           Y la lechuga "seca" tiene en bbdd como huerto de nacimiento "de secano"

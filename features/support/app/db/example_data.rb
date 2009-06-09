@@ -45,4 +45,8 @@ module FixtureReplacement
     a.flow = 10
     a.flow_units = 'm3'
   end
+
+  attributes_for :lettuce do |a|
+    a.name = String.random
+  end
 end

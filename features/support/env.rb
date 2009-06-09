@@ -24,18 +24,21 @@ MundoPepino::ModelsToClean = [
   Tomato,
   Chard,
   Pepino,
+  Lettuce,
   Sprinkler
 ]
 
 String.model_mappings = {
   /^huert[oa]s?$/i            => Orchard,
-  /^bancal(es)?$/i           => Terrace,
-  /^cultivos?$/i             => Crop,
+  /^bancal(es)?$/i            => Terrace,
+  /^cultivos?$/i              => Crop,
   /^(abono|fertilizante)s?$/i => Fertilizer,
-  /^tomates?$/i		    => Tomato,
-  /^acelgas?$/i		    => Chard,
-  /^pepinos?$/i		    => Pepino,
-  /^aspersor(es)?$/i        => Sprinkler
+  /^tomates?$/i		            => Tomato,
+  /^acelgas?$/i		            => Chard,
+  /^pepinos?$/i		            => Pepino,
+  /^aspersor(es)?$/i          => Sprinkler,
+  /^lechugas?$/i              => Lettuce,
+  /^huerto de nacimiento$/i   => Orchard
 }
 
 String.field_mappings = {
@@ -58,7 +61,8 @@ String.field_mappings = {
   /^cultivad[oa]$/             => :cultivated,
   /^caudal(es)?$/i             => :flow,
   /^unidad(es)? caudal(es)?$/i => :flow_units,
-  /^estaci[oó]n(es)?$/i        => :season
+  /^estaci[oó]n(es)?$/i        => :season,
+  /^huerto de nacimiento$/i    => :orchard_of_birth
 }
 
 String.url_mappings.merge!(

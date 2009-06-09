@@ -233,6 +233,29 @@ El fichero `gestion_de_huertos.feature` tendría:
 
 A diferencia de `generate feature` aquí no se crea un fichero `step_definitions.rb` con definiciones e implementaciones específicas ya que las mismas se encuentran dentro de las tratadas genéricamente dentro del MundoPepino.
 
+### Relación con modelo utilizando un nombre que no se corresponde con el mismo
+Con un ejemplo se entiende mejor, creo. Tenemos un modelo User y un modelo Garden y este último "belongs_to :author, class_name => 'User'", de tal forma que //a_garden.author// nos devuelve un User.
+
+Bien, pues para que la siguiente característica funcione correctamente:
+
+    Dado que tenemos un usuario llamado "Fidel"
+       Y que tenemos un jardín cuyo autor es "Fidel"
+
+Tengo que meter los siguentes mapeos en nuestro entorno:
+* En el mapeo de modelos (model_mappings):
+
+    /^autor(es)?$/i => User
+
+* En el mapeo de campos (field_mappings):
+
+    /^autor(es)?$/i => :author
+
+* Un mapeo adicional entre el nombre del campo en inglés y su modelo asociado (relation_model_mappings):
+
+    'author' => User
+
+Con estos mapeos también deberían funcionar el resto de definiciones de MP en las que se haga referencia a una relación.
+
 ## Definiciones implementadas en MundoPepino
 
 **Cada definición** existente en MundoPepino tiene **al menos un escenario** que comprueba:
@@ -271,6 +294,7 @@ Convenciones generales:
 * creación de nuevos recursos utilizando verbo **tener** en tercena persona plural (p.e. "Dado que **tenemos** tres lechugas")
 * asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
 * todas las definiciones para "Cuando algo ocurre" (o *Then's*, ver más abajo) son válidas también como "Dado el contexto" incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
+
 
 #### Creación de uno o varios registros asignándoles opcionalmente un nombre
     Dado que tenemos Un Producto llamado "Acelgas" 

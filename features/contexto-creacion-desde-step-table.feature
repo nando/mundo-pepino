@@ -53,3 +53,14 @@ Característica: creación desde step-table
            Y el huerto "Regadío-2" tiene en bbdd como abono "HDR-102"
            Y tiene en bbdd como área "42" hectáreas
 
+  Escenario: Con nombre de campo que no se corresponde directamente con su modelo
+    Dado que tenemos un huerto llamado "grande"
+       Y que tenemos un huerto llamado "pequeño"
+       Y que tenemos las siguientes lechugas:
+           | nombre    | huerto de nacimiento |
+           | blanca    | grande               |
+           | verde     | pequeño              |
+    Entonces tenemos en bbdd dos huertos
+       Y la lechuga "blanca" tiene en bbdd como huerto de nacimiento "grande"
+       Y la lechuga "verde" tiene en bbdd como huerto de nacimiento "pequeño"
+
