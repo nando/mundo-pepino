@@ -148,9 +148,9 @@ module MundoPepino
     raw_attributes.each do |k, v|
       if k =~ /^(.+)_id$/
         if polymorph = raw_attributes.delete($1 + '_type')
-          attributes[$1.to_sym] = eval(polymorph).find(v.to_i)
+          attributes[$1.to_sym] = polymorph.constantize.find(v.to_i)
         else 
-          attributes[$1.to_sym] = eval($1.capitalize).find(v.to_i)
+          attributes[$1.to_sym] = $1.camelize.constantize.find(v.to_i)
         end
       else
         attributes[k] = real_value_for(v)
