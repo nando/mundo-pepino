@@ -65,6 +65,10 @@ String.field_mappings = {
   /^huerto de nacimiento$/i    => :orchard_of_birth
 }
 
+String.relation_model_mappings = {
+  /^orchard_of_birth$/i => Orchard
+}
+
 String.url_mappings.merge!(
   /^la página de registro/i    => '/welcome/signup'
 )

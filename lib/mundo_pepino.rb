@@ -18,9 +18,7 @@ String.add_mapper(:real_value, {
   /^fals[ao]$/i      => false
 }) { |value| value }
 String.add_mapper :model
-String.add_mapper :relation_model, {
-  /^orchard_of_birth$/i => Orchard
-}
+String.add_mapper :relation_model
 String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
 String.add_mapper(:url, /^la (portada|home)/i => '/') do |string| 
   string if string =~ /^\/.*$|^https?:\/\//i
