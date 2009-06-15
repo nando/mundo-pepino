@@ -16,6 +16,11 @@ Característica: Veo una tabla con un contenido concreto
   #     | nombre    | área | longitud | latitud   |
   #     | Regadío-1 | 15   | N 41° 35 | W 003° 48 |
   #     | Regadío-2 | 42   | N 41° 35 | W 003° 48 |
+  #
+  #   Como contenido de una celda puede utilizarse ".*" para indicar
+  # cualquier valor.
+  #
+
     Dado que tenemos el huerto:
         | nombre   | área | longitud | latitud   |
         | Secano-1 | 35   | N 40° 44 | W 003° 48 |
@@ -33,4 +38,7 @@ Característica: Veo una tabla con un contenido concreto
            Y veo una tabla con el contenido:
              | nombre   | área | longitud | latitud   |
              | Secano-1 | 35   | N 40° 44 | W 003° 48 |
+           Y veo una tabla con el contenido:
+             | nombre   | área | longitud | latitud   |
+             | .*       | 35   | N 40° 44 | W 003° 48 |
     
