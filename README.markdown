@@ -271,7 +271,6 @@ Para todos los escenarios podríamos tener una narrativa genérica que expresase
 
 Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice.
 
-Los **asteriscos (\*)** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`. Dos asteríscos (\*\*) hacen referencia a una definición presente en la feature autogenerada por `script/generate feature`.
 
 Como **convención general** los nombres correspondientes a modelos y campos pueden ir sin comillas pero los valores deben ir entre comillas (simples o dobles). Por ejemplo:
 
@@ -405,6 +404,12 @@ Convenciones generales:
 #### Veo (o no) un texto \*
     Entonces debo ver el texto "IVA incluido"
 [más ejemplos](master/features/veo-el-texto.feature)
+#### Veo (o no) una serie de textos expresados en una step-table (sin cabeceras)
+    Entonces debo ver los siguientes textos:
+     | Muestras de tomate       |
+     | Restos de lechuga        |
+     | Treinta kilos de melones |
+[más ejemplos](master/features/veo-los-siguientes-textos.feature)
 #### Veo (o no) una etiqueta/selector opcionalmente con un contenido concreto
     Entonces no debo ver la etiqueta "div.title a" con el valor "Surco"
 [más ejemplos](master/features/veo-etiqueta-con-valor.feature)
@@ -454,6 +459,7 @@ Convenciones generales:
     Entonces tiene en base de datos un Bancal "B"
 [más ejemplos](master/features/tenemos-en-bbdd-asocioacion-has-many-en-registro-mencionado.feature)
 
+(\*) Los **asteriscos** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`. Dos asteríscos (\*\*) hacen referencia a una definición presente en la feature autogenerada por `script/generate feature`.
 
 ## License
 
