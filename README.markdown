@@ -405,13 +405,9 @@ Convenciones generales:
 #### Veo (o no) un texto \*
     Entonces debo ver el texto "IVA incluido"
 [más ejemplos](master/features/veo-el-texto.feature)
-#### Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto
-    Entonces no debo ver la etiqueta div#title con el valor "Surco"
+#### Veo (o no) una etiqueta/selector opcionalmente con un contenido concreto
+    Entonces no debo ver la etiqueta "div.title a" con el valor "Surco"
 [más ejemplos](master/features/veo-etiqueta-con-valor.feature)
-#### Veo (o no) un selector con jerarquía opcionalmente con un contenido concreto
-  Igual que el anterior pero posibilitando la búsqueda de un selector con jerarquía (en la definición anterior las comillas son opcionales impidiendo el uso de espacios dentro del selector).
-    Entonces no debo ver el selector "div#title a" con el valor "Azada"
-[más ejemplos](master/features/veo-selector-con-valor.feature)
 #### Veo (o no) un enlace a una URL específica (opcionalmente indicada con un nombre coloquial)
     Entonces debo ver un enlace a la página de recuperación de contraseña    
 [más ejemplos](master/features/veo-enlace-a-url-especifica)
