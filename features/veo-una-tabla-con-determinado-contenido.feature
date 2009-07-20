@@ -22,23 +22,23 @@ Característica: Veo una tabla con un contenido concreto
   #
 
     Dado que tenemos el huerto:
-        | nombre   | área | longitud | latitud   |
-        | Secano-1 | 35   | N 40° 44 | W 003° 48 |
+        | nombre   | área | longitud | latitud   | abono |
+        | Secano-1 |   35 | N 40° 44 | W 003° 48 |       |
     Cuando visito la Página de Huertos
     #Entonces debería ver una tabla con el/los (siguiente/s)? contenido/s:
     Entonces debería ver una tabla con el siguiente contenido:
-             | nombre   | área | longitud | latitud   |
-             | Secano-1 | 35   | N 40° 44 | W 003° 48 |
+             | nombre   | área | longitud | latitud   | abono |
+             | Secano-1 |   35 | N 40° 44 | W 003° 48 |       |
            Y debería ver una tabla con el contenido:
-             | nombre   | área | longitud | latitud   |
-             | Secano-1 | 35   | N 40° 44 | W 003° 48 |
+             | nombre   | área | longitud | latitud   | abono |
+             | Secano-1 |   35 | N 40° 44 | W 003° 48 |       |
            Y debo ver una tabla con los siguientes contenidos:
-             | nombre   | área | longitud | latitud   |
-             | Secano-1 | 35   | N 40° 44 | W 003° 48 |
+             | nombre   | área | longitud | latitud   | abono |
+             | Secano-1 |   35 | N 40° 44 | W 003° 48 |       |
            Y veo una tabla con el contenido:
-             | nombre   | área | longitud | latitud   |
-             | Secano-1 | 35   | N 40° 44 | W 003° 48 |
+             | nombre   | área | longitud | latitud   | abono |
+             | Secano-1 |   35 | N 40° 44 | W 003° 48 |       |
            Y veo una tabla con el contenido:
-             | nombre   | área | longitud | latitud   |
-             | .*       | 35   | N 40° 44 | W 003° 48 |
+             | nombre | área | longitud | latitud   | abono |
+             | .*     |   35 | N 40° 44 | W 003° 48 |       |
     
