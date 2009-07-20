@@ -413,6 +413,9 @@ Convenciones generales:
 #### Veo (o no) una etiqueta/selector opcionalmente con un contenido concreto
     Entonces no debo ver la etiqueta "div.title a" con el valor "Surco"
 [más ejemplos](master/features/veo-etiqueta-con-valor.feature)
+#### Leo (o no) un texto, quitando las etiquetas HTML
+    Entonces debo leer el texto "IVA incluido"
+[más ejemplos](master/features/leo-el-texto.feature)
 #### Veo (o no) un enlace a una URL específica (opcionalmente indicada con un nombre coloquial)
     Entonces debo ver un enlace a la página de recuperación de contraseña    
 [más ejemplos](master/features/veo-enlace-a-url-especifica)

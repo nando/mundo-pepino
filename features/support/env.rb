@@ -65,7 +65,9 @@ String.field_mappings = {
   /^caudal(es)?$/i             => :flow,
   /^unidad(es)? caudal(es)?$/i => :flow_units,
   /^estaci[oó]n(es)?$/i        => :season,
-  /^huerto de nacimiento$/i    => :orchard_of_birth
+  /^huerto de nacimiento$/i    => :orchard_of_birth,
+  /^hora de comenzar a regar$/i => :start_watering,
+  /^hora de terminar de regar$/i => :stop_watering
 }
 
 String.relation_model_mappings = {
