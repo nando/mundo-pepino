@@ -275,7 +275,7 @@ module MundoPepino
     "#{model && model.name}::#{campo}".to_field || campo.to_field
   end
   def shouldify(should_or_not)
-    affirmative = 'debo|debo ver|veo|deber[ií]a|deber[íi]a ver'
+    affirmative = 'debo|debo ver|veo|deber[ií]a|deber[íi]a ver|leo|debo leer|deber[ií]a leer'
     should_or_not =~ /^(#{affirmative})$/i ? :should : :should_not
   end
 

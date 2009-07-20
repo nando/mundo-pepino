@@ -4,6 +4,16 @@ Entonces /^(#{veo_o_no}) el texto (.+)?$/i do |should, text|
   eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
 end
 
+leo_o_no = '(?:no )?(?:leo|debo leer|debería leer)'
+Entonces /^(#{leo_o_no}) el texto (.+)?$/i do |should, text|
+  begin
+    HTML::FullSanitizer.new.sanitize(response.body).send(shouldify(should)) =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
+  rescue Spec::Expectations::ExpectationNotMetError
+    webrat.save_and_open_page
+    raise
+  end
+end
+
 Entonces /^(#{veo_o_no}) los siguientes textos:$/i do |should, texts|
   texts.raw.each do |row|
     Entonces "#{should} el texto #{row[0]}"
