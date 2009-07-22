@@ -67,7 +67,8 @@ String.field_mappings = {
   /^estaci[oó]n(es)?$/i        => :season,
   /^huerto de nacimiento$/i    => :orchard_of_birth,
   /^hora de comenzar a regar$/i => :start_watering,
-  /^hora de terminar de regar$/i => :stop_watering
+  /^hora de terminar de regar$/i => :stop_watering,
+  /^precio$/i                  => :price
 }
 
 String.relation_model_mappings = {

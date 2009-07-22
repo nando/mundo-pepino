@@ -42,3 +42,17 @@ Característica: Veo una tabla con un contenido concreto
              | nombre | área | longitud | latitud   | abono |
              | .*     |   35 | N 40° 44 | W 003° 48 |       |
     
+
+  Escenario: Veo una tabla con un contenido concreto en sus celdas, utilizando el tag <tbody>
+    Dado que tenemos los siguientes abonos:
+        | nombre  | precio |
+        | Abono 1 |     10 |
+        | Abono 2 |     20 |
+        | Abono 3 |     30 |
+    Cuando visito la Página de Abonos
+    Entonces debería ver una tabla con el siguiente contenido:
+            | nombre  | precio |
+            | Abono 1 |     10 |
+            | Abono 2 |     20 |
+            | Abono 3 |     30 |
+  

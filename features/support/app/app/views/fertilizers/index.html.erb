@@ -1,0 +1,24 @@
+<h1>Listado de Fertilizantes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for fertilizer in @fertilizers %>
+      <tr>
+        <td><%=h fertilizer.name %></td>
+        <td><%=h fertilizer.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<br />
+
+<%= link_to 'New fertilizer', new_fertilizer_path %>
