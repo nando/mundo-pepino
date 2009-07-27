@@ -1,10 +1,10 @@
-veo_o_no = '(?:no )?(?:veo|debo ver|debería ver)'
+veo_o_no = '(?:no )?(?:veo|debo ver|deber[ií]a ver)'
 
 Entonces /^(#{veo_o_no}) el texto (.+)?$/i do |should, text|
   eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
 end
 
-leo_o_no = '(?:no )?(?:leo|debo leer|debería leer)'
+leo_o_no = '(?:no )?(?:leo|debo leer|deber[íi]a leer)'
 Entonces /^(#{leo_o_no}) el texto (.+)?$/i do |should, text|
   begin
     HTML::FullSanitizer.new.sanitize(response.body).send(shouldify(should)) =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
@@ -29,6 +29,19 @@ Entonces /^(#{veo_o_no}) (?:en )?(?:el selector|la etiqueta|el tag) (["'].+?['"]
     end
   }.send(not_shouldify(should), raise_error)  
 end
+
+Entonces /^(#{veo_o_no}) (?:las|los) siguientes (?:etiquetas|selectores):$/i do |should, texts|
+  check_contents, from_index = texts.raw[0].size == 2 ? [true, 1] : [false, 0]
+  texts.raw[from_index..-1].each do |row|
+    if check_contents
+      Entonces "#{should} el selector \"#{row[0]}\" con el valor \"#{row[1]}\""
+    else
+      Entonces "#{should} el selector \"#{row[0]}\""
+    end
+  end
+end
+
+
 
 Entonces /^(#{veo_o_no}) un enlace (?:a|para) (.+)?$/i do |should, pagina|
   lambda {

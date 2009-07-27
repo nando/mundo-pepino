@@ -413,6 +413,12 @@ Convenciones generales:
 #### Veo (o no) una etiqueta/selector opcionalmente con un contenido concreto
     Entonces no debo ver la etiqueta "div.title a" con el valor "Surco"
 [más ejemplos](master/features/veo-etiqueta-con-valor.feature)
+
+#### Veo (o no) varios selectores opcionalmente determinados valores (step-table)
+    Entonces debería ver los siguientes selectores:
+             | Selector       | Valor                  |
+             | h1             | Mundo Pepino           |
+[más ejemplos]/master/features/veo-etiquetas-con-valores.feature
 #### Leo (o no) un texto, quitando las etiquetas HTML
     Entonces debo leer el texto "IVA incluido"
 [más ejemplos](master/features/leo-el-texto.feature)
