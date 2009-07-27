@@ -426,8 +426,8 @@ Convenciones generales:
     Entonces veo marcado "Acepto las condiciones del servicio"
 [más ejemplos](master/features/veo-el-checkbox.feature)
 
-#### Veo una tabla con determinados valores en sus celdas (*table>tr>td*) \*
-    Entonces veo una tabla con el siguiente contenido:
+#### Veo una tabla con determinados valores en sus celdas \*
+    Entonces veo la tabla "bancales" con el siguiente contenido:
       | nombre | longitud | cultivo |  matas |
       |  A-01  |    12    | Patatas |     16 |
       |  A-02  |    12    | Tomates |     18 |

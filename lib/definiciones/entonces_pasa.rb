@@ -42,21 +42,25 @@ Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |shou
   field_labeled(unquote(campo)).send shouldify(should), be_checked
 end
 
-Entonces /^(#{veo_o_no}) una tabla con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, valores|
+Entonces /^(#{veo_o_no}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, table_id, valores|
+  table_id = "##{table_id.to_unquoted}" if table_id
   shouldified = shouldify(should)
-   if have_selector("table tbody").matches?(response.body)
-     start_row = 1
-     tbody = "tbody"
-   else
-     start_row = 2
-     tbody = ""
-   end
+  response.send shouldified, have_selector("table#{table_id}")
+
+  if have_selector("table#{table_id} tbody").matches?(response.body)
+    start_row = 1
+    tbody = "tbody"
+  else
+    start_row = 2
+    tbody = ""
+  end
+
   valores.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
       response.send shouldified, 
-        have_selector("table #{tbody} tr:nth-child(#{i+start_row}) td:nth-child(#{j+1})") { |td|
-          td.inner_text.should =~ /#{cell == '.*' ? cell : Regexp.escape((cell||"").to_translated)}/
-        }
+      have_selector("table#{table_id} #{tbody} tr:nth-child(#{i+start_row}) td:nth-child(#{j+1})") { |td|
+        td.inner_text.should =~ /#{cell == '.*' ? cell : Regexp.escape((cell||"").to_translated)}/
+      }
     end
   end
 end
