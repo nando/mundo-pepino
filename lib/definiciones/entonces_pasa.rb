@@ -20,6 +20,12 @@ Entonces /^(#{veo_o_no}) los siguientes textos:$/i do |should, texts|
   end
 end
 
+Entonces /^(#{leo_o_no}) los siguientes textos:$/i do |should, texts|
+  texts.raw.each do |row|
+    Entonces "#{should} el texto #{row[0]}"
+  end
+end
+
 Entonces /^(#{veo_o_no}) (?:en )?(?:el selector|la etiqueta|el tag) (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
     if value

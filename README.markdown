@@ -422,6 +422,11 @@ Convenciones generales:
 #### Leo (o no) un texto, quitando las etiquetas HTML
     Entonces debo leer el texto "IVA incluido"
 [más ejemplos](master/features/leo-el-texto.feature)
+#### Leo (o no), quitando las etiquetas HTML, una serie de textos expresados en una step-table
+    Entonces debo leer los siguientes textos:
+     | Muestras de tomate       |
+     | Restos de lechuga        |
+[más ejemplos](master/features/leo-los-siguientes-textos.feature)
 #### Veo (o no) un enlace a una URL específica (opcionalmente indicada con un nombre coloquial)
     Entonces debo ver un enlace a la página de recuperación de contraseña    
 [más ejemplos](master/features/veo-enlace-a-url-especifica)
