@@ -53,6 +53,12 @@ Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?['"](.+)["']$/i do
   find_field_and_do_with_webrat :fill_in, campo, :with => valor
 end
 
+Cuando /^(?:que )?(?:completo|relleno):$/i do |tabla|
+  tabla.raw[1..-1].each do |row|
+    Cuando "relleno \"#{row[0].gsub('"', '\"')}\" con \"#{row[1].gsub('"', '\"')}\""
+  end
+end
+
 Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|
   choose(campo_to_field(campo).to_s + '_' + valor.downcase.to_underscored)
 end
@@ -101,7 +107,7 @@ Cuando /^(?:que )?selecciono ['"]?(\d\d?) de (\w+) de (\d{4})["']? como (?:la )?
   options = etiqueta ? { :from => etiqueta } : {}
   select_date(time, options)
 end
-                                 
+
 Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ do |modelo, posicion|
   pile_up modelo.to_unquoted.to_model.new
   do_visit last_mentioned_url

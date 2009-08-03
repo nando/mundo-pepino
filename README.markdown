@@ -372,6 +372,12 @@ Convenciones generales:
 #### Relleno/completo un campo con un texto (*text* o *textarea*) \*
      Cuando completo 'nombre' con 'Wadus'
 [más ejemplos](master/features/cuando-relleno-el-campo.feature)
+#### Relleno/completo varios campos (*text* o *textarea*) desde una step-table \*
+     Cuando completo:
+       | Campo    | Valor    |
+       | Nombre   | Lechuga  |
+       | Color    | Verde    |
+[más ejemplos](master/features/cuando-relleno-los-campos.feature)
 #### Selecciono opción/opciones
 ##### Selecciono una opción de una lista (*select*) \*
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
