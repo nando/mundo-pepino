@@ -23,7 +23,7 @@ Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, 
   model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
   action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
   pile_up model.new
-  do_visit eval("#{action}_#{model.name.downcase}_path")
+  do_visit eval("#{action}_#{model.name.underscore}_path")
 end
 
 Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do
