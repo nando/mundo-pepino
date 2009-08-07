@@ -9,9 +9,7 @@ begin
 rescue
   # NO NEED TO CREATE ALIASES IN pre-0.2
 end
-require 'definiciones/dado_contexto'
-require 'definiciones/cuando_ocurre'
-require 'definiciones/entonces_pasa'
+require 'definitions/es_ES.rb'
 
 String.add_mapper(:real_value, {
   /^verdader[oa]$/i  => true,
