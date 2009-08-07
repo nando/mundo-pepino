@@ -1,0 +1,35 @@
+<h1>Edición de Huerta</h1>
+
+<% form_for(@orchard) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :area, "Área" %><br />
+    <%= f.text_field :area %>
+  </p>
+  <p>
+    <%= f.label :longitude, "Longitud" %><br />
+    <%= f.text_field :longitude %>
+  </p>
+  <p>
+    <%= f.label :latitude, "Latitud" %><br />
+    <%= f.text_field :latitude %>
+  </p>
+  <p>
+    <%= f.label :start_watering, 'Comienzo de riego' %><br />
+    <%= f.time_select :start_watering %>
+  </p>
+  <p>
+    <%= f.label :stop_watering, 'Finalización de riego' %><br />
+    <%= f.time_select :stop_watering %>
+  </p>
+  <p>
+    <%= f.submit "Guardar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Página de Huertos', orchards_path %>

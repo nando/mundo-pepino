@@ -38,7 +38,7 @@ String.add_mapper(:crud_action,
   /^creaci[óo]n$/i           => 'new',
   /^nuev(?:o|a|o\/a|a\/o)$/i => 'new',
   /^cambio$/i                => 'edit',
-  /^modificaci[oó]n$/i       => 'edit',
+  /^modificaci[oó]n(?:es)?$/i       => 'edit',
   /^edici[oó]n$/i            => 'edit')
 String.add_mapper(:month,
   :enero           => 'January',
@@ -322,6 +322,10 @@ module MundoPepino
     else
       raise ModelNotMapped.new(modelo)
     end
+  end
+
+  def last_mentioned_called(name)
+    detect_first @resources.flatten, name
   end
 
   def recursive_group_search(model, resources)

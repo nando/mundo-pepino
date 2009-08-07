@@ -354,6 +354,9 @@ Convenciones generales:
 #### Solicitud de la URL de creación de un recurso
     Cuando visito la página de creación de Tomate
 [más ejemplos](master/features/es_ES/cuando-visito-url-de-creacion.feature)
+#### Solicitud de la URL de edición de un recurso
+    Cuando visito la página de edición del huerto "H-01"
+[más ejemplos](master/features/es_ES/cuando-visito-url-de-edicion.feature)
 #### Pincho en un enlace \*
     Cuando pulso el enlace "Volver"
 [más ejemplos](master/features/es_ES/cuando-pulso-el-enlace.feature)

@@ -86,19 +86,33 @@ Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w]+|['"][\w ]+["'])$/i do 
   end
 end
 
-Cuando /^(?:que )?visito (?:el|la) #{pagina_re} del (.+) ['"](.+)["']$/i do |modelo, nombre|
+Cuando /^(?:que )?visito (?:el|la) #{pagina_re} (?:del|de la) (.+) ['"](.+)["']$/i do |modelo, nombre|
   if resource = last_mentioned_of(modelo, nombre)
     do_visit eval("#{resource.class.name.underscore}_path(resource)")
   else
-    raise MundoPepino::ModelNotMapped.new(modelo)
+    raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
   end
 end
 
-Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de )?(.+)$/i do |accion, modelo|
-  model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
+Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i do |accion, modelo, nombre|
   action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
-  pile_up model.new
-  do_visit eval("#{action}_#{model.name.underscore}_path")
+  if action != 'new'
+    nombre, modelo = modelo, nil unless nombre
+    resource = if modelo && modelo.to_unquoted.to_model
+      last_mentioned_of(modelo, nombre.to_unquoted)
+    else
+      last_mentioned_called(nombre.to_unquoted)
+    end
+    if resource
+      do_visit eval("#{action}_#{resource.m_model.name.underscore}_path(resource)")
+    else
+      MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
+    end
+  else
+    model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
+    pile_up model.new
+    do_visit eval("#{action}_#{model.name.underscore}_path")
+  end
 end
 
 Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do
