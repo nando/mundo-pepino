@@ -61,9 +61,9 @@ String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
 String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
 String.add_mapper(:translated) { |str|
   if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
-    I18n.translate(str)
+    I18n.translate(str, :default => str)
   elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
-    I18n.translate($1, eval($2))
+    I18n.translate($1, {:default => str}.merge(eval($2)))
   else
     str
   end
