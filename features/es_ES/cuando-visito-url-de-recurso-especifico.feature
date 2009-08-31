@@ -13,10 +13,10 @@ Característica: Solicitud de URL de recurso específico a partir del nombre
   #   Cuando visito la página del huerto "H-01"
   #
   ########################################################################
-    Dado que tenemos dos huertos "Esplendoroso y Mermado"
+    Dado que tenemos dos huertos "Esplendoroso y Mermada"
     Cuando visito la página del huerto "Esplendoroso"
     Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
            Y debo ver la etiqueta H2 con el valor "Esplendoroso"
-    Cuando visito la página del huerto "Mermado"
+    Cuando visito la página de la huerta "Mermada"
     Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
-           Y debo ver la etiqueta H2 con el valor "Mermado"
+           Y debo ver la etiqueta H2 con el valor "Mermada"

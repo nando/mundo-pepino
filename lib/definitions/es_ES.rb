@@ -94,7 +94,7 @@ Cuando /^(?:que )?visito (?:el|la) #{pagina_re} (?:del|de la) (.+) ['"](.+)["']$
   end
 end
 
-Cuando /^(?:que )?visito la p[áa]gina de ([\w\/]+) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i do |accion, modelo, nombre|
+Cuando /^(?:que )?visito la p[áa]gina de (?!la)([\w\/]+) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i do |accion, modelo, nombre|
   action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
   if action != 'new'
     nombre, modelo = modelo, nil unless nombre
