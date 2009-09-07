@@ -281,14 +281,6 @@ module MundoPepino
     shouldify(should_or_not) == :should ? :should_not : :should
   end
 
-  def unquote(string_or_array)
-    if string_or_array.is_a?(Array)
-      string_or_array.map { |str| unquote(str) }
-    else
-      string_or_array =~ /^['"](.*)['"]$/ ? $1 : string_or_array
-    end
-  end
-  
   def last_mentioned
     @resources && @resources.first
   end

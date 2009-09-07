@@ -17,7 +17,7 @@ Dado /^(?:que tenemos )?(#{numero}) (.+) #{cuyo} (.+?) (?:(?:es|son) (?:de )?)?[
 end
 
 Dado /^(?:que tenemos )?(?:el|la|los|las|el\/la|los\/las) (?:siguientes? )?(.+):$/ do |modelo, tabla|
-  model = unquote(modelo).to_model
+  model = modelo.to_unquoted.to_model
   add_resource model, translated_hashes(tabla.raw, :model => model), :force_creation => true
 end 
 
@@ -266,7 +266,7 @@ end
 
 
 Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
-  field_labeled(unquote(campo)).send shouldify(should), be_checked
+  field_labeled(campo.to_unquoted).send shouldify(should), be_checked
 end
 
 Entonces /^(#{veo_o_no}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, table_id, valores|
