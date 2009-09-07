@@ -1,5 +1,6 @@
 require 'cucumber/rails/world'
 require 'resources_history/resources_history'
+require 'visits_history/visits_history'
 require 'string-mapper'
 begin
   module Cucumber::StepMethods
@@ -72,6 +73,7 @@ String.add_mapper(:translated) { |str|
 
 module MundoPepino
   include ResourcesHistory
+  include VisitsHistory
 	
   def real_value_for(v)
     (v.is_a?(String) ? v.to_real_value : v )
@@ -147,13 +149,6 @@ module MundoPepino
     [attribs.keys.map{|s| "#{s}=?"}.join(' AND ')] + attribs.values
   end
 
-
-  def do_visit(url)
-    @visits ||= []
-    @visits << url
-    visit url
-  end
-  
   def names_for_simple_creation(model, number, name_or_names, options = {})
     base_hash = base_hash_for(options)
     if name_or_names
@@ -179,11 +174,6 @@ module MundoPepino
 
   def not_shouldify(should_or_not)
     shouldify(should_or_not) == :should ? :should_not : :should
-  end
-
-
-  def last_visited
-    @visits.last
   end
 
   def relative_page(pagina)
