@@ -104,7 +104,7 @@ Cuando /^(?:que )?visito la p[áa]gina de (?!la)([\w\/]+) (?:de |de la |del )?(.
       last_mentioned_called(nombre.to_unquoted)
     end
     if resource
-      do_visit eval("#{action}_#{resource.m_model.name.underscore}_path(resource)")
+      do_visit eval("#{action}_#{resource.mr_singular}_path(resource)")
     else
       MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
     end
