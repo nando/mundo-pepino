@@ -2,6 +2,7 @@ nbproject
 features/support/app/log
 features/support/app/tmp
 features/support/app/vendor
+features/support/app/script
 features/support/app/db/schema.rb
 features/support/app/db/*.sqlite3
 features/support/app/caracteristicas/

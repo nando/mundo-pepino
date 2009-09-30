@@ -16,6 +16,8 @@ Bon appetit!
 
 ## Toma de contacto o *playground*
 
+AVISO: La versión actual de MundoPepino sólo funciona con la **versión 0.3.101 de Cucumber o inferiores**. Sorry!
+
 Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-rails**, **webrat** (más información sobre las dependencias más abajo y [en la documentacion oficial](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails** (2.x):
 
     rails mi_app; cd mi_app
