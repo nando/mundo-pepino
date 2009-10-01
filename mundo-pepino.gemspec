@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.autorequire = %q{mundo-pepino}
   s.date = %q{2009-09-30}
   s.email = %q{fernando.garcia@the-cocktail.com}
-  s.files = ["History.txt", "COPYING", "README.markdown", 'init.rb'] + FileList['lib/**/*.rb', 'rails_generators/**/*'].to_a
+  s.files = ["History.txt", "COPYING", "README.markdown"] + FileList['lib/**/*.rb', 'rails_generators/**/*'].to_a
   s.homepage = %q{http://github.com/nando/mundo-pepino}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.2.0}
