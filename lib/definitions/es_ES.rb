@@ -1,3 +1,73 @@
+begin
+  module Cucumber::StepMethods
+    alias_method :Dado, :Given
+    alias_method :Cuando, :When
+    alias_method :Entonces, :Then
+  end
+rescue
+  # NO NEED TO CREATE ALIASES IN post-0.2 Cucumbers
+end
+
+String.add_mapper(:real_value, {
+  /^verdader[oa]$/i  => true,
+  /^fals[ao]$/i      => false
+}) { |value| value }
+String.add_mapper :model
+String.add_mapper :relation_model
+String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
+String.add_mapper(:url, /^la (portada|home)/i => '/') do |string| 
+  string if string =~ /^\/.*$|^https?:\/\//i
+end
+
+String.add_mapper(:number, { 
+  /^un[oa]?$/i     => 1,
+  /^primer[oa]?$/i => 1,
+  :dos            => 2,
+  /^segund[oa]?$/i => 2,
+  :tres         => 3,
+  /^tercer[ao]/i => 3,
+  :cuatro      => 4,
+  /^cuart[ao]/i => 4,
+  :cinco       => 5,
+  /^quint[ao]/i => 5}) { |string| string.to_i }
+String.add_mapper(:crud_action,
+  /^alta$/i                  => 'new',
+  /^creaci[óo]n$/i           => 'new',
+  /^nuev(?:o|a|o\/a|a\/o)$/i => 'new',
+  /^cambio$/i                => 'edit',
+  /^modificaci[oó]n(?:es)?$/i       => 'edit',
+  /^edici[oó]n$/i            => 'edit')
+String.add_mapper(:month,
+  :enero           => 'January',
+  :febrero         => 'February',
+  :marzo           => 'March',
+  :abril           => 'April',
+  :mayo            => 'May',
+  :junio           => 'June',
+  :julio           => 'July',
+  :agosto          => 'August',
+  /^sep?tiembre$/i  => 'September',
+  :octubre         => 'October',
+  :noviembre       => 'November',
+  :diciembre       => 'December')
+String.add_mapper(:content_type,
+  /\.png$/   => 'image/png',
+  /\.jpe?g$/ => 'image/jpg',
+  /\.gif$/   => 'image/gif') { |str| 'text/plain' }
+String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
+String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
+String.add_mapper(:translated) { |str|
+  if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
+    I18n.translate(str, :default => str)
+  elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
+    I18n.translate($1, {:default => str}.merge(eval($2)))
+  else
+    str
+  end
+}
+
+
+
 numero = 'un|una|dos|tres|cuatro|cinco|\d+'
 cuyo = '(?:cuy[oa]s?|que tienen? como)'
 # Creación simple con nombre opcional
