@@ -15,13 +15,13 @@ MundoPepino will be an already implemented set of step definitions frequently ne
 Bon appetit!
 
 ## Toma de contacto
-ATENCIÓN: La versión actual de MundoPepino sólo funciona con la **versión 0.3.101 de Cucumber o inferiores**.
 
-Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-rails**, **webrat** (más información sobre las dependencias más abajo y [en la documentacion oficial](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails** (2.x):
+Asumiendo que tenemos instaladas las gema de **cucumber**, **rspec**, **rspec-rails**, **webrat** (más información sobre las dependencias más abajo y [en la documentacion oficial](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails** (2.x):
 
     rails mi_app; cd mi_app
     script/plugin install git://github.com/nando/string-mapper.git
     script/plugin install git://github.com/nando/mundo-pepino.git
+    script/generate cucumber
     script/generate mundo_pepino
     script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área longitude:string:longitud latitude:string:latitud used:boolean:usado
     script/generate scaffold Orchard name:string area:integer longitude:string latitude:string used:boolean
@@ -30,8 +30,8 @@ Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-r
 
 En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold* genera las vistas en inglés y el generador de *caracteristica* los espera en castellano. El primero es el botón "Create" y el segundo el enlace "Destroy":
 
-    $EDITOR app/views/orchards/index.html.erb # "Borrar" por "Destroy"
-    $EDITOR app/views/orchards/new.html.erb # "Crear" por "Create"
+    $EDITOR app/views/orchards/index.html.erb # "Borrar" en lugar de "Destroy"
+    $EDITOR app/views/orchards/new.html.erb # "Crear" en lugar de "Create"
     rake caracteristicas
 
 Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes.

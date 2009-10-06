@@ -5,8 +5,8 @@ require 'rbconfig'
 class MundoPepinoGenerator < Rails::Generator::Base
   def manifest
     record do |m|
-      m.directory 'caracteristicas/support'
-      m.file 'mundo_pepino_env.rb', 'caracteristicas/support/mundo_pepino_env.rb'
+      m.directory 'features/step_definitions'
+      m.file 'mundo_pepino_es_ES.rb', 'features/step_definitions/mundo_pepino_es_ES.rb'
 
       m.directory 'lib/tasks'
       m.file      'mundo_pepino.rake',    'lib/tasks/mundo_pepino.rake'

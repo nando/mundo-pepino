@@ -1,6 +1,6 @@
 # Este generador crea una plantilla de caracteristica (feature) ligada a un modelo
 module Rails::Generator::Commands
-  MUNDO_PEPINO_ENV = 'caracteristicas/support/mundo_pepino_env.rb'
+  MUNDO_PEPINO_ENV = 'features/step_definitions/mundo_pepino_es_ES.rb'
 
   MODEL_CLEANING = '"\n    # ENTRADA AUTO-GENERADA PARA #{model}\n' +
                    '    #{model}, # ' +
@@ -79,7 +79,7 @@ class CaracteristicaGenerator < Rails::Generator::NamedBase
         end
       end
       m.template  'caracteristica.erb',
-        "caracteristicas/gestion_de_#{modelo_en_plural.downcase}.feature"
+        "features/gestion_de_#{modelo_en_plural.downcase}.feature"
     end
   end
 
