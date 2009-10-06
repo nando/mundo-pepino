@@ -14,9 +14,8 @@ MundoPepino will be an already implemented set of step definitions frequently ne
 
 Bon appetit!
 
-## Toma de contacto o *playground*
-
-AVISO: La versión actual de MundoPepino sólo funciona con la **versión 0.3.101 de Cucumber o inferiores**. Sorry!
+## Toma de contacto
+ATENCIÓN: La versión actual de MundoPepino sólo funciona con la **versión 0.3.101 de Cucumber o inferiores**.
 
 Asumiendo que tenemos instaladas las gemas de **cucumber**, **rspec**, **rspec-rails**, **webrat** (más información sobre las dependencias más abajo y [en la documentacion oficial](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails** (2.x):
 
@@ -47,7 +46,7 @@ Dentro del plugin, en `features/support/app` está la aplicación que el MundoPe
 
 ### Dependencias
 
-  Las clásicas gemas o plugins de **cucumber**, **webrat** (gema de Aslak o última versión de Brynary como plugin. Más información [aquí](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)), **rspec** y **rspec-rails**. Por ejemplo:
+  Las clásicas gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo:
 
     gem install term-ansicolor treetop diff-lcs nokogiri # dependencias de Cucumber
     git clone git://github.com/aslakhellesoy/cucumber.git vendor/plugins/cucumber

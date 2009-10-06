@@ -1,1 +1,1 @@
-default: --require ../env.rb --language=es ../../../features
+default: --require ../env.rb --require ../../step_definitions/mundo_pepino_es_ES.rb --language=es ../../../features/es_ES/

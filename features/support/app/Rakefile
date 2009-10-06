@@ -9,4 +9,4 @@ require 'rake/rdoctask'
 
 require 'tasks/rails'
 
-task :default => 'mundo_pepino:features'
+task :default => 'mundo_pepino:features:es_ES'

@@ -8,7 +8,7 @@ require 'mundo_pepino/version'
 
 require 'string-mapper'
 
-require 'definitions/es_ES.rb'
+#require 'definitions/es_ES.rb'
 
 module MundoPepino
 
