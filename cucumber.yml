@@ -1,0 +1,1 @@
+default: --require features/support/env.rb --require features/step_definitions/mundo_pepino_es_ES.rb --language es features/es_ES/
