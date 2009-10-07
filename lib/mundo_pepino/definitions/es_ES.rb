@@ -1,12 +1,4 @@
-begin
-  module Cucumber::StepMethods
-    alias_method :Dado, :Given
-    alias_method :Cuando, :When
-    alias_method :Entonces, :Then
-  end
-rescue
-  # NO NEED TO CREATE ALIASES IN post-0.2 Cucumbers
-end
+# MundoPepino's step definitions in es_ES
 
 String.add_mapper(:real_value, {
   /^verdader[oa]$/i  => true,
