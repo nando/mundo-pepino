@@ -21,14 +21,14 @@ Gem::Specification.new do |s|
     s.specification_version = 2
 
     if current_version >= 3 then
-      s.add_runtime_dependency(%q<cucumber>, ["<= 0.3.101"])
-      s.add_runtime_dependency(%q<nando-string-mapper>, [">= 0.0.1"])
+      s.add_runtime_dependency(%q<cucumber>, [">= 0.3.102"])
+      s.add_runtime_dependency(%q<string-mapper>, [">= 0.1.0"])
     else
-      s.add_dependency(%q<cucumber>, ["<= 0.3.101"])
-      s.add_dependency(%q<nando-string-mapper>, [">= 0.0.1"])
+      s.add_dependency(%q<cucumber>, [">= 0.3.102"])
+      s.add_dependency(%q<string-mapper>, [">= 0.1.0"])
     end
   else
-    s.add_dependency(%q<cucumber>, ["<= 0.3.101"])
-    s.add_dependency(%q<nando-string-mapper>, [">= 0.0.1"])
+    s.add_dependency(%q<cucumber>, [">= 0.3.102"])
+    s.add_dependency(%q<nando-string-mapper>, [">= 0.1.0"])
   end
 end

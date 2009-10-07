@@ -8,8 +8,6 @@ require 'mundo_pepino/version'
 
 require 'string-mapper'
 
-#require 'definitions/es_ES.rb'
-
 module MundoPepino
 
   include ResourcesHistory
