@@ -1,1 +1,2 @@
-default: --require features/support/env.rb --require features/step_definitions/mundo_pepino_es_ES.rb --language es features/es_ES/
+es_ES: --require features/support/env.rb --require features/step_definitions/es_ES.rb --language es features/es_ES/
+en_US: --require features/support/env.rb --require features/step_definitions/en_US.rb --language en features/en_US/

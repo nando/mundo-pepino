@@ -9,15 +9,19 @@ unless ARGV.any? {|a| a =~ /^gems/}
   begin
     require 'cucumber/rake/task'
     namespace :mundo_pepino do
-      Cucumber::Rake::Task.new({:es_ES => 'db:test:prepare'}) do |t|
-        t.cucumber_opts = "--require features/support/env.rb --require features/step_definitions/mundo_pepino_es_ES.rb --format progress --language es features/es_ES"
+      supported_langs = [:es_ES, :en_US]
+      supported_langs.each do |lang|
+        Cucumber::Rake::Task.new({lang => 'db:test:prepare'}) do |t|
+          t.cucumber_opts = "--profile #{lang} --format progress"
+          t.feature_pattern = "features/#{lang}/*.feature"
+        end
       end
   
       desc 'Run all MundoPepino features on every supported language'
-      task :all => [:es_ES]
+      task :all => supported_langs
     end
   
-    task :default => 'mundo_pepino:es_ES'
+    task :default => 'mundo_pepino:all'
 
   rescue LoadError
     desc 'cucumber rake task not available (cucumber not installed)'

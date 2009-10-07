@@ -4,8 +4,6 @@ String.add_mapper(:real_value, {
   /^verdader[oa]$/i  => true,
   /^fals[ao]$/i      => false
 }) { |value| value }
-String.add_mapper :model
-String.add_mapper :relation_model
 String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
 String.add_mapper(:url, /^la (portada|home)/i => '/') do |string| 
   string if string =~ /^\/.*$|^https?:\/\//i
@@ -42,35 +40,12 @@ String.add_mapper(:month,
   :octubre         => 'October',
   :noviembre       => 'November',
   :diciembre       => 'December')
-String.add_mapper(:content_type,
-  /\.png$/   => 'image/png',
-  /\.jpe?g$/ => 'image/jpg',
-  /\.gif$/   => 'image/gif') { |str| 'text/plain' }
-String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
-String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
-String.add_mapper(:translated) { |str|
-  if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
-    I18n.translate(str, :default => str)
-  elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
-    I18n.translate($1, {:default => str}.merge(eval($2)))
-  else
-    str
-  end
-}
-
-
 
 numero = 'un|una|dos|tres|cuatro|cinco|\d+'
 cuyo = '(?:cuy[oa]s?|que tienen? como)'
 # Creación simple con nombre opcional
 Dado /^(?:que tenemos )?(#{numero}) (?!.+ #{cuyo})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
-  if model = modelo.to_unquoted.to_model
-    number = numero.to_number
-    attribs = names_for_simple_creation(model, number, nombre)
-    add_resource(model, attribs, :force_creation => true)
-  else
-    raise MundoPepino::ModelNotMapped.new(modelo)
-  end
+ we_have_a_number_of_instances_called numero, modelo, nombre 
 end
 # Creación con asignación de valor en campo
 Dado /^(?:que tenemos )?(#{numero}) (.+) #{cuyo} (.+?) (?:(?:es|son) (?:de )?)?['"](.+)["'](?: .+)?$/i do |numero, modelo, campo, valor|

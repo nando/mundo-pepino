@@ -2,14 +2,33 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 require 'cucumber/rails/world'
+require 'mundo_pepino/implementations'
 require 'mundo_pepino/resources_history'
 require 'mundo_pepino/visits_history'
 require 'mundo_pepino/version'
 
 require 'string-mapper'
 
-module MundoPepino
+String.add_mapper :model
+String.add_mapper :relation_model
+String.add_mapper(:content_type,
+  /\.png$/   => 'image/png',
+  /\.jpe?g$/ => 'image/jpg',
+  /\.gif$/   => 'image/gif') { |str| 'text/plain' }
+String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
+String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
+String.add_mapper(:translated) { |str|
+  if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
+    I18n.translate(str, :default => str)
+  elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
+    I18n.translate($1, {:default => str}.merge(eval($2)))
+  else
+    str
+  end
+}
 
+module MundoPepino
+  include Implementations
   include ResourcesHistory
   include VisitsHistory
 	
