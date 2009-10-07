@@ -39,9 +39,17 @@ Hoe.plugin :newgem
 
 $hoe = Hoe.spec 'mundo-pepino' do
   self.summary = 'MundoPepino is a set of reusable step definitions to test Rails apps with Cucumber'
+  self.url = 'http://github.com/nando/mundo-pepino'
   self.version = MundoPepino::VERSION::STRING
   self.developer 'Fernando García Samblas', 'fernando.garcia@the-cocktail.com'
   self.rubyforge_name = self.name # TODO this is default value
-  self.extra_deps     = [['string-mapper','>= 0.1.0'],['cucumber', '>=0.3.102']]
+  self.extra_deps = [
+    ['rails', '>=2.0.0'],
+    ['cucumber', '>=0.3.102'],
+    ['webrat', '>=0.5.3'],
+    ['rspec', '>=1.2.6'],
+    ['rspec-rails', '>=1.2.6'],
+    ['string-mapper','>= 0.1.0']
+  ]
 end
 

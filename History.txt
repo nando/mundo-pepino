@@ -1,3 +1,8 @@
+== 0.1.1 2009-10-07
+
+* 1 Bugfix:
+  * Added missed gem dependencies
+
 == 0.1.0 2009-09-30
 
 * 1 major enhancement:

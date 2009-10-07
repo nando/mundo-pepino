@@ -16,17 +16,15 @@ Bon appetit!
 
 ## Toma de contacto
 
-Asumiendo que tenemos instaladas las gema de **cucumber**, **rspec**, **rspec-rails**, **webrat** (más información sobre las dependencias más abajo y [en la documentacion oficial](http://wiki.github.com/aslakhellesoy/cucumber/ruby-on-rails)) y (como no) **rails** (2.x):
-
+    sudo gem install mundo-pepino
     rails mi_app; cd mi_app
-    script/plugin install git://github.com/nando/string-mapper.git
-    script/plugin install git://github.com/nando/mundo-pepino.git
     script/generate cucumber
     script/generate mundo_pepino
     script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área longitude:string:longitud latitude:string:latitud used:boolean:usado
     script/generate scaffold Orchard name:string area:integer longitude:string latitude:string used:boolean
     rake db:migrate
     rake caracteristicas
+
 
 En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold* genera las vistas en inglés y el generador de *caracteristica* los espera en castellano. El primero es el botón "Create" y el segundo el enlace "Destroy":
 
@@ -42,7 +40,14 @@ Dentro del plugin, en `features/support/app` está la aplicación que el MundoPe
 
 ## Instalación
 
-    $ script/plugin install git://github.com/nando/mundo-pepino.git
+Como gema:
+
+    gem install mundo-pepino
+
+Como plugin, debemos tener **cucumber**, **rspec**, **rspec-rails**, **webrat** y (como no) **rails** (2.x):
+
+    script/plugin install git://github.com/nando/string-mapper.git
+    script/plugin install git://github.com/nando/mundo-pepino.git
 
 ### Dependencias
 
@@ -298,40 +303,40 @@ Convenciones generales:
 
 #### Creación de uno o varios registros asignándoles opcionalmente un nombre
     Dado que tenemos Un Producto llamado "Acelgas" 
-[más ejemplos](master/features/es_ES/contexto-creacion-simple.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/contexto-creacion-simple.feature)
 
 #### Creación de uno o varios registros con un valor en un campo
     Dado que tenemos un huerto cuya área es de "1200" metros cuadrados
-[más ejemplos](master/features/es_ES/contexto-creacion-con-asignacion.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/contexto-creacion-con-asignacion.feature)
 
 #### Creación de uno o varios recursos a partir de una **step table**
     Dado que tenemos el siguiente Huerto:
            | nombre   | área | latitud  | latitud   | abono   |
            | Secano-1 | 35   | N 40° 44 | W 003° 48 | FSF-315 |
-[más ejemplos](master/features/es_ES/contexto-creacion-desde-step-table.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/contexto-creacion-desde-step-table.feature)
 
 #### Asignación de un valor en un campo de un recurso concreto
     Dado que el Tomate "A" tiene como variedad "Raf"
-[más ejemplos](master/features/es_ES/contexto-asignacion-de-valor-en-recurso.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-de-valor-en-recurso.feature)
 
 #### Asignación de un valor en un campo del último (o últimos) recurso mencionado
     Dado que dichas Acelgas tienen como Variedad "Gigante carmesí"
-[más ejemplos](master/features/es_ES/contexto-asignacion-de-valor-en-recurso-mencionado.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-de-valor-en-recurso-mencionado.feature)
 
 #### Asignación simple a un campo **has\_many** (normal o polimórfico) del último recurso mencionado
     Dado que dicho Huerto tiene Tres Bancales "Acelgas, Tomates y Pepinos"
-[más ejemplos (has_many normal)](master/features/es_ES/contexto-asignacion-has-many-simple.feature) - 
-[más ejemplos (has_many polimórfico)](master/features/es_ES/contexto-asignacion-has-many-polymorphic-simple.feature)
-[más ejemplos (has_many through)](master/features/es_ES/contexto-asignacion-has-many-through-simple.feature)
+[más ejemplos (has_many normal)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-simple.feature) - 
+[más ejemplos (has_many polimórfico)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-simple.feature)
+[más ejemplos (has_many through)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-simple.feature)
 
 #### Asignación en campo **has\_many** (normal o polimórfico) del último recurso mencionado desde una step-table
     Dado que dicho Huerto tiene los siguientes Bancales:
            | nombre | longitud | cultivo |  matas |
            |  A-01  |    12    | Patatas |     16 |
            |  A-02  |    12    | Tomates |     18 |
-[más ejemplos (has_many normal)](master/features/es_ES/contexto-asignacion-has-many-desde-fit-table.feature) - 
-[más ejemplos (has_many polimórfico)](master/features/es_ES/contexto-asignacion-has-many-polymorphic-desde-fit-table.feature)
-[más ejemplos (has_many through)](master/features/es_ES/contexto-asignacion-has-many-through-desde-fit-table.feature)
+[más ejemplos (has_many normal)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-desde-fit-table.feature) - 
+[más ejemplos (has_many polimórfico)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-desde-fit-table.feature)
+[más ejemplos (has_many through)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-desde-fit-table.feature)
 
 ### Cuando algo ocurre (Whens)
 
@@ -342,46 +347,46 @@ Convenciones generales:
 
 #### Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
     Cuando visito la portada
-[más ejemplos](master/features/es_ES/cuando-visito-url-especifica.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-visito-url-especifica.feature)
 #### Solicitud de la URL asociada a un recurso concreto
     Cuando visito la página del huerto "H-01"
-[más ejemplos](master/features/es_ES/cuando-visito-url-de-recurso-especifico.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-recurso-especifico.feature)
 #### Solicitud de la URL asociada al último recurso definido
     Cuando visito su página
-[más ejemplos](master/features/es_ES/cuando-visito-url-de-recurso-mencionado.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-recurso-mencionado.feature)
 #### Solicitud de la URL del índice (index) de un tipo de recurso (modelo)
     Cuando visito la página de Tomates
-[más ejemplos](master/features/es_ES/cuando-visito-url-de-indice-de-tipo-de-recurso.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-indice-de-tipo-de-recurso.feature)
 #### Solicitud de la URL de creación de un recurso
     Cuando visito la página de creación de Tomate
-[más ejemplos](master/features/es_ES/cuando-visito-url-de-creacion.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-creacion.feature)
 #### Solicitud de la URL de edición de un recurso
     Cuando visito la página de edición del huerto "H-01"
-[más ejemplos](master/features/es_ES/cuando-visito-url-de-edicion.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-edicion.feature)
 #### Pincho en un enlace \*
     Cuando pulso el enlace "Volver"
-[más ejemplos](master/features/es_ES/cuando-pulso-el-enlace.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-enlace.feature)
 #### Pincho/pulso un bóton (*submit*) \*
     Cuando pulso en el botón Enviar
-[más ejemplos](master/features/es_ES/cuando-pulso-el-boton.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-boton.feature)
 #### Adjunto un fichero (*file*) \*
     Cuando adjunto el fichero "images/cucumber.jpg" en Fotografía actual
-[más ejemplos](master/features/es_ES/cuando-adjunto-el-fichero.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-adjunto-el-fichero.feature)
 #### Elijo una opción (*radiobutton*) \*
     Cuando elijo el color "VERDE"
-[más ejemplos](master/features/es_ES/cuando-elijo-de-radiobutton.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-elijo-de-radiobutton.feature)
 #### Marco (o desmarco) una casilla (*checkbox*) \*
     Cuando marco "color verde"
-[más ejemplos](master/features/es_ES/cuando-marco-el-checkbox.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-marco-el-checkbox.feature)
 #### Relleno/completo un campo con un texto (*text* o *textarea*) \*
      Cuando completo 'nombre' con 'Wadus'
-[más ejemplos](master/features/es_ES/cuando-relleno-el-campo.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-relleno-el-campo.feature)
 #### Relleno/completo varios campos (*text* o *textarea*) desde una step-table \*
      Cuando completo:
        | Campo    | Valor    |
        | Nombre   | Lechuga  |
        | Color    | Verde    |
-[más ejemplos](master/features/es_ES/cuando-relleno-los-campos.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-relleno-los-campos.feature)
 #### Selecciono opción/opciones
 ##### Selecciono una opción de una lista (*select*) \*
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
@@ -397,11 +402,11 @@ Convenciones generales:
      Cuando selecciono 1 de septiembre de 1998 como fecha
 ##### Selecciono fecha para un campo concreto \*
      Cuando selecciono 2 de marzo de 2009 como fecha para el comienzo de la poda
-[más ejemplos](master/features/es_ES/cuando-selecciono-en-listado.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-selecciono-en-listado.feature)
 
 #### Borro el enésimo recurso desde la página de su índice (index) \*\*
      Cuando borro el Bancal en 6ª posición
-[más ejemplos](master/features/es_ES/cuando-borro-el-enesimo-recurso.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/cuando-borro-el-enesimo-recurso.feature)
 
 ### Entonces pasa (Thens)
 
@@ -413,46 +418,46 @@ Convenciones generales:
 
 #### Veo (o no) un texto \*
     Entonces debo ver el texto "IVA incluido"
-[más ejemplos](master/features/es_ES/veo-el-texto.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-el-texto.feature)
 #### Veo (o no) una serie de textos expresados en una step-table (sin cabeceras)
     Entonces debo ver los siguientes textos:
      | Muestras de tomate       |
      | Restos de lechuga        |
      | Treinta kilos de melones |
-[más ejemplos](master/features/es_ES/veo-los-siguientes-textos.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-los-siguientes-textos.feature)
 #### Veo (o no) una etiqueta/selector opcionalmente con un contenido concreto
     Entonces no debo ver la etiqueta "div.title a" con el valor "Surco"
-[más ejemplos](master/features/es_ES/veo-etiqueta-con-valor.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-etiqueta-con-valor.feature)
 
 #### Veo (o no) varios selectores opcionalmente determinados valores (step-table)
     Entonces debería ver los siguientes selectores:
              | Selector       | Valor                  |
              | h1             | Mundo Pepino           |
-[más ejemplos]/master/features/es_ES/veo-etiquetas-con-valores.feature
+[más ejemplos]/mundo-pepino/tree/master/features/es_ES/veo-etiquetas-con-valores.feature
 #### Leo (o no) un texto, quitando las etiquetas HTML
     Entonces debo leer el texto "IVA incluido"
-[más ejemplos](master/features/es_ES/leo-el-texto.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/leo-el-texto.feature)
 #### Leo (o no), quitando las etiquetas HTML, una serie de textos expresados en una step-table
     Entonces debo leer los siguientes textos:
      | Muestras de tomate       |
      | Restos de lechuga        |
-[más ejemplos](master/features/es_ES/leo-los-siguientes-textos.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/leo-los-siguientes-textos.feature)
 #### Veo (o no) un enlace a una URL específica (opcionalmente indicada con un nombre coloquial)
     Entonces debo ver un enlace a la página de recuperación de contraseña    
-[más ejemplos](master/features/es_ES/veo-enlace-a-url-especifica)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-enlace-a-url-especifica)
 #### Veo (o no) un enlace a una URL relativa a una visitada con anterioridad
     Entonces debo ver un enlace a la siguiente página
-[más ejemplos](master/features/es_ES/veo-enlace-a-url-relativa)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-enlace-a-url-relativa)
 #### Veo marcada (o desmarcada) una casilla (*checkbox*) \*
     Entonces veo marcado "Acepto las condiciones del servicio"
-[más ejemplos](master/features/es_ES/veo-el-checkbox.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-el-checkbox.feature)
 
 #### Veo una tabla con determinados valores en sus celdas \*
     Entonces veo la tabla "bancales" con el siguiente contenido:
       | nombre | longitud | cultivo |  matas |
       |  A-01  |    12    | Patatas |     16 |
       |  A-02  |    12    | Tomates |     18 |
-[más ejemplos](master/features/es_ES/veo-una-tabla-con-determinado-contenido.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-una-tabla-con-determinado-contenido.feature)
 
 #### Veo un formulario con determinados campos convenientemente etiquetados \*
     Entonces veo un formulario con los siguientes campos:
@@ -460,28 +465,28 @@ Convenciones generales:
       | Login      | textfield |
       | Contraseña | password  |
       | Entrar     | submit    |
-[más ejemplos](master/features/es_ES/veo-un-formulario-con-los-siguientes-campos.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/veo-un-formulario-con-los-siguientes-campos.feature)
 
 
 #### Tenemos en BBDD uno o más registros de un modelo opcionalmente con un nombre concreto
     Entonces tenemos en la base de datos un Abono llamado "FSF-03"
-[más ejemplos](master/features/es_ES/tenemos-en-bbdd-registros.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-registros.feature)
 
 #### Tenemos en BBDD un valor en un campo de un registro concreto
     Entonces el Huerto "H-02" tiene en base de datos como Área "2" hectáreas
-[más ejemplos](master/features/es_ES/tenemos-en-bbdd-valor-en-campo-de-registro.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-valor-en-campo-de-registro.feature)
 
 #### Tenemos en BBDD un valor en un campo del registro mencionando anteriormente
     Entonces tiene en base de datos como Área "2" hectáreas
-[más ejemplos](master/features/es_ES/tenemos-en-bbdd-valor-en-campo-de-registro-mencionado.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-valor-en-campo-de-registro-mencionado.feature)
 
 #### Tenemos en BBDD una asociación **has\_many** en un registro concreto
     Entonces el Huerto "H-02" tiene en base de datos un Bancal "A"
-[más ejemplos](master/features/es_ES/tenemos-en-bbdd-asocioacion-has-many-en-registro.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-asocioacion-has-many-en-registro.feature)
 
 #### Tenemos en BBDD una asociación **has\_many**  en un registro mencionando anteriormente
     Entonces tiene en base de datos un Bancal "B"
-[más ejemplos](master/features/es_ES/tenemos-en-bbdd-asocioacion-has-many-en-registro-mencionado.feature)
+[más ejemplos](mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-asocioacion-has-many-en-registro-mencionado.feature)
 
 (\*) Los **asteriscos** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`. Dos asteríscos (\*\*) hacen referencia a una definición presente en la feature autogenerada por `script/generate feature`.
 
