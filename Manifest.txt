@@ -2,8 +2,6 @@ COPYING
 History.txt
 Manifest.txt
 README.markdown
-Rakefile
-cucumber.yml
 init.rb
 lib/mundo_pepino.rb
 lib/mundo_pepino/definitions/es_ES.rb
@@ -11,7 +9,6 @@ lib/mundo_pepino/resources_history.rb
 lib/mundo_pepino/version.rb
 lib/mundo_pepino/visits_history.rb
 lib/mundo_pepino_es_ES.rb
-mundo-pepino.gemspec
 rails_generators/caracteristica/USAGE
 rails_generators/caracteristica/caracteristica_generator.rb
 rails_generators/caracteristica/templates/caracteristica.erb
