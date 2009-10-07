@@ -1,4 +1,6 @@
 nbproject
+doc
+pkg
 features/support/app/log
 features/support/app/tmp
 features/support/app/vendor
