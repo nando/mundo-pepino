@@ -44,22 +44,24 @@ Como gema:
 
     gem install mundo-pepino
 
-Como plugin, debemos tener **cucumber**, **rspec**, **rspec-rails**, **webrat** y (como no) **rails** (2.x):
+Como plugin (ver dependencias más abajo):
 
-    script/plugin install git://github.com/nando/string-mapper.git
     script/plugin install git://github.com/nando/mundo-pepino.git
 
 ### Dependencias
+  Si instalamos la gema junto con ella deberían quedar instaladas todas sus dependencias.
 
-  Las clásicas gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo:
+  Si instalamos mundo-pepino como plugin debemos tener instaladas las gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo, para instalar todas ellas como plugins:
 
     gem install term-ansicolor treetop diff-lcs nokogiri # dependencias de Cucumber
-    git clone git://github.com/aslakhellesoy/cucumber.git vendor/plugins/cucumber
-    git clone git://github.com/brynary/webrat.git vendor/plugins/webrat
-    git clone git://github.com/dchelimsky/rspec.git vendor/plugins/rspec
-    git clone git://github.com/dchelimsky/rspec-rails.git vendor/plugins/rspec-rails
+    script/plugin install git://github.com/aslakhellesoy/cucumber.git
+    script/plugin install git://github.com/brynary/webrat.git
+    script/plugin install git://github.com/dchelimsky/rspec.git
+    script/plugin install git://github.com/dchelimsky/rspec-rails.git
 
-  Además necesitamos instalar como plugin StringMapper (ver más abajo).
+  Además necesitamos instalar la gema o plugin StringMapper (ver más abajo):
+
+    script/plugin install git://github.com/nando/string-mapper.git
 
   Si hacemos uso de alguno de los pasos que hacen referencia a la selección de un mes como parte de una fecha en un formulario es necesaria la instalación del módulo ruby-locale.
 
