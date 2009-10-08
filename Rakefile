@@ -13,7 +13,6 @@ unless ARGV.any? {|a| a =~ /^gems/}
       supported_langs.each do |lang|
         Cucumber::Rake::Task.new({lang => 'db:test:prepare'}) do |t|
           t.cucumber_opts = "--profile #{lang} --format progress"
-          t.feature_pattern = "features/#{lang}/*.feature"
         end
       end
   
