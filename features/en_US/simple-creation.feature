@@ -37,15 +37,13 @@ Feature: Simple creation
   ########################################################################
     Given an orchard
       And one orchard
-#       Y un huerto "En el río"
-#       Y una huerta "En el castro"
-#       Y un huerto llamado "Regadío"
-#       Y una huerta llamada "Secano"
-#       Y 2 huertos
-#       Y 2 huertos "Regadío"
-#       Y 2 huertos llamados "Secano"
-#       Y 2 huertas llamadas "Secano"
-#       Y 3 huertas llamadas "H-01, H-02 y H-03"
+      And a tomatoe
+      And a tomatoe "Red Tomatoe"
+      And a tomatoe called "Dark Red Tomatoe"
+      And 2 orchards
+      And 2 orchards "Irrigated"
+      And 2 orchards called "Unirrigated"
+      And 3 orchards called "H-01, H-02 y H-03"
 #    Entonces tenemos en bbdd 17 huertos
 #           Y tenemos en bbdd un huerto "En el río"
 #           Y tenemos en bbdd una huerta "En el castro"

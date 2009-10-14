@@ -4,22 +4,24 @@ String.add_mapper(:real_value, {
   /^tru(e|th)$/i  => true,
   /^false$/i       => false
 }) { |value| value }  # "true".to_real_value # => true
-String.add_mapper :field
+String.add_mapper(:field, {:nombre => 'name'})
+
 String.add_mapper(:url, /^the home(page)?/i => '/') do |string| 
   string if string =~ /^\/.*$|^https?:\/\//i
 end
 
 String.add_mapper(:number, { 
-  /^un[oa]?$/i     => 1,
-  /^primer[oa]?$/i => 1,
-  :dos            => 2,
-  /^segund[oa]?$/i => 2,
-  :tres         => 3,
-  /^tercer[ao]/i => 3,
-  :cuatro      => 4,
-  /^cuart[ao]/i => 4,
-  :cinco       => 5,
-  /^quint[ao]/i => 5}) { |string| string.to_i }
+  /^an?$/i    => 1,
+  /^one$/i    => 1,
+  /^first?$/i => 1,
+  /^two$/i    => 2,
+  /^second$/i => 2,
+  /^three$/i  => 3,
+  /^third$/i  => 3,
+  /^four$/i   => 4,
+  /^fourth$/i => 4,
+  /^five$/i   => 5,
+  /^fifth$/i  => 5}) { |string| string.to_i }
 String.add_mapper(:crud_action,
   /^creation$/i           => 'new',
   /^changes?$/i                => 'edit',

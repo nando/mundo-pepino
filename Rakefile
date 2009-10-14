@@ -5,6 +5,8 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
 
+task :default => :'mundo_pepino:all'
+
 unless ARGV.any? {|a| a =~ /^gems/}
   begin
     require 'cucumber/rake/task'
@@ -19,8 +21,6 @@ unless ARGV.any? {|a| a =~ /^gems/}
       desc 'Run all MundoPepino features on every supported language'
       task :all => supported_langs
     end
-  
-    task :default => 'mundo_pepino:all'
 
   rescue LoadError
     desc 'cucumber rake task not available (cucumber not installed)'
