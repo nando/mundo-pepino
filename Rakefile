@@ -1,11 +1,6 @@
 # build stuff
 require(File.join(File.dirname(__FILE__), 'features', 'support', 'app', 'config', 'boot'))
 require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-require 'tasks/rails'
-
-task :default => :'mundo_pepino:all'
 
 unless ARGV.any? {|a| a =~ /^gems/}
   begin
@@ -13,7 +8,7 @@ unless ARGV.any? {|a| a =~ /^gems/}
     namespace :mundo_pepino do
       supported_langs = [:es_ES, :en_US]
       supported_langs.each do |lang|
-        Cucumber::Rake::Task.new({lang => 'db:test:prepare'}) do |t|
+        Cucumber::Rake::Task.new(lang) do |t|
           t.cucumber_opts = "--profile #{lang} --format progress"
         end
       end
@@ -21,6 +16,7 @@ unless ARGV.any? {|a| a =~ /^gems/}
       desc 'Run all MundoPepino features on every supported language'
       task :all => supported_langs
     end
+    task :default => :'mundo_pepino:all'
 
   rescue LoadError
     desc 'cucumber rake task not available (cucumber not installed)'
@@ -31,28 +27,28 @@ unless ARGV.any? {|a| a =~ /^gems/}
 end
 
 # gem stuff
-require 'rubygems'
-gem 'hoe', '>= 2.1.0'
-require 'hoe'
-require 'fileutils'
-require 'newgem/tasks'
-require 'lib/mundo_pepino/version'
-
-Hoe.plugin :newgem
-
-$hoe = Hoe.spec 'mundo-pepino' do
-  self.summary = 'MundoPepino is a set of reusable step definitions to test Rails apps with Cucumber'
-  self.url = 'http://github.com/nando/mundo-pepino'
-  self.version = MundoPepino::VERSION::STRING
-  self.developer 'Fernando García Samblas', 'fernando.garcia@the-cocktail.com'
-  self.rubyforge_name = self.name # TODO this is default value
-  self.extra_deps = [
-    ['rails', '>=2.0.0'],
-    ['cucumber', '>=0.3.102'],
-    ['webrat', '>=0.5.3'],
-    ['rspec', '>=1.2.6'],
-    ['rspec-rails', '>=1.2.6'],
-    ['string-mapper','>= 0.1.0']
-  ]
-end
+#require 'rubygems'
+#gem 'hoe', '>= 2.1.0'
+#require 'hoe'
+#require 'fileutils'
+#require 'newgem/tasks'
+#require 'lib/mundo_pepino/version'
+#
+#Hoe.plugin :newgem
+#
+#$hoe = Hoe.spec 'mundo-pepino' do
+#  self.summary = 'MundoPepino is a set of reusable step definitions to test Rails apps with Cucumber'
+#  self.url = 'http://github.com/nando/mundo-pepino'
+#  self.version = MundoPepino::VERSION::STRING
+#  self.developer 'Fernando García Samblas', 'fernando.garcia@the-cocktail.com'
+#  self.rubyforge_name = self.name # TODO this is default value
+#  self.extra_deps = [
+#    ['rails', '>=2.0.0'],
+#    ['cucumber', '>=0.3.102'],
+#    ['webrat', '>=0.5.3'],
+#    ['rspec', '>=1.2.6'],
+#    ['rspec-rails', '>=1.2.6'],
+#    ['string-mapper','>= 0.1.0']
+#  ]
+#end
 
