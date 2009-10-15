@@ -1,5 +1,15 @@
 require 'mundo_pepino_es_ES'
 
+class Time
+  alias :strftime_nolocale :strftime
+  def strftime(format)
+    format = format.dup
+    # webrat uses strftime(%B) to select months
+    format.gsub!(/%B/, I18n.translate('date.month_names')[self.mon])
+    self.strftime_nolocale(format)
+  end
+end
+
 MundoPepino::ModelsToClean = [
   Orchard,
   Terrace,
