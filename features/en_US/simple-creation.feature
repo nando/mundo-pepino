@@ -6,6 +6,7 @@ Feature: Simple creation
   #   Given (that we have)? _number_ _modelo_( called _name_)
   #
   # Description:
+  #   TODO: To translate this:
   #   Nos crea una o más instancias de un modelo con la posibilidad de 
   #   asociar a las mismas un _nombre_ determinado.
   #
@@ -37,18 +38,13 @@ Feature: Simple creation
   ########################################################################
     Given an orchard
       And one orchard
-      And a tomatoe
-      And a tomatoe "Red Tomatoe"
-      And a tomatoe called "Dark Red Tomatoe"
       And 2 orchards
       And 2 orchards "Irrigated"
       And 2 orchards called "Unirrigated"
       And 3 orchards called "H-01, H-02 y H-03"
     Then we have 11 orchards in our database
-#           Y tenemos en bbdd un huerto "En el río"
-#           Y tenemos en bbdd una huerta "En el castro"
-#           Y tenemos en bbdd 3 huertos "Regadío"
-#           Y tenemos en bbdd 5 huertas "Secano"
-#           Y tenemos en bbdd un huerto "H-01"
-#           Y tenemos en bbdd un huerto "H-02"
-#           Y tenemos en bbdd un huerto "H-03"
+     And we have two orchards "Irrigated" in our database
+     And we have two orchards "Unirrigated" in our database
+     And we have a orchard "H-01" in our database
+     And we have a orchard "H-02" in our database
+     And we have a orchard "H-03" in our database

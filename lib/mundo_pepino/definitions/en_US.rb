@@ -4,7 +4,7 @@ String.add_mapper(:real_value, {
   /^tru(e|th)$/i  => true,
   /^false$/i       => false
 }) { |value| value }  # "true".to_real_value # => true
-String.add_mapper(:field, {:nombre => 'name'})
+String.add_mapper(:field, {:nombre => :name})
 
 String.add_mapper(:url, /^the home(page)?/i => '/') do |string| 
   string if string =~ /^\/.*$|^https?:\/\//i
@@ -36,6 +36,6 @@ Given /^(?:that we have )?(#{number}) (?!.+ #{which})(.+?)(?: (?:called )?['"](.
   given_we_have_a_number_of_instances_called number, model, name 
 end
 
-Then /^we have (#{number}) (.+)(?: (?:called )?['"](.+)["'])? in our database$/ do |number, model, names|
+Then /^we have (#{number}) ([^ ]+)(?: (?:called )?['"](.+)["'])? in our database$/ do |number, model, names|
   then_we_have_a_number_of_instances_in_our_database number, model, names
 end
