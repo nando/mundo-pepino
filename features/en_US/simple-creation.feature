@@ -2,10 +2,10 @@ Feature: Simple creation
 
   Scenario: Creation of one or more instances of a model with optional name/s
   ########################################################################
-  # Patrón: 
+  # Syntax: 
   #   Given (that we have)? _number_ _modelo_( called _name_)
   #
-  # Descripción:
+  # Description:
   #   Nos crea una o más instancias de un modelo con la posibilidad de 
   #   asociar a las mismas un _nombre_ determinado.
   #
@@ -44,7 +44,7 @@ Feature: Simple creation
       And 2 orchards "Irrigated"
       And 2 orchards called "Unirrigated"
       And 3 orchards called "H-01, H-02 y H-03"
-#    Entonces tenemos en bbdd 17 huertos
+    Then we have 11 orchards in our database
 #           Y tenemos en bbdd un huerto "En el río"
 #           Y tenemos en bbdd una huerta "En el castro"
 #           Y tenemos en bbdd 3 huertos "Regadío"
