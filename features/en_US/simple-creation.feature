@@ -42,7 +42,7 @@ Feature: Simple creation
       And 2 orchards "Irrigated"
       And 2 orchards called "Unirrigated"
       And 3 orchards called "H-01, H-02 y H-03"
-    Then we have 11 orchards in our database
+    Then we have 110 orchards in our database
      And we have two orchards "Irrigated" in our database
      And we have two orchards "Unirrigated" in our database
      And we have an orchard "H-01" in our database
