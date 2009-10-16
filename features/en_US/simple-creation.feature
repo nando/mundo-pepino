@@ -45,6 +45,6 @@ Feature: Simple creation
     Then we have 11 orchards in our database
      And we have two orchards "Irrigated" in our database
      And we have two orchards "Unirrigated" in our database
-     And we have a orchard "H-01" in our database
-     And we have a orchard "H-02" in our database
-     And we have a orchard "H-03" in our database
+     And we have an orchard "H-01" in our database
+     And we have an orchard "H-02" in our database
+     And we have an orchard "H-03" in our database
