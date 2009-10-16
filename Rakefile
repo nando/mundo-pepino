@@ -9,7 +9,7 @@ unless ARGV.any? {|a| a =~ /^gems/}
       supported_langs = [:es_ES, :en_US]
       supported_langs.each do |lang|
         Cucumber::Rake::Task.new(lang) do |t|
-          t.cucumber_opts = "--profile #{lang} --format progress"
+          t.cucumber_opts = "--profile #{lang} --format debug"
         end
       end
   
