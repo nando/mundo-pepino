@@ -45,7 +45,7 @@ numero = 'un|una|dos|tres|cuatro|cinco|\d+'
 cuyo = '(?:cuy[oa]s?|que tienen? como)'
 # Creación simple con nombre opcional
 Dado /^(?:que tenemos )?(#{numero}) (?!.+ #{cuyo})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
- we_have_a_number_of_instances_called numero, modelo, nombre 
+  given_we_have_a_number_of_instances_called numero, modelo, nombre 
 end
 # Creación con asignación de valor en campo
 Dado /^(?:que tenemos )?(#{numero}) (.+) #{cuyo} (.+?) (?:(?:es|son) (?:de )?)?['"](.+)["'](?: .+)?$/i do |numero, modelo, campo, valor|
@@ -355,17 +355,7 @@ end
 en_bbdd_tenemos = '(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos))'
 tiene_en_bbdd = '(?:tiene en (?:la )?bbdd|en (?:la )?bbdd tiene|tiene en (?:la )?base de datos|en (?:la )?base de datos tiene)'
 Entonces /^#{en_bbdd_tenemos} (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
-  model = modelo.to_unquoted.to_model
-  conditions = if nombre
-    {:conditions => [ "#{field_for(model, 'nombre')}=?", nombre ]}
-  else
-    {}
-  end
-  resources = model.find(:all, conditions)
-  resources.size.should == numero.to_number
-  if resources.size > 0
-    pile_up (resources.size == 1 ? resources.first : resources)
-  end
+  then_we_have_a_number_of_instances_in_our_database numero, modelo, nombre
 end
 
 Entonces /^(?:el|la) (.+) "(.+)" #{tiene_en_bbdd} como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
