@@ -69,7 +69,10 @@ Como plugin (ver dependencias más abajo):
 
     script/plugin install git://github.com/nando/string-mapper.git
 
-  Si hacemos uso de alguno de los pasos que hacen referencia a la selección de un mes como parte de una fecha en un formulario es necesaria la instalación del módulo ruby-locale.
+  Si hacemos uso de alguno de los pasos que hacen referencia a la **selección de un mes** como parte de una fecha en un formulario necesitamos que el método ''strftime'' devuelva en nombre del mes en castellano cuando se utilice ''"%B"''. Para conseguirlo, tenemos entre otras las siguientes opciones (ver más abajo):
+
+* instalar el módulo ruby-locale,
+* o redefinir la función strftime para lograr dicho comportamiento.
 
 #### [StringMapper](http://github.com/nando/string-mapper)
 
@@ -113,11 +116,22 @@ Para ello por un lado tenemos que instalar la gema (para más información sobre
 
 También se debe incluir un fichero donde se definan las factories a utilizar en nuestro mundo-pepino, como ejemplo consultar el fichero de factories que se encuentra en el directorio ''features/support/app/db/factories''
 
-#### [ruby-locale](http://ruby-locale.sourceforge.net/)
+#### Selección de un mes en formularios
 
-  Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby esto es sinonimo del nombre del mes en inglés.
-  
-  **ruby-locale** es un (viejo) módulo que añade **soporte para locales en Ruby** al que se hace referencia [desde el wiki de Rails](http://wiki.rubyonrails.org/rails/pages/HowToOutputDatesInAnotherLanguage/). Instalándolo en el sistema tendremos la posibilidad de que strftime('%B') devuelva el nombre del mes en castellano.
+  Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby, si no hacemos nada para remediarlo, esto es sinónimo del nombre del mes de dicha fecha en inglés.
+
+  La opción más simple para resolver este problema es redefinir ''strftime'' para que devuelva el nombre del mes en el locale de la aplicación. Por ejemplo:
+
+    class Time
+      alias :strftime_nolocale :strftime
+      def strftime(format)
+        format = format.dup
+        format.gsub!(/%B/, I18n.translate('date.month_names')[self.mon])
+        self.strftime_nolocale(format)
+      end
+    end
+
+  Otra opción sería instalar **ruby-locale**. **ruby-locale** es un (viejo) módulo que añade **soporte para locales en Ruby** al que se hace referencia [desde el wiki de Rails](http://wiki.rubyonrails.org/rails/pages/HowToOutputDatesInAnotherLanguage/). Instalándolo en el sistema tendremos la posibilidad de que strftime('%B') devuelva el nombre del mes en castellano.
 
   Para instalarlo nos bajamos [su código fuente](http://sourceforge.net/project/platformdownload.php?group_id=68254) y lo compilamos e instalamos en el sistema:
 
