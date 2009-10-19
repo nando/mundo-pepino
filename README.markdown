@@ -28,6 +28,11 @@ MundoPepino was originally implemented to write features in Spanish. However its
 * **build**: [run-code-run](http://runcoderun.com/nando/mundo-pepino)
 * **gem**: mundo-pepino
 
+## Definitions
+
+### Simple instance/s creation optionally with its/their name/s
+    Given three orchards called "H-01, H-02 y H-03"
+[more examples](mundo-pepino/tree/master/features/en_US/simple-creation.feature)
 
 ## License
 
