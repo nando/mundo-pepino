@@ -24,11 +24,11 @@ Característica: asignación en campo has_many :through desde fit table
   #
   ########################################################################
     Dado que tenemos un huerto llamado "H-01"
-    Dado que dicho huerto tiene los siguientes cultivos:
-      |nombre |estación        |
-      |Tomates|verano          |
-      |Pepinos|primavera-verano|
-      |Patatas|invierno        |
+       Y que dicho huerto tiene los siguientes cultivos:
+          |nombre |estación        |
+          |Tomates|verano          |
+          |Pepinos|primavera-verano|
+          |Patatas|invierno        |
     Entonces tenemos en bbdd un huerto
            Y tenemos en bbdd tres bancales
            Y tenemos en bbdd tres cultivos

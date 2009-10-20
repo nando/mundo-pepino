@@ -357,13 +357,22 @@ Convenciones generales:
 [más ejemplos (has_many polimórfico)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-simple.feature) -
 [más ejemplos (has_many through)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-simple.feature)
 
-#### Asignación en campo **has\_many** (normal o polimórfico) del último recurso mencionado desde una step-table
+#### Asignación en campo **has\_many** de un recurso concreto desde una step-table
+    Dado que el huerto "H-01" tiene los siguientes bancales:
+           | nombre | longitud | cultivo |  matas |
+           |  A-01  |    12    | Patatas |     16 |
+           |  A-02  |    12    | Tomates |     18 |
+[más ejemplos (has_many normal)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-desde-fit-table-en-recurso-concreto.feature) - 
+[más ejemplos (has_many polimórfico)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-desde-fit-table-en-recurso-concreto.feature) -
+[más ejemplos (has_many through)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-desde-fit-table-en-recurso-concreto.feature)
+
+#### Asignación en campo **has\_many** del último recurso mencionado desde una step-table
     Dado que dicho Huerto tiene los siguientes Bancales:
            | nombre | longitud | cultivo |  matas |
            |  A-01  |    12    | Patatas |     16 |
            |  A-02  |    12    | Tomates |     18 |
 [más ejemplos (has_many normal)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-desde-fit-table.feature) - 
-[más ejemplos (has_many polimórfico)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-desde-fit-table.feature)
+[más ejemplos (has_many polimórfico)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-desde-fit-table.feature) -
 [más ejemplos (has_many through)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-desde-fit-table.feature)
 
 ### Cuando algo ocurre (Whens)

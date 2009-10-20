@@ -24,6 +24,17 @@ module MundoPepino
       end
     end
 
+    def given_resource_has_many_children_from_step_table(params)
+      if mentioned = last_mentioned_of(params[:resource_model].to_unquoted, params[:resource_name])
+        children_model = params[:children_model].to_unquoted.to_model
+        resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
+        resources.each do |resource|
+          add_resource children_model, 
+            translated_hashes(params[:step_table].raw, parent_options(resource, children_model))
+        end
+      end
+    end
+
     # DB CHECKS
     def then_we_have_a_number_of_instances_in_our_database(raw_number, raw_model, name)
       model = raw_model.to_unquoted.to_model

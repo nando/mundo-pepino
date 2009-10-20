@@ -100,15 +100,19 @@ Dado /^que dich[oa]s? (.+) tienen? (#{nro}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)[
     :children_names => nombres)
 end
 
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, nombre_del_padre, modelo_hijos, tabla|
+  given_resource_has_many_children_from_step_table(
+    :resource_model => modelo_padre,
+    :resource_name  => nombre_del_padre,
+    :children_model => modelo_hijos,
+    :step_table => tabla)
+end
+
 Dado /^que dich[ao]s? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
-  if mentioned = last_mentioned_of(modelo_padre.to_unquoted)
-    children_model = modelo_hijos.to_unquoted.to_model
-    resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
-    resources.each do |resource|
-      add_resource children_model, 
-        translated_hashes(tabla.raw, parent_options(resource, children_model))
-    end
-  end
+  given_resource_has_many_children_from_step_table(
+    :resource_model => modelo_padre,
+    :children_model => modelo_hijos,
+    :step_table => tabla)
 end
 
 
