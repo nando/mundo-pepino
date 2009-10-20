@@ -41,14 +41,14 @@ String.add_mapper(:month,
   :noviembre       => 'November',
   :diciembre       => 'December')
 
-numero = 'un|una|dos|tres|cuatro|cinco|\d+'
+nro = 'un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|\d+'
 cuyo = '(?:cuy[oa]s?|que tienen? como)'
 # Creación simple con nombre opcional
-Dado /^(?:que tenemos )?(#{numero}) (?!.+ #{cuyo})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
+Dado /^(?:que tenemos )?(#{nro}) (?!.+ #{cuyo})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   given_we_have_a_number_of_instances_called numero, modelo, nombre 
 end
 # Creación con asignación de valor en campo
-Dado /^(?:que tenemos )?(#{numero}) (.+) #{cuyo} (.+?) (?:(?:es|son) (?:de )?)?['"](.+)["'](?: .+)?$/i do |numero, modelo, campo, valor|
+Dado /^(?:que tenemos )?(#{nro}) (.+) #{cuyo} (.+?) (?:(?:es|son) (?:de )?)?['"](.+)["'](?: .+)?$/i do |numero, modelo, campo, valor|
   Dado "que tenemos #{numero} #{modelo}"
   Dado "que dichos #{modelo} tienen como #{campo} '#{valor}'"
 end
@@ -83,17 +83,21 @@ Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, 
   end
 end
 
-Dado /^que dich[oa]s? (.+) tienen? (un|una|dos|tres|cuatro|cinco|\d+) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
-  if mentioned = last_mentioned_of(modelo_padre.to_unquoted)
-    children_model = modelo_hijos.to_unquoted.to_model
-    resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
-    resources.each do |resource|
-      attribs = names_for_simple_creation(children_model, 
-        numero.to_number, nombres, parent_options(resource, children_model))
-      add_resource children_model, attribs, :force_creation => nombres.nil?
-    end
-    pile_up mentioned
-  end
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{nro}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, modelo_hijos, nombres|
+  given_resource_has_many_children(
+    :resource_model => modelo_padre,
+    :resource_name => nombre_del_padre,
+    :number_of_children => numero,
+    :children_model => modelo_hijos,
+    :children_names => nombres)
+end
+
+Dado /^que dich[oa]s? (.+) tienen? (#{nro}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
+  given_resource_has_many_children(
+    :resource_model => modelo_padre,
+    :number_of_children => numero,
+    :children_model => modelo_hijos,
+    :children_names => nombres)
 end
 
 Dado /^que dich[ao]s? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
@@ -354,7 +358,7 @@ end
 #BBDD
 en_bbdd_tenemos = '(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos))'
 tiene_en_bbdd = '(?:tiene en (?:la )?bbdd|en (?:la )?bbdd tiene|tiene en (?:la )?base de datos|en (?:la )?base de datos tiene)'
-Entonces /^#{en_bbdd_tenemos} (un|una|dos|tres|cuatro|cinco|\d+) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
+Entonces /^#{en_bbdd_tenemos} (#{nro}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
   then_we_have_a_number_of_instances_in_our_database numero, modelo, nombre
 end
 

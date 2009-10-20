@@ -345,7 +345,13 @@ Convenciones generales:
     Dado que dichas Acelgas tienen como Variedad "Gigante carmesí"
 [más ejemplos](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-de-valor-en-recurso-mencionado.feature)
 
-#### Asignación simple a un campo **has\_many** (normal o polimórfico) del último recurso mencionado
+#### Asignación simple a un campo **has\_many** de un recurso concreto
+    Dado que el huerto "H-01" tiene dos bancales "Bancal de Acelgas y Bancal de Tomates"
+[más ejemplos (has_many estándar)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-simple-en-recurso-concreto.feature) - 
+[más ejemplos (has_many polimórfico)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-simple-en-recurso-concreto.feature)
+[más ejemplos (has_many through)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-simple-en-recurso-concreto.feature)
+
+#### Asignación simple a un campo **has\_many** del último recurso mencionado
     Dado que dicho Huerto tiene Tres Bancales "Acelgas, Tomates y Pepinos"
 [más ejemplos (has_many normal)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-simple.feature) - 
 [más ejemplos (has_many polimórfico)](mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-simple.feature)
