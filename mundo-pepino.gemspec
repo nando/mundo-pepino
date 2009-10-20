@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mundo-pepino}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fernando Garc\303\255a Samblas"]
-  s.date = %q{2009-10-07}
+  s.date = %q{2009-10-20}
   s.description = %q{}
   s.email = ["fernando.garcia@the-cocktail.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt"]
-  s.files = ["COPYING", "History.txt", "Manifest.txt", "README.markdown", "doc", "init.rb", "lib/mundo_pepino.rb", "lib/mundo_pepino/definitions/es_ES.rb", "lib/mundo_pepino/resources_history.rb", "lib/mundo_pepino/version.rb", "lib/mundo_pepino/visits_history.rb", "lib/mundo_pepino_es_ES.rb", "rails_generators/caracteristica/USAGE", "rails_generators/caracteristica/caracteristica_generator.rb", "rails_generators/caracteristica/templates/caracteristica.erb", "rails_generators/mundo_pepino/USAGE", "rails_generators/mundo_pepino/mundo_pepino_generator.rb", "rails_generators/mundo_pepino/templates/mundo_pepino.rake", "rails_generators/mundo_pepino/templates/mundo_pepino_es_ES.rb"]
+  s.files = ["COPYING", "History.txt", "Manifest.txt", "README.markdown", "README_es.markdown", "init.rb", "lib/mundo_pepino.rb", "lib/mundo_pepino/definitions/en_US.rb", "lib/mundo_pepino/definitions/es_ES.rb", "lib/mundo_pepino/implementations.rb", "lib/mundo_pepino/resources_history.rb", "lib/mundo_pepino/version.rb", "lib/mundo_pepino/visits_history.rb", "lib/mundo_pepino_en_US.rb", "lib/mundo_pepino_es_ES.rb", "rails_generators/caracteristica/USAGE", "rails_generators/caracteristica/caracteristica_generator.rb", "rails_generators/caracteristica/templates/caracteristica.erb", "rails_generators/mundo_pepino/USAGE", "rails_generators/mundo_pepino/mundo_pepino_generator.rb", "rails_generators/mundo_pepino/templates/mundo_pepino.rake", "rails_generators/mundo_pepino/templates/mundo_pepino_es_ES.rb"]
   s.homepage = %q{http://github.com/nando/mundo-pepino}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]

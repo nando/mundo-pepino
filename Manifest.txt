@@ -2,12 +2,16 @@ COPYING
 History.txt
 Manifest.txt
 README.markdown
+README_es.markdown
 init.rb
 lib/mundo_pepino.rb
+lib/mundo_pepino/definitions/en_US.rb
 lib/mundo_pepino/definitions/es_ES.rb
+lib/mundo_pepino/implementations.rb
 lib/mundo_pepino/resources_history.rb
 lib/mundo_pepino/version.rb
 lib/mundo_pepino/visits_history.rb
+lib/mundo_pepino_en_US.rb
 lib/mundo_pepino_es_ES.rb
 rails_generators/caracteristica/USAGE
 rails_generators/caracteristica/caracteristica_generator.rb

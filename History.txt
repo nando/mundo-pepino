@@ -1,3 +1,12 @@
+== 0.1.2 2009-10-20
+
+* 2 major enhancements
+  * 1 new step definition matcher in English (en_US)
+    * Simple instance creation (simple-creation.feature)
+  * 2 new step definitions and matchers in es_ES:
+    * Simple asignment of a has_many field in an specific resource
+    * Asignment of a has_many field in an specific resource from an step-table
+
 == 0.1.1 2009-10-07
 
 * 1 Bugfix:
