@@ -12,17 +12,18 @@ MundoPepino::ModelsToClean = [
   Sprinkler
 ]
 
-String.model_mappings = {
-  /^orchards?$/i              => Orchard,
-  /^terraces?$/i            => Terrace,
-  /^crops?$/i              => Crop,
-  /^fertilizers?$/i => Fertilizer,
-  /^tomatoes?$/i		            => Tomato,
-  /^chards?$/i		            => Chard,
-  /^cucumbers?$/i		            => Pepino,
-  /^sprinklers?$/i          => Sprinkler,
-  /^lettuces?$/i              => Lettuce
-}
+def user_specific_mappings(world)
+  String.model_mappings = {
+    /^orchards?$/i    => Orchard,
+    /^terraces?$/i    => Terrace,
+    /^crops?$/i       => Crop,
+    /^fertilizers?$/i => Fertilizer,
+    /^tomatoes?$/i    => Tomato,
+    /^chards?$/i		  => Chard,
+    /^cucumbers?$/i	  => Pepino,
+    /^sprinklers?$/i  => Sprinkler,
+    /^lettuces?$/i    => Lettuce }
+end
 
 #String.field_mappings = {
 #  /^[Ááa]reas?$/i    => :area,

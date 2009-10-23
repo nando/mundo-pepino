@@ -22,6 +22,7 @@ MundoPepino::ModelsToClean = [
   Sprinkler
 ]
 
+def user_specific_mappings(world)
 String.model_mappings = {
   /^huert[oa]s?$/i            => Orchard,
   /^bancal(es)?$/i            => Terrace,
@@ -69,6 +70,7 @@ String.relation_model_mappings = {
 String.url_mappings.merge!(
   /^la página de registro/i    => '/welcome/signup'
 )
+end
 
 Before do
   MundoPepino::ModelsToClean.each { |model| model.destroy_all }

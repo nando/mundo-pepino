@@ -9,28 +9,46 @@ require 'mundo_pepino/version'
 
 require 'string-mapper'
 
-String.add_mapper :model
-String.add_mapper :relation_model
-String.add_mapper(:content_type,
-  /\.png$/   => 'image/png',
-  /\.jpe?g$/ => 'image/jpg',
-  /\.gif$/   => 'image/gif') { |str| 'text/plain' }
-String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
-String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
-String.add_mapper(:translated) { |str|
-  if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
-    I18n.translate(str, :default => str)
-  elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
-    I18n.translate($1, {:default => str}.merge(eval($2)))
-  else
-    str
-  end
-}
-
 module MundoPepino
   include Implementations
   include ResourcesHistory
   include VisitsHistory
+
+  class << self
+    def extended(world)
+      common_mappings world
+      language_specific_mappings world
+      user_specific_mappings world
+    end
+
+    def common_mappings(world)
+      String.add_mapper :model
+      String.add_mapper :relation_model
+      String.add_mapper(:content_type,
+        /\.png$/   => 'image/png',
+        /\.jpe?g$/ => 'image/jpg',
+        /\.gif$/   => 'image/gif') { |str| 'text/plain' }
+      String.add_mapper(:underscored) { |string| string.gsub(/ +/, '_') }
+      String.add_mapper(:unquoted) { |str| str =~ /^['"](.*)['"]$/ ? $1 : str}
+      String.add_mapper(:translated) do |str|
+        if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
+          I18n.translate(str, :default => str)
+        elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
+          I18n.translate($1, {:default => str}.merge(eval($2)))
+        else
+          str
+        end
+      end
+      String.add_mapper(:url) do |string|
+        if world.respond_to? :path_to
+          world.path_to string
+        else
+          string if string =~ /^\/.*$|^https?:\/\//i
+        end
+      end
+    end
+  end
+
 	
   def real_value_for(v)
     (v.is_a?(String) ? v.to_real_value : v )
