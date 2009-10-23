@@ -1,4 +1,4 @@
-require 'mundo_pepino_es_ES'
+require 'mundo_pepino/es_ES'
 
 class Time
   alias :strftime_nolocale :strftime

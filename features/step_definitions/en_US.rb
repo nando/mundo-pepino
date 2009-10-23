@@ -1,4 +1,4 @@
-require 'mundo_pepino_en_US'
+require 'mundo_pepino/en_US'
 
 MundoPepino::ModelsToClean = [
   Orchard,
