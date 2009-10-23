@@ -1,16 +1,18 @@
 require 'mundo_pepino/en_US'
 
-MundoPepino::ModelsToClean = [
-  Orchard,
-  Terrace,
-  Crop,
-  Fertilizer,
-  Tomato,
-  Chard,
-  Pepino,
-  Lettuce,
-  Sprinkler
-]
+MundoPepino.configure do |config|
+  config.models_to_clean = [
+    Orchard,
+    Terrace,
+    Crop,
+    Fertilizer,
+    Tomato,
+    Chard,
+    Pepino,
+    Lettuce,
+    Sprinkler
+  ]
+end
 
 def user_specific_mappings(world)
   String.model_mappings = {
@@ -61,7 +63,7 @@ end
 #)
 #
 Before do
-  MundoPepino::ModelsToClean.each { |model| model.destroy_all }
+  MundoPepino.clean_models
 end
 
 module MundoPepino

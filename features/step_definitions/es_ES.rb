@@ -1,26 +1,28 @@
 require 'mundo_pepino/es_ES'
 
+# Hack to manage that Webrat uses strftime(%B) to select months at forms
 class Time
   alias :strftime_nolocale :strftime
   def strftime(format)
     format = format.dup
-    # webrat uses strftime(%B) to select months
     format.gsub!(/%B/, I18n.translate('date.month_names')[self.mon])
     self.strftime_nolocale(format)
   end
 end
 
-MundoPepino::ModelsToClean = [
-  Orchard,
-  Terrace,
-  Crop,
-  Fertilizer,
-  Tomato,
-  Chard,
-  Pepino,
-  Lettuce,
-  Sprinkler
-]
+MundoPepino.configure do |config|
+  config.models_to_clean = [
+    Orchard,
+    Terrace,
+    Crop,
+    Fertilizer,
+    Tomato,
+    Chard,
+    Pepino,
+    Lettuce,
+    Sprinkler
+  ]
+end
 
 def user_specific_mappings(world)
 String.model_mappings = {
@@ -73,7 +75,7 @@ String.url_mappings.merge!(
 end
 
 Before do
-  MundoPepino::ModelsToClean.each { |model| model.destroy_all }
+  MundoPepino.clean_models
 end
 
 module MundoPepino
