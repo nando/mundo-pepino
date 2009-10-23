@@ -63,5 +63,12 @@ module MundoPepino
     def clean_models
       config.models_to_clean.each { |model| model.destroy_all }
     end
+
+    def user_specific_mappings(world)
+      config.model_mappings.each {|k,v| String.model_mappings[k] = v}
+      config.relation_model_mappings.each {|k,v| String.relation_model_mappings[k] = v}
+      config.field_mappings.each {|k,v| String.field_mappings[k] = v}
+      config.url_mappings.each {|k,v| String.url_mappings[k] = v}
+    end
   end
 end

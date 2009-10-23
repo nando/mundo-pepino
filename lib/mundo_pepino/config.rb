@@ -2,9 +2,16 @@ require 'ostruct'
 
 module MundoPepino
   class Config
-    attr_writer :models_to_clean
+    attr_accessor :models_to_clean,
+      :model_mappings,
+      :field_mappings,
+      :relation_model_mappings,
+      :url_mappings
     
     def initialize(&block)
+      @models_to_clean = []
+      @model_mappings, @field_mappings, 
+        @relation_model_mappings, @url_mappings = {}, {}, {}, {}
       configure(&block) if block_given?
     end
     

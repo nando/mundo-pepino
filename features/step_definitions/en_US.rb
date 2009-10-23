@@ -12,10 +12,7 @@ MundoPepino.configure do |config|
     Lettuce,
     Sprinkler
   ]
-end
-
-def user_specific_mappings(world)
-  String.model_mappings = {
+  config.model_mappings = {
     /^orchards?$/i    => Orchard,
     /^terraces?$/i    => Terrace,
     /^crops?$/i       => Crop,
@@ -24,7 +21,8 @@ def user_specific_mappings(world)
     /^chards?$/i		  => Chard,
     /^cucumbers?$/i	  => Pepino,
     /^sprinklers?$/i  => Sprinkler,
-    /^lettuces?$/i    => Lettuce }
+    /^lettuces?$/i    => Lettuce
+  }
 end
 
 #String.field_mappings = {
