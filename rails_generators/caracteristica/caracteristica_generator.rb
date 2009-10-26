@@ -16,17 +16,17 @@ module Rails::Generator::Commands
 
   class Create < Base
     def mp_model_cleaning(model)
-      add_to_mundo_pepino_env "MundoPepino::ModelsToClean = [", eval(MODEL_CLEANING)
+      add_to_mundo_pepino_env "config.models_to_clean = [", eval(MODEL_CLEANING)
       logger.model_cleaning "added #{model} (#{model}.destroy_all call before each scenario)"
     end
 
     def mp_model_mapping(model, regexp)
-      add_to_mundo_pepino_env 'String.model_mappings = {', eval(MODEL_MAPPING)
+      add_to_mundo_pepino_env 'config.model_mappings = {', eval(MODEL_MAPPING)
       logger.model_mapping " added /^#{regexp}$/i => #{model}"
     end
 
     def mp_field_mapping(field, regexp)
-      add_to_mundo_pepino_env 'String.field_mappings = {', eval(FIELD_MAPPING)
+      add_to_mundo_pepino_env 'config.field_mappings = {', eval(FIELD_MAPPING)
       logger.field_mapping " added /^#{regexp}$/i => :#{field}"
     end
 
@@ -43,7 +43,7 @@ module Rails::Generator::Commands
   class Destroy < RewindBase
     def mp_model_cleaning(model)
       remove_from_mundo_pepino_env eval(MODEL_CLEANING)
-      logger.model_cleaning "removing Before { #{model}.destroy_all }"
+      logger.model_cleaning "removing #{model} model cleaning"
     end
 
     def mp_model_mapping(model, regexp)

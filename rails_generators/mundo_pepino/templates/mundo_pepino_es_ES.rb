@@ -4,33 +4,34 @@ Webrat.configure do |config|
   config.mode = :rails
 end
 
-MundoPepino::ModelsToClean = [
-  # MODELOS PARA LIMPIAR antes de cada escenario,
-  # por ejemplo:
-  # Orchard, Terrace, Crop...
-]
+MundoPepino.configure do |config|
+  config.models_to_clean = [
+    # MODELOS PARA LIMPIAR antes de cada escenario,
+    # por ejemplo:
+    # Orchard, Terrace, Crop...
+  ]
 
-String.model_mappings = {
-  # TRADUCCIÓN DE MODELOS AQUÍ, por ejemplo:
-  # /^huert[oa]s?/i            => Orchard,
-  # /^bancal(es)?$/i           => Terrace,
-  # /^cultivos?$/i             => Crop...
-}
+  config.model_mappings = {
+    # TRADUCCIÓN DE MODELOS AQUÍ, por ejemplo:
+    # /^huert[oa]s?/i            => Orchard,
+    # /^bancal(es)?$/i           => Terrace,
+    # /^cultivos?$/i             => Crop...
+  }
 
-String.field_mappings = {
-  # TRADUCCIÓN DE CAMPOS AQUÍ:
-  # /^[Ááa]reas?$/i    => 'area',
-  # /^color(es)?$/i   => 'color',
-  # /^latitud(es)?$/i => 'latitude',
-  # /^longitud(es)?/i => 'length'
-  #
-  # TRADUCCIÓN ESPECÍFICA PARA UN MODELO
-  # /^Orchard::longitud(es)?$/   => 'longitude'
-}
-
+  config.field_mappings = {
+    # TRADUCCIÓN DE CAMPOS AQUÍ:
+    # /^[Ááa]reas?$/i    => 'area',
+    # /^color(es)?$/i   => 'color',
+    # /^latitud(es)?$/i => 'latitude',
+    # /^longitud(es)?/i => 'length'
+    #
+    # TRADUCCIÓN ESPECÍFICA PARA UN MODELO
+    # /^Orchard::longitud(es)?$/   => 'longitude'
+  }
+end
 
 Before do
-  MundoPepino::ModelsToClean.each { |model| model.destroy_all }
+  MundoPepino.clean_models
 end
 
 #module MundoPepino
