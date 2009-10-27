@@ -1,4 +1,4 @@
-require 'mundo_pepino_es_ES'
+require 'mundo_pepino/es_ES'
 
 Webrat.configure do |config|
   config.mode = :rails
