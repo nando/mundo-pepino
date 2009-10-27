@@ -19,11 +19,11 @@ MundoPepino is a set of reusable step definitions to test Rails apps with Cucumb
 
 MundoPepino was originally implemented to write features in Spanish. Its code has been recently modified to support different languages (and, theoretically, at the same time if needed).
 
-Currently only part of the original set of steps (and just a little of the documentation) has been translated to English. On the other hand features written in English don't have to manage the complexity added by translations of models and attributes. Cousin projects like (pickle)[http://github.com/ianwhite/pickle] or (email-spec)[http://github.com/bmabey/email-spec] are much more advanced to write features in English.
+Currently only part of the original set of steps (and just a little of the documentation) has been translated to English. On the other hand features written in English don't have to manage the complexity added by translations of models and attributes. Cousin projects like [pickle](http://github.com/ianwhite/pickle) or [email-spec](http://github.com/bmabey/email-spec) are much more advanced to write features in English.
 
 For other languages, before start your own implementation, it'd be nice if you:
 * start a new language in MundoPepino (we'll be glad to help you if you try), or
-* look for it in (similar projects)[http://groups.google.com/group/cukes/browse_thread/thread/b9b8ff6301393c19/febf6530a1ed1a37?lnk=gst&q=mundo+pepino#febf6530a1ed1a37].
+* look for your language in [similar i18n projects](http://groups.google.com/group/cukes/browse_thread/thread/b9b8ff6301393c19/febf6530a1ed1a37).
 
 ## Resources
 
