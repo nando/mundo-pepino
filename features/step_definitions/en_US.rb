@@ -23,9 +23,8 @@ MundoPepino.configure do |config|
     /^sprinklers?$/i  => Sprinkler,
     /^lettuces?$/i    => Lettuce
   }
-end
 
-#String.field_mappings = {
+#config.field_mappings = {
 #  /^[Ááa]reas?$/i    => :area,
 #  /^color(es)?$/i   => :color,
 #  /^latitud(es)?$/i => :latitude,
@@ -52,14 +51,16 @@ end
 #  /^precio$/i                  => :price
 #}
 #
-#String.relation_model_mappings = {
+#config.relation_model_mappings = {
 #  /^orchard_of_birth$/i => Orchard
 #}
 #
-#String.url_mappings.merge!(
+#config.url_mappings.merge!(
 #  /^la página de registro/i    => '/welcome/signup'
 #)
 #
+end
+
 Before do
   MundoPepino.clean_models
 end

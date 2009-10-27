@@ -11,7 +11,10 @@ Característica: veo enlace a URL específica
   # Descripción:
   #   Comprueba la presencia de un enlace a URL referida comprobando 
   # previamente si el valor de la misma ha sido mapeado (en 
-  # String.url_mappings).
+  # config.url_mappings).
+  #
+  #   Si se ha definido una función "path_to" utilizará dicha función
+  # para convertir el texto en la ruta que debe ser encontrada.
   #
   #   El valor por defecto definido en el mapeo de URLs (string.to_url) 
   # devuelve la propia cadena si no existe un mapeo concreto para ella y 
@@ -23,19 +26,16 @@ Característica: veo enlace a URL específica
   # 
   #   Otro:
   #
-  #     Entonces veo un enlace a /
+  #     Entonces veo un enlace a /mi-pagina
   #
   #   Sería equivalente a tener definido el siguente mapeo:
-  #
-  #     String.url_mappings[/la (portada|home)/i] = '/'
+  #     MundoPepino.configure do |conf|
+  #       conf.url_mappings[/mi página/i] = '/mi-pagina'
+  #     end
   #
   #   y escribir:
   #
-  #     Entonces veo un enlace a la portada
-  #
-  #   o:
-  #
-  #     Entonces veo un enlace a la home
+  #     Entonces veo un enlace a mi página
   #
   ########################################################################
     Cuando visito /

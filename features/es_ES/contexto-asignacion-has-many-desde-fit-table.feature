@@ -28,10 +28,6 @@ Característica: asignación de valores para un campo has_many
   #   sea el valor facilitado (nieto) para proceder a su asociación con 
   #   el hijo correspondiente a esa fila de la tabla.
   #
-  #   Ejemplo de mapeo de modelo:
-  #
-  #     String.model_mappings[/bancal(es)?$/i] = Terrace
-  #
   ########################################################################
     Dado que tenemos un huerto llamado "H-01"
        Y que dicho huerto tiene los siguientes bancales: 

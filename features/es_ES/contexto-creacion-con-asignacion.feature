@@ -22,7 +22,7 @@ Característica: Creación de recurso/s con un valor en alguno de sus campos
   #   todas las instancias.
   #
   #   Dicha asignación se llevará a cabo sobre el campo "name" si no se
-  #   indica lo contrario mapeando "nombre" en String.field_mappings.
+  #   indica lo contrario mapeando "nombre" con config.field_mappings.
   #
   # Ejemplos:
   #   Dado que tenemos un producto cuyo tipo es "Acelga"

@@ -20,13 +20,12 @@ Característica: asignación de un valor
   #
   #   - En caso contrario se asignará directamente _valor_ a _campo_.to_field 
   #
-  #   Ejemplo de mapeo de campo:
+  #   Ejemplo de mapeo de modelo y campo:
   #
-  #     String.field_mappings[/[áa]rea/i] = 'area'
-  #
-  #   Ejemplo de mapeo de modelo:
-  #
-  #     String.model_mappings[/(abono|fertilizante)s?$/i] = Fertilizer
+  #     MundoPepino.configure do |config|
+  #       config.model_mappings[/(abono|fertilizante)s?$/i] = Fertilizer
+  #       config.field_mappings[/[áa]rea/i] = 'area'
+  #     end
   #
   ########################################################################
     Dado que tenemos tres huertos llamados "H-02, H-03 y H-04"

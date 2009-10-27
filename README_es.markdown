@@ -65,7 +65,11 @@ Como plugin (ver dependencias más abajo):
     script/plugin install git://github.com/dchelimsky/rspec.git
     script/plugin install git://github.com/dchelimsky/rspec-rails.git
 
-  Además necesitamos instalar la gema o plugin StringMapper (ver más abajo):
+  Además necesitamos instalar la gema o plugin StringMapper:
+
+    gem install string-mapper
+
+  o
 
     script/plugin install git://github.com/nando/string-mapper.git
 
@@ -73,12 +77,6 @@ Como plugin (ver dependencias más abajo):
 
 * instalar el módulo ruby-locale,
 * o redefinir la función strftime para lograr dicho comportamiento.
-
-#### [StringMapper](http://github.com/nando/string-mapper)
-
-  StringMapper es una extensión de la clase String para obtener modelos, números, nombres de campo, etc. a partir de sus nombres en castellano.
-
-    script/plugin install git://github.com/nando/string-mapper.git
 
 #### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
 
@@ -157,62 +155,33 @@ Y posteriormente en las vistas llamamos al helper con algo parecido a:
     <%= pepino.datetime_select :harvested_at, :use_month_names => Meses %>
 
 ## Uso
-
-Para utilizar MundoPepino en una aplicación en la que todavía no estamos utilizando Cucumber lo más cómodo es comenzar utilizando los generadores (de forma similar a como se describe más arriba en *Toma de contacto*). Algo como:
-
-    cd miapp-sin-cucumber
-    script/plugin install git://github.com/nando/string-mapper.git
-    script/plugin install git://github.com/nando/mundo-pepino.git
-    script/generate mundo_pepino
-    script/generate caracteristica Model Modelo name:string:nombre used:boolean:usado
-
-Aquí ya deberíamos poder lanzar `rake caracteristicas`, obteniendo eso sí los errores pertinentes relacionados con implementación concreta de nuestro controlador. El fichero `gestion_de_modelo.feature` (que podemos renombrar por algo más chulo) nos servirá de patrón para escribir nuestra /característica/.
-
-Para utilizar MundoPepino en una aplicación en la que ya estamos utilizando Cucumber, al final de `features/support/env.rb` (o equivalente) incorporamos lo siguiente:
-
-    require 'mundo_pepino'
-    String.model_mappings = {} # Mapeo castellano-inglés de modelos
-    String.field_mappings = {} # Mapeo castellano-inglés de campos
-    
-    World do
-      MundoPepino.new
-    end
-
-Es recomendable también vaciar el contenido de la BBDD antes de comenzar la evaluación de un nuevo escenario para que los datos que pueda haber de otros escenarios no alteren su resultado. La función *Before* nos puede ayudar para conseguirlo, haciendo algo como:
-
-    Before do
-      MiModelo.destroy_all
-      MiOtroModelo.destroy_all # etc.
-    end
-
-*Before* se ejecutará antes de cada escenario y que los //Antecetentes// ((Background)[http://wiki.github.com/aslakhellesoy/cucumber/background]) de los mismos si los hubiese.
-
 ### generate mundo\_pepino
 
     rails_root$ script/generate mundo_pepino
-          create  caracteristicas/support
-          create  caracteristicas/support/mundo_pepino_env.rb
+          exists  features/step_definitions
+          create  features/step_definitions/mundo_pepino_es_ES.rb
           exists  lib/tasks
           create  lib/tasks/mundo_pepino.rake
 
-El principio de `mundo_pepino_env.rb` es el contenido del `env.rb` generado por `generate cucumber`, tras el cual añade lo siguiente:
+En `mundo_pepino_es_ES.rb` tenemos lo siguiente:
 
-    require 'mundo_pepino'          # Cargamos MundoPepino...
-    MundoPepino::ModelsToClean = [] # Array con los modelos que serán limpiados 
+    require 'mundo_pepino/es_ES'    # Cargamos las definiciones en castellano
+    MundoPepino.configure do |c|
+      c.models_to_clean = []        # Array con los modelos que serán limpiados 
                                     # antes de lanzar cada escenario.
-    String.model_mappings = {}      # Hash con el mapeo de los modelos a partir
+      c.model_mappings = {}         # Hash con el mapeo de los modelos a partir
                                     # de sus equivalencias en castellano.
-    String.field_mappings = {}      # Hash con el mapeo de los campos.
+      c.field_mappings = {}         # Hash con el mapeo de los campos.
     class MiMundo < MundoPepino     # Ejemplo de uso del MundoPepio con herencia. 
       # include FixtureReplacement  # FR listo para entrar en acción. Meter aquí 
       # def mi_funcion; ...; end    # las funciones específicas que necesitemos
     end                             # desde nuestras definiciones.
     Before do                       # La limpieza de modelos propiamente dicha... 
-      MundoPepino::ModelsToClean.each { |model| model.destroy_all }
-    end                             # ...se realizará antes de cada escenario.  
-    World do                        # Finalmente le pedimos a Cucumber que
-      MiMundo.new                   # utilice una instancia de nuestro mundo como
-    end                             # ámbito local de nuestros escenarios.
+      MundoPepino.clean_models
+    end                             # ...se realizará antes de cada escenario.
+                                    # Finalmente le pedimos a Cucumber que
+    World(MiMundo)                  # utilice una instancia de nuestro mundo como
+                                    # ámbito local de nuestros escenarios.
 
 Por otro lado `mundo_pepino.rake` añade una tarea llamada **caracteristicas** que lanza con la opción `--language es` todos los ficheros con extensión `.feature` que tengamos dentro del directorio `caracteristicas`.
 

@@ -17,7 +17,7 @@ Feature: Simple creation
   #   todas las instancias.
   #
   #   Dicha asignación se llevará a cabo sobre el campo "name" si no se
-  #   indica lo contrario mapeando "nombre" en String.field_mappings.
+  #   indica lo contrario mapeando "nombre" en config.field_mappings.
   #
   #   Si optamos por no escribir "que tenemos" hay que tener en cuenta
   #   que la frase será correcta sólo en aquellas frases que comiencen con
@@ -25,8 +25,9 @@ Feature: Simple creation
   #   género másculino (p.e. "Dado un huerto:")
   #
   #   Por ejemplo:
-  #
-  #     String.field_mappings[:nombre] = 'title'
+  #     MundoPepino.configure do |config|
+  #       config.field_mappings[:nombre] = 'title'
+  #     end
   #
   #   haría que dichas asignaciones se llevasen a cabo sobre el campo
   #   "title" en lugar de sobre "name".

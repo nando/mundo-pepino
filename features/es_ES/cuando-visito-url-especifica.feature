@@ -7,7 +7,11 @@ Característica: solicitud de URL específica
   #
   # Descripción:
   #   Solicita la URL referida comprobando previamente si el valor de la 
-  # misma ha sido mapeado en String.url_mappings.
+  # misma ha sido mapeado en config.url_mappings.
+  #
+  #   Si se ha definido una función "path_to" los mapeos de url_mappings
+  # son ignorados y se utilizará dicha función para obtener la ruta que
+  # se debe solicitar.
   #
   #   El valor por defecto definido en el mapeo de URLs (string.to_url) 
   # devuelve la propia cadena si no existe un mapeo concreto para ella y 
@@ -15,19 +19,17 @@ Característica: solicitud de URL específica
   #
   # Ejemplos:
   #
-  #     Cuando visito /
+  #     Cuando visito /mi-pagina
   #
   #   Sería equivalente a tener definido el siguente mapeo:
   #
-  #     String.url_mappings[/la (portada|home)/i] = '/'
+  #     MundoPepino.configure do |config|
+  #       config.url_mappings[/mi página$/i] = '/mi-pagina'
+  #     end
   #
   #   y escribir:
   #
-  #     Cuando visito la portada
-  #
-  #   o:
-  #
-  #     Cuando visito La Home. 
+  #     Cuando visito mi página
   #
   #   Por otro lado:
   #

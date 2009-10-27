@@ -30,8 +30,9 @@ Característica: asignación de valores para un campo has_many polimórfico de u
   #   el hijo correspondiente a esa fila de la tabla.
   #
   #   Ejemplo de mapeo de modelo:
-  #
-  #     String.model_mappings[/bancal(es)?$/i] = Terrace
+  #     MundoPepino.configure do |config|
+  #       config.model_mappings[/(abono|fertilizante)s?$/i] = Fertilizer
+  #     end
   #
   ########################################################################
     Dado que tenemos dos huertos llamados "H-01 y H-02"
