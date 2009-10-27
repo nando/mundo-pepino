@@ -306,7 +306,7 @@ Entonces /^(#{veo_o_no}) (?:las|los) siguientes (?:etiquetas|selectores):$/i do 
   end
 end
 
-Entonces /^(#{veo_o_no}) un enlace (?:a|para) (.+)?$/i do |should, pagina|
+Entonces /^(#{veo_o_no}) un enlace (?:al?|para) (.+)?$/i do |should, pagina|
   lambda {
     href = relative_page(pagina) || pagina.to_unquoted.to_url 
     response.should have_tag('a[href=?]', href)

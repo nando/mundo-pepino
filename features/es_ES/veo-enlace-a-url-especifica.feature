@@ -46,3 +46,8 @@ Característica: veo enlace a URL específica
            Y debería ver un enlace a la página de registro
            Y debería ver un enlace a la página de inicio de sesión
            Y no debería ver un enlace a /welcome/goodbye
+
+  Escenario: Veo un enlace a una URL específica cuyo mapeo utiliza Regexp
+    Dado que tenemos un huerto "Fancy"
+    Cuando visito la página de huertos
+    Entonces debería ver un enlace al huerto "Fancy"

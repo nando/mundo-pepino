@@ -1,6 +1,6 @@
 Característica: veo enlace a URL relativo a la última visita realizada
 
-  Escenario: Veo un enlace a una URL específica opcionalmente indicada con un nombre coloquial
+  Escenario: Veo un enlace a una URL relativa a la última
   ########################################################################
   # Patrones: 
   #   Entonces no? debería ver un enlace a la siguente página
