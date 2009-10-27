@@ -1,3 +1,8 @@
+== 0.1.3 2009-10-27
+* path_to method sensitivity: if present, url_mappings are disabled
+* Configuration as Rails teach me: MundoPepino.configure
+* Possibility to map to dynamic values with access to the World
+
 == 0.1.2 2009-10-20
 
 * 2 major enhancements
