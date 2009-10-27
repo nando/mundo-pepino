@@ -19,13 +19,15 @@ module MundoPepino
   include VisitsHistory
 
   class << self
-    def extended(world)
-      common_mappings world
-      language_specific_mappings world
-      user_specific_mappings world
+    attr_accessor :world 
+    def extended(current_world)
+      self.world = current_world
+      common_mappings
+      language_specific_mappings
+      user_specific_mappings
     end
 
-    def common_mappings(world)
+    def common_mappings
       String.add_mapper :model
       String.add_mapper :relation_model
       String.add_mapper(:content_type,
@@ -64,7 +66,7 @@ module MundoPepino
       config.models_to_clean.each { |model| model.destroy_all }
     end
 
-    def user_specific_mappings(world)
+    def user_specific_mappings
       config.model_mappings.each {|k,v| String.model_mappings[k] = v}
       config.relation_model_mappings.each {|k,v| String.relation_model_mappings[k] = v}
       config.field_mappings.each {|k,v| String.field_mappings[k] = v}

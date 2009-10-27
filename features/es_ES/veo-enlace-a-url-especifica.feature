@@ -38,10 +38,11 @@ Característica: veo enlace a URL específica
   #     Entonces veo un enlace a mi página
   #
   ########################################################################
-    Cuando visito /
+    Cuando visito la portada
     Entonces veo un enlace a la página de registro
            Y debo ver un enlace a la página de registro
            Y debo ver un enlace para la página de registro
            Y debo ver un enlace a /welcome/signup
            Y debería ver un enlace a la página de registro
+           Y debería ver un enlace a la página de inicio de sesión
            Y no debería ver un enlace a /welcome/goodbye

@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 # string-mapper.rb
 #
 # Copyright 2008, Fernando García Samblas <fernando.garcia at the-cocktail.com>
@@ -21,10 +20,23 @@
 # write to the Free Software Foundation, Inc., 51 Franklin St, Fifth 
 # Floor, Boston, MA 02110-1301 USA
 #
+$:.unshift(File.dirname(__FILE__)) unless
+  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+	
 require 'active_support'
 
-class String
+module StringMapper #:nodoc:
+  class VERSION #:nodoc:
+    MAJOR = 0
+    MINOR = 1
+    TINY  = 0
+    PATCH = nil # Set to nil for official release
 
+    STRING = [MAJOR, MINOR, TINY, PATCH].compact.join('.')
+  end
+end
+
+class String
   def self.add_mapper(name, mappings = {}, &def_val_block)
     accessor = "#{name}_mappings"
     cattr_accessor(accessor)
@@ -37,7 +49,16 @@ class String
         else
           Regexp.new(key.to_s, Regexp::IGNORECASE)
         end
-        (mapping = value) && break if self =~ regexp
+        if self =~ regexp
+          mapping = if value.is_a?(String)
+            eval('"'+value+'"')
+          elsif value.is_a?(Proc)
+            value.call
+          else
+            value
+          end
+          break
+        end
       end
       if mapping.nil?
         (def_val_block && def_val_block.call(self))

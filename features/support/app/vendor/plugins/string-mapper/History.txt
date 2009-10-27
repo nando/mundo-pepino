@@ -1,0 +1,4 @@
+== 0.1.0 2009-09-30
+
+* 1 major enhancement:
+  * Initial gem release

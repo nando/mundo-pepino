@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :sessions
+
   map.resources :pepinos
 
   map.resources :tomatoes

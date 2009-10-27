@@ -4,6 +4,7 @@
 <p>Find me in app/views/welcome/index.html.erb</p>
 
 <%= link_to 'Registro', :action => 'signup' %>
+<%= link_to '¡Entra!', new_session_path %>
 <% form_tag({:action => :form_action}, :enctype => "multipart/form-data") do %>
   <div>
     <%= label_tag :login, "Nombre de usuario" %>

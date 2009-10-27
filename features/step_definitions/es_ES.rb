@@ -64,7 +64,13 @@ MundoPepino.configure do |config|
     /^orchard_of_birth$/i => Orchard
   }
   config.url_mappings = {
-    /^la página de registro/i    => '/welcome/signup'
+    /^la página de registro/i => lambda {
+      MundoPepino.world.url_for(:only_path=>true,
+        :controller=>'welcome', :action => 'signup')
+    },
+    /^la página de inicio de sesión/i => lambda {
+      MundoPepino.world.new_session_path
+    }
   }
 end
 

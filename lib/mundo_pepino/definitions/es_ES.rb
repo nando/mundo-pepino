@@ -1,7 +1,7 @@
 # MundoPepino's step definitions in es_ES
 module MundoPepino
   class << self
-    def language_specific_mappings(world)
+    def language_specific_mappings
       String.add_mapper(:real_value, {
         /^verdader[oa]$/i  => true,
         /^fals[ao]$/i      => false
@@ -39,8 +39,8 @@ module MundoPepino
         :octubre         => 'October',
         :noviembre       => 'November',
         :diciembre       => 'December')
-      unless world.respond_to? :path_to
-        String.url_mappings[/^la (?:portada|home\s?(?:page)?)/i] = world.root_path
+      unless self.world.respond_to? :path_to
+        String.url_mappings[/^la (?:portada|home\s?(?:page)?)/i] = self.world.root_path
       end
 
     end
@@ -305,8 +305,6 @@ Entonces /^(#{veo_o_no}) (?:las|los) siguientes (?:etiquetas|selectores):$/i do 
     end
   end
 end
-
-
 
 Entonces /^(#{veo_o_no}) un enlace (?:a|para) (.+)?$/i do |should, pagina|
   lambda {

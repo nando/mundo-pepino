@@ -1,7 +1,7 @@
 # MundoPepino's step definitions in en_US
 module MundoPepino
   class << self
-    def language_specific_mappings(world)
+    def language_specific_mappings
       String.add_mapper(:real_value, {
         /^tru(e|th)$/i  => true,
         /^false$/i       => false
@@ -26,8 +26,8 @@ module MundoPepino
         /^modifications?$/i       => 'edit',
         /^editions?$/i            => 'edit') { |action| action }
       String.add_mapper(:month) { |month| month.capitalize }
-      unless world.respond_to? :path_to
-        String.url_mappings[/^the home\s?page/i] = world.root_path
+      unless self.world.respond_to? :path_to
+        String.url_mappings[/^the home\s?page/i] = self.world.root_path
       end
     end
   end
