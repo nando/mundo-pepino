@@ -1,2 +1,3 @@
 es_ES: --require features/support/env.rb --require features/step_definitions/es_ES.rb --language es features/es_ES/
 en_US: --require features/support/env.rb --require features/step_definitions/en_US.rb --language en features/en_US/
+lib: -r features/support/env.rb -r features/support/paths.rb -r features/step_definitions/es_ES.rb --language es features/lib/

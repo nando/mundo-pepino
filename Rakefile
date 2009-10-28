@@ -6,15 +6,15 @@ unless ARGV.any? {|a| a =~ /^gems/}
   begin
     require 'cucumber/rake/task'
     namespace :mundo_pepino do
-      supported_langs = [:en_US,:es_ES]
-      supported_langs.each do |lang|
+      build_tasks = [:en_US,:es_ES, :lib]
+      build_tasks.each do |lang|
         Cucumber::Rake::Task.new(lang) do |t|
           t.cucumber_opts = "--profile #{lang} --format pretty"
         end
       end
   
       desc 'Run all MundoPepino features on every supported language'
-      task :all => supported_langs
+      task :all => build_tasks
     end
     task :default => :'mundo_pepino:all'
 
