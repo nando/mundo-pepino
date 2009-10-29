@@ -1,6 +1,8 @@
 # Este generador crea una plantilla de caracteristica (feature) ligada a un modelo
 module Rails::Generator::Commands
-  MUNDO_PEPINO_ENV = 'features/step_definitions/mundo_pepino_es_ES.rb'
+  CLONED_STEPS_ENV = 'features/support/mundo_pepino_es_ES.rb'
+  SHARED_STEPS_ENV = 'features/step_definitions/mundo_pepino_es_ES.rb'
+  MUNDO_PEPINO_ENV = File.file?(CLONED_STEPS_ENV) ? CLONED_STEPS_ENV : SHARED_STEPS_ENV
 
   MODEL_CLEANING = '"\n    # ENTRADA AUTO-GENERADA PARA #{model}\n' +
                    '    #{model}, # ' +

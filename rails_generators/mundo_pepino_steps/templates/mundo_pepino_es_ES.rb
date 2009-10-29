@@ -1,4 +1,6 @@
-require 'mundo_pepino/es_ES'
+require 'mundo_pepino'
+require 'mundo_pepino/es_ES/matchers'
+require 'mundo_pepino/es_ES/mappings'
 
 MundoPepino.configure do |config|
   config.models_to_clean = [

@@ -6,7 +6,7 @@ unless ARGV.any? {|a| a =~ /^gems/}
   begin
     require 'cucumber/rake/task'
     namespace :mundo_pepino do
-      build_tasks = [:en_US,:es_ES, :lib]
+      build_tasks = [:lib, :rails_generators, :en_US, :es_ES]
       build_tasks.each do |lang|
         Cucumber::Rake::Task.new(lang) do |t|
           t.cucumber_opts = "--profile #{lang} --format pretty"
