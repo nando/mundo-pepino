@@ -3,13 +3,6 @@ ENV["RAILS_ENV"] ||= "cucumber"
 require File.expand_path(File.dirname(__FILE__) + '/app/config/environment')
 require 'cucumber/rails/world'
 
-#module Lucas
-#def path_to(str)
-#  str
-#end
-#end
-#World(Lucas)
-
 # Whether or not to run each scenario within a database transaction.
 #
 # If you leave this to true, you can turn off traqnsactions on a

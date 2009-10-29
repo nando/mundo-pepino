@@ -41,4 +41,3 @@ end
 # #Definición de las factorias equivalente a example_data.rb en fixture_replacement
 # require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
 
-World(MundoPepino)

@@ -68,5 +68,3 @@ end
 module MundoPepino
   include FixtureReplacement
 end
-
-World(MundoPepino)

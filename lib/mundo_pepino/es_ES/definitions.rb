@@ -1,60 +1,11 @@
 # MundoPepino's step definitions in es_ES
-module MundoPepino
-  class << self
-    def language_specific_mappings
-      String.add_mapper(:real_value, {
-        /^verdader[oa]$/i  => true,
-        /^fals[ao]$/i      => false
-      }) { |value| value }
-      String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
-      
-      String.add_mapper(:number, { 
-        /^un[oa]?$/i     => 1,
-        /^primer[oa]?$/i => 1,
-        :dos             => 2,
-        /^segund[oa]?$/i => 2,
-        :tres            => 3,
-        /^tercer[ao]/i   => 3,
-        :cuatro          => 4,
-        /^cuart[ao]/i    => 4,
-        :cinco           => 5,
-        /^quint[ao]/i    => 5}) { |string| string.to_i }
-      String.add_mapper(:crud_action,
-        /^alta$/i                  => 'new',
-        /^creaci[óo]n$/i           => 'new',
-        /^nuev(?:o|a|o\/a|a\/o)$/i => 'new',
-        /^cambio$/i                => 'edit',
-        /^modificaci[oó]n(?:es)?$/i       => 'edit',
-        /^edici[oó]n$/i            => 'edit')
-      String.add_mapper(:month,
-        :enero           => 'January',
-        :febrero         => 'February',
-        :marzo           => 'March',
-        :abril           => 'April',
-        :mayo            => 'May',
-        :junio           => 'June',
-        :julio           => 'July',
-        :agosto          => 'August',
-        /^sep?tiembre$/i  => 'September',
-        :octubre         => 'October',
-        :noviembre       => 'November',
-        :diciembre       => 'December')
-      unless self.world.respond_to? :path_to
-        String.url_mappings[/^la (?:portada|home\s?(?:page)?)/i] = self.world.root_path
-      end
-
-    end
-  end
-end
-
-nro = 'un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|\d+'
-cuyo = '(?:cuy[oa]s?|que tienen? como)'
 # Creación simple con nombre opcional
-Dado /^(?:que tenemos )?(#{nro}) (?!.+ #{cuyo})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
+Dado /^(?:que tenemos )?(#{_numero_}) (?!.+ #{_cuyo_})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   given_we_have_a_number_of_instances_called numero, modelo, nombre 
 end
+
 # Creación con asignación de valor en campo
-Dado /^(?:que tenemos )?(#{nro}) (.+) #{cuyo} (.+?) (?:(?:es|son) (?:de )?)?['"](.+)["'](?: .+)?$/i do |numero, modelo, campo, valor|
+Dado /^(?:que tenemos )?(#{_numero_}) (.+) #{_cuyo_} (.+?) (?:(?:es|son) (?:de )?)?['"](.+)["'](?: .+)?$/i do |numero, modelo, campo, valor|
   Dado "que tenemos #{numero} #{modelo}"
   Dado "que dichos #{modelo} tienen como #{campo} '#{valor}'"
 end
@@ -89,7 +40,7 @@ Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, 
   end
 end
 
-Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{nro}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, modelo_hijos, nombres|
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, modelo_hijos, nombres|
   given_resource_has_many_children(
     :resource_model => modelo_padre,
     :resource_name => nombre_del_padre,
@@ -98,7 +49,7 @@ Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{nro}) (.+?)(?: (?:llamad[oa]s? )
     :children_names => nombres)
 end
 
-Dado /^que dich[oa]s? (.+) tienen? (#{nro}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
+Dado /^que dich[oa]s? (.+) tienen? (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
   given_resource_has_many_children(
     :resource_model => modelo_padre,
     :number_of_children => numero,
@@ -124,8 +75,7 @@ end
 
 ###############################################################################
 
-pagina_re = '(?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n)'
-Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w]+|['"][\w ]+["'])$/i do |modelo_en_crudo|
+Cuando /^(?:que )?visito (?:el|la) #{_pagina_} de ([\w]+|['"][\w ]+["'])$/i do |modelo_en_crudo|
   modelo = modelo_en_crudo.to_unquoted
   if model = modelo.to_model
     pile_up model.new
@@ -137,9 +87,9 @@ Cuando /^(?:que )?visito (?:el|la) #{pagina_re} de ([\w]+|['"][\w ]+["'])$/i do 
   end
 end
 
-Cuando /^(?:que )?visito (?:el|la) #{pagina_re} (?:del|de la) (.+) ['"](.+)["']$/i do |modelo, nombre|
+Cuando /^(?:que )?visito (?:el|la) #{_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i do |modelo, nombre|
   if resource = last_mentioned_of(modelo, nombre)
-    do_visit eval("#{resource.class.name.underscore}_path(resource)")
+    do_visit send("#{resource.class.name.underscore}_path", resource)
   else
     raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
   end
@@ -155,14 +105,14 @@ Cuando /^(?:que )?visito la p[áa]gina de (?!la)([\w\/]+) (?:de |de la |del )?(.
       last_mentioned_called(nombre.to_unquoted)
     end
     if resource
-      do_visit eval("#{action}_#{resource.mr_singular}_path(resource)")
+      do_visit send("#{action}_#{resource.mr_singular}_path", resource)
     else
       MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
     end
   else
     model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
     pile_up model.new
-    do_visit eval("#{action}_#{model.name.underscore}_path")
+    do_visit send("#{action}_#{model.name.underscore}_path")
   end
 end
 
@@ -170,8 +120,7 @@ Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do
   do_visit last_mentioned_url
 end
 
-negative_lookahead = '(?:la|el) \w+ del? |su p[aá]gina|su portada'
-Cuando /^(?:que )?visito (?!#{negative_lookahead})(.+)$/i do |pagina|
+Cuando /^(?:que )?visito (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
   do_visit pagina.to_unquoted.to_url
 end
 
@@ -257,14 +206,11 @@ Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ 
 end
 
 #############################################################################
-veo_o_no = '(?:no )?(?:veo|debo ver|deber[ií]a ver)'
-
-Entonces /^(#{veo_o_no}) el texto (.+)?$/i do |should, text|
+Entonces /^(#{_veo_o_no_}) el texto (.+)?$/i do |should, text|
   eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
 end
 
-leo_o_no = '(?:no )?(?:leo|debo leer|deber[íi]a leer)'
-Entonces /^(#{leo_o_no}) el texto (.+)?$/i do |should, text|
+Entonces /^(#{_leo_o_no_}) el texto (.+)?$/i do |should, text|
   begin
     HTML::FullSanitizer.new.sanitize(response.body).send(shouldify(should)) =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
   rescue Spec::Expectations::ExpectationNotMetError
@@ -273,19 +219,19 @@ Entonces /^(#{leo_o_no}) el texto (.+)?$/i do |should, text|
   end
 end
 
-Entonces /^(#{veo_o_no}) los siguientes textos:$/i do |should, texts|
+Entonces /^(#{_veo_o_no_}) los siguientes textos:$/i do |should, texts|
   texts.raw.each do |row|
     Entonces "#{should} el texto #{row[0]}"
   end
 end
 
-Entonces /^(#{leo_o_no}) los siguientes textos:$/i do |should, texts|
+Entonces /^(#{_leo_o_no_}) los siguientes textos:$/i do |should, texts|
   texts.raw.each do |row|
     Entonces "#{should} el texto #{row[0]}"
   end
 end
 
-Entonces /^(#{veo_o_no}) (?:en )?(?:el selector|la etiqueta|el tag) (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
+Entonces /^(#{_veo_o_no_}) (?:en )?(?:el selector|la etiqueta|el tag) (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
     if value
       response.should have_tag(tag.to_unquoted, /.*#{value.to_translated}.*/i)
@@ -295,7 +241,7 @@ Entonces /^(#{veo_o_no}) (?:en )?(?:el selector|la etiqueta|el tag) (["'].+?['"]
   }.send(not_shouldify(should), raise_error)  
 end
 
-Entonces /^(#{veo_o_no}) (?:las|los) siguientes (?:etiquetas|selectores):$/i do |should, texts|
+Entonces /^(#{_veo_o_no_}) (?:las|los) siguientes (?:etiquetas|selectores):$/i do |should, texts|
   check_contents, from_index = texts.raw[0].size == 2 ? [true, 1] : [false, 0]
   texts.raw[from_index..-1].each do |row|
     if check_contents
@@ -306,7 +252,7 @@ Entonces /^(#{veo_o_no}) (?:las|los) siguientes (?:etiquetas|selectores):$/i do 
   end
 end
 
-Entonces /^(#{veo_o_no}) un enlace (?:al?|para) (.+)?$/i do |should, pagina|
+Entonces /^(#{_veo_o_no_}) un enlace (?:al?|para) (.+)?$/i do |should, pagina|
   lambda {
     href = relative_page(pagina) || pagina.to_unquoted.to_url 
     response.should have_tag('a[href=?]', href)
@@ -314,11 +260,11 @@ Entonces /^(#{veo_o_no}) un enlace (?:al?|para) (.+)?$/i do |should, pagina|
 end
 
 
-Entonces /^(#{veo_o_no}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
+Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
   field_labeled(campo.to_unquoted).send shouldify(should), be_checked
 end
 
-Entonces /^(#{veo_o_no}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, table_id, valores|
+Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, table_id, valores|
   table_id = "##{table_id.to_unquoted}" if table_id
   shouldified = shouldify(should)
   response.send shouldified, have_selector("table#{table_id}")
@@ -341,7 +287,7 @@ Entonces /^(#{veo_o_no}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los
   end
 end
 
-Entonces /^(#{veo_o_no}) un formulario con (?:el|los) (?:siguientes? )?(?:campos?|elementos?):$/ do |should, elementos|
+Entonces /^(#{_veo_o_no_}) un formulario con (?:el|los) (?:siguientes? )?(?:campos?|elementos?):$/ do |should, elementos|
   shouldified = shouldify(should)
   response.send(shouldified, have_tag('form')) do
     elementos.raw[1..-1].each do |row|
@@ -364,26 +310,24 @@ Entonces /^(#{veo_o_no}) un formulario con (?:el|los) (?:siguientes? )?(?:campos
 end
 
 #BBDD
-en_bbdd_tenemos = '(?:en (?:la )?(?:bb?dd?|base de datos) tenemos|tenemos en (?:la )?(?:bb?dd?|base de datos))'
-tiene_en_bbdd = '(?:tiene en (?:la )?bbdd|en (?:la )?bbdd tiene|tiene en (?:la )?base de datos|en (?:la )?base de datos tiene)'
-Entonces /^#{en_bbdd_tenemos} (#{nro}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
+Entonces /^#{_tenemos_en_bbdd_} (#{_numero_}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
   then_we_have_a_number_of_instances_in_our_database numero, modelo, nombre
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" #{tiene_en_bbdd} como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
+Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
   add_resource_from_database(modelo, nombre)
   last_mentioned_should_have_value(campo, valor.to_real_value)
 end
 
-Entonces /^#{tiene_en_bbdd} como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
+Entonces /^#{_tiene_en_bbdd_} como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
   last_mentioned_should_have_value(campo, valor.to_real_value)
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" #{tiene_en_bbdd} una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
+Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
   add_resource_from_database(padre, nombre_del_padre)
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
 
-Entonces /^#{tiene_en_bbdd} una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
+Entonces /^#{_tiene_en_bbdd_} una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end

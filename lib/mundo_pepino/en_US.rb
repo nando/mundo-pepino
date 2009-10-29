@@ -1,2 +1,2 @@
 require 'mundo_pepino'
-require 'mundo_pepino/definitions/en_US'
+require 'mundo_pepino/en_US/definitions'

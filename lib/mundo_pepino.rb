@@ -11,6 +11,8 @@ require 'mundo_pepino/config'
 
 require 'string-mapper'
 
+World(MundoPepino)
+
 module MundoPepino
   include Base
   include ImplementationsApi
