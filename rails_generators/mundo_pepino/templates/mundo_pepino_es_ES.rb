@@ -1,9 +1,5 @@
 require 'mundo_pepino/es_ES'
 
-Webrat.configure do |config|
-  config.mode = :rails
-end
-
 MundoPepino.configure do |config|
   config.models_to_clean = [
     # MODELOS PARA LIMPIAR antes de cada escenario,
