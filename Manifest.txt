@@ -7,10 +7,14 @@ init.rb
 lib/mundo_pepino.rb
 lib/mundo_pepino/base.rb
 lib/mundo_pepino/config.rb
-lib/mundo_pepino/definitions/en_US.rb
-lib/mundo_pepino/definitions/es_ES.rb
 lib/mundo_pepino/en_US.rb
+lib/mundo_pepino/en_US/definitions.rb
+lib/mundo_pepino/en_US/mappings.rb
+lib/mundo_pepino/en_US/matchers.rb
 lib/mundo_pepino/es_ES.rb
+lib/mundo_pepino/es_ES/definitions.rb
+lib/mundo_pepino/es_ES/mappings.rb
+lib/mundo_pepino/es_ES/matchers.rb
 lib/mundo_pepino/implementations.rb
 lib/mundo_pepino/implementations_api.rb
 lib/mundo_pepino/resources_history.rb
@@ -23,3 +27,7 @@ rails_generators/mundo_pepino/USAGE
 rails_generators/mundo_pepino/mundo_pepino_generator.rb
 rails_generators/mundo_pepino/templates/mundo_pepino.rake
 rails_generators/mundo_pepino/templates/mundo_pepino_es_ES.rb
+rails_generators/mundo_pepino_steps/USAGE
+rails_generators/mundo_pepino_steps/mundo_pepino_steps_generator.rb
+rails_generators/mundo_pepino_steps/templates/mundo_pepino.rake
+rails_generators/mundo_pepino_steps/templates/mundo_pepino_es_ES.rb

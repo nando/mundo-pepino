@@ -17,7 +17,13 @@ module MundoPepino
         :cuatro          => 4,
         /^cuart[ao]/i    => 4,
         :cinco           => 5,
-        /^quint[ao]/i    => 5}) { |string| string.to_i }
+        /^quint[ao]/i    => 5,
+        :seis            => 6,
+        :siete           => 7,
+        :ocho            => 8,
+        :nueve           => 9,
+        :diez            => 10
+      }) { |string| string.to_i }
       String.add_mapper(:crud_action,
         /^alta$/i                  => 'new',
         /^creaci[óo]n$/i           => 'new',
