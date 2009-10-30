@@ -6,6 +6,8 @@ Característica: selecciono en listado/s
   #   Cuando selecciono "_valor_"
   # o:
   #   Cuando selecciono "_valor_" en (el listado de) _campo_
+  # o:
+  #   Cuando selecciono "_valor_" como _campo_
   #
   # Ejemplos:
   #   Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
@@ -19,6 +21,11 @@ Característica: selecciono en listado/s
 
     Cuando visito la portada
          Y selecciono 'Frutales' en Tipos de Cultivo
+         Y pulso el botón "Galleta de la fortuna"
+    Entonces veo el tag div#orchard_type con el valor "Frutales"
+
+    Cuando visito la portada
+         Y selecciono 'Frutales' como Tipos de Cultivo
          Y pulso el botón "Galleta de la fortuna"
     Entonces veo el tag div#orchard_type con el valor "Frutales"
 

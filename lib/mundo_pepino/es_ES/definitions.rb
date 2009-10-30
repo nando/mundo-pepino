@@ -165,7 +165,7 @@ Cuando /^(?:que )?adjunto el fichero ['"](.*)["'] (?:a|en) (.*)$/ do |ruta, camp
     {:path => ruta, :content_type => ruta.to_content_type}
 end
 
-Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: en (?:el listado de )?(.+))?$/i do |valor, campo|
+Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: (?:en (?:el listado de )?|como )(?!#{_fecha_y_o_hora_})(.+))?$/i do |valor, campo|
   begin
     if campo
       select valor, :from => campo.to_unquoted.to_translated  # Vía label
