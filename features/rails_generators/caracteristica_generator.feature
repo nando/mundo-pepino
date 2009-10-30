@@ -2,8 +2,9 @@ Feature: caracteristica generator
 
   Background:
     Given a Rails app
+    And "mundo-pepino" in "." as one of its plugins
+    And "string-mapper" in "features/support/app/vendor/plugins/string-mapper" as one of its plugins
     And I run executable "script/generate" with arguments "cucumber"
-    And I run executable "ln" with arguments "-s ../../../../ vendor/plugins/mundo-pepino"
     
   Scenario: generate caracteristica
     Given I run executable "script/generate" with arguments "mundo_pepino"

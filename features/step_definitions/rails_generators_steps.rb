@@ -21,6 +21,10 @@ When /^I run executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
   end
 end
 
+Given /^"(.+)" in "(.+)" as one of its plugins$/ do |plugin, path|
+  When 'I run executable "ln" with arguments "-s ../../../../'+path+' vendor/plugins/'+plugin+'"'
+end
+
 When /^I invoke task "rake (.*)"/ do |task|
   @stdout = File.expand_path(File.join(@tmp_root, "rake.out"))
   @stderr = File.expand_path(File.join(@tmp_root, "rake.err"))
