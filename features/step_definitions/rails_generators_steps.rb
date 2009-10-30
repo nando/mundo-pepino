@@ -1,3 +1,21 @@
+Given /^a Rails app$/ do
+  FileUtils.chdir(@tmp_root) do
+    `rails my_project`
+  end
+  @active_project_folder = File.expand_path(File.join(@tmp_root, "my_project"))
+end
+
+When /^I run executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
+  @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
+  in_project_folder do
+    system "#{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
+  end
+end
+
+Given /^"(.+)" in "(.+)" as one of its plugins$/ do |plugin, path|
+  When 'I run executable "ln" with arguments "-s ../../../../'+path+' vendor/plugins/'+plugin+'"'
+end
+
 When /^I invoke "(.*)" generator with arguments "(.*)"$/ do |generator, arguments|
   @stdout = StringIO.new
   in_project_folder do
@@ -14,17 +32,6 @@ When /^I invoke "(.*)" generator with arguments "(.*)"$/ do |generator, argument
   end
 end
 
-When /^I run executable "(.*)" with arguments "(.*)"/ do |executable, arguments|
-  @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
-  in_project_folder do
-    system "#{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
-  end
-end
-
-Given /^"(.+)" in "(.+)" as one of its plugins$/ do |plugin, path|
-  When 'I run executable "ln" with arguments "-s ../../../../'+path+' vendor/plugins/'+plugin+'"'
-end
-
 When /^I invoke task "rake (.*)"/ do |task|
   @stdout = File.expand_path(File.join(@tmp_root, "rake.out"))
   @stderr = File.expand_path(File.join(@tmp_root, "rake.err"))
@@ -38,16 +45,9 @@ Then /^I should see '([^\']*)'$/ do |text|
   actual_output.should contain(text)
 end
 
-Given /^a Rails app$/ do
-  FileUtils.chdir(@tmp_root) do
-    `rails my_project`
-  end
-  @active_project_folder = File.expand_path(File.join(@tmp_root, "my_project"))
-end
-
-Given /^I copy the project generators into "([^\"]*)"$/ do |target_folder|
+Given /^I replace "(.+)" with "(.+)" in (.+)$/ do |from, to, path|
   in_project_folder do
-    FileUtils.mkdir_p(target_folder)
+    content = File.read(path).gsub(from, to)
+    File.open(path, 'wb') { |file| file.write(content) }
   end
-  `cp -rf #{File.dirname(__FILE__) + "/../../rails_generators/*"} #{File.join(@active_project_folder, target_folder)}`
 end
