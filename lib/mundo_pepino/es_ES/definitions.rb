@@ -138,9 +138,18 @@ Cuando /^(?:que )?#{_pulso_} (?:en )?el (enlace|enlace ajax|enlace con efectos) 
   click_link(enlace.to_unquoted.to_translated, options)
 end
 
-Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?enlaces:$/i do |tabla|
-  tabla.raw.each do |row|
-    click_link(row[0].to_unquoted.to_translated)
+Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?(?:enlaces|botones)(?: y (?:enlaces|botones))?:$/i do |tabla|
+  tabla.raw.each_with_index do |row, index|
+    if row.size == 1
+      Cuando "pulso el enlace '#{row[0]}'"
+    else
+      next if index == 0
+      if row[0] =~ /enlace/i
+        Cuando "pulso el enlace '#{row[1]}'"
+      else
+        Cuando "pulso el botón '#{row[1]}'"
+      end
+    end
   end
 end
 
