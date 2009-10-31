@@ -268,8 +268,7 @@ Para todos los escenarios podríamos tener una narrativa genérica que expresase
       Como usuario de Cucumber
       Quiero tener los pasos más habituales definidos, implementados y bien documentados
 
-Sin embargo cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice.
-
+Cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice.
 
 Como **convención general** los nombres correspondientes a modelos y campos pueden ir sin comillas pero los valores deben ir entre comillas (simples o dobles). Por ejemplo:
 
@@ -282,7 +281,6 @@ MundoPepino soporta el uso de **claves I18n** en lugar de literales "a pincho" (
 Se puede utilizar la interpolación separando el hash con los parámetros de la clave con una coma sin espacios. Por ejemplo:
 
     Entonces debería ver la etiqueta H1 con el valor "app.users.new_friend,{:name => 'Lucas'}"
-
 
 ### Dado el contexto (Givens)
 
@@ -371,12 +369,18 @@ Convenciones generales:
 #### Solicitud de la URL de edición de un recurso
     Cuando visito la página de edición del huerto "H-01"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-edicion.feature)
-#### Pincho en un enlace \*
+#### Pincho/pulso en un enlace \*
     Cuando pulso el enlace "Volver"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-enlace.feature)
 #### Pincho/pulso un bóton (*submit*) \*
     Cuando pulso en el botón Enviar
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-boton.feature)
+#### Pincho/pulso una serie de bótones y/o enlaces
+    Cuando pincho en los siguientes enlaces:
+      | presentación        |
+      | galería de huertos  |
+      | cultivos de regadío |
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-los-siguientes-enlaces-y-botones.feature)
 #### Adjunto un fichero (*file*) \*
     Cuando adjunto el fichero "images/cucumber.jpg" en Fotografía actual
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-adjunto-el-fichero.feature)

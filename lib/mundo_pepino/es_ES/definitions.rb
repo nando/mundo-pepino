@@ -124,11 +124,11 @@ Cuando /^(?:que )?visito (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
   do_visit pagina.to_unquoted.to_url
 end
 
-Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el bot[oó]n (.+)$/i do |boton|
+Cuando /^(?:que )?#{_pulso_} (?:en )?el bot[oó]n (.+)$/i do |boton|
   click_button(boton.to_unquoted.to_translated)
 end
 
-Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+)$/i do |tipo, enlace|
+Cuando /^(?:que )?#{_pulso_} (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+)$/i do |tipo, enlace|
   options = {}
   options[:wait] = case tipo.downcase
   when 'enlace con efectos' then :effects
@@ -136,6 +136,12 @@ Cuando /^(?:que )?(?:pulso|pincho) (?:en )?el (enlace|enlace ajax|enlace con efe
   else :page
   end
   click_link(enlace.to_unquoted.to_translated, options)
+end
+
+Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?enlaces:$/i do |tabla|
+  tabla.raw.each do |row|
+    click_link(row[0].to_unquoted.to_translated)
+  end
 end
 
 Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|

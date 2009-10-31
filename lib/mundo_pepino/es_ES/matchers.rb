@@ -14,6 +14,9 @@ module MundoPepino
         def _pagina_desde_rutas_ # páginas obtenida a partir de las rutas
           '(?:la|el) \w+ del? |su p[aá]gina|su portada'
         end
+        def _pulso_
+          '(?:pulso|pincho)'         
+        end
         def _fecha_y_o_hora_
           '(?:(?:la )?fecha|hora)'
         end
@@ -36,6 +39,6 @@ end
 
 class << self
   delegate :_numero_, :_cuyo_, :_pagina_, :_pagina_desde_rutas_, :_fecha_y_o_hora_,
-    :_veo_o_no_, :_leo_o_no_, :_tenemos_en_bbdd_, :_tiene_en_bbdd_,
+    :_veo_o_no_, :_leo_o_no_, :_tenemos_en_bbdd_, :_tiene_en_bbdd_, :_pulso_,
     :to => 'MundoPepino::Matchers::Bites'
 end
