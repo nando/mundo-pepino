@@ -28,10 +28,12 @@ Característica: implementación de pasos habituales
            Y tenemos en bbdd 7 acelgas
            Y tenemos en bbdd 4 tomates
            Y el huerto "Hortalizas" tiene en bbdd un bancal "Acelgas"
-           Y el bancal "Acelgas" tiene en bbdd una acelga "A"
+           Y el bancal "Acelgas" tiene en bbdd siete acelgas
+           Y tiene en bbdd una acelga "A"
            Y tiene en bbdd una acelga "F"
            Y la acelga "F" tiene en bbdd como peso "83" gramos
            Y tiene en bbdd como variedad "Gigante carmesí"
            Y el bancal "Tomates" tiene en bbdd un tomate "A"
+           Y tiene en bbdd cuatro tomates
            Y el tomate "A" tiene en bbdd como variedad "Raf"
            Y el tomate "A" tiene en bbdd como diámetro "97" milímetros

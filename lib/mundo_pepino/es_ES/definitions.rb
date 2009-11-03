@@ -328,6 +328,16 @@ Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} una? (.+) "(.+)"$/ do |padre
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
 
+Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |modelo_padre, nombre_del_padre, numero, modelo_hijo|
+  add_resource_from_database(modelo_padre, nombre_del_padre)
+  last_mentioned_should_have_n_children(modelo_hijo, numero)
+end
+
 Entonces /^#{_tiene_en_bbdd_} una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
+
+Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, modelo_hijo|
+  last_mentioned_should_have_n_children(modelo_hijo, numero)
+end
+

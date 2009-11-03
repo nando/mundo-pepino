@@ -92,6 +92,14 @@ module MundoPepino
       end
     end
     
+    def last_mentioned_should_have_n_children(child, numero)
+      if child_model = child.to_model
+        (last_mentioned.send child_model.table_name).size.should == numero.to_number
+      else
+        raise ModelNotMapped.new(child)
+      end
+    end
+    
     def last_mentioned_should_have_value(campo, valor)
       res = last_mentioned
       if child_model = campo.to_model

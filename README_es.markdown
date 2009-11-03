@@ -482,19 +482,27 @@ Convenciones generales:
 
 #### Tenemos en BBDD un valor en un campo de un registro concreto
     Entonces el Huerto "H-02" tiene en base de datos como Área "2" hectáreas
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-valor-en-campo-de-registro.feature)
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
 
 #### Tenemos en BBDD un valor en un campo del registro mencionando anteriormente
     Entonces tiene en base de datos como Área "2" hectáreas
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-valor-en-campo-de-registro-mencionado.feature)
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
 
 #### Tenemos en BBDD una asociación **has\_many** en un registro concreto
     Entonces el Huerto "H-02" tiene en base de datos un Bancal "A"
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-asocioacion-has-many-en-registro.feature)
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
 
-#### Tenemos en BBDD una asociación **has\_many**  en un registro mencionando anteriormente
+#### Tenemos en BBDD una asociación **has\_many** en un registro mencionando anteriormente
     Entonces tiene en base de datos un Bancal "B"
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/tenemos-en-bbdd-asocioacion-has-many-en-registro-mencionado.feature)
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
+
+#### Tenemos en BBDD un número concreto de registros en una asociación **has\_many** de un registro padre concreto
+    Entonces el Huerto "H-02" tiene en base de datos tres Bancales
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
+
+#### Tenemos en BBDD un número concreto de registros en una asociación **has\_many** de un registro mencionando anteriormente
+    Entonces tiene en base de datos siete Bancales
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
 
 (\*) Los **asteriscos** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`. Dos asteríscos (\*\*) hacen referencia a una definición presente en la feature autogenerada por `script/generate feature`.
 
