@@ -103,7 +103,7 @@ module MundoPepino
     def last_mentioned_should_have_value(campo, valor)
       res = last_mentioned
       if child_model = campo.to_model
-        child = child_model.send "find_by_#{field_for(child_model)}", name
+        child = child_model.send "find_by_#{field_for(child_model)}", valor
         child_field = campo.to_field || child_model.name.underscore
         (res.send child_field).should == child
       elsif field = field_for(res.class, campo)
