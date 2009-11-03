@@ -35,13 +35,13 @@ MundoPepino.configure do |config|
     /^huerto de nacimiento$/i   => Orchard
   }
   config.field_mappings = {
-    /^[Ááa]reas?$/i    => :area,
-    /^color(es)?$/i   => :color,
-    /^latitud(es)?$/i => :latitude,
-    /^longitud(es)?/i => :length,
-    /^pesos?/i        => :weight,
-    /^di[áa]metros?/i => :diameter,
-    /^matas?$/i       => :plants,
+    /^[Ááa]reas?$/i              => :area,
+    /^color(es)?$/i              => :color,
+    /^latitud(es)?$/i            => :latitude,
+    /^longitud(es)?/i            => :length,
+    /^pesos?/i                   => :weight,
+    /^di[áa]metros?/i            => :diameter,
+    /^matas?$/i                  => :plants,
     /^variedad(es)?$/i           => :variety,
     /^campos? de texto/i         => :text_field,
     /^[áa]reas? de texto/i       => :textarea,
@@ -58,7 +58,8 @@ MundoPepino.configure do |config|
     /^huerto de nacimiento$/i    => :orchard_of_birth,
     /^hora de comenzar a regar$/i => :start_watering,
     /^hora de terminar de regar$/i => :stop_watering,
-    /^precio$/i                  => :price
+    /^precio$/i                  => :price,
+    /^Pepino::nombre$/i          => :title
   }
   config.relation_model_mappings = {
     /^orchard_of_birth$/i => Orchard

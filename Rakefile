@@ -2,6 +2,11 @@
 require(File.join(File.dirname(__FILE__), 'features', 'support', 'app', 'config', 'boot'))
 require 'rake'
 
+# Commented to avoid that runcoderun uses "test" as default task
+# require 'rake/testtask'
+# require 'rake/rdoctask'
+# require 'tasks/rails'
+
 unless ARGV.any? {|a| a =~ /^gems/}
   begin
     require 'cucumber/rake/task'
