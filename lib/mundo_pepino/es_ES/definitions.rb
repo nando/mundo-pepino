@@ -1,5 +1,5 @@
 # MundoPepino's step definitions in es_ES
-Dado /^que estoy en (.+)$/ do |pagina|
+Dado /^que estoy en (?!#{_pagina_desde_rutas_})(.+)$/ do |pagina|
   do_visit pagina.to_unquoted.to_url
 end 
 
