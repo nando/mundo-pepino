@@ -270,6 +270,9 @@ Entonces /^(#{_veo_o_no_}) un enlace (?:al?|para) (.+)?$/i do |should, pagina|
   }.send(not_shouldify(should), raise_error)
 end
 
+Entonces /^(#{_veo_o_no_}) el campo (.+) con el (?:valor|texto)? (.+)$/ do |should, campo, valor|
+  field_labeled(campo.to_unquoted).value.send shouldify(should), match(/#{valor.to_unquoted}/)
+end
 
 Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
   field_labeled(campo.to_unquoted).send shouldify(should), be_checked

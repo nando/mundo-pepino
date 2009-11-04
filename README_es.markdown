@@ -456,6 +456,11 @@ Convenciones generales:
              | Selector       | Valor                  |
              | h1             | Mundo Pepino           |
 [más ejemplos]/mundo-pepino/tree/master/features/es_ES/veo-etiquetas-con-valores.feature
+
+#### Veo (o no) un campo con un contenido concreto \*
+    Entonces debería ver el campo "nombre" con "Wadus"
+[más ejemplos]/mundo-pepino/tree/master/features/es_ES/veo-campo-con-valor.feature    
+
 #### Leo (o no) un texto, quitando las etiquetas HTML
     Entonces debo leer el texto "IVA incluido"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/leo-el-texto.feature)
