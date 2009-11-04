@@ -1,4 +1,8 @@
 # MundoPepino's step definitions in es_ES
+Dado /^que estoy en (.+)$/ do |pagina|
+  do_visit pagina.to_unquoted.to_url
+end 
+
 # Creación simple con nombre opcional
 Dado /^(?:que tenemos )?(#{_numero_}) (?!.+ #{_cuyo_})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   given_we_have_a_number_of_instances_called numero, modelo, nombre 

@@ -38,7 +38,7 @@ En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold*
     $EDITOR app/views/orchards/new.html.erb # "Crear" en lugar de "Create"
     rake caracteristicas
 
-Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes.
+Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. 
 
 El generador mundo_pepino nos prepara el entorno para utilizar las definiciones de MundoPepino sin copiarnos las mismas en ''features/steps_definitions'', cargándolas directemente desde su código. Existe otro generador equivalente llamado **mundo_pepino_steps** que hace lo mismo pero copiando dichas definiciones dentro de ''features/steps_definitions''.
 
@@ -291,6 +291,9 @@ Convenciones generales:
 * asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
 * todas las definiciones para "Cuando algo ocurre" (o *Then's*, ver más abajo) son válidas también como "Dado el contexto" incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
+#### Estoy en una página específica (alias de //Solicitud de una página//) \*
+    Dado que estoy en la portada
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-especifica.feature)
 
 #### Creación de uno o varios registros asignándoles opcionalmente un nombre
     Dado que tenemos Un Producto llamado "Acelgas" 

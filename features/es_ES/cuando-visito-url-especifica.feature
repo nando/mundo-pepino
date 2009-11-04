@@ -1,9 +1,10 @@
-Característica: solicitud de URL específica
+Característica: solicitud-de/estoy-en URL específica
 
-  Escenario: Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
+  Escenario: Carga de URL específica opcionalmente indicada con un nombre coloquial
   ########################################################################
   # Patrón: 
   #   Cuando visito _pagina_
+  #   Dado que estoy en _pagina_
   #
   # Descripción:
   #   Solicita la URL referida comprobando previamente si el valor de la 
@@ -46,12 +47,22 @@ Característica: solicitud de URL específica
   # mapeo de URL, o el valor de dicho mapeo en caso contrario.
   #
   ########################################################################
+    Dado que estoy en la portada
+    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+
+    Dado que estoy en /
+    Cuando pincho el botón Galleta de la Fortuna
+    Entonces veo la etiqueta H1 con el valor "Sorry, not implemented yet"
+
     Cuando visito /
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+
     Cuando visito "/"
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+
     Cuando visito la portada
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+
     Cuando visito "la HOME"
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
 
