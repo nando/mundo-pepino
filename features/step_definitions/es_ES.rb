@@ -72,8 +72,8 @@ MundoPepino.configure do |config|
     /^la página de inicio de sesión/i => lambda {
       MundoPepino.world.new_session_path
     },
-    # the fancy one
-    /^(.+) ["'](.+)['"]$/ => lambda {|captures|
+    # the fancy one: specific resource page
+    /^la página de(?:l| la) (.+) ["'](.+)['"]$/ => lambda {|captures|
       if model = captures[0].to_model
         MundoPepino.world.send "#{model.name.underscore}_path", model.find_by_name(captures[1])
       end

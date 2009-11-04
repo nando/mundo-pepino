@@ -32,6 +32,9 @@ module MundoPepino
         def _tiene_en_bbdd_
           '(?:tiene en (?:la )?bbdd|en (?:la )?bbdd tiene|tiene en (?:la )?base de datos|en (?:la )?base de datos tiene)'
         end
+        def _debo_estar_en_
+          '(?:debo|deber[ií]a) (?:estar|encontrarme) en'
+        end
       end
     end
   end
@@ -40,5 +43,6 @@ end
 class << self
   delegate :_numero_, :_cuyo_, :_pagina_, :_pagina_desde_rutas_, :_fecha_y_o_hora_,
     :_veo_o_no_, :_leo_o_no_, :_tenemos_en_bbdd_, :_tiene_en_bbdd_, :_pulso_,
+    :_debo_estar_en_,
     :to => 'MundoPepino::Matchers::Bites'
 end

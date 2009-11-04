@@ -354,22 +354,22 @@ Convenciones generales:
 * frases escritas en tiempo presente en primera persona del singular
 * todas las definiciones son válidas también para definir contexto (en "Dados" o "Givens") incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
-#### Solicitud de una URL específica opcionalmente indicada con un nombre coloquial
+#### Solicitud de una página específica opcionalmente indicada con un nombre coloquial
     Cuando visito la portada
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-especifica.feature)
-#### Solicitud de la URL asociada a un recurso concreto
+#### Solicitud de la página asociada a un recurso concreto
     Cuando visito la página del huerto "H-01"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-recurso-especifico.feature)
-#### Solicitud de la URL asociada al último recurso definido
+#### Solicitud de la página asociada al último recurso definido
     Cuando visito su página
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-recurso-mencionado.feature)
-#### Solicitud de la URL del índice (index) de un tipo de recurso (modelo)
+#### Solicitud de la página del índice (index) de un tipo de recurso (modelo)
     Cuando visito la página de Tomates
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-indice-de-tipo-de-recurso.feature)
-#### Solicitud de la URL de creación de un recurso
+#### Solicitud de la página de creación de un recurso
     Cuando visito la página de creación de Tomate
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-creacion.feature)
-#### Solicitud de la URL de edición de un recurso
+#### Solicitud de la página de edición de un recurso
     Cuando visito la página de edición del huerto "H-01"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-edicion.feature)
 #### Pincho/pulso en un enlace \*
@@ -424,12 +424,19 @@ Convenciones generales:
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-borro-el-enesimo-recurso.feature)
 
 ### Entonces pasa (Thens)
-
 Convenciones generales:
 
 * frases escritas en primera persona del singular (excepto comprobaciones en bbdd)
 * para expresar que algo es visible utiliza "veo" o "debo ver" (o "no veo" y "no debo ver")
 * las comprobaciones del contenido de la base de datos se escriben haciendo una referencia explícita a la misma en primera persona del plural ("tenemos en base de datos") o en tercera del singular ("tiene en base de datos"). Esta verbosidad es intencionada debido a que [dichas comprobaciones están desaconsejadas](http://github.com/aslakhellesoy/cucumber/wikis/given-when-then), haciendo así menos limpio y un poco más costoso su uso.
+
+#### Debería estar en una página específica \*
+    Entonces debo estar en la portada
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/estoy-en-url-especifica.feature)
+
+#### Debería estar en página del índice (index) de un tipo de recurso (modelo)
+    Entonces debo estar en la página de Tomates
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/estoy-en-url-de-indice-de-recurso.feature)
 
 #### Veo (o no) un texto \*
     Entonces debo ver el texto "IVA incluido"
@@ -457,10 +464,10 @@ Convenciones generales:
      | Muestras de tomate       |
      | Restos de lechuga        |
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/leo-los-siguientes-textos.feature)
-#### Veo (o no) un enlace a una URL específica (opcionalmente indicada con un nombre coloquial)
+#### Veo (o no) un enlace a una página específica (opcionalmente indicada con un nombre coloquial)
     Entonces debo ver un enlace a la página de recuperación de contraseña    
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-enlace-a-url-especifica)
-#### Veo (o no) un enlace a una URL relativa a una visitada con anterioridad
+#### Veo (o no) un enlace a una página relativa a una visitada con anterioridad
     Entonces debo ver un enlace a la siguiente página
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-enlace-a-url-relativa)
 #### Veo marcada (o desmarcada) una casilla (*checkbox*) \*

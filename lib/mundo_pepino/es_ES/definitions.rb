@@ -79,16 +79,8 @@ end
 
 ###############################################################################
 
-Cuando /^(?:que )?visito (?:el|la) #{_pagina_} de ([\w]+|['"][\w ]+["'])$/i do |modelo_en_crudo|
-  modelo = modelo_en_crudo.to_unquoted
-  if model = modelo.to_model
-    pile_up model.new
-    do_visit eval("#{model.table_name}_path")
-  elsif url = "la página de #{modelo_en_crudo}".to_url
-    do_visit url
-  else
-    raise MundoPepino::ModelNotMapped.new(modelo)
-  end
+Cuando /^(?:que )?visito ((?:el|la) #{_pagina_} de )([\w]+|['"][\w ]+["'])$/i do |la_pagina_de, modelo_en_crudo|
+  do_visit resource_index_or_mapped_page(la_pagina_de, modelo_en_crudo)
 end
 
 Cuando /^(?:que )?visito (?:el|la) #{_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i do |modelo, nombre|
@@ -360,3 +352,10 @@ Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, mod
   last_mentioned_should_have_n_children(modelo_hijo, numero)
 end
 
+Entonces /^#{_debo_estar_en_} ((?:el|la) #{_pagina_} de )([\w\s]+|['"][\w ]+["'])$/i do |la_pagina_de, modelo_en_crudo|
+  URI.parse(current_url).path.should == resource_index_or_mapped_page(la_pagina_de, modelo_en_crudo)
+end
+
+Entonces /^#{_debo_estar_en_} (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
+  URI.parse(current_url).path.should == pagina.to_unquoted.to_url
+end

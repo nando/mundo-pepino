@@ -163,6 +163,18 @@ module MundoPepino
       end
       options
     end
+
+    def resource_index_or_mapped_page(the_page_of, raw_model)
+      unquoted_model = raw_model.to_unquoted
+      if model = unquoted_model.to_model
+        pile_up model.new
+        eval("#{model.table_name}_path")
+      elsif url = "#{the_page_of}#{raw_model}".to_url
+        url
+      else
+        raise MundoPepino::ModelNotMapped.new(unquoted_model)
+      end
+    end
   end  
 end
 

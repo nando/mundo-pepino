@@ -50,4 +50,4 @@ Característica: veo enlace a URL específica
   Escenario: Veo un enlace a una URL específica cuyo mapeo utiliza Regexp
     Dado que tenemos un huerto "Fancy"
     Cuando visito la página de huertos
-    Entonces debería ver un enlace al huerto "Fancy"
+    Entonces debería ver un enlace a la página del huerto "Fancy"
