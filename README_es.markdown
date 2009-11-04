@@ -38,7 +38,7 @@ En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold*
     $EDITOR app/views/orchards/new.html.erb # "Crear" en lugar de "Create"
     rake caracteristicas
 
-Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. 
+Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. Para tener precargado el entorno utilizando Spork bastaría con añadir ''--spork'' al ''script/generate cucumber'' y meter la opción ''--drb'' dentro del profile y/o tarea de rake.
 
 El generador mundo_pepino nos prepara el entorno para utilizar las definiciones de MundoPepino sin copiarnos las mismas en ''features/steps_definitions'', cargándolas directemente desde su código. Existe otro generador equivalente llamado **mundo_pepino_steps** que hace lo mismo pero copiando dichas definiciones dentro de ''features/steps_definitions''.
 

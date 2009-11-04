@@ -1,3 +1,17 @@
+== 0.1.5 2009-11-09
+* Fixed bug in children search if their name field it's not "name" (by Paco
+  Guzman).
+* Dynamic load and refactoring of Matchers::Fragments delegation
+* X new step definitions in es_ES:
+  * I press the following sequence of links and/or buttons + fit table
+  * Given I am on _page_
+  * Then I should be on _page_
+  * Then the field _field_ should|should-not contain _value_
+  * Resource at BBDD should have an specific number of children (Paco Guzman's
+    issue)
+* Extended es_ES "I select _x_ from _y_" step definition.
+* Spork reference at README_es (by Gaizka).
+
 == 0.1.4 2009-10-30
 * Added generator mundo_pepino_steps like mundo_pepino but creating a copy
   of the step definitions in features/step_definitions.

@@ -2,7 +2,7 @@ module MundoPepino #:nodoc:
   class VERSION #:nodoc:
     MAJOR = 0
     MINOR = 1
-    TINY  = 4
+    TINY  = 5
     PATCH = nil # Set to nil for official release
 
     STRING = [MAJOR, MINOR, TINY, PATCH].compact.join('.')
