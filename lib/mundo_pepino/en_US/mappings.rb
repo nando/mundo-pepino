@@ -5,7 +5,7 @@ module MundoPepino
         /^tru(e|th)$/i  => true,
         /^false$/i       => false
       }) { |value| value }  # "true".to_real_value # => true
-      String.add_mapper(:field, {:nombre => :name})
+      String.add_mapper(:field)
     
       String.add_mapper(:number, { 
         /^an?$/i    => 1,

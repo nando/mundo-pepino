@@ -41,7 +41,7 @@ module MundoPepino
     def then_we_have_a_number_of_instances_in_our_database(raw_number, raw_model, name)
       model = raw_model.to_unquoted.to_model
       conditions = if name
-        {:conditions => [ "#{field_for(model, 'nombre')}=?", name ]}
+        {:conditions => [ "#{field_for(model)}=?", name ]}
       else
         {}
       end

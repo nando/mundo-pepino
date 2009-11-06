@@ -7,7 +7,7 @@ module MundoPepino
     def names_for_simple_creation(model, number, name_or_names, options = {})
       base_hash = base_hash_for(options)
       if name_or_names
-        field = field_for(model, 'nombre')
+        field = field_for(model)
         names = name_or_names.split(/ ?, | y /)
         if names.size == number
           names.map { |name| base_hash.dup.merge(field => name) }
@@ -19,8 +19,16 @@ module MundoPepino
       end
     end
   
-    def field_for(model, campo = 'nombre')
-      "#{model && model.name}::#{campo}".to_field || campo.to_field
+    def field_for(model=nil, field = nil)
+      model_name = "#{model && model.name+'::'}"
+      if field
+        "#{model_name}#{field}".to_field || field.to_field
+      else
+        # The use of "nombre" the name field mapping is deprecated
+        "#{model_name}nombre".to_field || 'nombre'.to_field || 
+        # "Model::name" or "name" (for a global mapping) is the right use.
+        "#{model_name}name".to_field || 'name'.to_field || :name
+      end
     end
 
     def shouldify(should_or_not)

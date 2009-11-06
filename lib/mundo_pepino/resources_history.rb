@@ -90,7 +90,7 @@ module MundoPepino
   
     def add_resource_from_database(modelo, nombre)
       model = modelo.to_unquoted.to_model
-      field = field_for(model, 'nombre')
+      field = field_for(model)
       if resource = model.send("find_by_#{field}", nombre)
         pile_up resource
       else
@@ -165,7 +165,7 @@ module MundoPepino
         arr.detect { |r| r.respond_to?(method) && r.send(method, value) }
       elsif value.is_a? Array
         model, val = value # [ class, value ]
-        name_field = field_for(model, 'nombre')
+        name_field = field_for(model)
         arr.detect do |r| 
           r.respond_to?(:is_a?) && r.is_a?(model) && r.send(name_field) =~ /#{val}/i
         end
@@ -187,7 +187,7 @@ module MundoPepino
         [[ mentioned ], [ valor ]]
       end
       field, values = if (child_model = campo.to_model)
-        child_name_field = field_for(mentioned.mr_model, 'nombre')
+        child_name_field = field_for(mentioned.mr_model)
         values = add_resource(child_model,
           valores.map { |val| { child_name_field => val } })
         values = [ values ] unless values.is_a?(Array)

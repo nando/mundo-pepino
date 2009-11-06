@@ -31,20 +31,83 @@ Por otro lado, cuando el idioma utilizado no es inglés es necesario evitar las 
     rake db:migrate
     rake caracteristicas
 
-
 En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold* genera las vistas en inglés y el generador de *caracteristica* los espera en castellano. El primero es el botón "Create" y el segundo el enlace "Destroy":
 
     $EDITOR app/views/orchards/index.html.erb # "Borrar" en lugar de "Destroy"
     $EDITOR app/views/orchards/new.html.erb # "Crear" en lugar de "Create"
     rake caracteristicas
 
-Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. Para tener precargado el entorno utilizando Spork bastaría con añadir ''--spork'' al ''script/generate cucumber'' y meter la opción ''--drb'' dentro del profile y/o tarea de rake.
+Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. Para tener precargado el entorno utilizando Spork bastaría con añadir ''--spork'' al ''script/generate cucumber'' y meter la opción ''--drb'' dentro del profile y/o de la tarea de rake.
 
 El generador mundo_pepino nos prepara el entorno para utilizar las definiciones de MundoPepino sin copiarnos las mismas en ''features/steps_definitions'', cargándolas directemente desde su código. Existe otro generador equivalente llamado **mundo_pepino_steps** que hace lo mismo pero copiando dichas definiciones dentro de ''features/steps_definitions''.
 
-La intención del generador de características es más didáctica que pragmática. Ofrece un ejemplo simple que podemos toquetear para probar el plugin. Por otro lado se limita a hacer exactamente lo mismo que hace `generate feature` exceptuando el hecho de que no genera un fichero de **definiciones específicas** para la nueva *caracteristica* (ya que las utilizadas están comprendidas dentro de las **definiciones genéricas** ya implementadas en MundoPepino).
+La intención del generador de características es más didáctica que pragmática. Ofrece un ejemplo simple que podemos toquetear para probar el MundoPepino. Por otro lado se limita a hacer exactamente lo mismo que hace `generate feature` de Cucumber, exceptuando el hecho de que no genera un fichero de **definiciones específicas** para la nueva *caracteristica* (ya que las utilizadas están comprendidas dentro de las **definiciones genéricas** ya implementadas en MundoPepino).
 
-Dentro del código de MundoPepino, en `features/support/app` está la aplicación que el MundoPepino utiliza para probarse a si mismo. En particular la característica `features/mundo-pepino.feature` pretente ser un compendio de escenarios que muestren las posibilidades que ofrece.
+El primer paso del primer escenario generado por ''caracteristica'' en el fichero ''features/gestion_de_huertos.feature'' es la siguiente:
+
+    Dado que visito la página de nuevo/a Huerto
+
+Para que MundoPepino sepa que cuando hablamos de //Huerto// nos estamos refiriendo al modelo //Orchard// es necesario realizar lo que llamamos un "mapeo de modelo". El generador de hecho nos lo ha metido en ''mundo_pepino_es_ES.rb'':
+
+    MundoPepino.configure do |config|
+      config.model_mappings = {
+        /^huertos?$/i => Orchard
+      }
+      config.field_mappings = { ... }
+      config.url_mappings = { ... }
+    end
+
+De forma similar se pueden definir mapeos para los atributos (//field_mappings//, p.e ''/^usado$/i => :used'') y las rutas de la aplicación (//url_mappings//, p.e. ''/^la portada$/ => "/"'').
+
+Del mapeo de atributos lo más destacable es la convención de que, si no se le indica lo contrario, el nombre del campo que guarda el //nombre// de cualquier modelo es **name**. Este mapeo nos permite escribir frases como ''Dado que tengo un usuario llamado "Casimiro"'' sin necesidad de hacer referencia al nombre del campo en el que debe guardarse //Casimiro//.
+
+Es recomendable para evitar problemas que los valores en el mapeo de atributos sean símbolos en lugar de cadenas ya que algunas factorias (p.e. FixtureReplacement) los quieren así.
+
+Del mapeo de rutas cabe destacar que si MundoPepino detecta la presencia del **método ''path_to''** (creado actualmente por Cucumber al preparar el entorno) ignorará dicho mapeo y utilizará ''path_to'' para obtener las rutas a partir de las capturas en los textos.
+
+### Primera convención y como saltársela: campo **name** para el //nombre// en todos los modelos
+
+Como acabamos de comentar:
+    
+    ''Dado que tengo un usuario llamado "Casimiro"''
+
+MundoPepino, por convención, intentará guardar "Casimiro" en el campo ''name'' del modelo contra el que esté mapeado "usuario". Vamos a tirar de imaginación y continuemos asumiendo que dicho modelo es ''User''.
+
+Si queremos saltarnos la convención y que "Casimiro" se guarde en el campo ''login'' tendremos que indicarlo con un mapeo de atributo similar al siguiente:
+
+    config.model_mappings = {
+      /^User::name$/ => :login
+    }
+
+Si lo que nos interesa es cambiar la convención globalmente, es decir, que siempre se utilice otro nombre de campo para el nombre, simplemente tendriamos que quitar el modelo y los dos dos puntos del mapeo anterior. Por ejemplo, si queremos que dicho nombre de campo fuese **title** sería algo como:
+
+    config.model_mappings = {
+      /^name$/ => :title
+    }
+
+### Relación con modelo utilizando un nombre que no se corresponde con el mismo
+Con un ejemplo se entiende mejor, creo. Tenemos un modelo User y un modelo Garden y este último "belongs_to :author, class_name => 'User'", de tal forma que //a_garden.author// nos devuelve un User.
+
+Bien, pues para que la siguiente característica funcione correctamente:
+
+    Dado que tenemos un usuario llamado "Fidel"
+       Y que tenemos un jardín cuyo autor es "Fidel"
+
+Tengo que meter los siguentes mapeos en nuestro entorno:
+* En el mapeo de modelos (model_mappings):
+
+    /^autor(es)?$/i => User
+
+* En el mapeo de campos (field_mappings):
+
+    /^autor(es)?$/i => :author
+
+* Un mapeo adicional entre el nombre del campo en inglés y su modelo asociado (relation_model_mappings):
+
+    'author' => User
+
+Con estos mapeos también deberían funcionar el resto de definiciones de MP en las que se haga referencia a una relación.
+
 
 ## Instalación
 
@@ -232,29 +295,6 @@ El fichero `gestion_de_huertos.feature` tendría:
 
 A diferencia de `generate feature` aquí no se crea un fichero `step_definitions.rb` con definiciones e implementaciones específicas ya que las mismas se encuentran dentro de las tratadas genéricamente dentro del MundoPepino.
 
-### Relación con modelo utilizando un nombre que no se corresponde con el mismo
-Con un ejemplo se entiende mejor, creo. Tenemos un modelo User y un modelo Garden y este último "belongs_to :author, class_name => 'User'", de tal forma que //a_garden.author// nos devuelve un User.
-
-Bien, pues para que la siguiente característica funcione correctamente:
-
-    Dado que tenemos un usuario llamado "Fidel"
-       Y que tenemos un jardín cuyo autor es "Fidel"
-
-Tengo que meter los siguentes mapeos en nuestro entorno:
-* En el mapeo de modelos (model_mappings):
-
-    /^autor(es)?$/i => User
-
-* En el mapeo de campos (field_mappings):
-
-    /^autor(es)?$/i => :author
-
-* Un mapeo adicional entre el nombre del campo en inglés y su modelo asociado (relation_model_mappings):
-
-    'author' => User
-
-Con estos mapeos también deberían funcionar el resto de definiciones de MP en las que se haga referencia a una relación.
-
 ## Definiciones implementadas en MundoPepino
 
 **Cada definición** existente en MundoPepino tiene **al menos un escenario** que comprueba:
@@ -268,9 +308,9 @@ Para todos los escenarios podríamos tener una narrativa genérica que expresase
       Como usuario de Cucumber
       Quiero tener los pasos más habituales definidos, implementados y bien documentados
 
-Cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas desde este índice.
+Cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas con //markdown// desde este README. La característica `features/mundo-pepino.feature` pretente ser todo lo contrario, un compendio de escenarios que muestren las posibilidades que ofrece más alla de una definición concreta (la aplicación que MundoPepino utiliza para correr estos tests se encuentra en `features/support/app`). 
 
-Como **convención general** los nombres correspondientes a modelos y campos pueden ir sin comillas pero los valores deben ir entre comillas (simples o dobles). Por ejemplo:
+Como **convención general**, aunque MundoPepino pretende ser lo más flexible posible en general, y con las comillas en particular, los nombres correspondientes a modelos y campos pueden ir sin comillas pero los valores deben ir entre comillas (simples o dobles). Por ejemplo:
 
     Dado que tenemos un artículo que tiene como título "Título del artículo"
 

@@ -44,7 +44,7 @@ module MundoPepino
         attribs = Hash.new
         attributes.each do |key, value|
           if child_model = (key.to_s.to_model || key.to_s.to_relation_model)
-            child = add_resource(child_model, field_for(child_model, 'nombre') => value)
+            child = add_resource(child_model, field_for(child_model) => value)
             field_name = key.to_s.to_relation_model ? key : child_model.name.underscore
             attribs["#{field_name}_id"] = child.id
           else
