@@ -12,6 +12,15 @@ Al mismo tiempo existen expresiones que son de uso frecuente cuando describimos 
 
 Por otro lado, cuando el idioma utilizado no es inglés es necesario evitar las posibles ambigüedades que genera la traducción de nuestra aplicación. Para posibilitar un lenguaje ubicuo, MundoPepino fuerza la vinculación de las distintas partes de la aplicación (modelos, atributos, acciones y rutas) con los términos con los que nos referimos a las mismas desde nuestras características/features.
 
+## Filosofía del MundoPepino
+La aproximación que MundoPepino realiza para resolver su cometido se basa en tres conceptos principalmente: 
+
+* Definir **convenciones** generales **que reduzcan el número de posibilidades** de expresar un paso.
+* Aprovechar toda la potencia de las **expresiones regulares** para que la definición de un paso capture el **mayor número de posible formas de expresarlo**.
+* Uso indiscriminado de **metaprogramación** de cara a **reducir el código necesario** para implementar sus pasos.
+
+El uso de expresiones regulares complejas dificulta notablemente la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. MundoPepino vive con ello y cree que merece la pena, pero comprende y respeta que OtrosMundos ataquen el problema con una visión completamente distinta.
+
 ## Recursos
 
 * **fuentes**: git://github.com/nando/mundo-pepino.git
@@ -108,192 +117,6 @@ Tengo que meter los siguentes mapeos en nuestro entorno:
 
 Con estos mapeos también deberían funcionar el resto de definiciones de MP en las que se haga referencia a una relación.
 
-
-## Instalación
-
-Como gema:
-
-    gem install mundo-pepino
-
-Como plugin (ver dependencias más abajo):
-
-    script/plugin install git://github.com/nando/mundo-pepino.git
-
-### Dependencias
-  Si instalamos la gema junto con ella deberían quedar instaladas todas sus dependencias.
-
-  Si instalamos mundo-pepino como plugin debemos tener instaladas las gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo, para instalar todas ellas como plugins:
-
-    gem install term-ansicolor treetop diff-lcs nokogiri # dependencias de Cucumber
-    script/plugin install git://github.com/aslakhellesoy/cucumber.git
-    script/plugin install git://github.com/brynary/webrat.git
-    script/plugin install git://github.com/dchelimsky/rspec.git
-    script/plugin install git://github.com/dchelimsky/rspec-rails.git
-
-  Además necesitamos instalar la gema o plugin StringMapper:
-
-    gem install string-mapper
-
-  o
-
-    script/plugin install git://github.com/nando/string-mapper.git
-
-  Si hacemos uso de alguno de los pasos que hacen referencia a la **selección de un mes** como parte de una fecha en un formulario necesitamos que el método ''strftime'' devuelva en nombre del mes en castellano cuando se utilice ''"%B"''. Para conseguirlo, tenemos entre otras las siguientes opciones (ver más abajo):
-
-* instalar el módulo ruby-locale,
-* o redefinir la función strftime para lograr dicho comportamiento.
-
-#### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
-
-De fábrica MundoPepino utiliza ActiveRecord para incorporar a la BBDD los datos que soliciten los escenarios. 
-
-Opcionalmente MundoPepino puede utilizar FixtureReplacement haciendo dicha tarea más simple y permitiéndo que los textos se centren en los objetivos de los escenarios sin preocuparse por el modelo de datos subyacente.
-
-Para ello por un lado tenemos que instalar el plugin:
-
-    script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
-    script/generate fixture_replacement
-
-...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
-
-    class MiMundo < MundoPepino
-      include FixtureReplacement
-    end
-    
-    World do
-      MiMundo.new
-    end 
-
-#### [FactoryGirl](http://github.com/thoughtbot/factory_girl/)
-
-Otra opción es utilizar FactoryGirl
-
-Para ello por un lado tenemos que instalar la gema (para más información sobre FactoryGirl consultar (aquí)[http://github.com/thoughtbot/factory_girl/]):
-
-    gem install thoughtbot-factory_girl --source http://gems.github.com
-
-...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que requerir la librería seguida de la definición de nuestras factorias:
-
-    require 'factory_girl'
-    require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
-
-También se debe incluir un fichero donde se definan las factories a utilizar en nuestro mundo-pepino, como ejemplo consultar el fichero de factories que se encuentra en el directorio ''features/support/app/db/factories''
-
-#### Selección de un mes en formularios
-
-  Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby, si no hacemos nada para remediarlo, esto es sinónimo del nombre del mes de dicha fecha en inglés.
-
-  La opción más simple para resolver este problema es redefinir ''strftime'' para que devuelva el nombre del mes en el locale de la aplicación. Por ejemplo:
-
-    class Time
-      alias :strftime_nolocale :strftime
-      def strftime(format)
-        format = format.dup
-        format.gsub!(/%B/, I18n.translate('date.month_names')[self.mon])
-        self.strftime_nolocale(format)
-      end
-    end
-
-  Otra opción sería instalar **ruby-locale**. **ruby-locale** es un (viejo) módulo que añade **soporte para locales en Ruby** al que se hace referencia [desde el wiki de Rails](http://wiki.rubyonrails.org/rails/pages/HowToOutputDatesInAnotherLanguage/). Instalándolo en el sistema tendremos la posibilidad de que strftime('%B') devuelva el nombre del mes en castellano.
-
-  Para instalarlo nos bajamos [su código fuente](http://sourceforge.net/project/platformdownload.php?group_id=68254) y lo compilamos e instalamos en el sistema:
-
-    ruby extconf.rb
-    make
-    sudo make install
-    irb
-    irb> require 'locale'
-    => true
-    irb> Time.now.strftime('%B')
-    => "January"
-    irb> Locale.setlocale(Locale::LC_TIME, "es_ES.UTF-8")
-    => "es_ES"
-    irb> Time.now.strftime('%B')
-    => "enero" 
-
-Por último, para que los helpers de Rails relacionados con la selección de fechas muestren los meses en castellano es necesario hacer uso de la opción **:use\_month\_names**, pasándole en la misma un array con los nombres de los doce meses que deseamos utilizar. Por ejemplo, en algún punto de nuestra aplicación definimos el array con los meses con:
-
-    Meses = %w(enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre)
-
-Y posteriormente en las vistas llamamos al helper con algo parecido a:
-
-    <%= pepino.datetime_select :harvested_at, :use_month_names => Meses %>
-
-## Uso
-### generate mundo\_pepino
-
-    rails_root$ script/generate mundo_pepino
-          exists  features/step_definitions
-          create  features/step_definitions/mundo_pepino_es_ES.rb
-          exists  lib/tasks
-          create  lib/tasks/mundo_pepino.rake
-
-En `mundo_pepino_es_ES.rb` tenemos lo siguiente:
-
-    require 'mundo_pepino/es_ES'    # Cargamos las definiciones en castellano
-    MundoPepino.configure do |c|
-      c.models_to_clean = []        # Array con los modelos que serán limpiados 
-                                    # antes de lanzar cada escenario.
-      c.model_mappings = {}         # Hash con el mapeo de los modelos a partir
-                                    # de sus equivalencias en castellano.
-      c.field_mappings = {}         # Hash con el mapeo de los campos.
-    class MiMundo < MundoPepino     # Ejemplo de uso del MundoPepio con herencia. 
-      # include FixtureReplacement  # FR listo para entrar en acción. Meter aquí 
-      # def mi_funcion; ...; end    # las funciones específicas que necesitemos
-    end                             # desde nuestras definiciones.
-    Before do                       # La limpieza de modelos propiamente dicha... 
-      MundoPepino.clean_models
-    end                             # ...se realizará antes de cada escenario.
-                                    # Finalmente le pedimos a Cucumber que
-    World(MiMundo)                  # utilice una instancia de nuestro mundo como
-                                    # ámbito local de nuestros escenarios.
-
-Por otro lado `mundo_pepino.rake` añade una tarea llamada **caracteristicas** que lanza con la opción `--language es` todos los ficheros con extensión `.feature` que tengamos dentro del directorio `caracteristicas`.
-
-### generate caracteristica
-
-Se trata del generador equivalente a `script/generate feature` de Cucumber:
-
-    $ script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área used:boolean:usado
-    model_cleaning  added Orchard (Orchard.destroy_all call before each scenario)
-    model_mapping   added /huertos?$/i => Orchard
-    field_mapping   added /nombres?$/i => :name
-    field_mapping   added /áreas?$/i => :area
-    field_mapping   added /usados?$/i => :used
-          create  caracteristicas/gestion_de_huertos.feature
-
-El fichero `gestion_de_huertos.feature` tendría:
-
-    Característica: Gestión de Huertos
-      Para [beneficio]
-      Como [sujeto]
-      Quiero [característica/comportamiento]
-    
-      Escenario: Añadir un/a nuevo/a Huerto
-        Dado que visito la página de nuevo/a Huerto
-        Cuando relleno nombre con "nombre 0"
-             Y relleno área con "0"
-             Y relleno usado con "true"
-             Y pulso el botón "Crear"
-        Entonces debería ver el texto "nombre 0"
-               Y debería ver el texto "0"
-               Y debería ver el texto "true"
-    
-      Escenario: Borrar Huerto
-        Dado que tenemos los/las siguientes Huertos:
-          |nombre|área|usado|
-          |nombre 1|1|false|
-          |nombre 2|2|true|
-          |nombre 3|3|false|
-          |nombre 4|4|true|
-        Cuando borro el/la Huerto en la tercera posición
-        Entonces debería ver una tabla con los siguientes contenidos:
-          |nombre|área|usado|
-          |nombre 1|1|false|
-          |nombre 2|2|true|
-          |nombre 4|4|true|
-
-A diferencia de `generate feature` aquí no se crea un fichero `step_definitions.rb` con definiciones e implementaciones específicas ya que las mismas se encuentran dentro de las tratadas genéricamente dentro del MundoPepino.
 
 ## Definiciones implementadas en MundoPepino
 
@@ -564,6 +387,192 @@ Convenciones generales:
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
 
 (\*) Los **asteriscos** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`. Dos asteríscos (\*\*) hacen referencia a una definición presente en la feature autogenerada por `script/generate feature`.
+
+## Instalación
+
+Como gema:
+
+    gem install mundo-pepino
+
+Como plugin (ver dependencias más abajo):
+
+    script/plugin install git://github.com/nando/mundo-pepino.git
+
+### Dependencias
+  Si instalamos la gema junto con ella deberían quedar instaladas todas sus dependencias.
+
+  Si instalamos mundo-pepino como plugin debemos tener instaladas las gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo, para instalar todas ellas como plugins:
+
+    gem install term-ansicolor treetop diff-lcs nokogiri # dependencias de Cucumber
+    script/plugin install git://github.com/aslakhellesoy/cucumber.git
+    script/plugin install git://github.com/brynary/webrat.git
+    script/plugin install git://github.com/dchelimsky/rspec.git
+    script/plugin install git://github.com/dchelimsky/rspec-rails.git
+
+  Además necesitamos instalar la gema o plugin StringMapper:
+
+    gem install string-mapper
+
+  o
+
+    script/plugin install git://github.com/nando/string-mapper.git
+
+  Si hacemos uso de alguno de los pasos que hacen referencia a la **selección de un mes** como parte de una fecha en un formulario necesitamos que el método ''strftime'' devuelva en nombre del mes en castellano cuando se utilice ''"%B"''. Para conseguirlo, tenemos entre otras las siguientes opciones (ver más abajo):
+
+* instalar el módulo ruby-locale,
+* o redefinir la función strftime para lograr dicho comportamiento.
+
+#### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
+
+De fábrica MundoPepino utiliza ActiveRecord para incorporar a la BBDD los datos que soliciten los escenarios. 
+
+Opcionalmente MundoPepino puede utilizar FixtureReplacement haciendo dicha tarea más simple y permitiéndo que los textos se centren en los objetivos de los escenarios sin preocuparse por el modelo de datos subyacente.
+
+Para ello por un lado tenemos que instalar el plugin:
+
+    script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
+    script/generate fixture_replacement
+
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
+
+    class MiMundo < MundoPepino
+      include FixtureReplacement
+    end
+    
+    World do
+      MiMundo.new
+    end 
+
+#### [FactoryGirl](http://github.com/thoughtbot/factory_girl/)
+
+Otra opción es utilizar FactoryGirl
+
+Para ello por un lado tenemos que instalar la gema (para más información sobre FactoryGirl consultar (aquí)[http://github.com/thoughtbot/factory_girl/]):
+
+    gem install thoughtbot-factory_girl --source http://gems.github.com
+
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que requerir la librería seguida de la definición de nuestras factorias:
+
+    require 'factory_girl'
+    require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
+
+También se debe incluir un fichero donde se definan las factories a utilizar en nuestro mundo-pepino, como ejemplo consultar el fichero de factories que se encuentra en el directorio ''features/support/app/db/factories''
+
+#### Selección de un mes en formularios
+
+  Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby, si no hacemos nada para remediarlo, esto es sinónimo del nombre del mes de dicha fecha en inglés.
+
+  La opción más simple para resolver este problema es redefinir ''strftime'' para que devuelva el nombre del mes en el locale de la aplicación. Por ejemplo:
+
+    class Time
+      alias :strftime_nolocale :strftime
+      def strftime(format)
+        format = format.dup
+        format.gsub!(/%B/, I18n.translate('date.month_names')[self.mon])
+        self.strftime_nolocale(format)
+      end
+    end
+
+  Otra opción sería instalar **ruby-locale**. **ruby-locale** es un (viejo) módulo que añade **soporte para locales en Ruby** al que se hace referencia [desde el wiki de Rails](http://wiki.rubyonrails.org/rails/pages/HowToOutputDatesInAnotherLanguage/). Instalándolo en el sistema tendremos la posibilidad de que strftime('%B') devuelva el nombre del mes en castellano.
+
+  Para instalarlo nos bajamos [su código fuente](http://sourceforge.net/project/platformdownload.php?group_id=68254) y lo compilamos e instalamos en el sistema:
+
+    ruby extconf.rb
+    make
+    sudo make install
+    irb
+    irb> require 'locale'
+    => true
+    irb> Time.now.strftime('%B')
+    => "January"
+    irb> Locale.setlocale(Locale::LC_TIME, "es_ES.UTF-8")
+    => "es_ES"
+    irb> Time.now.strftime('%B')
+    => "enero" 
+
+Por último, para que los helpers de Rails relacionados con la selección de fechas muestren los meses en castellano es necesario hacer uso de la opción **:use\_month\_names**, pasándole en la misma un array con los nombres de los doce meses que deseamos utilizar. Por ejemplo, en algún punto de nuestra aplicación definimos el array con los meses con:
+
+    Meses = %w(enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre)
+
+Y posteriormente en las vistas llamamos al helper con algo parecido a:
+
+    <%= pepino.datetime_select :harvested_at, :use_month_names => Meses %>
+
+## Uso
+### generate mundo\_pepino
+
+    rails_root$ script/generate mundo_pepino
+          exists  features/step_definitions
+          create  features/step_definitions/mundo_pepino_es_ES.rb
+          exists  lib/tasks
+          create  lib/tasks/mundo_pepino.rake
+
+En `mundo_pepino_es_ES.rb` tenemos lo siguiente:
+
+    require 'mundo_pepino/es_ES'    # Cargamos las definiciones en castellano
+    MundoPepino.configure do |c|
+      c.models_to_clean = []        # Array con los modelos que serán limpiados 
+                                    # antes de lanzar cada escenario.
+      c.model_mappings = {}         # Hash con el mapeo de los modelos a partir
+                                    # de sus equivalencias en castellano.
+      c.field_mappings = {}         # Hash con el mapeo de los campos.
+    class MiMundo < MundoPepino     # Ejemplo de uso del MundoPepio con herencia. 
+      # include FixtureReplacement  # FR listo para entrar en acción. Meter aquí 
+      # def mi_funcion; ...; end    # las funciones específicas que necesitemos
+    end                             # desde nuestras definiciones.
+    Before do                       # La limpieza de modelos propiamente dicha... 
+      MundoPepino.clean_models
+    end                             # ...se realizará antes de cada escenario.
+                                    # Finalmente le pedimos a Cucumber que
+    World(MiMundo)                  # utilice una instancia de nuestro mundo como
+                                    # ámbito local de nuestros escenarios.
+
+Por otro lado `mundo_pepino.rake` añade una tarea llamada **caracteristicas** que lanza con la opción `--language es` todos los ficheros con extensión `.feature` que tengamos dentro del directorio `caracteristicas`.
+
+### generate caracteristica
+
+Se trata del generador equivalente a `script/generate feature` de Cucumber:
+
+    $ script/generate caracteristica Orchard Huerto name:string:nombre area:integer:área used:boolean:usado
+    model_cleaning  added Orchard (Orchard.destroy_all call before each scenario)
+    model_mapping   added /huertos?$/i => Orchard
+    field_mapping   added /nombres?$/i => :name
+    field_mapping   added /áreas?$/i => :area
+    field_mapping   added /usados?$/i => :used
+          create  caracteristicas/gestion_de_huertos.feature
+
+El fichero `gestion_de_huertos.feature` tendría:
+
+    Característica: Gestión de Huertos
+      Para [beneficio]
+      Como [sujeto]
+      Quiero [característica/comportamiento]
+    
+      Escenario: Añadir un/a nuevo/a Huerto
+        Dado que visito la página de nuevo/a Huerto
+        Cuando relleno nombre con "nombre 0"
+             Y relleno área con "0"
+             Y relleno usado con "true"
+             Y pulso el botón "Crear"
+        Entonces debería ver el texto "nombre 0"
+               Y debería ver el texto "0"
+               Y debería ver el texto "true"
+    
+      Escenario: Borrar Huerto
+        Dado que tenemos los/las siguientes Huertos:
+          |nombre|área|usado|
+          |nombre 1|1|false|
+          |nombre 2|2|true|
+          |nombre 3|3|false|
+          |nombre 4|4|true|
+        Cuando borro el/la Huerto en la tercera posición
+        Entonces debería ver una tabla con los siguientes contenidos:
+          |nombre|área|usado|
+          |nombre 1|1|false|
+          |nombre 2|2|true|
+          |nombre 4|4|true|
+
+A diferencia de `generate feature` aquí no se crea un fichero `step_definitions.rb` con definiciones e implementaciones específicas ya que las mismas se encuentran dentro de las tratadas genéricamente dentro del MundoPepino.
 
 ## License
 
