@@ -259,7 +259,10 @@ Convenciones generales:
 #### Relleno/completo un campo con un texto (*text* o *textarea*) \*
      Cuando completo 'nombre' con 'Wadus'
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-relleno-el-campo.feature)
-#### Relleno/completo varios campos (*text* o *textarea*) desde una step-table \*
+#### Relleno/completo un campo (*text* o *textarea*) de un atributo anidado
+     Cuando relleno el email del usuario 'Antonio' con 'Wadus'
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-relleno-el-campo-de-atributo-anidado.feature)
+#### Relleno/completo varios campos (*text* o *textarea*) desde una step-table
      Cuando completo:
        | Campo    | Valor    |
        | Nombre   | Lechuga  |

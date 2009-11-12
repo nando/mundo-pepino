@@ -149,7 +149,7 @@ Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?(?:enlaces|botones)(?: 
   end
 end
 
-Cuando /^(?:que )?(?:completo|relleno) (.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
+Cuando /^(?:que )?(?:completo|relleno) (?!#{_localizador_de_atributo_anidado_(false)})(.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
   find_field_and_do_with_webrat :fill_in, campo, :with => valor
 end
 
@@ -157,6 +157,11 @@ Cuando /^(?:que )?(?:completo|relleno):$/i do |tabla|
   tabla.raw[1..-1].each do |row|
     Cuando "relleno \"#{row[0].gsub('"', '\"')}\" con \"#{row[1].gsub('"', '\"')}\""
   end
+end
+
+Cuando /^(?:que )?(?:completo|relleno) #{_localizador_de_atributo_anidado_} con (?:el valor )?['"](.+)["']$/i do |campo, modelo_anidado, nombre_anidado, valor|
+  field_id = nested_attribute_field_id(campo, modelo_anidado, nombre_anidado, last_mentioned.mr_model)
+  find_field_and_do_with_webrat :fill_in, field_id, :with => valor
 end
 
 Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|

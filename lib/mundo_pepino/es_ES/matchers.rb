@@ -34,6 +34,10 @@ module MundoPepino
       def _debo_estar_en_
         '(?:debo|deber[ií]a) (?:estar|encontrarme) en'
       end
+      def _localizador_de_atributo_anidado_(capture=true)
+        o,c = capture ? ['(', ')'] : ['', '']
+        "(?:(?:el|la) )?#{o}.+?#{c} (?:del|de la) #{o}.+?#{c} ['\"]#{o}[^\"']+#{c}[\"']"
+      end
     end
   end
 end

@@ -20,7 +20,16 @@
   De <span id="riego-comienzo"><%= @orchard.watering_time :start %></span>
   a <span id="riego-fin"><%= @orchard.watering_time :stop %></span>
 </p>
-
+<% if @orchard.terraces.any? %>
+  <div id="terraces">  
+    <b>Bancales:</b>
+    <ul>
+  <% @orchard.terraces.each do |terrace| %>
+      <li><%= terrace.name %></li>  
+  <% end %>
+    </ul>
+  </div>  
+<% end %>
 
 <%= link_to 'Editar', edit_orchard_path(@orchard) %> |
 <%= link_to 'Página de Huertos', orchards_path %>

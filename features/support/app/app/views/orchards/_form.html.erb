@@ -1,0 +1,49 @@
+<% form_for setup_orchard(@orchard) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name, "Nombre" %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :area, "Área" %><br />
+    <%= f.text_field :area %>
+  </p>
+  <p>
+    <%= f.label :longitude, "Longitud" %><br />
+    <%= f.text_field :longitude %>
+  </p>
+  <p>
+    <%= f.label :latitude, "Latitud" %><br />
+    <%= f.text_field :latitude %>
+  </p>
+  <p>
+    <%= f.label :start_watering, 'Comienzo de riego' %><br />
+    <%= f.time_select :start_watering %>
+  </p>
+  <p>
+    <%= f.label :stop_watering, 'Finalización de riego' %><br />
+    <%= f.time_select :stop_watering %>
+  </p>
+
+  <h3>Bancales</h3>
+  <% f.fields_for :terraces do |terrace_form| %>
+    <p>
+    <% if terrace_form.object.new_record? %>
+    <%= terrace_form.label :name, 'Nuevo bancal' %>
+    <%= terrace_form.text_field :name %>
+    <% else %>
+    <%= terrace_form.label :name, "Bancal #{terrace_form.object.name}" %>
+    <%= terrace_form.text_field :name %>
+    <%= terrace_form.check_box '_delete' %>
+    <%= terrace_form.label '_delete', 'Borrar' %>
+    <% end %>
+    </p> 
+  <% end %>
+
+  <p>
+    <%= f.submit(params[:action] == 'new' ? "Crear" : "Guardar") %>
+  </p>
+<% end %>
+
+<%= link_to 'Página de Huertos', orchards_path %>
