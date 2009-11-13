@@ -184,20 +184,12 @@ module MundoPepino
       end
     end
 
-    def nested_attribute_field_id(nested_field, nested_model, nested_name, parent_model=nil)
+    def nested_field_id(nested_field, nested_model, nested_name, parent_resource=nil)
       unquoted_model = nested_model.to_unquoted
       if model = unquoted_model.to_model
         if res = model.send("find_by_#{field_for(model)}", nested_name)
-          parent = if parent_model
-            parent_model.name.underscore
-          else
-            '[a-z][a-z_]*[a-z]'
-          end
-          prefix = "#{parent}_#{model.name.pluralize.underscore}_attributes"
-          if seq = sequence_number_for_nested_resource(res, prefix)
-            "#{prefix}_#{seq}_#{nested_field.to_field}"
-          else
-            nil
+          if field_prefix = nested_field_id_prefix(res, parent_resource)
+            "#{field_prefix}#{nested_field.to_field}"
           end
         else
           raise MundoPepino::ResourceNotFound.new("No '#{unquoted_model}' called '#{nested_name}'")
@@ -207,13 +199,14 @@ module MundoPepino
       end
     end
 
-    def sequence_number_for_nested_resource(resource, id_prefix)
+    def nested_field_id_prefix(resource, parent_resource=nil)
+      parent = parent_resource ? parent_resource.mr_model.name.underscore : '[a-z][a-z_]*[a-z]'
+      children = resource.class.name.pluralize.underscore
+      preprefix = "#{parent}_#{children}_attributes"
       Nokogiri::HTML.parse(response.body).xpath(
         "//input[@type='hidden' and @value=#{resource.id}]"
       ).each do |input|
-        if input.attributes['id'].to_s =~ /#{id_prefix}_([0-9]+)_id/
-          return $1
-        end
+        return "#{preprefix}_#{$1}_" if input.attributes['id'].to_s =~ /#{preprefix}_([0-9]+)_id/
       end
     end
   end  
