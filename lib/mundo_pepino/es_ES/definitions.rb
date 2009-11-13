@@ -117,7 +117,7 @@ Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do
 end
 
 Cuando /^(?:que )?visito (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
-  do_visit pagina.to_unquoted.to_url
+  given_or_when_i_do_a_page_request pagina
 end
 
 Cuando /^(?:que )?#{_pulso_} (?:en )?el bot[oó]n (.+)$/i do |boton|

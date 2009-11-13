@@ -19,7 +19,7 @@ La aproximación que MundoPepino realiza para resolver su cometido se basa en tr
 * Aprovechar toda la potencia de las **expresiones regulares** para que la definición de un paso capture el **mayor número de posible formas de expresarlo**.
 * Uso indiscriminado de **metaprogramación** de cara a **reducir el código necesario** para implementar sus pasos.
 
-El uso de expresiones regulares complejas dificulta notablemente la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación puede también empeorar notablemente el //feedback// que obtenemos cuando no se está cumpliendo una espectativa.
+El uso de expresiones regulares complejas puede dificultar la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación puede también empeorar notablemente el //feedback// que obtenemos cuando no se está cumpliendo una espectativa.
 
 MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena a medio/largo plazo, pero comprende y respeta que OtrosMundos ataquen el problema con una visión completamente distinta. Un ejemplo. Cucumber genera entre otros los siguientes pasos en ''webrat_steps.rb'':
 

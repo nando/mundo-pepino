@@ -36,9 +36,20 @@ For other languages, before start your own implementation, it'd be nice if you:
 
 ## Definitions
 
-### Simple instance/s creation optionally with its/their name/s
+### Givens/Whens
+#### Simple instance/s creation optionally with its/their name/s
     Given three orchards called "H-01, H-02 y H-03"
 [more examples](mundo-pepino/tree/master/features/en_US/simple-creation.feature)
+
+#### Page request
+    Given I am on the homepage
+[more examples](mundo-pepino/tree/master/features/en_US/page-request.feature)
+
+### Thens
+#### I see (or not) a text
+    Then I should see the text "Hello!"
+[more examples](mundo-pepino/tree/master/features/en_US/i-see-the-text.feature)
+
 
 ## License
 

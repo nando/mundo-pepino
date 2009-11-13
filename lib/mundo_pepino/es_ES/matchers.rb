@@ -1,6 +1,9 @@
 module MundoPepino
   module Matchers
     module Fragments
+      def _should_
+        'debo|debo ver|veo|deber[ií]a|deber[íi]a ver|leo|debo leer|deber[ií]a leer'
+      end
       def _numero_
         'un|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|\d+'
       end

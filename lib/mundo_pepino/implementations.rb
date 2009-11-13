@@ -37,6 +37,15 @@ module MundoPepino
       end
     end
 
+    def given_or_when_i_do_a_page_request(page)
+      do_visit page.to_unquoted.to_url
+    end
+
+    def then_i_see_or_not_the_text(should, text)
+      eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
+    end
+
+
     # DB CHECKS
     def then_we_have_a_number_of_instances_in_our_database(raw_number, raw_model, name)
       model = raw_model.to_unquoted.to_model

@@ -34,8 +34,7 @@ module MundoPepino
     end
 
     def shouldify(should_or_not)
-      affirmative = 'debo|debo ver|veo|deber[ií]a|deber[íi]a ver|leo|debo leer|deber[ií]a leer'
-      should_or_not =~ /^(#{affirmative})$/i ? :should : :should_not
+      should_or_not =~ /^(#{MundoPepino::Matchers::Bites._should_})$/i ? :should : :should_not
     end
   
     def not_shouldify(should_or_not)
