@@ -1,8 +1,19 @@
+== 0.1.6 2009-11-13 ("Iria's half year old!" release)
+* 1 new step definition w/ es_ES matcher:
+  * I fill field of a nested attribute
+* 1 convention changed:
+  * 'name' is the literal to map for 'the name field' of a model ('nombre' is
+    now deprecated)
+* README_es improvements:
+  * MundoPepino philosofy added,
+  * Sections swapping (to give more relevance to steps definitions than to
+    dependendies)
+
 == 0.1.5 2009-11-09
 * Fixed bug in children search if their name field it's not "name" (by Paco
   Guzman).
 * Dynamic load and refactoring of Matchers::Fragments delegation
-* X new step definitions in es_ES:
+* 5 new step definitions in es_ES:
   * I press the following sequence of links and/or buttons + fit table
   * Given I am on _page_
   * Then I should be on _page_

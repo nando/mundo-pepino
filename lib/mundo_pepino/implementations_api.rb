@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 module MundoPepino
   module ImplementationsApi
     def real_value_for(v)
