@@ -223,7 +223,7 @@ end
 
 #############################################################################
 Entonces /^(#{_veo_o_no_}) el texto (.+)?$/i do |should, text|
-  eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
+  then_i_see_or_not_the_text should, text
 end
 
 Entonces /^(#{_leo_o_no_}) el texto (.+)?$/i do |should, text|
