@@ -94,7 +94,7 @@ module MundoPepino
       if resource = model.send("find_by_#{field}", nombre)
         pile_up resource
       else
-        NotFoundInDatabase.new(model, name)
+        NotFoundInDatabase.new(model, nombre)
       end
     end
 
