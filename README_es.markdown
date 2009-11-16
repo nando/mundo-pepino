@@ -21,7 +21,7 @@ Para lograr su cometido MundoPepino se apoya en tres pilares principalmente:
 * Aprovechar toda la potencia de las **expresiones regulares** para que la definición de un paso capture el **mayor número de posible formas de expresarlo**.
 * Uso indiscriminado de **metaprogramación** de cara a **reducir el código necesario** para implementar sus pasos.
 
-El uso de expresiones regulares complejas puede dificultar la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación también puede empeorar el //feedback// que obtenemos cuando no se está cumpliendo una espectativa.
+El uso de expresiones regulares complejas puede dificultar la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación también puede empeorar el //feedback// que obtenemos cuando no se está cumpliendo una expectativa.
 
 MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena a medio/largo plazo, pero comprende y respeta que OtrosMundos ataquen el problema con una visión completamente distinta. Con un ejemplo se ve mejor parte de los pros y contras de MundoPepino. Cucumber genera, entre otros, los siguientes pasos en ''webrat_steps.rb'':
 
@@ -34,7 +34,7 @@ MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena
       end
     end
 
-Similares a estas dos definiciones, en ''webrat_steps.rb'' hay otras dos que niegan lo que estas afirman. Similares a esas cuatro, hay también otras cuatro que recogen en lugar de un texto, una expresión regular. Código y expresiones regulares sencillas pero un total de ocho definiciones para hacer prácticamente lo mismo en todas ellas.
+Similares a estas dos definiciones, en ''webrat_steps.rb'' hay otras dos que niegan lo que estas afirman. Similares a esas cuatro (las dos de arriba más sus negaciones), hay también otras cuatro que comprueban la existencia de una expresión regular en lugar de un texto concreto. Código y expresiones regulares sencillas, pero un total de ocho definiciones para hacer prácticamente lo mismo en todas ellas.
 
 MundoPepino para esas ocho definiciones tiene una sóla:
 
@@ -44,7 +44,9 @@ MundoPepino para esas ocho definiciones tiene una sóla:
       end
     end
 
-Dicha definición nos permite escribir //veo el texto//, //debo ver el texto// y //debería ver el texto// (así como sus correspondientes negaciones). El hecho de que sea DRY permitiría añadir con comodidad //debería estar viendo el texto// como cuarta forma de expresarlo.
+Dicha definición nos permite escribir //veo el texto//, //debo ver el texto// y //debería ver el texto// (así como sus correspondientes negaciones). Además, si optamos por buscar una expresion regular en lugar de texto, dicha expresión puede llevar modificadores de modo (por ejemplo **/i** para que ignore mayúsculas y minúsculas), algo que no es posible con las actuales definiciones presentes en ''webrat_steps.rb''.
+
+Pero lo más importante, el hecho de que sea DRY nos permite añadir mejoras (por ejemplo añadir //debería estar viendo el texto// como otra forma más de comenzar la frase) con más comodidad.
 
 ## Recursos
 
@@ -73,7 +75,7 @@ En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold*
 
 Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. Para tener precargado el entorno utilizando Spork bastaría con añadir ''--spork'' al ''script/generate cucumber'' y meter la opción ''--drb'' dentro del profile y/o de la tarea de rake.
 
-El generador mundo_pepino nos prepara el entorno para utilizar las definiciones de MundoPepino sin copiarnos las mismas en ''features/steps_definitions'', cargándolas directemente desde su código. Existe otro generador equivalente llamado **mundo_pepino_steps** que hace lo mismo pero copiando dichas definiciones dentro de ''features/steps_definitions''.
+El generador mundo_pepino nos prepara el entorno para utilizar las definiciones de MundoPepino sin copiarnos las mismas en ''features/steps_definitions'', cargándolas directamente desde su código. Existe otro generador equivalente llamado **mundo_pepino_steps** que hace lo mismo pero copiando dichas definiciones dentro de ''features/steps_definitions''.
 
 La intención del generador de características es más didáctica que pragmática. Ofrece un ejemplo simple que podemos toquetear para probar el MundoPepino. Por otro lado se limita a hacer exactamente lo mismo que hace `generate feature` de Cucumber, exceptuando el hecho de que no genera un fichero de **definiciones específicas** para la nueva *caracteristica* (ya que las utilizadas están comprendidas dentro de las **definiciones genéricas** ya implementadas en MundoPepino).
 

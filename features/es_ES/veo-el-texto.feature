@@ -28,7 +28,8 @@ Característica: veo (o no) un texto opcionalmente dentro de un selector
   Escenario: Veo (o no) un texto dentro de un selector
     Cuando visito la portada
     Entonces veo el texto Portada dentro de "h1"
-    Entonces veo el texto Portada dentro del selector h1
-    Entonces veo el texto "Mundo" dentro de la etiqueta h1
+           Y veo el texto Portada dentro del selector h1
+           Y veo el texto "Mundo" dentro de la etiqueta h1
+           Y veo el texto /mundo\s[a-z]+/i dentro de h1
     
 
