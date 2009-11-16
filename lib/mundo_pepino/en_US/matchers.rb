@@ -13,6 +13,9 @@ module MundoPepino
       def _which_
         '(?:which|that have as)'
       end
+      def _visit_
+        '?:that I am (?:in|on|at)|I visit|I go to'
+      end
     end
   end
 end
