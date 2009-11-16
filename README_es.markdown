@@ -13,31 +13,38 @@ Al mismo tiempo existen expresiones que son de uso frecuente cuando describimos 
 Por otro lado, cuando el idioma utilizado no es inglés es necesario evitar las posibles ambigüedades que genera la traducción de nuestra aplicación. Para posibilitar un lenguaje ubicuo, MundoPepino fuerza la vinculación de las distintas partes de la aplicación (modelos, atributos, acciones y rutas) con los términos con los que nos referimos a las mismas desde nuestras características/features.
 
 ## Filosofía del MundoPepino
-La aproximación que MundoPepino realiza para resolver su cometido se basa en tres conceptos principalmente: 
+El objetivo de MundoPepino es que escribir las características comunes de nuestra aplicación sin preocuparnos por su implementación e intentando recoger las distintas formas de expresar cada concepto para reducir la necesidad de consultar su documentación.
+
+Para lograr su cometido MundoPepino se apoya en tres pilares principalmente:
 
 * Definir **convenciones** generales **que reduzcan el número de posibilidades** de expresar un paso.
 * Aprovechar toda la potencia de las **expresiones regulares** para que la definición de un paso capture el **mayor número de posible formas de expresarlo**.
 * Uso indiscriminado de **metaprogramación** de cara a **reducir el código necesario** para implementar sus pasos.
 
-El uso de expresiones regulares complejas puede dificultar la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación puede también empeorar notablemente el //feedback// que obtenemos cuando no se está cumpliendo una espectativa.
+El uso de expresiones regulares complejas puede dificultar la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación también puede empeorar el //feedback// que obtenemos cuando no se está cumpliendo una espectativa.
 
-MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena a medio/largo plazo, pero comprende y respeta que OtrosMundos ataquen el problema con una visión completamente distinta. Un ejemplo. Cucumber genera entre otros los siguientes pasos en ''webrat_steps.rb'':
+MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena a medio/largo plazo, pero comprende y respeta que OtrosMundos ataquen el problema con una visión completamente distinta. Con un ejemplo se ve mejor parte de los pros y contras de MundoPepino. Cucumber genera, entre otros, los siguientes pasos en ''webrat_steps.rb'':
 
     Then /^I should see "([^\"]*)"$/ do |text|
       response.should contain(text)
     end
-    
-    Then /^I should not see "([^\"]*)"$/ do |text|
-      response.should_not contain(text)
+    Then /^I should see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
+      within(selector) do |content|
+        content.should contain(text)
+      end
     end
 
-MundoPepino para ambos pasos tiene una única definición:
+Similares a estas dos definiciones, en ''webrat_steps.rb'' hay otras dos que niegan lo que estas afirman. Similares a esas cuatro, hay también otras cuatro que recogen en lugar de un texto, una expresión regular. Código y expresiones regulares sencillas pero un total de ocho definiciones para hacer prácticamente lo mismo en todas ellas.
+
+MundoPepino para esas ocho definiciones tiene una sóla:
 
     Entonces /^(#{_veo_o_no_}) el texto (.+?) #{_dentro_de_}['"]?(.+?)["']?)?$/i do |should, text, selector|
       within selector || 'html' do
         response.send shouldify(should), contain(text.to_unquoted.to_translated.to_regexp)
       end
     end
+
+Dicha definición nos permite escribir //veo el texto//, //debo ver el texto// y //debería ver el texto// (así como sus correspondientes negaciones). El hecho de que sea DRY permitiría añadir con comodidad //debería estar viendo el texto// como cuarta forma de expresarlo.
 
 ## Recursos
 
