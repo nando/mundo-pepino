@@ -21,9 +21,9 @@ Para lograr su cometido MundoPepino se apoya en tres pilares principalmente:
 * Aprovechar toda la potencia de las **expresiones regulares** para que la definición de un paso capture el **mayor número de posible formas de expresarlo**.
 * Uso indiscriminado de **metaprogramación** de cara a **reducir el código necesario** para implementar sus pasos.
 
-El uso de expresiones regulares complejas puede dificultar la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación también puede empeorar el //feedback// que obtenemos cuando no se está cumpliendo una expectativa.
+El uso de expresiones regulares complejas puede dificultar la lectura y comprensión de las definiciones de los pasos. Algo similar ocurre con el uso de metaprogramación en su implementación. La metaprogramación también puede empeorar el *feedback* que obtenemos cuando no se está cumpliendo una expectativa.
 
-MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena a medio/largo plazo, pero comprende y respeta que OtrosMundos ataquen el problema con una visión completamente distinta. Con un ejemplo se ve mejor parte de los pros y contras de MundoPepino. Cucumber genera, entre otros, los siguientes pasos en ''webrat_steps.rb'':
+MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena a medio/largo plazo, pero comprende y respeta que OtrosMundos ataquen el problema con una visión completamente distinta. Con un ejemplo se ve mejor parte de los pros y contras de MundoPepino. Cucumber genera, entre otros, los siguientes pasos en `webrat_steps.rb`:
 
     Then /^I should see "([^\"]*)"$/ do |text|
       response.should contain(text)
@@ -34,9 +34,9 @@ MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena
       end
     end
 
-Similares a estas dos definiciones, en ''webrat_steps.rb'' hay otras dos que niegan lo que estas afirman. Similares a esas cuatro (las dos de arriba más sus negaciones), hay también otras cuatro que comprueban la existencia de una expresión regular en lugar de un texto concreto. Código y expresiones regulares sencillas, pero un total de ocho definiciones para hacer prácticamente lo mismo en todas ellas.
+Similares a estas dos definiciones, en `webrat_steps.rb` hay otras dos que niegan lo que estas afirman. Similares a esas cuatro (las dos de arriba más sus negaciones), hay también otras cuatro que comprueban la existencia de una expresión regular en lugar de un texto concreto. **Código y expresiones regulares sencillas**, pero un total de **ocho definiciones** para hacer prácticamente lo mismo en todas ellas.
 
-MundoPepino para esas ocho definiciones tiene una sóla:
+Para resolver lo mismo que resuelven esas ocho definiciones MundoPepino tiene **sólo una definición**:
 
     Entonces /^(#{_veo_o_no_}) el texto (.+?) #{_dentro_de_}['"]?(.+?)["']?)?$/i do |should, text, selector|
       within selector || 'html' do
@@ -44,9 +44,15 @@ MundoPepino para esas ocho definiciones tiene una sóla:
       end
     end
 
-Dicha definición nos permite escribir //veo el texto//, //debo ver el texto// y //debería ver el texto// (así como sus correspondientes negaciones). Además, si optamos por buscar una expresion regular en lugar de texto, dicha expresión puede llevar modificadores de modo (por ejemplo **/i** para que ignore mayúsculas y minúsculas), algo que no es posible con las actuales definiciones presentes en ''webrat_steps.rb''.
+Dicha definición nos permite escribir *veo el texto*, *debo ver el texto* y *debería ver el texto* (así como sus correspondientes negaciones). Además, si optamos por buscar una expresion regular en lugar de texto, dicha expresión puede llevar modificadores de modo (por ejemplo **/i** para que ignore mayúsculas y minúsculas), algo que no es posible con las actuales definiciones presentes en `webrat_steps.rb`.
 
-Pero lo más importante, el hecho de que sea DRY nos permite añadir mejoras (por ejemplo añadir //debería estar viendo el texto// como otra forma más de comenzar la frase) con más comodidad.
+Pero lo más importante, el hecho de que sea DRY nos permite añadir mejoras más cómodamente. Por ejemplo, añadir *debería estar viendo el texto* como otra forma de expresar este paso consistiría en añadir *deber[íi]a estar viendo* en la definición del fragmento de expresión regular `_veo_o_no_`:
+
+    def _veo_o_no_
+      '(?:no )?(?:veo|debo ver|deber[ií]a ver|deber[íi]a estar viendo)'
+    end
+
+Como bola extra, resulta que al haber modificado `_veo_o_no_` todos los pasos que lo utilicen tendrán también esta nueva forma de ser expresados.
 
 ## Recursos
 
@@ -73,17 +79,17 @@ En este punto deberíamos obtener dos errores, ambos debidos a que el *scaffold*
     $EDITOR app/views/orchards/new.html.erb # "Crear" en lugar de "Create"
     rake caracteristicas
 
-Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. Para tener precargado el entorno utilizando Spork bastaría con añadir ''--spork'' al ''script/generate cucumber'' y meter la opción ''--drb'' dentro del profile y/o de la tarea de rake.
+Ahora sí, los escenarios deberían ser válidos, sin errores ni definiciones pendientes. Para tener precargado el entorno utilizando Spork bastaría con añadir `--spork` al `script/generate cucumber` y meter la opción `--drb` dentro del profile y/o de la tarea de rake.
 
-El generador mundo_pepino nos prepara el entorno para utilizar las definiciones de MundoPepino sin copiarnos las mismas en ''features/steps_definitions'', cargándolas directamente desde su código. Existe otro generador equivalente llamado **mundo_pepino_steps** que hace lo mismo pero copiando dichas definiciones dentro de ''features/steps_definitions''.
+El generador mundo_pepino nos prepara el entorno para utilizar las definiciones de MundoPepino sin copiarnos las mismas en `features/steps_definitions`, cargándolas directamente desde su código. Existe otro generador equivalente llamado **mundo_pepino_steps** que hace lo mismo pero copiando dichas definiciones dentro de `features/steps_definitions`.
 
 La intención del generador de características es más didáctica que pragmática. Ofrece un ejemplo simple que podemos toquetear para probar el MundoPepino. Por otro lado se limita a hacer exactamente lo mismo que hace `generate feature` de Cucumber, exceptuando el hecho de que no genera un fichero de **definiciones específicas** para la nueva *caracteristica* (ya que las utilizadas están comprendidas dentro de las **definiciones genéricas** ya implementadas en MundoPepino).
 
-El primer paso del primer escenario generado por ''caracteristica'' en el fichero ''features/gestion_de_huertos.feature'' es la siguiente:
+El primer paso del primer escenario generado por `caracteristica` en el fichero `features/gestion_de_huertos.feature` es la siguiente:
 
     Dado que visito la página de nuevo/a Huerto
 
-Para que MundoPepino sepa que cuando hablamos de //Huerto// nos estamos refiriendo al modelo //Orchard// es necesario realizar lo que llamamos un "mapeo de modelo". El generador de hecho nos lo ha metido en ''mundo_pepino_es_ES.rb'':
+Para que MundoPepino sepa que cuando hablamos de *Huerto* nos estamos refiriendo al modelo *Orchard* es necesario realizar lo que llamamos un "mapeo de modelo". El generador de hecho nos lo ha metido en `mundo_pepino_es_ES.rb`:
 
     MundoPepino.configure do |config|
       config.model_mappings = {
@@ -93,23 +99,23 @@ Para que MundoPepino sepa que cuando hablamos de //Huerto// nos estamos refirien
       config.url_mappings = { ... }
     end
 
-De forma similar se pueden definir mapeos para los atributos (//field_mappings//, p.e ''/^usado$/i => :used'') y las rutas de la aplicación (//url_mappings//, p.e. ''/^la portada$/ => "/"'').
+De forma similar se pueden definir mapeos para los atributos (*field_mappings*, p.e `/^usado$/i => :used`) y las rutas de la aplicación (*url_mappings*, p.e. `/^la portada$/ => "/"`).
 
-Del mapeo de atributos lo más destacable es la convención de que, si no se le indica lo contrario, el nombre del campo que guarda el //nombre// de cualquier modelo es **name**. Este mapeo nos permite escribir frases como ''Dado que tengo un usuario llamado "Casimiro"'' sin necesidad de hacer referencia al nombre del campo en el que debe guardarse //Casimiro//.
+Del mapeo de atributos lo más destacable es la convención de que, si no se le indica lo contrario, el nombre del campo que guarda el *nombre* de cualquier modelo es **name**. Este mapeo nos permite escribir frases como `Dado que tengo un usuario llamado "Casimiro"` sin necesidad de hacer referencia al nombre del campo en el que debe guardarse *Casimiro*.
 
 Es recomendable para evitar problemas que los valores en el mapeo de atributos sean símbolos en lugar de cadenas ya que algunas factorias (p.e. FixtureReplacement) los quieren así.
 
-Del mapeo de rutas cabe destacar que si MundoPepino detecta la presencia del **método ''path_to''** (creado actualmente por Cucumber al preparar el entorno) ignorará dicho mapeo y utilizará ''path_to'' para obtener las rutas a partir de las capturas en los textos.
+Del mapeo de rutas cabe destacar que si MundoPepino detecta la presencia del **método `path_to`** (creado actualmente por Cucumber al preparar el entorno) ignorará dicho mapeo y utilizará `path_to` para obtener las rutas a partir de las capturas en los textos.
 
-### Primera convención y como saltársela: campo **name** para el //nombre// en todos los modelos
+### Primera convención y como saltársela: campo **name** para el *nombre* en todos los modelos
 
 Como acabamos de comentar:
     
-    ''Dado que tengo un usuario llamado "Casimiro"''
+    Dado que tengo un usuario llamado "Casimiro"
+    
+MundoPepino, por convención, intentará guardar "Casimiro" en el campo `name` del modelo contra el que esté mapeado "usuario". Vamos a tirar de imaginación y continuemos asumiendo que dicho modelo es `User`.
 
-MundoPepino, por convención, intentará guardar "Casimiro" en el campo ''name'' del modelo contra el que esté mapeado "usuario". Vamos a tirar de imaginación y continuemos asumiendo que dicho modelo es ''User''.
-
-Si queremos saltarnos la convención y que "Casimiro" se guarde en el campo ''login'' tendremos que indicarlo con un mapeo de atributo similar al siguiente:
+Si queremos saltarnos la convención y que "Casimiro" se guarde en el campo `login` tendremos que indicarlo con un mapeo de atributo similar al siguiente:
 
     config.model_mappings = {
       /^User::name$/ => :login
@@ -122,7 +128,7 @@ Si lo que nos interesa es cambiar la convención globalmente, es decir, que siem
     }
 
 ### Relación con modelo utilizando un nombre que no se corresponde con el mismo
-Con un ejemplo se entiende mejor, creo. Tenemos un modelo User y un modelo Garden y este último "belongs_to :author, class_name => 'User'", de tal forma que //a_garden.author// nos devuelve un User.
+Con un ejemplo se entiende mejor, creo. Tenemos un modelo User y un modelo Garden y este último "belongs_to :author, class_name => 'User'", de tal forma que *a_garden.author* nos devuelve un User.
 
 Bien, pues para que la siguiente característica funcione correctamente:
 
@@ -148,7 +154,9 @@ Con estos mapeos también deberían funcionar el resto de definiciones de MP en 
 ## Definiciones implementadas en MundoPepino
 
 **Cada definición** existente en MundoPepino tiene **al menos un escenario** que comprueba:
+
 * por un lado que la expresión regular *machea* las posibles formas de expresarla,
+
 * y por otro que la implementación lleva a cabo lo que se supone que debe hacer.
 
 Para todos los escenarios podríamos tener una narrativa genérica que expresase algo como lo siguiente:
@@ -158,7 +166,7 @@ Para todos los escenarios podríamos tener una narrativa genérica que expresase
       Como usuario de Cucumber
       Quiero tener los pasos más habituales definidos, implementados y bien documentados
 
-Cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas con //markdown// desde este README. La característica `features/mundo-pepino.feature` pretente ser todo lo contrario, un compendio de escenarios que muestren las posibilidades que ofrece más alla de una definición concreta (la aplicación que MundoPepino utiliza para correr estos tests se encuentra en `features/support/app`). 
+Cada definición ha sido separada en un fichero `.feature` específico para poder enlazarlas con *markdown* desde este README. La característica `features/mundo-pepino.feature` pretente ser todo lo contrario, un compendio de escenarios que muestren las posibilidades que ofrece más alla de una definición concreta (la aplicación que MundoPepino utiliza para correr estos tests se encuentra en `features/support/app`). 
 
 Como **convención general**, aunque MundoPepino pretende ser lo más flexible posible en general, y con las comillas en particular, los nombres correspondientes a modelos y campos pueden ir sin comillas pero los valores deben ir entre comillas (simples o dobles). Por ejemplo:
 
@@ -181,7 +189,7 @@ Convenciones generales:
 * asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
 * todas las definiciones para "Cuando algo ocurre" (o *Then's*, ver más abajo) son válidas también como "Dado el contexto" incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
-#### Estoy en una página específica (alias de //Solicitud de una página//) \*
+#### Estoy en una página específica (alias de *Solicitud de una página*) \*
     Dado que estoy en la portada
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-especifica.feature)
 
@@ -447,7 +455,7 @@ Como plugin (ver dependencias más abajo):
 
     script/plugin install git://github.com/nando/string-mapper.git
 
-  Si hacemos uso de alguno de los pasos que hacen referencia a la **selección de un mes** como parte de una fecha en un formulario necesitamos que el método ''strftime'' devuelva en nombre del mes en castellano cuando se utilice ''"%B"''. Para conseguirlo, tenemos entre otras las siguientes opciones (ver más abajo):
+  Si hacemos uso de alguno de los pasos que hacen referencia a la **selección de un mes** como parte de una fecha en un formulario necesitamos que el método `strftime` devuelva en nombre del mes en castellano cuando se utilice `"%B"`. Para conseguirlo, tenemos entre otras las siguientes opciones (ver más abajo):
 
 * instalar el módulo ruby-locale,
 * o redefinir la función strftime para lograr dicho comportamiento.
@@ -463,7 +471,7 @@ Para ello por un lado tenemos que instalar el plugin:
     script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
     script/generate fixture_replacement
 
-...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio `features/support`) tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
 
     class MiMundo < MundoPepino
       include FixtureReplacement
@@ -481,18 +489,18 @@ Para ello por un lado tenemos que instalar la gema (para más información sobre
 
     gem install thoughtbot-factory_girl --source http://gems.github.com
 
-...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio ''features/support'') tenemos que requerir la librería seguida de la definición de nuestras factorias:
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio `features/support`) tenemos que requerir la librería seguida de la definición de nuestras factorias:
 
     require 'factory_girl'
     require File.expand_path(File.dirname(__FILE__) + '/app/db/factories')
 
-También se debe incluir un fichero donde se definan las factories a utilizar en nuestro mundo-pepino, como ejemplo consultar el fichero de factories que se encuentra en el directorio ''features/support/app/db/factories''
+También se debe incluir un fichero donde se definan las factories a utilizar en nuestro mundo-pepino, como ejemplo consultar el fichero de factories que se encuentra en el directorio `features/support/app/db/factories`
 
 #### Selección de un mes en formularios
 
   Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby, si no hacemos nada para remediarlo, esto es sinónimo del nombre del mes de dicha fecha en inglés.
 
-  La opción más simple para resolver este problema es redefinir ''strftime'' para que devuelva el nombre del mes en el locale de la aplicación. Por ejemplo:
+  La opción más simple para resolver este problema es redefinir `strftime` para que devuelva el nombre del mes en el locale de la aplicación. Por ejemplo:
 
     class Time
       alias :strftime_nolocale :strftime
