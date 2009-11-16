@@ -33,8 +33,10 @@ MundoPepino vive con estos inconvenientes porque confía en que merezcan la pena
 
 MundoPepino para ambos pasos tiene una única definición:
 
-    Entonces /^((?:no )?(?:veo|debo ver|deber[ií]a ver)) el texto (.+)?$/i do |should, text|
-      eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
+    Entonces /^(#{_veo_o_no_}) el texto (.+?) #{_dentro_de_}['"]?(.+?)["']?)?$/i do |should, text, selector|
+      within selector || 'html' do
+        response.send shouldify(should), contain(text.to_unquoted.to_translated.to_regexp)
+      end
     end
 
 ## Recursos
@@ -320,7 +322,7 @@ Convenciones generales:
     Entonces debo estar en la página de Tomates
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/estoy-en-url-de-indice-de-recurso.feature)
 
-#### Veo (o no) un texto \*
+#### Veo (o no) un texto opcionalmente dentro de un selector concreto \*
     Entonces debo ver el texto "IVA incluido"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-el-texto.feature)
 #### Veo (o no) una serie de textos expresados en una step-table (sin cabeceras)

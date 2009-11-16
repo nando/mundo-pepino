@@ -41,10 +41,11 @@ module MundoPepino
       do_visit page.to_unquoted.to_url
     end
 
-    def then_i_see_or_not_the_text(should, text)
-      eval('response.body.send(shouldify(should))') =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
+    def then_i_see_or_not_the_text(should, text, selector=nil)
+      within selector || 'html' do
+        response.send shouldify(should), contain(text.to_unquoted.to_translated.to_regexp)
+      end
     end
-
 
     # DB CHECKS
     def then_we_have_a_number_of_instances_in_our_database(raw_number, raw_model, name)

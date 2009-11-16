@@ -222,8 +222,8 @@ Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ 
 end
 
 #############################################################################
-Entonces /^(#{_veo_o_no_}) el texto (.+)?$/i do |should, text|
-  then_i_see_or_not_the_text should, text
+Entonces /^(#{_veo_o_no_}) el texto (.+?)(?: dentro de(?: la etiqueta|l selector)? ['"]?(.+?)["']?)?$/i do |should, text, selector|
+  then_i_see_or_not_the_text should, text, selector
 end
 
 Entonces /^(#{_leo_o_no_}) el texto (.+)?$/i do |should, text|
