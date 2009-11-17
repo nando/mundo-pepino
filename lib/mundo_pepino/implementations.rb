@@ -47,6 +47,14 @@ module MundoPepino
       end
     end
 
+    def given_or_when_i_follow_the_link(link, selector=nil)
+      if selector
+        click_link_within selector, link
+      else
+        click_link link
+      end
+    end
+
     # DB CHECKS
     def then_we_have_a_number_of_instances_in_our_database(raw_number, raw_model, name)
       model = raw_model.to_unquoted.to_model

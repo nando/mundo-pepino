@@ -17,7 +17,7 @@ module MundoPepino
         '(?:la|el) \w+ del? |su p[aá]gina|su portada'
       end
       def _pulso_
-        '(?:pulso|pincho)'         
+        '(?:pulso|pincho|sigo)'
       end
       def _fecha_y_o_hora_
         '(?:(?:la )?fecha|hora)'
@@ -40,6 +40,15 @@ module MundoPepino
       def _localizador_de_atributo_anidado_(capture=true)
         o,c = capture ? ['(', ')'] : ['', '']
         "(?:(?:el|la) )?#{o}.+?#{c} (?:del|de la) #{o}.+?#{c} ['\"]#{o}[^\"']+#{c}[\"']"
+      end
+      def _dentro_de_
+        'dentro de(?: la etiqueta|l selector)?'
+      end
+      def _enlace_
+        'enlace|(?:hiper)?-?v[íi]nculo' #TODO: |enlace ajax|enlace con efectos'
+      end
+      def _que_existe_
+        '(?: que (?:hay|existe))?'
       end
     end
   end

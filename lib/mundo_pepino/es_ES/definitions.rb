@@ -124,14 +124,8 @@ Cuando /^(?:que )?#{_pulso_} (?:en )?el bot[oó]n (.+)$/i do |boton|
   click_button(boton.to_unquoted.to_translated)
 end
 
-Cuando /^(?:que )?#{_pulso_} (?:en )?el (enlace|enlace ajax|enlace con efectos) (.+)$/i do |tipo, enlace|
-  options = {}
-  options[:wait] = case tipo.downcase
-  when 'enlace con efectos' then :effects
-  when 'enlace ajax' then :ajax
-  else :page
-  end
-  click_link(enlace.to_unquoted.to_translated, options)
+Cuando /^(?:que )?#{_pulso_} (?:en )?el (#{_enlace_}) (.+?)(?:#{_que_existe_} #{_dentro_de_} ['"]?(.+?)["']?)?$/i do |tipo, enlace, selector|
+  given_or_when_i_follow_the_link enlace.to_unquoted.to_translated, selector
 end
 
 Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?(?:enlaces|botones)(?: y (?:enlaces|botones))?:$/i do |tabla|
@@ -222,7 +216,7 @@ Cuando /^borro (?:el|la|el\/la) (.+) en (?:la )?(\w+|\d+)(?:ª|º)? posición$/ 
 end
 
 #############################################################################
-Entonces /^(#{_veo_o_no_}) el texto (.+?)(?: dentro de(?: la etiqueta|l selector)? ['"]?(.+?)["']?)?$/i do |should, text, selector|
+Entonces /^(#{_veo_o_no_}) el texto (.+?)(?: #{_dentro_de_} ['"]?(.+?)["']?)?$/i do |should, text, selector|
   then_i_see_or_not_the_text should, text, selector
 end
 

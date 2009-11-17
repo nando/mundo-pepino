@@ -38,7 +38,7 @@ Similares a estas dos definiciones, en `webrat_steps.rb` hay otras dos que niega
 
 Para resolver lo mismo que resuelven esas ocho definiciones MundoPepino tiene **sólo una definición**:
 
-    Entonces /^(#{_veo_o_no_}) el texto (.+?) #{_dentro_de_}['"]?(.+?)["']?)?$/i do |should, text, selector|
+    Entonces /^(#{_veo_o_no_}) el texto (.+?)(?: #{_dentro_de_} ['"]?(.+?)["']?)?$/i do |should, text, selector|
       within selector || 'html' do
         response.send shouldify(should), contain(text.to_unquoted.to_translated.to_regexp)
       end
@@ -270,8 +270,8 @@ Convenciones generales:
 #### Solicitud de la página de edición de un recurso
     Cuando visito la página de edición del huerto "H-01"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-edicion.feature)
-#### Pincho/pulso en un enlace \*
-    Cuando pulso el enlace "Volver"
+#### Pincho/pulso en un enlace opcionalmente dentro de un selector concreto \*
+    Cuando pulso el enlace "Volver" dentro de .navigation_links
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-enlace.feature)
 #### Pincho/pulso un bóton (*submit*) \*
     Cuando pulso en el botón Enviar

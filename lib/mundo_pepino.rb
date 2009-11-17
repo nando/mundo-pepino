@@ -38,7 +38,7 @@ module MundoPepino
         /\.gif$/   => 'image/gif') {|str| 'text/plain'}
       String.add_mapper(:underscored) {|string| string.gsub(/ +/, '_')}
       String.add_mapper(:unquoted) {|str| str =~ /^['"](.*)['"]$/ ? $1 : str}
-      String.add_mapper(:regexp) {|str| str =~ /\/.+\/[a-z]*/ ? eval(str) : str}
+      String.add_mapper(:regexp) {|str| str =~ /\/.+\/[a-z]*/ ? eval(str) : /#{Regexp.escape(str)}/m }
       String.add_mapper(:translated) do |str|
         if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
           I18n.translate(str, :default => str)

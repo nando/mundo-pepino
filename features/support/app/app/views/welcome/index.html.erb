@@ -2,9 +2,10 @@
 <div id="slogan">Todo un huerto para ti</div>
 <div><%= t 'app.welcome.interpolated', :name => 'Nombre' %></div>
 <p>Find me in app/views/welcome/index.html.erb</p>
-
+<div class="navigation_links">
 <%= link_to 'Registro', :action => 'signup' %>
 <%= link_to '¡Entra!', new_session_path %>
+</div>
 <% form_tag({:action => :form_action}, :enctype => "multipart/form-data") do %>
   <div>
     <%= label_tag :login, "Nombre de usuario" %>
