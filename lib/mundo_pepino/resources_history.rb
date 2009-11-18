@@ -88,8 +88,8 @@ module MundoPepino
       pile_up res
     end
   
-    def add_resource_from_database(modelo, name)
-      model = modelo.to_unquoted.to_model
+    def add_resource_from_database(raw_model, name)
+      model = raw_model.to_unquoted.to_model
       field = field_for(model)
       if resource = model.send("find_by_#{field}", name)
         pile_up resource
@@ -123,27 +123,31 @@ module MundoPepino
       end
     end
   
-    def last_mentioned_of(modelo, with_name = nil)
-      if model = modelo.to_model
+    def last_mentioned_of(raw_model, with_name = nil)
+      if model = raw_model.to_model
         resource = if with_name
-          detect_first @resources.flatten, [model, with_name]
+          if mentioned = detect_first(resources_flatten, [model, with_name])
+            mentioned
+          else
+            add_resource_from_database(raw_model, with_name)
+          end
         elsif(last_mentioned.mr_model == model)
           last_mentioned
         else
           if group = recursive_group_search(model, @resources[1..-1])
             group
           else
-            detect_first @resources.flatten, model
+            detect_first resources_flatten, model
           end
         end
         resource || raise(ResourceNotFound.new("model:#{model.name}, name:#{with_name||'nil'}"))
       else
-        raise ModelNotMapped.new(modelo)
+        raise ModelNotMapped.new(raw_model)
       end
     end
   
     def last_mentioned_called(name)
-      detect_first @resources.flatten, name
+      detect_first resources_flatten, name
     end
   
     def recursive_group_search(model, resources)
@@ -196,6 +200,10 @@ module MundoPepino
         [ field_for(mentioned.mr_model, campo), valores ]
       end 
       [resources, field, values]
+    end
+
+    def resources_flatten
+      (@resources || []).flatten
     end
   
     def method_missing(method, *args, &block)
