@@ -7,11 +7,11 @@ Característica: etiqueta/selector con valor
   # o:
   #   Entonces (no) debo ver en la etiqueta _selector_( el texto "_valor_")
   # o:
-  #   Entonces (no) veo la etiqueta _selector_( con el texto "_valor_")
+  #   Entonces (no) veo una/la etiqueta _selector_( con el texto "_valor_")
   # o:
-  #   Entonces (no) veo el selector _selector_( con el texto "_valor_")
+  #   Entonces (no) veo un/el selector _selector_( con el texto "_valor_")
   # o:
-  #   Entonces (no) veo el tag _selector_( con el texto "_valor_")
+  #   Entonces (no) veo un/el tag _selector_( con el texto "_valor_")
   #
   # Descripción:
   #   Comprueba la existencia o inexistencia de una etiqueta/selector que
@@ -34,6 +34,7 @@ Característica: etiqueta/selector con valor
   ########################################################################
     Cuando visito la portada
     Entonces debo ver el tag H1
+    Entonces debo ver un tag H1
     Entonces debo ver la etiqueta "H1"
     Entonces no debo ver el selector HR
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
@@ -43,5 +44,7 @@ Característica: etiqueta/selector con valor
     Entonces debo ver la etiqueta 'div#slogan' con el valor "Todo un huerto para ti"
     Entonces no debo ver la etiqueta DIV#title con el valor "Todo un huerto para ti"
     Entonces no debo ver la etiqueta DIV#title con el texto "Todo un huerto para ti"
+    Entonces no debo ver una etiqueta DIV#title con el texto "Todo un huerto para ti"
     Entonces debo ver el selector "div label[for=login]"
     Entonces debo ver el selector "div label[for=login]" con el valor "Nombre de usuario"
+    Entonces debo ver un selector "div label[for=login]" con el valor "Nombre de usuario"

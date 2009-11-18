@@ -50,6 +50,9 @@ module MundoPepino
       def _que_existe_
         '(?: que (?:hay|existe))?'
       end
+      def _la_etiqueta_
+        '(?:en )?(?:(?:una?|el|la) (?:selector|etiqueta|tag))'
+      end
     end
   end
 end

@@ -241,7 +241,7 @@ Entonces /^(#{_leo_o_no_}) los siguientes textos:$/i do |should, texts|
   end
 end
 
-Entonces /^(#{_veo_o_no_}) (?:en )?(?:el selector|la etiqueta|el tag) (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
+Entonces /^(#{_veo_o_no_}) #{_la_etiqueta_} (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
     if value
       response.should have_tag(tag.to_unquoted, /.*#{value.to_translated}.*/i)
