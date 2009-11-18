@@ -10,8 +10,14 @@ module MundoPepino
       def _cuyo_
         '(?:cuy[oa]s?|que tienen? como)'
       end
-      def _pagina_
-        '(?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n)'
+      def _visito_
+        '(?:visito|estoy en)'
+      end
+      def _la_pagina_
+        'la (?:p[áa]gina|portada)'
+      end
+      def _el_listado_de_
+        '(?:el|la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de'
       end
       def _pagina_desde_rutas_ # páginas obtenida a partir de las rutas
         '(?:la|el) \w+ del? |su p[aá]gina|su portada'

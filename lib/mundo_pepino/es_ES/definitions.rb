@@ -1,8 +1,4 @@
 # MundoPepino's step definitions in es_ES
-Dado /^que estoy en (?!#{_pagina_desde_rutas_})(.+)$/ do |pagina|
-  do_visit pagina.to_unquoted.to_url
-end 
-
 # Creación simple con nombre opcional
 Dado /^(?:que tenemos )?(#{_numero_}) (?!.+ #{_cuyo_})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   given_we_have_a_number_of_instances_called numero, modelo, nombre 
@@ -79,11 +75,11 @@ end
 
 ###############################################################################
 
-Cuando /^(?:que )?visito ((?:el|la) #{_pagina_} de )([\w]+|['"][\w ]+["'])$/i do |la_pagina_de, modelo_en_crudo|
-  do_visit resource_index_or_mapped_page(la_pagina_de, modelo_en_crudo)
+Cuando /^(?:que )?#{_visito_} (#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i do |el_listado_de, modelo_en_crudo|
+  do_visit resource_index_or_mapped_page(el_listado_de, modelo_en_crudo)
 end
 
-Cuando /^(?:que )?visito (?:el|la) #{_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i do |modelo, nombre|
+Cuando /^(?:que )?#{_visito_} #{_la_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i do |modelo, nombre|
   if resource = last_mentioned_of(modelo, nombre)
     do_visit send("#{resource.class.name.underscore}_path", resource)
   else
@@ -91,7 +87,7 @@ Cuando /^(?:que )?visito (?:el|la) #{_pagina_} (?:del|de la) (.+) ['"](.+)["']$/
   end
 end
 
-Cuando /^(?:que )?visito la p[áa]gina de (?!la)([\w\/]+) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i do |accion, modelo, nombre|
+Cuando /^(?:que )?#{_visito_} #{_la_pagina_} de (?!la)([\w\/]+) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i do |accion, modelo, nombre|
   action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
   if action != 'new'
     nombre, modelo = modelo, nil unless nombre
@@ -112,11 +108,11 @@ Cuando /^(?:que )?visito la p[áa]gina de (?!la)([\w\/]+) (?:de |de la |del )?(.
   end
 end
 
-Cuando /^(?:que )?visito su (?:p[áa]gina|portada)$/i do
+Cuando /^(?:que )?#{_visito_} su (?:p[áa]gina|portada)$/i do
   do_visit last_mentioned_url
 end
 
-Cuando /^(?:que )?visito (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
+Cuando /^(?:que )?#{_visito_} (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
   given_or_when_i_do_a_page_request pagina
 end
 
@@ -354,8 +350,8 @@ Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, mod
   last_mentioned_should_have_n_children(modelo_hijo, numero)
 end
 
-Entonces /^#{_debo_estar_en_} ((?:el|la) #{_pagina_} de )([\w\s]+|['"][\w ]+["'])$/i do |la_pagina_de, modelo_en_crudo|
-  URI.parse(current_url).path.should == resource_index_or_mapped_page(la_pagina_de, modelo_en_crudo)
+Entonces /^#{_debo_estar_en_} (#{_el_listado_de_}) ([\w\s]+|['"][\w ]+["'])$/i do |el_listado_de, modelo_en_crudo|
+  URI.parse(current_url).path.should == resource_index_or_mapped_page(el_listado_de, modelo_en_crudo)
 end
 
 Entonces /^#{_debo_estar_en_} (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
