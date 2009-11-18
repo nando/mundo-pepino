@@ -147,7 +147,7 @@ Cuando /^(?:que )?(?:completo|relleno) (?!#{_localizador_de_atributo_anidado_(fa
   find_field_and_do_with_webrat :fill_in, campo, :with => valor
 end
 
-Cuando /^(?:que )?(?:completo|relleno):$/i do |tabla|
+Cuando /^(?:que )?(?:completo|relleno)(?: los(?: siguientes)? campos)?:$/i do |tabla|
   tabla.raw[1..-1].each do |row|
     Cuando "relleno \"#{row[0].gsub('"', '\"')}\" con \"#{row[1].gsub('"', '\"')}\""
   end
