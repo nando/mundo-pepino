@@ -5,7 +5,7 @@ module MundoPepino
         /^verdader[oa]$/i  => true,
         /^fals[ao]$/i      => false
       }) { |value| value }
-      String.add_mapper(:field) { |str| :name if str =~ /nombres?/ }
+      String.add_mapper(:field) { |str| :name if str =~ /^nombres?/ }
       
       String.add_mapper(:number, { 
         /^un[oa]?$/i     => 1,
