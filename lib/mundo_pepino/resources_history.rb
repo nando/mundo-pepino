@@ -88,13 +88,13 @@ module MundoPepino
       pile_up res
     end
   
-    def add_resource_from_database(modelo, nombre)
+    def add_resource_from_database(modelo, name)
       model = modelo.to_unquoted.to_model
       field = field_for(model)
-      if resource = model.send("find_by_#{field}", nombre)
+      if resource = model.send("find_by_#{field}", name)
         pile_up resource
       else
-        NotFoundInDatabase.new(model, nombre)
+        NotFoundInDatabase.new(model, name)
       end
     end
 
