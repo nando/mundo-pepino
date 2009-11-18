@@ -26,10 +26,9 @@ module MundoPepino
       if field
         "#{model_name}#{field}".to_field || field.to_field
       else
+        "#{model_name}name".to_field || 'name'.to_field || 
         # The use of "nombre" the name field mapping is deprecated
-        "#{model_name}nombre".to_field || 'nombre'.to_field || 
-        # "Model::name" or "name" (for a global mapping) is the right use.
-        "#{model_name}name".to_field || 'name'.to_field || :name
+        "#{model_name}nombre".to_field || 'nombre'.to_field || :name
       end
     end
 
