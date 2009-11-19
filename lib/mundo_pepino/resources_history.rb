@@ -191,7 +191,7 @@ module MundoPepino
         [[ mentioned ], [ valor ]]
       end
       field, values = if (child_model = campo.to_model)
-        child_name_field = field_for(mentioned.mr_model)
+        child_name_field = field_for(child_model)
         values = add_resource(child_model,
           valores.map { |val| { child_name_field => val } })
         values = [ values ] unless values.is_a?(Array)

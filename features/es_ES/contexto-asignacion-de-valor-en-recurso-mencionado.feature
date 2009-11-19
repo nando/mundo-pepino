@@ -56,3 +56,9 @@ Característica: asignación de un valor
     Entonces tenemos en bbdd un huerto
            Y tenemos en bbdd una lechuga
            Y la lechuga "seca" tiene en bbdd como huerto de nacimiento "de secano"
+
+  Escenario: En un modelo cuyo campo "nombre" sea distinto de "name"
+    Dado que tenemos un bancal llamado "Primer bancal"
+       Y que tenemos un pepino "Primer pepino"
+       Y que dicho pepino tiene como bancal "Primer bancal"
+    Entonces el pepino "Primer pepino" tiene en bbdd como bancal "Primer bancal"
