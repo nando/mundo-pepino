@@ -148,8 +148,7 @@ Tengo que meter los siguentes mapeos en nuestro entorno:
 
     'author' => User
 
-Con estos mapeos también deberían funcionar el resto de definiciones de MP en las que se haga referencia a una relación.
-
+Para una relación **has_many** en la que se utilice **:class_name** hay que proceder de la misma manera.
 
 ## Definiciones implementadas en MundoPepino
 

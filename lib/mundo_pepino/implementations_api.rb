@@ -100,9 +100,14 @@ module MundoPepino
       end
     end
     
-    def last_mentioned_should_have_n_children(child, numero)
+    def last_mentioned_children(child_model)
+      child_field = child_model.table_name.to_field || child_model.table_name
+      last_mentioned.send child_field
+    end
+
+    def last_mentioned_should_have_n_children(child, number)
       if child_model = child.to_model
-        (last_mentioned.send child_model.table_name).size.should == numero.to_number
+        last_mentioned_children(child_model).size.should == number.to_number
       else
         raise ModelNotMapped.new(child)
       end
@@ -124,7 +129,7 @@ module MundoPepino
     def last_mentioned_should_have_child(child, name)
       if child_model = child.to_model
         child = child_model.send "find_by_#{field_for(child_model)}", name
-        (last_mentioned.send child_model.table_name).detect do |c|
+        last_mentioned_children(child_model).detect do |c|
           c.id == child.id 
         end.should_not be_nil
       else

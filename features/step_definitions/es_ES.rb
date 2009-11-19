@@ -59,10 +59,12 @@ MundoPepino.configure do |config|
     /^hora de comenzar a regar$/i => :start_watering,
     /^hora de terminar de regar$/i => :stop_watering,
     /^precio$/i                  => :price,
-    /^Pepino::nombre$/i          => :title
+    /^Pepino::nombre$/i          => :title,
+    /^pepinos?$/i                => :cucumbers
   }
   config.relation_model_mappings = {
-    /^orchard_of_birth$/i => Orchard
+    :cucumbers        => Pepino,
+    :orchard_of_birth => Orchard
   }
   config.url_mappings = {
     /^la página de registro/i => lambda {

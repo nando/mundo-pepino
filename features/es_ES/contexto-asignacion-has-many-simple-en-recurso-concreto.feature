@@ -24,14 +24,18 @@ Característica: asignación simple de instancias en campo has_many en un recurs
        Y que la huerta "H-01" tiene tres bancales "Acelgas, Tomates y Pepinos"
        Y que el huerto "H-02" tiene dos bancales llamados "Berzas y Patatas"
        Y que el huerto "H-03" tiene un bancal llamado "Pitos y flautas"
+       Y que el bancal "Pitos y flautas" tiene dos pepinos "P y F"
        Y que el huerto "H-04" tiene 10 bancales
     Cuando visito su página
     Entonces debo ver la etiqueta H2 con el valor "H-04"
            Y tenemos en bbdd cuatro huertos
            Y 16 bancales
+           Y 2 pepinos
            Y el huerto "H-01" tiene en bbdd un bancal "Acelgas"
            Y tiene en bbdd un bancal "Tomates"
            Y tiene en bbdd un bancal "Pepinos"
            Y el huerto "H-02" tiene en bbdd un bancal "Berzas"
            Y tiene en bbdd un bancal "Patatas"
            Y el huerto "H-03" tiene en bbdd un bancal "Pitos y flautas"
+           Y el bancal "Pitos y flautas" tiene en bbdd un pepino "P"
+           Y tiene en bbdd un pepino "F"
