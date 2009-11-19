@@ -313,10 +313,6 @@ Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, mod
   last_mentioned_should_have_n_children(modelo_hijo, numero)
 end
 
-Entonces /^#{_debo_estar_en_} (#{_el_listado_de_}) ([\w\s]+|['"][\w ]+["'])$/i do |el_listado_de, modelo_en_crudo|
-  URI.parse(current_url).path.should == resource_index_or_mapped_page(el_listado_de, modelo_en_crudo)
-end
-
-Entonces /^#{_debo_estar_en_} (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
-  URI.parse(current_url).path.should == pagina.to_unquoted.to_url
+Entonces /^#{_debo_estar_en_} (.+)$/i do |pagina|
+  URI.parse(current_url).path.should == MundoPepino::Matchers.page(pagina)
 end

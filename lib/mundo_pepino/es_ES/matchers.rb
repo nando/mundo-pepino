@@ -65,7 +65,9 @@ module MundoPepino
       include Fragments
 
       def page(expression)
-        if expression =~ /^(#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i
+        if mapped_page = expression.to_unquoted.to_url
+          mapped_page
+        elsif expression =~ /^(#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i
           MundoPepino.world.resource_index_or_mapped_page($1, $2)
         elsif expression =~ /^su (p[áa]gina|portada)$/i
           MundoPepino.world.last_mentioned_url
@@ -76,7 +78,7 @@ module MundoPepino
           else
             raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
           end
-        elsif expression =~ /^#{_la_pagina_} de (?!la)([\w\/]+) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i
+        elsif expression =~ /^#{_la_pagina_} de (?!la)([\w\/]+(?: de (?:una? )?nuev[oa])?) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i
           accion, modelo, nombre = $1, $2, $3
           action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
           if action != 'new'
@@ -96,8 +98,6 @@ module MundoPepino
             MundoPepino.world.pile_up model.new
             MundoPepino.world.send "#{action}_#{model.name.underscore}_path"
           end
-        else
-          expression.to_unquoted.to_url
         end
       end
     end

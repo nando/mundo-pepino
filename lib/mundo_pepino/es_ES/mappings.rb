@@ -25,8 +25,8 @@ module MundoPepino
         :diez            => 10
       }) { |string| string.to_i }
       String.add_mapper(:crud_action,
-        /^alta$/i                  => 'new',
-        /^creaci[óo]n$/i           => 'new',
+        /^alta(?: de (?:una? )?nuev[ao])?$/i         => 'new',
+        /^creaci[óo]n(?: de (?:una? )?nuev[ao])?$/i  => 'new',
         /^nuev(?:o|a|o\/a|a\/o)$/i => 'new',
         /^cambio$/i                => 'edit',
         /^modificaci[oó]n(?:es)?$/i       => 'edit',
@@ -45,9 +45,8 @@ module MundoPepino
         :noviembre       => 'November',
         :diciembre       => 'December')
       unless self.world.respond_to? :path_to
-        String.url_mappings[/^la (?:portada|home\s?(?:page)?)/i] = self.world.root_path
+        String.url_mappings[/^la (?:portada|home\s?(?:page)?)$/i] = self.world.root_path
       end
-
     end
   end
 end
