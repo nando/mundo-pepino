@@ -49,3 +49,10 @@ Característica: asignación de un valor
            Y el huerto "H-04" tiene en bbdd como área "12"
            Y tiene en bbdd como abono "Nitrogenado de 2ª calidad"
 
+  Escenario: Con nombre de relacion que no se corresponde con su modelo asociado
+    Dado que tenemos un huerto llamado "de secano"
+       Y que tenemos una lechuga "seca"
+       Y que dicha lechuga tiene como huerto de nacimiento "de secano"
+    Entonces tenemos en bbdd un huerto
+           Y tenemos en bbdd una lechuga
+           Y la lechuga "seca" tiene en bbdd como huerto de nacimiento "de secano"
