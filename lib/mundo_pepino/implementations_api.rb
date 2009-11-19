@@ -181,7 +181,7 @@ module MundoPepino
       unquoted_model = raw_model.to_unquoted
       if model = unquoted_model.to_model
         pile_up model.new
-        eval("#{model.table_name}_path")
+        MundoPepino.world.send "#{model.table_name}_path"
       elsif url = "#{the_page_of} #{raw_model}".to_url
         url
       else

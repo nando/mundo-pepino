@@ -75,44 +75,7 @@ end
 
 ###############################################################################
 
-Cuando /^(?:que )?#{_visito_} (#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i do |el_listado_de, modelo_en_crudo|
-  do_visit resource_index_or_mapped_page(el_listado_de, modelo_en_crudo)
-end
-
-Cuando /^(?:que )?#{_visito_} #{_la_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i do |modelo, nombre|
-  if resource = last_mentioned_of(modelo, nombre)
-    do_visit send("#{resource.class.name.underscore}_path", resource)
-  else
-    raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
-  end
-end
-
-Cuando /^(?:que )?#{_visito_} #{_la_pagina_} de (?!la)([\w\/]+) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i do |accion, modelo, nombre|
-  action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
-  if action != 'new'
-    nombre, modelo = modelo, nil unless nombre
-    resource = if modelo && modelo.to_unquoted.to_model
-      last_mentioned_of(modelo, nombre.to_unquoted)
-    else
-      last_mentioned_called(nombre.to_unquoted)
-    end
-    if resource
-      do_visit send("#{action}_#{resource.mr_singular}_path", resource)
-    else
-      MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
-    end
-  else
-    model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
-    pile_up model.new
-    do_visit send("#{action}_#{model.name.underscore}_path")
-  end
-end
-
-Cuando /^(?:que )?#{_visito_} su (?:p[áa]gina|portada)$/i do
-  do_visit last_mentioned_url
-end
-
-Cuando /^(?:que )?#{_visito_} (?!#{_pagina_desde_rutas_})(.+)$/i do |pagina|
+Cuando /^(?:que )?#{_visito_} (.+)$/i do |pagina|
   given_or_when_i_do_a_page_request pagina
 end
 
