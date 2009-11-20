@@ -5,6 +5,7 @@
 <div class="navigation_links">
 <%= link_to 'Registro', :action => 'signup' %>
 <%= link_to '¡Entra!', new_session_path %>
+<%= link_to 'Listado de todos los huertos', orchards_path %>
 </div>
 <% form_tag({:action => :form_action}, :enctype => "multipart/form-data") do %>
   <div>
