@@ -38,7 +38,7 @@ module MundoPepino
     end
 
     def given_or_when_i_do_a_page_request(page)
-      do_visit MundoPepino::Matchers.page(page)
+      do_visit page.to_unquoted.to_url
     end
 
     def then_i_see_or_not_the_text(should, text, selector=nil)

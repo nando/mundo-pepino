@@ -17,14 +17,6 @@ module MundoPepino
         '(?:that I am (?:in|on|at)|I visit|I go to)'
       end
     end
-
-    class << self
-      include Fragments
-
-      def page(expression)
-        expression.to_unquoted.to_url
-      end
-    end
   end
 end
 require 'mundo_pepino/matchers_delegation'

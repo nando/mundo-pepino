@@ -314,5 +314,5 @@ Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, mod
 end
 
 Entonces /^#{_debo_estar_en_} (.+)$/i do |pagina|
-  URI.parse(current_url).path.should == MundoPepino::Matchers.page(pagina)
+  URI.parse(current_url).path.should == pagina.to_unquoted.to_url
 end

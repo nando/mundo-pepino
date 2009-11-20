@@ -38,4 +38,6 @@ Característica: debería estar en una URL específica
     Entonces deberia encontrarme en la portada
 
     Cuando pincho en el enlace "¡Entra!"
-    Entonces debería encontrarme en la página de inicio de sesión
+    Entonces debería encontrarme en la página de login
+           Y debería encontrarme en la página de identificación
+           Y debería encontrarme en la página de inicio de sesión

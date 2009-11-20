@@ -23,6 +23,7 @@ MundoPepino.configure do |config|
     Sprinkler
   ]
   config.model_mappings = {
+    /^sesi[óo]n$/i              => Session,
     /^huert[oa]s?$/i            => Orchard,
     /^bancal(es)?$/i            => Terrace,
     /^cultivos?$/i              => Crop,
@@ -71,13 +72,13 @@ MundoPepino.configure do |config|
       MundoPepino.world.url_for(:only_path=>true,
         :controller=>'welcome', :action => 'signup')
     },
-    /^la página de inicio de sesión/i => lambda {
+    /^la página de (?:identificación|login)/i => lambda {
       MundoPepino.world.new_session_path
     },
     # the fancy one: specific resource page
-    /^la página de(?:l| la) (.+) ["'](.+)['"]$/ => lambda {|captures|
-      if model = captures[0].to_model
-        MundoPepino.world.send "#{model.name.underscore}_path", model.find_by_name(captures[1])
+    /^la página de(?:l| la) (.+) ["'](.+)['"]$/ => lambda {|modelo, nombre|
+      if model = modelo.to_model
+        MundoPepino.world.send "#{model.name.underscore}_path", model.find_by_name(nombre)
       end
     }
   }
