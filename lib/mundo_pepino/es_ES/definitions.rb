@@ -83,8 +83,14 @@ Cuando /^(?:que )?#{_pulso_} (?:en )?el bot[oó]n (.+)$/i do |boton|
   click_button(boton.to_unquoted.to_translated)
 end
 
-Cuando /^(?:que )?#{_pulso_} (?:en )?el (?:#{_enlace_}) (.+?)(?:#{_que_existe_} #{_dentro_de_} ['"]?(.+?)["']?)?$/i do |enlace, selector|
-  given_or_when_i_follow_the_link enlace.to_unquoted.to_translated, selector
+Cuando /^(?:que )?#{_pulso_} (?:en )?(#{_el_enlace_}) (.+?)(?:#{_que_existe_} #{_dentro_de_} ['"]?(.+?)["']?)?$/i do |el_enlace, enlace, selector|
+  if selector.nil? and 
+     href = (enlace.to_url || "#{el_enlace} #{enlace}".to_url)
+    Entonces "veo el enlace #{href}"
+    Y "visito #{href}"
+  else
+    given_or_when_i_follow_the_link enlace.to_unquoted.to_translated, selector
+  end
 end
 
 Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?(?:enlaces|botones)(?: y (?:enlaces|botones))?:$/i do |tabla|
@@ -221,7 +227,7 @@ Entonces /^(#{_veo_o_no_}) (?:las|los) siguientes (?:etiquetas|selectores):$/i d
   end
 end
 
-Entonces /^(#{_veo_o_no_}) un enlace (?:al?|para) (.+)?$/i do |should, pagina|
+Entonces /^(#{_veo_o_no_}) (?:un|el) enlace (?:al? |para )?(.+)?$/i do |should, pagina|
   lambda {
     response.should have_tag('a[href=?]', pagina.to_unquoted.to_url)
   }.send(not_shouldify(should), raise_error)

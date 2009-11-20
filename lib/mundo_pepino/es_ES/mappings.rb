@@ -53,7 +53,7 @@ module MundoPepino
             MundoPepino.world.resource_index_or_mapped_page(el_listado_de, modelo)
           },
         /^su (p[áa]gina|portada)$/i => lambda{MundoPepino.world.last_mentioned_url},
-        /^#{_la_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i =>
+        /^(?:#{_la_pagina_}|#{_el_enlace_}) (?:del|de la) (.+) ['"](.+)["']$/i =>
           lambda{|modelo, nombre|
             if resource = MundoPepino.world.last_mentioned_of(modelo, nombre)
               MundoPepino.world.send "#{resource.class.name.underscore}_path", resource
@@ -61,7 +61,7 @@ module MundoPepino
               raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
             end
           },
-        /^#{_la_pagina_} de (?!la)([\w\/]+(?: de (?:una? )?nuev[oa])?) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i => 
+        /^(?:#{_la_pagina_}|#{_el_enlace_}) de (?!la)([\w\/]+(?: de (?:una? )?nuev[oa])?) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i => 
           lambda{|accion, modelo, nombre|
             action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
             if action != 'new'

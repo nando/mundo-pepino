@@ -17,7 +17,7 @@ module MundoPepino
         'la (?:p[áa]gina|portada)'
       end
       def _el_listado_de_
-        '(?:el|la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de'
+        '(?:el|la|al|a la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de'
       end
       def _pagina_desde_rutas_ # páginas obtenida a partir de las rutas
         '(?:la|el) \w+ del? |su p[aá]gina|su portada'
@@ -50,8 +50,8 @@ module MundoPepino
       def _dentro_de_
         'dentro de(?: la etiqueta|l selector)?'
       end
-      def _enlace_
-        'enlace|(?:hiper)?-?v[íi]nculo' #TODO: |enlace ajax|enlace con efectos'
+      def _el_enlace_
+        'el (?:enlace|(?:hiper)?-?v[íi]nculo)(?: a)?' #TODO: |enlace ajax|enlace con efectos'
       end
       def _que_existe_
         '(?: que (?:hay|existe))?'

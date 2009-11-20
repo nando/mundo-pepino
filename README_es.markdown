@@ -265,9 +265,25 @@ Convenciones generales:
 ##### Página relativa a una visitada con anterioridad
     Cuando visito la siguiente página
     
-#### Pincho/pulso en un enlace opcionalmente dentro de un selector concreto \*
+#### Pincho/pulso en un enlace
+[ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-enlace.feature)
+##### Indicando su texto (o id) opcionalmente dentro de un selector concreto
     Cuando pulso el enlace "Volver" dentro de .navigation_links
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-enlace.feature)
+##### Página específica opcionalmente indicada con un nombre coloquial
+    Cuando pulso el enlace a la portada
+##### Página asociada a un recurso concreto
+    Cuando pulso el enlace a la página del huerto "H-01"
+##### Página asociada al último recurso definido
+    Cuando pulso el enlace a su página
+##### Índice o listado de un recursos de un modelo
+    Cuando pulso el enlace a la página de Tomates
+##### Página de creación de un recurso
+    Cuando pulso el enlace a la página de creación de Tomate
+##### Página de edición de un recurso
+    Cuando pulso el enlace a la página de edición del huerto "H-01"
+##### Página relativa a una visitada con anterioridad
+    Cuando pulso el enlace a la siguiente página
+
 #### Pincho/pulso un bóton (*submit*) \*
     Cuando pulso en el botón Enviar
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-boton.feature)

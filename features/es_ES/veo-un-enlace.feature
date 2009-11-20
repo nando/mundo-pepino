@@ -42,6 +42,7 @@ Característica: Comprobamos la existencia de un enlace en la página actual
            Y debo ver un enlace a /welcome/signup
            Y debería ver un enlace a la página de registro
            Y no debería ver un enlace a /welcome/goodbye
+           Y debo ver el enlace /welcome/signup
 
   Escenario: Veo un enlace a una URL específica cuyo mapeo utiliza Regexp
     Dado que tenemos un huerto "Fancy"
@@ -96,3 +97,4 @@ Característica: Comprobamos la existencia de un enlace en la página actual
     Cuando visito /?page=2
     Entonces veo un enlace a la página anterior
            Y no veo un enlace a la siguiente página
+           Y no veo el enlace a la siguiente página

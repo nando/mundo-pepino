@@ -52,3 +52,66 @@ Característica: pulso el enlace opcionalmente dentro de un selector
     Dado que pincho el enlace "Volver" dentro de ".navigation_links"
     Entonces veo la etiqueta H1 con el valor "Portada de Mundo Pepino"
 
+  Esquema del escenario: Pincho en un enlace de creación de nuevo recurso
+    Dado que visito la home
+    Cuando pincho el enlace <a_la_pagina_de> nueva sesión
+    Entonces debería encontrarme en la página de inicio de sesión
+  Ejemplos:
+    | a_la_pagina_de |
+    | a la pagina de |
+    |       de       |
+    
+  Esquema del escenario: Pincho en un enlace de edición de nuevo recurso
+    Dado que tenemos un huerto llamado "Huerto One"
+    Cuando visito la página de huertos
+         Y pincho en el enlace <a_la_pagina_de> edición del huerto "Huerto One"
+    Entonces debería encontrarme en la página de edición del "Huerto One"
+  Ejemplos:
+    | a_la_pagina_de |
+    | a la pagina de |
+    |       de       |
+
+  Esquema del escenario: Pincho en un enlace de un recurso concreto
+    Dado que tenemos un huerto llamado "Huerto One"
+    Cuando visito la página de huertos
+         Y pincho en el enlace <a_la_pagina_del> huerto "Huerto One"
+    Entonces debería encontrarme en la página del huerto "Huerto One"
+  Ejemplos:
+    | a_la_pagina_del   |
+    | a la pagina del   |
+    | a la pagina de la |
+    | del               |
+    | de la             |
+
+  Escenario: Pincho en el enlace del último recurso mencionado
+    Dado que tenemos un huerto llamado "Huerto One"
+       Y que visito /orchards
+    Cuando pincho en el enlace a su página
+    Entonces debería encontrarme en la página del huerto "Huerto One"
+
+  Esquema del escenario: Pincho en un enlace al índice/listado de un modelo
+    Dado que visito la portada
+    Cuando pincho en el enlace <al_listado> de huertos
+    Entonces debería estar en la página de huertos
+  Ejemplos:
+    | al_listado  |
+    | al listado  |
+    | a la página |
+
+  Esquema del escenario: Pincho en un enlace al que nos referimos utilizando su ruta/url
+    Dado que visito la portada
+    Cuando pincho en el enlace <path>
+    Entonces debería estar en <path>
+  Ejemplos:
+     | path                 |
+     | /orchards            |
+     | la página de registro|
+   
+  Escenario: Pincho en el enlace a la siguiente/anterior página
+    Dado que visito la home
+    Cuando pincho el enlace a la siguiente página
+    Entonces no debería ver el enlace a la página siguiente
+           Y debería ver el enlace a la página anterior
+    Cuando pincho el enlace a la página anterior
+    Entonces debería ver el enlace a la página siguiente
+           Y no debería ver el enlace a la página anterior
