@@ -103,7 +103,7 @@ Pero lo más importante, el hecho de que sea DRY nos permite añadir mejoras má
       '(?:no )?(?:veo|debo ver|deber[ií]a ver|deber[íi]a estar viendo)'
     end
 
-Como bola extra, resulta que al haber modificado `_veo_o_no_` todos los pasos que lo utilicen tendrán también esta nueva forma de ser expresados.
+Y, por el mismo precio, resulta que al haber modificado `_veo_o_no_` todos los pasos que lo utilicen tendrán también esta nueva forma de ser expresados.
 
 ### Primera convención y como saltársela: campo **name** para el *nombre* en todos los modelos
 
@@ -248,25 +248,23 @@ Convenciones generales:
 
 * frases escritas en tiempo presente en primera persona del singular
 * todas las definiciones son válidas también para definir contexto (en "Dados" o "Givens") incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
-
-#### Solicitud de una página específica opcionalmente indicada con un nombre coloquial
+#### Solicitud de página
+[ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-una-pagina.feature)
+##### Página específica opcionalmente indicada con un nombre coloquial
     Cuando visito la portada
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-especifica.feature)
-#### Solicitud de la página asociada a un recurso concreto
+##### Página asociada a un recurso concreto
     Cuando visito la página del huerto "H-01"
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-recurso-especifico.feature)
-#### Solicitud de la página asociada al último recurso definido
+##### Página asociada al último recurso definido
     Cuando visito su página
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-recurso-mencionado.feature)
-#### Solicitud de la página del índice (index) de un tipo de recurso (modelo)
+##### Índice o listado de un recursos de un modelo
     Cuando visito la página de Tomates
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-indice-de-tipo-de-recurso.feature)
-#### Solicitud de la página de creación de un recurso
+##### Página de creación de un recurso
     Cuando visito la página de creación de Tomate
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-creacion.feature)
-#### Solicitud de la página de edición de un recurso
+##### Página de edición de un recurso
     Cuando visito la página de edición del huerto "H-01"
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-de-edicion.feature)
+##### Página relativa a una visitada con anterioridad
+    Cuando visito la siguiente página
+    
 #### Pincho/pulso en un enlace opcionalmente dentro de un selector concreto \*
     Cuando pulso el enlace "Volver" dentro de .navigation_links
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-enlace.feature)
@@ -328,13 +326,21 @@ Convenciones generales:
 * para expresar que algo es visible utiliza "veo" o "debo ver" (o "no veo" y "no debo ver")
 * las comprobaciones del contenido de la base de datos se escriben haciendo una referencia explícita a la misma en primera persona del plural ("tenemos en base de datos") o en tercera del singular ("tiene en base de datos"). Esta verbosidad es intencionada debido a que [dichas comprobaciones están desaconsejadas](http://github.com/aslakhellesoy/cucumber/wikis/given-when-then), haciendo así menos limpio y un poco más costoso su uso.
 
-#### Debería estar en una página específica \*
+#### Debería estar en una página
+Distinguimos entre los seis tipos de página que tienen sentido aquí (todos excepto el de *página relativa*).
+[ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/deberia-estar-en-una-pagina.feature)
+##### Página específica opcionalmente indicada con un nombre coloquial
     Entonces debo estar en la portada
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/estoy-en-url-especifica.feature)
-
-#### Debería estar en página del índice (index) de un tipo de recurso (modelo)
+##### Página asociada a un recurso concreto
+    Entonces debo estar en la página del huerto "H-01"
+##### Página asociada al último recurso definido
+    Entonces debo estar en su página
+##### Índice o listado de un recursos de un modelo
     Entonces debo estar en la página de Tomates
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/estoy-en-url-de-indice-de-recurso.feature)
+##### Página de creación de un recurso
+    Entonces debo estar en la página de creación de Tomate
+##### Página de edición de un recurso
+    Entonces debo estar en la página de edición del huerto "H-01"
 
 #### Veo (o no) un texto opcionalmente dentro de un selector concreto \*
     Entonces debo ver el texto "IVA incluido"
@@ -367,12 +373,24 @@ Convenciones generales:
      | Muestras de tomate       |
      | Restos de lechuga        |
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/leo-los-siguientes-textos.feature)
-#### Veo (o no) un enlace a una página específica (opcionalmente indicada con un nombre coloquial)
-    Entonces debo ver un enlace a la página de recuperación de contraseña    
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-enlace-a-url-especifica)
-#### Veo (o no) un enlace a una página relativa a una visitada con anterioridad
+
+#### Veo (o no) un enlace a una página
+[ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-un-enlace.feature)
+##### Página específica opcionalmente indicada con un nombre coloquial
+    Entonces debo ver un enlace a la portada
+##### Página asociada a un recurso concreto
+    Entonces debo ver un enlace a la página del huerto "H-01"
+##### Página asociada al último recurso definido
+    Entonces debo ver un enlace a su página
+##### Índice o listado de un recursos de un modelo
+    Entonces debo ver un enlace a la página de Tomates
+##### Página de creación de un recurso
+    Entonces debo ver un enlace a la página de creación de Tomate
+##### Página de edición de un recurso
+    Entonces debo ver un enlace a la página de edición del huerto "H-01"
+##### Página relativa a una visitada con anterioridad
     Entonces debo ver un enlace a la siguiente página
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-enlace-a-url-relativa)
+
 #### Veo marcada (o desmarcada) una casilla (*checkbox*) \*
     Entonces veo marcado "Acepto las condiciones del servicio"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-el-checkbox.feature)
