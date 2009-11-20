@@ -81,6 +81,15 @@ module MundoPepino
               MundoPepino.world.pile_up model.new
               MundoPepino.world.send "#{action}_#{model.name.underscore}_path"
             end
+          },
+        /la (siguiente) p[aá]gina|la p[aá]gina (anterior)/i =>
+          lambda{|go_next, go_previous|
+            head, current, tail = if MundoPepino.world.last_visited =~ /(.+page=)(\d+)(.*)/
+              [$1, $2.to_i, $3]
+            else
+              [MundoPepino.world.last_visited + '?page=', 1, '']
+            end
+            "#{head}#{go_next ? current + 1 : current - 1}#{tail}"
           }
         })
     end

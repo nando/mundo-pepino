@@ -223,8 +223,7 @@ end
 
 Entonces /^(#{_veo_o_no_}) un enlace (?:al?|para) (.+)?$/i do |should, pagina|
   lambda {
-    href = relative_page(pagina) || pagina.to_unquoted.to_url 
-    response.should have_tag('a[href=?]', href)
+    response.should have_tag('a[href=?]', pagina.to_unquoted.to_url)
   }.send(not_shouldify(should), raise_error)
 end
 

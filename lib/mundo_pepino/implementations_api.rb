@@ -40,20 +40,6 @@ module MundoPepino
       shouldify(should_or_not) == :should ? :should_not : :should
     end
   
-    def relative_page(pagina)
-      if pagina =~ /la siguiente p[aá]gina|la p[aá]gina anterior/i
-        head, current, tail = if last_visited =~ /(.+page=)(\d+)(.*)/
-          [$1, $2.to_i, $3]
-        else
-          [last_visited + '?page=', 1, '']
-        end
-        (pagina =~ /siguiente/ ? current += 1 : current -= 1)
-        head + current.to_s + tail
-      else
-        nil
-      end
-    end
-  
     # Cucumber::Model::Table's hashes traduciendo nombres de campo
     def translated_hashes(step_table, options = {})
       base_hash = base_hash_for(options)
