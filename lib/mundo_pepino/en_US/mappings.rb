@@ -31,9 +31,7 @@ module MundoPepino
         /^modifications?$/i       => 'edit',
         /^editions?$/i            => 'edit') { |action| action }
       String.add_mapper(:month) { |month| month.capitalize }
-      unless self.world.respond_to? :path_to
-        String.url_mappings[/^the home\s?page/i] = self.world.root_path
-      end
+      String.url_mappings[/^the home\s?page/i] = self.world.root_path
     end
   end
 end

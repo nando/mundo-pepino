@@ -5,6 +5,6 @@ features/support/app/log
 features/support/app/tmp
 features/support/app/vendor
 features/support/app/script
-features/support/app/db/*.sqlite3
+features/support/app/db/development.sqlite3
 features/support/app/caracteristicas/
 features/support/app/lib/tasks/mundo_pepino.rake

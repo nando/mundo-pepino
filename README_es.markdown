@@ -63,8 +63,6 @@ Del mapeo de atributos lo más destacable es la convención de que, si no se le 
 
 Es recomendable para evitar problemas que los valores en el mapeo de atributos sean símbolos en lugar de cadenas ya que algunas factorias (p.e. FixtureReplacement) los quieren así.
 
-Del mapeo de rutas cabe destacar que si MundoPepino detecta la presencia del **método `path_to`** (creado actualmente por Cucumber al preparar el entorno) ignorará dicho mapeo y utilizará `path_to` para obtener las rutas a partir de las capturas en los textos.
-
 ### Un poquito sobre la filosofía de MundoPepino
 El objetivo de MundoPepino es que escribir las características comunes de nuestra aplicación sin preocuparnos por su implementación e intentando recoger las distintas formas de expresar cada concepto para reducir la necesidad de consultar su documentación.
 

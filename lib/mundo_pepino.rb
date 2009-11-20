@@ -48,13 +48,7 @@ module MundoPepino
           str
         end
       end
-      String.add_mapper(:url) do |string|
-        if world.respond_to? :path_to
-          world.path_to string
-        else
-          string if string =~ /^\/.*$|^https?:\/\//i
-        end
-      end
+      String.add_mapper(:url) {|str| str if str =~ /^\/.*$|^https?:\/\//i}
     end
 
     def config

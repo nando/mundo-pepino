@@ -10,10 +10,6 @@ Característica: solicitud-de/estoy-en URL específica
   #   Solicita la URL referida comprobando previamente si el valor de la 
   # misma ha sido mapeado en config.url_mappings.
   #
-  #   Si se ha definido una función "path_to" los mapeos de url_mappings
-  # son ignorados y se utilizará dicha función para obtener la ruta que
-  # se debe solicitar.
-  #
   #   El valor por defecto definido en el mapeo de URLs (string.to_url) 
   # devuelve la propia cadena si no existe un mapeo concreto para ella y 
   # comienza por / o https?://. En caso contrario devuelve nulo.

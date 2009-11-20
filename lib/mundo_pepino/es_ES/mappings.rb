@@ -46,46 +46,43 @@ module MundoPepino
         :octubre         => 'October',
         :noviembre       => 'November',
         :diciembre       => 'December')
-      unless self.world.respond_to? :path_to
-        String.url_mappings.merge!({
-          /^la (?:portada|home\s?(?:page)?)$/i => self.world.root_path,
-          /^(#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i => 
-            lambda{ |el_listado_de, modelo|
-              MundoPepino.world.resource_index_or_mapped_page(el_listado_de, modelo)
-            },
-          /^su (p[áa]gina|portada)$/i => 
-            lambda{MundoPepino.world.last_mentioned_url},
-          /^#{_la_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i =>
-            lambda{|modelo, nombre|
-              if resource = MundoPepino.world.last_mentioned_of(modelo, nombre)
-                MundoPepino.world.send "#{resource.class.name.underscore}_path", resource
+      String.url_mappings.merge!({
+        /^la (?:portada|home\s?(?:page)?)$/i => lambda{MundoPepino.world.root_path},
+        /^(#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i => 
+          lambda{ |el_listado_de, modelo|
+            MundoPepino.world.resource_index_or_mapped_page(el_listado_de, modelo)
+          },
+        /^su (p[áa]gina|portada)$/i => lambda{MundoPepino.world.last_mentioned_url},
+        /^#{_la_pagina_} (?:del|de la) (.+) ['"](.+)["']$/i =>
+          lambda{|modelo, nombre|
+            if resource = MundoPepino.world.last_mentioned_of(modelo, nombre)
+              MundoPepino.world.send "#{resource.class.name.underscore}_path", resource
+            else
+              raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
+            end
+          },
+        /^#{_la_pagina_} de (?!la)([\w\/]+(?: de (?:una? )?nuev[oa])?) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i => 
+          lambda{|accion, modelo, nombre|
+            action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
+            if action != 'new'
+              nombre, modelo = modelo, nil unless nombre
+              resource = if modelo && modelo.to_unquoted.to_model
+                MundoPepino.world.last_mentioned_of(modelo, nombre.to_unquoted)
               else
-                raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
+                MundoPepino.world.last_mentioned_called(nombre.to_unquoted)
               end
-            },
-          /^#{_la_pagina_} de (?!la)([\w\/]+(?: de (?:una? )?nuev[oa])?) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i => 
-            lambda{|accion, modelo, nombre|
-              action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
-              if action != 'new'
-                nombre, modelo = modelo, nil unless nombre
-                resource = if modelo && modelo.to_unquoted.to_model
-                  MundoPepino.world.last_mentioned_of(modelo, nombre.to_unquoted)
-                else
-                  MundoPepino.world.last_mentioned_called(nombre.to_unquoted)
-                end
-                if resource
-                  MundoPepino.world.send "#{action}_#{resource.mr_singular}_path", resource
-                else
-                  MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
-                end
+              if resource
+                MundoPepino.world.send "#{action}_#{resource.mr_singular}_path", resource
               else
-                model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
-                MundoPepino.world.pile_up model.new
-                MundoPepino.world.send "#{action}_#{model.name.underscore}_path"
+                MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
               end
-            }
-          })
-      end
+            else
+              model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
+              MundoPepino.world.pile_up model.new
+              MundoPepino.world.send "#{action}_#{model.name.underscore}_path"
+            end
+          }
+        })
     end
   end
 end
