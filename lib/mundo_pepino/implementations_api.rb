@@ -95,7 +95,7 @@ module MundoPepino
       if child_model = child.to_model
         last_mentioned_children(child_model).size.should == number.to_number
       else
-        raise ModelNotMapped.new(child)
+        raise MundoPepino::ModelNotMapped.new(child)
       end
     end
     
@@ -119,7 +119,7 @@ module MundoPepino
           c.id == child.id 
         end.should_not be_nil
       else
-        raise ModelNotMapped.new(child)
+        raise MundoPepino::ModelNotMapped.new(child)
       end
     end
     
