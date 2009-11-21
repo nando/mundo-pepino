@@ -37,7 +37,7 @@ module MundoPepino
       end
     end
 
-    class NotFoundInDatabase
+    class NotFoundInDatabase < ResourceNotFound
       def initialize(model, value='')
         super "#{model} #{value} not found in database"
       end
