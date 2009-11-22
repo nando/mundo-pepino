@@ -214,7 +214,7 @@ Convenciones generales:
 
 #### Asignación simple a un campo **has\_many** de un recurso concreto
     Dado que el huerto "H-01" tiene dos bancales "Bancal de Acelgas y Bancal de Tomates"
-[más ejemplos (has_many estándar)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-simple-en-recurso-concreto.feature) - 
+[más ejemplos (has_many estándar)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-simple.feature) - 
 [más ejemplos (has_many polimórfico)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-simple-en-recurso-concreto.feature) -
 [más ejemplos (has_many through)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-simple-en-recurso-concreto.feature)
 
@@ -229,7 +229,7 @@ Convenciones generales:
            | nombre | longitud | cultivo |  matas |
            |  A-01  |    12    | Patatas |     16 |
            |  A-02  |    12    | Tomates |     18 |
-[más ejemplos (has_many normal)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-desde-fit-table-en-recurso-concreto.feature) - 
+[más ejemplos (has_many normal)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-desde-fit-table.feature) - 
 [más ejemplos (has_many polimórfico)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-polymorphic-desde-fit-table-en-recurso-concreto.feature) -
 [más ejemplos (has_many through)](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-has-many-through-desde-fit-table-en-recurso-concreto.feature)
 
