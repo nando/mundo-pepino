@@ -41,6 +41,6 @@ Característica: asignación simple de instancias en campo has_many en un recurs
            Y tiene en bbdd un pepino "F"
 
   Escenario: Asignación en campo has_many habiendo otro campo has_many del mismo modelo
-    Dado que tenemos una usuaria llamana "Rosa"
+    Dado que tenemos una usuaria llamada "Rosa"
     Y que la usuaria "Rosa" tiene una flor enviada llamada "Clavel"
     Entonces la usuaria "Rosa" tiene en bbdd una flor enviada "Clavel"
