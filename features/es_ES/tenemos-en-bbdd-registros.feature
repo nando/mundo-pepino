@@ -25,6 +25,8 @@ Característica: Tenemos en BBDD uno o más registros de un modelo
            | nombre  | área | latitud  | latitud   | abono   |
            | Secano  | 35   | N 40° 44 | W 003° 48 | FSF-315 |
            | Regadío | 31   | N 41º 26 | W 003° 42 | FSF-311 |
+       Y que el huerto "Secano" tiene un bancal "Largo"
+       Y que el bancal "Largo" tiene 5 pepinos
     Entonces tenemos en base de datos dos huertos
            Y tenemos en la base de datos dos huertos 
            Y en la base de datos tenemos dos huertos
@@ -42,3 +44,26 @@ Característica: Tenemos en BBDD uno o más registros de un modelo
            Y en la bbdd tenemos un huerto "Secano"
            Y en bbdd tenemos un huerto "Secano"
            Y tenemos en base de datos un huerto llamado "Regadío"
+           Y el bancal "Largo" tiene en bbdd cinco pepinos
+
+  Escenario: dos campos has_many del mismo modelo
+  # Un usuario tiene "flores enviadas" y "flores" (recibidas).
+    Dado que tenemos los siguientes usuarios:
+      | nombre    |
+      | Rosa      |
+      | Antonio   |
+      | Jacinto   |
+      | Tomás     |
+    Y que inicio sesión con la usuaria Rosa
+    Cuando que visito la página de nueva Flor
+         Y relleno título con "hortensia"
+         Y marco "Jacinto"
+         Y marco "Tomás"
+         Y pulso el botón "Enviar"
+    Entonces debería ver el texto "Flor enviada"
+           Y tenemos en la bbdd dos envíos
+           Y el usuario "Jacinto" tiene en bbdd una flor
+           Y el usuario "Tomás" tiene en bbdd una flor
+           Y el usuario "Antonio" tiene en bbdd 0 flores
+           Y la flor "hortensia" tiene en bbdd dos usuarios
+           Y la usuaria "Rosa" tiene en bbdd una flor enviada

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091119232939) do
+ActiveRecord::Schema.define(:version => 20091121185724) do
 
   create_table "chards", :force => true do |t|
     t.string   "name"
@@ -28,9 +28,25 @@ ActiveRecord::Schema.define(:version => 20091119232939) do
     t.datetime "updated_at"
   end
 
+  create_table "deliveries", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "flower_id"
+    t.boolean  "light"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fertilizers", :force => true do |t|
     t.string   "name"
     t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flowers", :force => true do |t|
+    t.string   "title"
+    t.integer  "from_id"
+    t.string   "file_path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,6 +84,8 @@ ActiveRecord::Schema.define(:version => 20091119232939) do
   end
 
   create_table "sessions", :force => true do |t|
+    t.integer  "user_id"
+    t.boolean  "closed",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,6 +116,15 @@ ActiveRecord::Schema.define(:version => 20091119232939) do
     t.integer  "weight"
     t.string   "variety"
     t.integer  "diameter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "nick"
+    t.string   "password"
+    t.boolean  "dark_past"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

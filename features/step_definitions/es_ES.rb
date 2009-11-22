@@ -20,7 +20,11 @@ MundoPepino.configure do |config|
     Chard,
     Pepino,
     Lettuce,
-    Sprinkler
+    Sprinkler,
+    Flower,
+    Session, 
+    Delivery, 
+    User
   ]
   config.model_mappings = {
     /^sesi[óo]n$/i              => Session,
@@ -33,7 +37,11 @@ MundoPepino.configure do |config|
     /^pepinos?$/i               => Pepino,
     /^aspersor(es)?$/i          => Sprinkler,
     /^lechugas?$/i              => Lettuce,
-    /^huerto de nacimiento$/i   => Orchard
+    /^huerto de nacimiento$/i   => Orchard,
+    /^flor(?:es)?(?: enviadas?)?$/i => Flower,
+    /^sesión(es)?$/i => Session,
+    /^usuari[ao]s?$/i => User,
+    /^env[ií]os?$/i => Delivery
   }
   config.field_mappings = {
     /^[Ááa]reas?$/i              => :area,
@@ -61,7 +69,11 @@ MundoPepino.configure do |config|
     /^hora de terminar de regar$/i => :stop_watering,
     /^precio$/i                  => :price,
     /^Pepino::nombre$/i          => :title,
-    /^pepinos?$/i                => :cucumbers
+    /^pepinos?$/i                => :cucumbers,
+    /^títulos?$/i                => :title,
+    /^(?:clave|contraseña)s?$/i  => :password, 
+    /^flor(?:es)? enviadas?$/i   => :sended_flowers,
+    /^Flower::name$/             => :title
   }
   config.relation_model_mappings = {
     :cucumbers        => Pepino,
@@ -90,4 +102,12 @@ end
 
 module MundoPepino
   include FixtureReplacement
+end
+
+Dado /^que inicio sesión con (?:el|la) usuari[oa] (.+)$/ do |usuario|
+  user = last_mentioned_of("usuario", usuario.to_unquoted)
+  Dado 'que visito la página de inicio de sesión'
+  Cuando 'relleno nombre con "'+user.name+'"'
+       Y 'relleno contraseña con "'+user.password+'"'
+       Y 'pulso el botón "Entrar"'
 end

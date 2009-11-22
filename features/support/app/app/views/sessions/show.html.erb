@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @session.name %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%=h @session.password %>
+</p>
+
+
+<%= link_to 'Edit', edit_session_path(@session) %> |
+<%= link_to 'Back', sessions_path %>

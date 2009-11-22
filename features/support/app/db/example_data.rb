@@ -49,4 +49,9 @@ module FixtureReplacement
   attributes_for :lettuce do |a|
     a.name = String.random
   end
+
+  attributes_for :user do |a|
+    a.name = String.random
+    a.password = String.random
+  end
 end

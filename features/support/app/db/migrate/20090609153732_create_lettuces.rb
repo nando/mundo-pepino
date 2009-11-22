@@ -10,6 +10,6 @@ class CreateLettuces < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :orchard_lettuces
+    drop_table :lettuces
   end
 end

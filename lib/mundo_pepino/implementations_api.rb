@@ -86,17 +86,18 @@ module MundoPepino
       end
     end
     
-    def last_mentioned_children(child_model)
-      child_field = child_model.table_name.to_field || child_model.table_name
-      last_mentioned.send child_field
-    end
-
-    def last_mentioned_should_have_n_children(child, number)
-      if child_model = child.to_model
-        last_mentioned_children(child_model).size.should == number.to_number
+    def last_mentioned_children(field_raw)
+      if child_model = field_raw.to_model
+        last_mentioned.send field_raw.to_field ||
+                            child_model.table_name.to_field ||
+                            child_model.table_name
       else
         raise MundoPepino::ModelNotMapped.new(child)
       end
+    end
+
+    def last_mentioned_should_have_n_children(field, number)
+      last_mentioned_children(field).size.should == number.to_number
     end
     
     def last_mentioned_should_have_value(campo, valor)
@@ -112,15 +113,13 @@ module MundoPepino
       end
     end
     
-    def last_mentioned_should_have_child(child, name)
-      if child_model = child.to_model
-        child = child_model.send "find_by_#{field_for(child_model)}", name
-        last_mentioned_children(child_model).detect do |c|
-          c.id == child.id 
-        end.should_not be_nil
-      else
-        raise MundoPepino::ModelNotMapped.new(child)
+    def last_mentioned_should_have_child(field_raw, name)
+      children = last_mentioned_children(field_raw)
+      child = if children.any?
+        model = children.first.class
+        model.send("find_by_#{field_for(model)}", name) 
       end
+      children.detect {|c| c.id == child.id}.should_not be_nil
     end
     
     def find_field_and_do_with_webrat(action, campo, options = nil)

@@ -1,0 +1,19 @@
+<p><%= flash[:notice] %></p>
+<p>
+  <b>Title:</b>
+  <%=h @flower.title %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%=h @flower.from_id %>
+</p>
+
+<p>
+  <b>File path:</b>
+  <%=h @flower.file_path %>
+</p>
+
+
+<%= link_to 'Edit', edit_flower_path(@flower) %> |
+<%= link_to 'Back', flowers_path %>

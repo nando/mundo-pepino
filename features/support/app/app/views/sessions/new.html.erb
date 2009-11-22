@@ -1,2 +1,18 @@
 <h2>¡Entra!</h2>
-<strong>Coming soon...</strong>
+New features <strong>Coming soon...</strong>
+<%= "<strong>#{flash[:alert]}</strong>" if flash[:alert] -%>
+<% form_for(@session) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </p>
+  <p>
+    <%= f.submit 'Entrar' %>
+  </p>
+<% end %>
