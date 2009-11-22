@@ -124,7 +124,7 @@ Cuando /^(?:que )?(?:completo|relleno) #{_localizador_de_atributo_anidado_} con 
 end
 
 Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|
-  choose(campo_to_field(campo).to_s + '_' + valor.downcase.to_underscored)
+  choose(convert_to_field(campo).to_s + '_' + valor.downcase.to_underscored)
 end
 
 Cuando /^(?:que )?marco (?:la|el)? ?(.+)$/i do |campo|
@@ -148,7 +148,7 @@ Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: (?:en (?:el listado de )?|como
       select valor
     end
   rescue Webrat::NotFoundError
-    select(valor, :from => campo_to_field(campo)) # Sin label
+    select(valor, :from => convert_to_field(campo)) # Sin label
   end
 end
 

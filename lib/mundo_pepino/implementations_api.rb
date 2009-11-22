@@ -43,8 +43,8 @@ module MundoPepino
     # Cucumber::Model::Table's hashes traduciendo nombres de campo
     def translated_hashes(step_table, options = {})
       base_hash = base_hash_for(options)
-      header = step_table[0].map do |campo| 
-        field_for(options[:model], campo) || campo 
+      header = step_table[0].map do |raw_field| 
+        field_for(options[:model], raw_field) || raw_field 
       end
       step_table[1..-1].map do |row|
         h = base_hash.dup
@@ -76,20 +76,21 @@ module MundoPepino
       end
     end
   
-    def campo_to_field(campo, model = nil)
-      unless campo.nil? 
-        if field = field_for(model, campo.to_unquoted)
+    def convert_to_field(raw_field, model = nil)
+      unless raw_field.nil? 
+        if field = field_for(model, raw_field.to_unquoted)
           field
         else
-          raise MundoPepino::FieldNotMapped.new(campo) 
+          raise MundoPepino::FieldNotMapped.new(raw_field) 
         end
       end
     end
     
     def last_mentioned_children(field_raw)
       if child_model = field_raw.to_model
-        last_mentioned.send field_raw.to_field ||
-                            child_model.table_name.to_field ||
+        parent_model = last_mentioned.mr_model
+        last_mentioned.send field_for(parent_model, field_raw) ||
+                            field_for(parent_model, child_model.table_name) ||
                             child_model.table_name
       else
         raise MundoPepino::ModelNotMapped.new(child)
@@ -100,16 +101,16 @@ module MundoPepino
       last_mentioned_children(field).size.should == number.to_number
     end
     
-    def last_mentioned_should_have_value(campo, valor)
+    def last_mentioned_should_have_value(raw_field, valor)
       res = last_mentioned
-      if child_model = campo.to_model
+      if child_model = raw_field.to_model
         child = child_model.send "find_by_#{field_for(child_model)}", valor
-        child_field = field_for(res.mr_model, campo) || child_model.name.underscore
+        child_field = field_for(res.mr_model, raw_field) || child_model.name.underscore
         (res.send child_field).should == child
-      elsif field = field_for(res.class, campo)
+      elsif field = field_for(res.class, raw_field)
         (res.send field).to_s.should == valor.to_s
       else
-        raise MundoPepino::FieldNotMapped.new(campo)
+        raise MundoPepino::FieldNotMapped.new(raw_field)
       end
     end
     
@@ -122,10 +123,10 @@ module MundoPepino
       children.detect {|c| c.id == child.id}.should_not be_nil
     end
     
-    def find_field_and_do_with_webrat(action, campo, options = nil)
-      do_with_webrat action, campo.to_unquoted.to_translated, options # a pelo (localización vía labels)
+    def find_field_and_do_with_webrat(action, raw_field, options = nil)
+      do_with_webrat action, raw_field.to_unquoted.to_translated, options # a pelo (localización vía labels)
     rescue Webrat::NotFoundError
-      field = campo_to_field(campo, last_mentioned_model)
+      field = convert_to_field(raw_field, last_mentioned_model)
       begin 
         do_with_webrat action, field, options # campo traducido tal cual...
       rescue Webrat::NotFoundError
@@ -177,12 +178,12 @@ module MundoPepino
       end
     end
 
-    def nested_field_id(nested_field, nested_model, nested_name, parent_resource=nil)
+    def nested_field_id(nested_field, nested_model, nested_name, parent_resource)
       unquoted_model = nested_model.to_unquoted
       if model = unquoted_model.to_model
         if res = model.send("find_by_#{field_for(model)}", nested_name)
           if field_prefix = nested_field_id_prefix(res, parent_resource)
-            "#{field_prefix}#{nested_field.to_field}"
+            "#{field_prefix}#{field_for(parent_resource.mr_model, nested_field)}"
           end
         else
           raise MundoPepino::ResourceNotFound.new("No '#{unquoted_model}' called '#{nested_name}'")
@@ -192,7 +193,7 @@ module MundoPepino
       end
     end
 
-    def nested_field_id_prefix(resource, parent_resource=nil)
+    def nested_field_id_prefix(resource, parent_resource)
       parent = parent_resource ? parent_resource.mr_model.name.underscore : '[a-z][a-z_]*[a-z]'
       children = resource.class.name.pluralize.underscore
       preprefix = "#{parent}_#{children}_attributes"

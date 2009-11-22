@@ -185,19 +185,19 @@ module MundoPepino
         if valores.size == mentioned.size
           [mentioned, valores]
         else
-          [mentioned, [ valor ] * mentioned.size]
+          [mentioned, [valor] * mentioned.size]
         end
       else
-        [[ mentioned ], [ valor ]]
+        [[mentioned], [valor]]
       end
       field, values = if (child_model = campo.to_model)
         child_name_field = field_for(child_model)
         values = add_resource(child_model,
           valores.map { |val| { child_name_field => val } })
         values = [ values ] unless values.is_a?(Array)
-        [ campo.to_field || child_model.name.underscore, values ]
+        [field_for(mentioned.mr_model, campo) || child_model.name.underscore, values]
       else
-        [ field_for(mentioned.mr_model, campo), valores ]
+        [field_for(mentioned.mr_model, campo), valores]
       end 
       [resources, field, values]
     end
