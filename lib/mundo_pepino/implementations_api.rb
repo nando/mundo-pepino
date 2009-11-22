@@ -104,12 +104,12 @@ module MundoPepino
       res = last_mentioned
       if child_model = campo.to_model
         child = child_model.send "find_by_#{field_for(child_model)}", valor
-        child_field = campo.to_field || child_model.name.underscore
+        child_field = field_for(res.mr_model, campo) || child_model.name.underscore
         (res.send child_field).should == child
       elsif field = field_for(res.class, campo)
         (res.send field).to_s.should == valor.to_s
       else
-        raise FieldNotMapped.new(campo)
+        raise MundoPepino::FieldNotMapped.new(campo)
       end
     end
     
@@ -149,7 +149,7 @@ module MundoPepino
       end
     end
   
-    def parent_options(parent, child_model, child_field=nil)
+    def parent_options(parent, child_model, child_field)
       options = {:parent => parent}
       if child_field and 
          parent_field = "#{child_model.name}::#{child_field}".to_field

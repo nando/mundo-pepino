@@ -29,7 +29,7 @@ module MundoPepino
         children_model = params[:children_field].to_unquoted.to_model
         resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
         resources.each do |resource|
-          options = parent_options(resource, children_model)
+          options = parent_options(resource, children_model, params[:children_field])
           options[:model] = children_model
           add_resource children_model, 
             translated_hashes(params[:step_table].raw, options)

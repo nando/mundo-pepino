@@ -40,6 +40,7 @@ MundoPepino.configure do |config|
     /^huerto de nacimiento$/i   => Orchard,
     /^flor(?:es)?(?: enviadas?)?$/i => Flower,
     /^sesión(es)?$/i            => Session,
+    /^remitentes?$/i            => User,
     /^usuari[ao]s?$/i           => User,
     /^env[ií]os?$/i             => Delivery
   }
@@ -73,6 +74,7 @@ MundoPepino.configure do |config|
     /^títulos?$/i                => :title,
     /^(?:clave|contraseña)s?$/i  => :password, 
     /^flor(?:es)? enviadas?$/i   => :sended_flowers,
+    /^Flower::remitentes?$/i     => :from,
     /^Flower::flor(?:es)? enviadas?$/i => :from,
     /^Flower::name$/             => :title
   }
