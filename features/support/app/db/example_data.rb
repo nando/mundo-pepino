@@ -54,4 +54,14 @@ module FixtureReplacement
     a.name = String.random
     a.password = String.random
   end
+
+  attributes_for :flower do |a|
+    a.title = String.random
+    a.from = default_user
+  end
+
+  attributes_for :delivery do |a|
+    a.flower = default_flower
+    a.user = default_user
+  end
 end

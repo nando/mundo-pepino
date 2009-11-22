@@ -63,12 +63,12 @@ module MundoPepino
           { "#{options[:polymorphic_as]}_id" => options[:parent].id,
             "#{options[:polymorphic_as]}_type" => options[:parent].class.name }
         else 
-          field_prefix = options[:parent].class.name.underscore
+          field_prefix = options[:parent_field] || options[:parent].class.name.underscore
           if options[:through]
             {:through => {"model" => eval(options[:through].to_s.classify),
                           "attributes" => {"#{field_prefix}_id"  => options[:parent].id}}}
           else
-            { "#{field_prefix}_id" => options[:parent].id }
+            {"#{field_prefix}_id" => options[:parent].id}
           end
         end
       else
@@ -149,14 +149,17 @@ module MundoPepino
       end
     end
   
-    def parent_options(parent, child)
-     options = {:parent => parent}
-      # polymorphic associations
-      if reflections = parent.class.reflect_on_association(child.table_name.to_sym)
+    def parent_options(parent, child_model, child_field=nil)
+      options = {:parent => parent}
+      if child_field and 
+         parent_field = "#{child_model.name}::#{child_field}".to_field
+        options[:parent_field] = parent_field
+      elsif reflections = parent.class.reflect_on_association(child_model.table_name.to_sym)
+        # many to many associations
         if reflections.options[:as]
-          options.merge!({:polymorphic_as => reflections.options[:as]})
+          options[:polymorphic_as] = reflections.options[:as]
         elsif reflections.options[:through]
-          options.merge!({:through => reflections.options[:through]})
+          options[:through] = reflections.options[:through]
         end
       end
       options

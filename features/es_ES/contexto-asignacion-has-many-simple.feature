@@ -39,7 +39,7 @@ Característica: asignación simple de instancias en campo has_many
            Y tiene en bbdd un bancal "Patatas"
            Y el huerto "H-03" tiene en bbdd un bancal "Pitos y flautas"
 
-    Escenario: asignación simple en campo has_many cuyo nombre no coincide con su modelo asociado
+  Escenario: asignación simple en campo has_many cuyo nombre no coincide con su modelo asociado
     Dado que tenemos un bancal "Pepinos"
        Y que dicho bancal tiene tres pepinos "A, B y C"
     Entonces tenemos en bbdd un bancal "Pepinos"
@@ -47,3 +47,7 @@ Característica: asignación simple de instancias en campo has_many
            Y tiene en bbdd un pepino "B"
            Y tiene en bbdd un pepino "C"
 
+  Escenario: Asignación en campo has_many habiendo otro campo has_many del mismo modelo
+    Dado que tenemos una usuaria llamada "Rosa"
+    Y que dicha usuaria tiene una flor enviada llamada "Clavel"
+    Entonces la usuaria "Rosa" tiene en bbdd una flor enviada "Clavel"

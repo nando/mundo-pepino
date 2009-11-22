@@ -39,9 +39,9 @@ MundoPepino.configure do |config|
     /^lechugas?$/i              => Lettuce,
     /^huerto de nacimiento$/i   => Orchard,
     /^flor(?:es)?(?: enviadas?)?$/i => Flower,
-    /^sesión(es)?$/i => Session,
-    /^usuari[ao]s?$/i => User,
-    /^env[ií]os?$/i => Delivery
+    /^sesión(es)?$/i            => Session,
+    /^usuari[ao]s?$/i           => User,
+    /^env[ií]os?$/i             => Delivery
   }
   config.field_mappings = {
     /^[Ááa]reas?$/i              => :area,
@@ -73,11 +73,13 @@ MundoPepino.configure do |config|
     /^títulos?$/i                => :title,
     /^(?:clave|contraseña)s?$/i  => :password, 
     /^flor(?:es)? enviadas?$/i   => :sended_flowers,
+    /^Flower::flor(?:es)? enviadas?$/i => :from,
     /^Flower::name$/             => :title
   }
   config.relation_model_mappings = {
-    :cucumbers        => Pepino,
-    :orchard_of_birth => Orchard
+    /^cucumbers$/        => Pepino,
+    /^orchard_of_birth$/ => Orchard,
+    /^from$/             => User
   }
   config.url_mappings = {
     /^la página de registro/i => lambda {

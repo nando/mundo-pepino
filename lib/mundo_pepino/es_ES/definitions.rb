@@ -40,35 +40,35 @@ Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, 
   end
 end
 
-Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, modelo_hijos, nombres|
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, campo_hijos, nombres|
   given_resource_has_many_children(
     :resource_model => modelo_padre,
     :resource_name => nombre_del_padre,
     :number_of_children => numero,
-    :children_model => modelo_hijos,
+    :children_field => campo_hijos,
     :children_names => nombres)
 end
 
-Dado /^que dich[oa]s? (.+) tienen? (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, modelo_hijos, nombres|
+Dado /^que dich[oa]s? (.+) tienen? (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, campo_hijos, nombres|
   given_resource_has_many_children(
     :resource_model => modelo_padre,
     :number_of_children => numero,
-    :children_model => modelo_hijos,
+    :children_field => campo_hijos,
     :children_names => nombres)
 end
 
-Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, nombre_del_padre, modelo_hijos, tabla|
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, nombre_del_padre, campo_hijos, tabla|
   given_resource_has_many_children_from_step_table(
     :resource_model => modelo_padre,
     :resource_name  => nombre_del_padre,
-    :children_model => modelo_hijos,
+    :children_field => campo_hijos,
     :step_table => tabla)
 end
 
-Dado /^que dich[ao]s? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, modelo_hijos, tabla|
+Dado /^que dich[ao]s? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, campo_hijos, tabla|
   given_resource_has_many_children_from_step_table(
     :resource_model => modelo_padre,
-    :children_model => modelo_hijos,
+    :children_field => campo_hijos,
     :step_table => tabla)
 end
 

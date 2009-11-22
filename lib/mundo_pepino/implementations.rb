@@ -12,12 +12,12 @@ module MundoPepino
 
     def given_resource_has_many_children(params)
       if mentioned = last_mentioned_of(params[:resource_model].to_unquoted, params[:resource_name])
-        children_model = params[:children_model].to_unquoted.to_model
+        children_model = params[:children_field].to_unquoted.to_model
         resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
         resources.each do |resource|
           attribs = names_for_simple_creation(children_model, 
             params[:number_of_children].to_number, params[:children_names],
-            parent_options(resource, children_model))
+            parent_options(resource, children_model, params[:children_field]))
           add_resource children_model, attribs, :force_creation => params[:children_names].nil?
         end
         pile_up mentioned
@@ -26,7 +26,7 @@ module MundoPepino
 
     def given_resource_has_many_children_from_step_table(params)
       if mentioned = last_mentioned_of(params[:resource_model].to_unquoted, params[:resource_name])
-        children_model = params[:children_model].to_unquoted.to_model
+        children_model = params[:children_field].to_unquoted.to_model
         resources = (mentioned.is_a?(Array) ? mentioned : [mentioned])
         resources.each do |resource|
           options = parent_options(resource, children_model)

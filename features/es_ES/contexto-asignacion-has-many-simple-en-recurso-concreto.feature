@@ -39,3 +39,8 @@ Característica: asignación simple de instancias en campo has_many en un recurs
            Y el huerto "H-03" tiene en bbdd un bancal "Pitos y flautas"
            Y el bancal "Pitos y flautas" tiene en bbdd un pepino "P"
            Y tiene en bbdd un pepino "F"
+
+  Escenario: Asignación en campo has_many habiendo otro campo has_many del mismo modelo
+    Dado que tenemos una usuaria llamana "Rosa"
+    Y que la usuaria "Rosa" tiene una flor enviada llamada "Clavel"
+    Entonces la usuaria "Rosa" tiene en bbdd una flor enviada "Clavel"
