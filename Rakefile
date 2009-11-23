@@ -55,7 +55,7 @@ if ENV['BUILDING_NEWGEM']
       ['rspec', '>=1.2.6'],
       ['rspec-rails', '>=1.2.6'],
       ['nokogiri', '>= 1.2.0'],
-      ['string-mapper','>= 0.1.1']
+      ['string-mapper','>= 0.1.2.1']
     ]
   end
 end

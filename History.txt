@@ -1,4 +1,7 @@
-== 0.1.7 2009-11-23 ("Conferencia Rails'09 & Gemcutter moving" Release
+== 0.1.7.1 2009-11-23
+* Removed string-mapper code from vendor/plugins of the test app
+
+== 0.1.7 2009-11-23 ("Conferencia Rails'09 & Gemcutter moving" Release)
 * Removed path_to method sensitivity: if present, ignored (uses url_mappings)
 * README_es: MP philososy and its pros and cons
 * New step definition to add/edit nested attributes (out of the box!)

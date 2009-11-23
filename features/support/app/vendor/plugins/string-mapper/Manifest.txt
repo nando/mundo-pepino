@@ -1,9 +1,0 @@
-COPYING
-History.txt
-Manifest.txt
-README.markdown
-Rakefile
-init.rb
-lib/string-mapper.rb
-spec/string-mapper_spec.rb
-string-mapper.gemspec
