@@ -62,8 +62,9 @@ Característica: Tenemos en BBDD uno o más registros de un modelo
          Y pulso el botón "Enviar"
     Entonces debería ver el texto "Flor enviada"
            Y tenemos en la bbdd dos envíos
+           Y la usuaria "Rosa" tiene en bbdd una flor enviada
            Y el usuario "Jacinto" tiene en bbdd una flor
            Y el usuario "Tomás" tiene en bbdd una flor
            Y el usuario "Antonio" tiene en bbdd 0 flores
            Y la flor "hortensia" tiene en bbdd dos usuarios
-           Y la usuaria "Rosa" tiene en bbdd una flor enviada
+           Y la flor "hortensia" tiene en bbdd como remitente "Rosa"
