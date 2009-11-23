@@ -118,8 +118,8 @@ Cuando /^(?:que )?(?:completo|relleno)(?: los(?: siguientes)? campos)?:$/i do |t
   end
 end
 
-Cuando /^(?:que )?(?:completo|relleno) #{_localizador_de_atributo_anidado_} con (?:el valor )?['"](.+)["']$/i do |campo, modelo_anidado, nombre_anidado, valor|
-  field_id = nested_field_id(campo, modelo_anidado, nombre_anidado, last_mentioned)
+Cuando /^(?:que )?(?:completo|relleno) #{_localizador_de_atributo_anidado_} con (?:el valor )?['"](.+)["']$/i do |campo, modelo, nombre, valor|
+  field_id = nested_field_id(last_mentioned, modelo, campo, nombre)
   find_field_and_do_with_webrat :fill_in, field_id, :with => valor
 end
 

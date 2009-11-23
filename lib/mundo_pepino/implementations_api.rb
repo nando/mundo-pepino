@@ -2,6 +2,7 @@ require 'nokogiri'
 
 module MundoPepino
   module ImplementationsApi
+    MAX_NESTED_RESOURCES = 30 # TODO: move this to MP.configure
     def real_value_for(v)
       (v.is_a?(String) ? v.to_real_value : v )
     end
@@ -178,30 +179,49 @@ module MundoPepino
       end
     end
 
-    def nested_field_id(nested_field, nested_model, nested_name, parent_resource)
+    def nested_field_id(parent_resource, nested_model, nested_field, nested_name)
       unquoted_model = nested_model.to_unquoted
       if model = unquoted_model.to_model
-        if res = model.send("find_by_#{field_for(model)}", nested_name)
-          if field_prefix = nested_field_id_prefix(res, parent_resource)
-            "#{field_prefix}#{field_for(parent_resource.mr_model, nested_field)}"
-          end
+        field = field_for(parent_resource.mr_model, nested_field)
+        if nested_name.nil?
+          new_nested_field_id(parent_resource, model, field)
         else
-          raise MundoPepino::ResourceNotFound.new("No '#{unquoted_model}' called '#{nested_name}'")
+          # Nested attrib. change
+          if res = model.send("find_by_#{field_for(model)}", nested_name)
+            if field_prefix = nested_field_id_prefix(parent_resource, res)
+              "#{field_prefix}#{field}"
+            else
+              # TODO: raise NestedAttributeNotFound
+            end
+          else
+            raise MundoPepino::ResourceNotFound.new("No '#{unquoted_model}' called '#{nested_name}'")
+          end
         end
       else
         raise MundoPepino::ModelNotMapped.new(unquoted_model)
       end
     end
 
-    def nested_field_id_prefix(resource, parent_resource)
-      parent = parent_resource ? parent_resource.mr_model.name.underscore : '[a-z][a-z_]*[a-z]'
-      children = resource.class.name.pluralize.underscore
-      preprefix = "#{parent}_#{children}_attributes"
+    def nested_field_id_prefix(parent_resource, resource)
+      preprefix = nested_field_prefix_prefix(parent_resource.mr_model, resource.class)
       Nokogiri::HTML.parse(response.body).xpath(
         "//input[@type='hidden' and @value=#{resource.id}]"
       ).each do |input|
         return "#{preprefix}_#{$1}_" if input.attributes['id'].to_s =~ /#{preprefix}_([0-9]+)_id/
       end
+    end
+
+    def new_nested_field_id(parent_resource, model, field)
+      preprefix = nested_field_prefix_prefix(parent_resource.mr_model, model)
+      (0..MAX_NESTED_RESOURCES).each do |index|
+        if Nokogiri::HTML.parse(response.body).css("##{preprefix}_#{index}_id").empty?
+          return "#{preprefix}_#{index}_#{field}"
+        end
+      end
+      # TODO: raise too many nested resources
+    end
+    def nested_field_prefix_prefix(parent_model, child_model)
+      "#{parent_model.name.underscore}_#{child_model.name.pluralize.underscore}_attributes"
     end
   end  
 end

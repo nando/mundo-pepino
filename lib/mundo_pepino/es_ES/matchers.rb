@@ -19,9 +19,6 @@ module MundoPepino
       def _el_listado_de_
         '(?:el|la|al|a la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de'
       end
-      def _pagina_desde_rutas_ # páginas obtenida a partir de las rutas
-        '(?:la|el) \w+ del? |su p[aá]gina|su portada'
-      end
       def _pulso_
         '(?:pulso|pincho|sigo)'
       end
@@ -45,7 +42,7 @@ module MundoPepino
       end
       def _localizador_de_atributo_anidado_(capture=true)
         o,c = capture ? ['(', ')'] : ['', '']
-        "(?:(?:el|la) )?#{o}.+?#{c} (?:del|de la) #{o}.+?#{c} ['\"]#{o}[^\"']+#{c}[\"']"
+        "(?:(?:el|la) )?#{o}.+?#{c} de(?:l| la| su nuev[oa]) #{o}.+?#{c}(?: ['\"]#{o}[^\"']+#{c}[\"'])?"
       end
       def _dentro_de_
         'dentro de(?: la etiqueta|l selector)?'
