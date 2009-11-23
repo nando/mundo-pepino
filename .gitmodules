@@ -1,0 +1,3 @@
+[submodule "features/support/app/vendor/plugins/string-mapper"]
+	path = features/support/app/vendor/plugins/string-mapper
+	url = git://github.com/nando/string-mapper.git
