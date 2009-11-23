@@ -1,3 +1,35 @@
+== 0.1.7 2009-11-23 ("Conferencia Rails'09 & Gemcutter moving" Release
+* Removed path_to method sensitivity: if present, ignored (uses url_mappings)
+* README_es: MP philososy and its pros and cons
+* New step definition to add/edit nested attributes (out of the box!)
+* Improvements in some spanish matchers:
+  * I see the text WITHIN a selector
+  * I follow the link WITHIN a selector
+  * Four step definitions share "page interpretation" logic through
+   url_mappings. Those steps definitions are:
+    * I see the link
+    * I follow the link
+    * I visit the page
+    * I should be in the page
+   Page interpretation includes:
+    * the index page of a resource
+    * the creation page of a resource
+    * the edition page of a resource
+    * the page of an specific resource (through its "name")
+    * the page of a mentioned resource
+    * a page relavite to the current one (next or previous)
+    * a specific path/url optionally written with a natural name
+* 2 new english matchers:
+  * When I visit the page
+  * Then I see the text
+* 1 IMPORTANT behaviour CHANGED:
+  * If a given resource has not been mentioned in the scenario, MP tries to
+    get it from DB.
+* Generators include some page mapping (url_mappings) examples
+* Added support to assign at a has_many field which asociated belongs_to has
+  not the name of the model
+* Bunch of bugfixes to celebrate RConf!
+
 == 0.1.6 2009-11-13 ("Iria's half year old!" release)
 * 1 new step definition w/ es_ES matcher:
   * I fill field of a nested attribute
