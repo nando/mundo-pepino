@@ -52,16 +52,18 @@ module MundoPepino
           lambda{ |el_listado_de, modelo|
             MundoPepino.world.resource_index_or_mapped_page(el_listado_de, modelo)
           },
-        /^su (p[áa]gina|portada)$/i => lambda{MundoPepino.world.last_mentioned_url},
-        /^(?:#{_la_pagina_}|#{_el_enlace_}) (?:del|de la) (.+) ['"](.+)["']$/i =>
+        /^su (?:p[áa]gina|portada)$/i => lambda{MundoPepino.world.last_mentioned_url},
+        # "la página de dicha huerta" + "la página de la huerta 'grande'"
+        /^(?:#{_la_pagina_}|#{_el_enlace_}) de(?:l| la| dich[oa]) (.+?)(?: ['"](.+)["'])?$/i =>
           lambda{|modelo, nombre|
             if resource = MundoPepino.world.last_mentioned_of(modelo, nombre)
               MundoPepino.world.send "#{resource.class.name.underscore}_path", resource
             else
-              raise MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")
+              raise MundoPepino::ResourceNotFound.new("model #{modelo}"+(nombre ? ", name #{nombre}":''))
             end
           },
-        /^(?:#{_la_pagina_}|#{_el_enlace_}) de (?!la)([\w\/]+(?: de (?:una? )?nuev[oa])?) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i => 
+        # "la página de creación de huertos" y "la página de edición del huerto 'grande'"
+        /^(?:#{_la_pagina_}|#{_el_enlace_}) de (?!la|dich[ao])([\w\/]+(?: de (?:una? )?nuev[oa])?) (?:de |de la |del )?(.+?)(?: (['"].+["']))?$/i => 
           lambda{|accion, modelo, nombre|
             action = accion.to_crud_action or raise(MundoPepino::CrudActionNotMapped.new(accion))
             if action != 'new'
