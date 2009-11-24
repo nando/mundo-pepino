@@ -1,3 +1,16 @@
+== 0.1.8 2009-11-24
+* New page interpretation (es_ES):
+  * Page of a mentioned resource of a given model. Examples:
+    Dado que estoy en la página de dicha propuesta
+    Cuando voy a la página de dicha propuesta
+    Cuando hago click en el enlace la página de dicha propuesta
+    Debo ver un enlace a la página de dicha propuesta
+    Debería estar en la página de dicha propuesta
+* Some spanish definitions expanded:
+  * _pulso_ : "hago click en"
+  * _visito_ : "voy a"
+  * BD value checks surrounded by sigle quotes
+
 == 0.1.7.1 2009-11-23
 * Removed string-mapper code from vendor/plugins of the test app
 
