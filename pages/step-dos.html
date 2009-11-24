@@ -24,15 +24,42 @@
 
         
 <div class="wikistyle">
-
+ 
   <h1>Testing sin escribir tests con Cucumber y MundoPepino</h1>
-  <h2>Step Uno: Preparación del entorno</h2>
+  <h2>Step Uno: Portada de Everybody Votes</h2>
+
+<p>
+Tenemos que escribir una feature que compruebe que aparece el texto "Everybody Votes" en la home de la aplicación.
+</p>
+
+<p>
+Creamos un fichero con la extension .feature en el directorio features con la siguiente plantilla:
+</p>
 <pre><code>
-sudo gem install mundo-pepino
-rails ev
-cd ev
-script/generate cucumber
+Característica: Portada de Everybody Votes
+  Escenario: Título de la página
+    Dado [rellena este hueco]
+    Entonces [rellena este hueco]
 </code></pre>
-  <a href="pages/step-dos.html">Siguiente paso</a>
+
+<p>
+Una vez rellenados los huecos de la plantilla, comenzamos el flow:
+</p>
+<pre><code>
+cucumber features --language es
+</code></pre>
+
+<p>
+Como todavía no hemos implementado nada Cucumber nos ofrece unos snippets para definir nuestros steps. Crear un fichero nuevo con extensión .rb en el directorio features/step_definitions y copiar en él dichos snippets.
+</p>
+
+<p>
+La implementación de dichos pasos la encrontraréis dentro de sus equivalentes en inglés dentro del fichero features/step_definitions/webrat_steps.rb.
+</p>
+<p>
+Repetir el flow hasta que todo sea verde.
+</p>
+  <a href="pages/step-tres.html">Siguiente paso</a>
+
   </body>
 </html>
