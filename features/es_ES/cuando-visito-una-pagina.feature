@@ -1,6 +1,6 @@
 Característica: Solicitud de una página ("cuando visito" o "dado que estoy en") 
 
-  Escenario: Carga de URL específica opcionalmente indicada con un nombre coloquial
+  Esquema del escenario: Carga de URL específica opcionalmente indicada con un nombre coloquial
   ########################################################################
   # Patrón: 
   #   Cuando visito _pagina_
@@ -43,28 +43,26 @@ Característica: Solicitud de una página ("cuando visito" o "dado que estoy en"
   # mapeo de URL, o el valor de dicho mapeo en caso contrario.
   #
   ########################################################################
-    Dado que estoy en la portada
+    Cuando <visito> <pagina>
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+  Ejemplos:
+    | visito | pagina       |
+    | visito | /            |
+    | voy a  | /            |
+    | visito | "/"          |
+    | voy a  | "/"          |
+    | visito | la portada   |
+    | voy a  | "la portada" |
 
-    Dado que estoy en /
-    Cuando pincho el botón Galleta de la Fortuna
-    Entonces veo la etiqueta H1 con el valor "Sorry, not implemented yet"
-
-    Cuando visito /
+  Esquema del escenario: Solicitud de una URL específica en desde un "Given"
+    Dado que <visito> <pagina>
     Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
-
-    Cuando visito "/"
-    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
-
-    Cuando visito la portada
-    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
-
-    Cuando visito "la HOME"
-    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
-
-  Escenario: Solicitud de una URL específica en definición de contexto "Given"
-    Dado que visito la portada
-    Entonces debo ver la etiqueta H1 con el valor "Portada de Mundo Pepino"
+  Ejemplos:
+    | visito    | pagina     |
+    | visito    | /          |
+    | visito    | la portada |
+    | estoy en  | /          |
+    | estoy en  | la portada |
 
   Escenario: Solicitud de la URL asociada a la creación de un recurso
   ########################################################################

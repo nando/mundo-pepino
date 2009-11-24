@@ -11,7 +11,7 @@ module MundoPepino
         '(?:cuy[oa]s?|que tienen? como)'
       end
       def _visito_
-        '(?:visito|estoy en)'
+        '(?:visito|estoy en|voy a)'
       end
       def _la_pagina_
         'la (?:p[áa]gina|portada)'
