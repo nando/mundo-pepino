@@ -291,16 +291,16 @@ Entonces /^#{_tenemos_en_bbdd_} (#{_numero_}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](
   then_we_have_a_number_of_instances_in_our_database numero, modelo, nombre
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} como (.+) "(.+)"(?: \w+)?$/ do |modelo, nombre, campo, valor|
+Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
   add_resource_from_database(modelo, nombre)
   last_mentioned_should_have_value(campo, valor.to_real_value)
 end
 
-Entonces /^#{_tiene_en_bbdd_} como (.+) "(.+)"(?: \w+)?$/ do |campo, valor|
+Entonces /^#{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |campo, valor|
   last_mentioned_should_have_value(campo, valor.to_real_value)
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} una? (.+) "(.+)"$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
+Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
   add_resource_from_database(padre, nombre_del_padre)
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
@@ -310,7 +310,7 @@ Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)[
   last_mentioned_should_have_n_children(modelo_hijo, numero)
 end
 
-Entonces /^#{_tiene_en_bbdd_} una? (.+) "(.+)"$/ do |hijo, nombre_del_hijo|
+Entonces /^#{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |hijo, nombre_del_hijo|
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
 
