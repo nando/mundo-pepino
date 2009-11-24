@@ -20,7 +20,7 @@ module MundoPepino
         '(?:el|la|al|a la) (?:p[áa]gina|portada|[íi]ndice|listado|colecci[óo]n) de'
       end
       def _pulso_
-        '(?:pulso|pincho|sigo)'
+        '(?:pulso|pincho|sigo|hago click en)'
       end
       def _fecha_y_o_hora_
         '(?:(?:la )?fecha|hora)'

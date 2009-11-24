@@ -22,12 +22,13 @@ Característica: pulso el enlace opcionalmente dentro de un selector
     Cuando <pincho> el enlace "Volver"
     Entonces veo la etiqueta H1 con el valor "Portada de Mundo Pepino"
   Ejemplos:
-    | pincho       |
-    | pincho       |
-    | pincho en    |
-    | sigo         |
-    | pulso        |
-    | pulso en     |
+    | pincho        |
+    | pincho        |
+    | pincho en     |
+    | sigo          |
+    | pulso         |
+    | pulso en      |
+    | hago click en |
          
   Esquema del escenario: Pincho en un enlace que se encuentra dentro de un selector
     Dado que visito la home
