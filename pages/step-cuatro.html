@@ -26,30 +26,21 @@
 <div class="wikistyle">
 
   <h1>Testing sin escribir tests con Cucumber y MundoPepino</h1>
-  <h2>Step Tres: Ciudadanos en La Home </h2>
+  <h2>Step Cuatro: Introducing MundoPepino </h2>
 
-Ahora de lo que se trata es de comprobar que todos los ciudadanos aparecen en La Home.
+Vamos a ver si MundoPepino es capaz de entender nuestra feature de la portada. Para ello comentamos el código de las definiciones de nuestros steps.
 
+A continuación lanzamos:
 <pre><code>
-script/generate model Citizen name:string
+script/generate mundo_pepino_steps
+rake caracteristicas
 </code></pre>
 
-Y añadimos un nuevo escenario en la feature de la portada que cree las instancias de los ciudadanos, visite la portada y compruebe que sus nombres aparecen en ella.
-<pre><code>
-  Escenario: Nombre de los ciudadanos en la portada
-    Dado [rellena este huevo]
-    Cuando [rellena este hueco]
-    Entonces [rellena este hueco]
-</code></pre>
-
-<p>
-Una vez rellenados los huecos de la plantilla, comenzamos el flow:
-</p>
-<pre><code>
-cucumber features --language es
-</code></pre>
-
-Pillamos los snippets y ya sabéis lo que toca: verde.
+1.- Primera persona del singular para todo lo que puedo hacer como un usuario (nos ponemos en su piel)
+2.- Primera persona del plural para todo lo que no puedo hacer como un usuario (p.e. creación y recuperación atacando directamente a la base de datos).
+3.- Se utiliza el campo "name" para crear y buscar recursos en la base de datos.
+4.- Las comillas (dobles o simples) son opcionales salvo para expresar un valor (p.e. Dado que tenemos un usuario "Pepe")
+5.- "Dado que" para lidiar con género y número (Dados, Dada, Dada) sin tener que tocar las palabras reservadas que trae Cucumber.
 
   </body>
 </html>

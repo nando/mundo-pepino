@@ -37,8 +37,8 @@ Creamos un fichero con la extension .feature en el directorio features con la si
 </p>
 <pre><code>
 Característica: Portada de Everybody Votes
-  Escenario: Título de la página
-    Dado [rellena este hueco]
+  Escenario: Nombre de la aplicación en la portada
+    Cuando [rellena este hueco]
     Entonces [rellena este hueco]
 </code></pre>
 
@@ -50,11 +50,14 @@ cucumber features --language es
 </code></pre>
 
 <p>
-Como todavía no hemos implementado nada Cucumber nos ofrece unos snippets para definir nuestros steps. Crear un fichero nuevo con extensión .rb en el directorio features/step_definitions y copiar en él dichos snippets.
+Como todavía no hemos implementado nada Cucumber nos ofrece unos snippets para definir nuestros steps. Crear un fichero nuevo con extensión .rb en el directorio features/step_definitions y copiar en él el primer snippet.
 </p>
 
 <p>
-La implementación de dichos pasos la encrontraréis dentro de sus equivalentes en inglés dentro del fichero features/step_definitions/webrat_steps.rb.
+La implementación de dicho paso la encrontraréis dentro de su equivalente en inglés dentro del fichero features/step_definitions/webrat_steps.rb.
+</p>
+<p>
+Implementar el código necesario para que pase el step.
 </p>
 <p>
 Repetir el flow hasta que todo sea verde.
