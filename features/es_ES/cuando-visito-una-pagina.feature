@@ -191,6 +191,17 @@ Característica: Solicitud de una página ("cuando visito" o "dado que estoy en"
     Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
            Y debo ver la etiqueta H2 con el valor "Esplendoroso"
 
+  Escenario: Solicitud de la URL asociada al último recurso definido de un modelo determinado (desde Given)
+  ########################################################################
+  # Patrón: 
+  #   Dado que visito la página de dicha lechuga
+  #
+  ########################################################################
+    Dado que tenemos un huerto "Esplendoroso"
+       Y que visito la página de dicha huerta
+    Entonces debo ver la etiqueta H1 con el valor "Página de huerto"
+           Y debo ver la etiqueta H2 con el valor "Esplendoroso"
+
   Escenario: Solicitud de la URL asociada al último recurso definido
   ########################################################################
   # Patrón: 

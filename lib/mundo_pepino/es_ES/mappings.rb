@@ -57,6 +57,7 @@ module MundoPepino
         /^(?:#{_la_pagina_}|#{_el_enlace_}) de(?:l| la| dich[oa]) (.+?)(?: ['"](.+)["'])?$/i =>
           lambda{|modelo, nombre|
             if resource = MundoPepino.world.last_mentioned_of(modelo, nombre)
+              MundoPepino.world.pile_up resource
               MundoPepino.world.send "#{resource.class.name.underscore}_path", resource
             else
               raise MundoPepino::ResourceNotFound.new("model #{modelo}"+(nombre ? ", name #{nombre}":''))
@@ -74,6 +75,7 @@ module MundoPepino
                 MundoPepino.world.last_mentioned_called(nombre.to_unquoted)
               end
               if resource
+                MundoPepino.world.pile_up resource
                 MundoPepino.world.send "#{action}_#{resource.mr_singular}_path", resource
               else
                 MundoPepino::ResourceNotFound.new("model #{modelo}, name #{nombre}")

@@ -70,7 +70,11 @@ Característica: Debería encontrarme en una página de mi sitio
     Dado que tenemos dos huertos "Esplendoroso y Mermada"
     Cuando visito la página del huerto "Esplendoroso"
     Entonces debo estar en la página de la huerta "Esplendoroso"
-           Y estoy en la página de la huerta "Mermada"
+
+  Escenario: Estoy en la página asociada al último recurso mencionado de un modelo concreto
+    Dado que tenemos dos huertos "Esplendoroso y Mermada"
+    Cuando visito la página del huerto "Esplendoroso"
+    Entonces debo estar en la página de dicho huerto
 
   Escenario: Debería estar en la página de un recurso que ha sido mencionado
     Dado que tenemos un huerto "Esplendoroso"

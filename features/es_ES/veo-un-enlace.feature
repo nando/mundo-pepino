@@ -68,6 +68,11 @@ Característica: Comprobamos la existencia de un enlace en la página actual
     Cuando visito la página de huertos
     Entonces debería ver un enlace a la página del huerto "Regadío Número 1"
 
+  Escenario: Veo un enlace a la página del último rescurso mencionado de un modelo
+    Dado que tenemos un huerto "Regadío Número 1"
+    Cuando visito /orchards
+    Entonces debería ver un enlace a la página de dicho huerto
+
   Escenario: Veo un enlace a la página de un recurso anteriormente mencionado
     Dado que tenemos un huerto "Regadío Número 1"
     Cuando visito /orchards

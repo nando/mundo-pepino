@@ -90,12 +90,6 @@ MundoPepino.configure do |config|
     },
     /^la página de (?:identificación|login)/i => lambda {
       MundoPepino.world.new_session_path
-    },
-    # the fancy one: specific resource page
-    /^la página de(?:l| la) (.+) ["'](.+)['"]$/ => lambda {|modelo, nombre|
-      if model = modelo.to_model
-        MundoPepino.world.send "#{model.name.underscore}_path", model.find_by_name(nombre)
-      end
     }
   }
 end

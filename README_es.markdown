@@ -186,9 +186,24 @@ Convenciones generales:
 * asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
 * todas las definiciones para "Cuando algo ocurre" (o *Then's*, ver más abajo) son válidas también como "Dado el contexto" incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
-#### Estoy en una página específica (alias de *Solicitud de una página*) \*
+#### Estoy en una página (alias de *Solicitud de una página*) \*
+[ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-una-pagina.feature)
+##### Página específica opcionalmente indicada con un nombre coloquial
     Dado que estoy en la portada
-[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-url-especifica.feature)
+##### Página asociada a un recurso concreto
+    Dado que estoy en la página del huerto "H-01"
+##### Página asociada al último recurso definido de un modelo concreto
+    Dado que estoy en la página de dicho huerto
+##### Página asociada al último recurso definido
+    Dado que estoy en su página
+##### Índice o listado de un recursos de un modelo
+    Dado que estoy en la página de Tomates
+##### Página de creación de un recurso
+    Dado que estoy en la página de creación de Tomate
+##### Página de edición de un recurso
+    Dado que estoy en la página de edición del huerto "H-01"
+##### Página relativa a una visitada con anterioridad
+    Dado que estoy en la siguiente página
 
 #### Creación de uno o varios registros asignándoles opcionalmente un nombre
     Dado que tenemos Un Producto llamado "Acelgas" 
@@ -254,6 +269,8 @@ Convenciones generales:
     Cuando visito la portada
 ##### Página asociada a un recurso concreto
     Cuando visito la página del huerto "H-01"
+##### Página asociada al último recurso definido de un modelo concreto
+    Cuando visito la página de dicho huerto
 ##### Página asociada al último recurso definido
     Cuando visito su página
 ##### Índice o listado de un recursos de un modelo
@@ -273,6 +290,8 @@ Convenciones generales:
     Cuando pulso el enlace a la portada
 ##### Página asociada a un recurso concreto
     Cuando pulso el enlace a la página del huerto "H-01"
+##### Página asociada al último recurso definido de un modelo concreto
+    Cuando pulso el enlace a la página de dicho huerto
 ##### Página asociada al último recurso definido
     Cuando pulso el enlace a su página
 ##### Índice o listado de un recursos de un modelo
@@ -349,6 +368,8 @@ Distinguimos entre los seis tipos de página que tienen sentido aquí (todos exc
     Entonces debo estar en la portada
 ##### Página asociada a un recurso concreto
     Entonces debo estar en la página del huerto "H-01"
+##### Página asociada al último recurso definido de un modelo concreto
+    Entonces debo estar en la página de dicho huerto
 ##### Página asociada al último recurso definido
     Entonces debo estar en su página
 ##### Índice o listado de un recursos de un modelo
@@ -396,6 +417,8 @@ Distinguimos entre los seis tipos de página que tienen sentido aquí (todos exc
     Entonces debo ver un enlace a la portada
 ##### Página asociada a un recurso concreto
     Entonces debo ver un enlace a la página del huerto "H-01"
+##### Página asociada al último recurso definido de un modelo concreto
+    Entonces debo ver un enlace a la página de dicho huerto
 ##### Página asociada al último recurso definido
     Entonces debo ver un enlace a su página
 ##### Índice o listado de un recursos de un modelo

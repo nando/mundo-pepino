@@ -71,17 +71,18 @@ Característica: pulso el enlace opcionalmente dentro de un selector
     | a la pagina de |
     |       de       |
 
-  Esquema del escenario: Pincho en un enlace de un recurso concreto
+  Esquema del escenario: Pincho en un enlace de un recurso concreto o el último de un modelo
     Dado que tenemos un huerto llamado "Huerto One"
-    Cuando visito la página de huertos
-         Y pincho en el enlace <a_la_pagina_del> huerto "Huerto One"
+    Cuando visito /orchards
+         Y pincho en el enlace <a_la_pagina_del> <huerto>
     Entonces debería encontrarme en la página del huerto "Huerto One"
   Ejemplos:
-    | a_la_pagina_del   |
-    | a la pagina del   |
-    | a la pagina de la |
-    | del               |
-    | de la             |
+    | a_la_pagina_del   | huerto              |
+    | a la página del   | huerto "Huerto One" |
+    | a la página de la | huerto "Huerto One" |  
+    | del               | huerto "Huerto One" |
+    | de la             | huerto "Huerto One" |
+    | a la página de    | dicho huerto        |
 
   Escenario: Pincho en el enlace del último recurso mencionado
     Dado que tenemos un huerto llamado "Huerto One"
