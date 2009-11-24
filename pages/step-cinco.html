@@ -29,30 +29,27 @@
   <h2>Step Cinco: Ciudadano Ejerciendo su derecho a Votar!</h2>
 
 <pre><code>
-  Caracteristica: Votar
+Caracteristica: Votar
 
-    Para que mi opinion se tenga en cuenta en las decisiones del parlamento
-    Como ciudadan@
-    Quiero poder votar
-
-    Antecedentes: 
-      Dado una propuesta "pagar el rescate a los piratas"
-         Y una ciudadana llamada "Ana"
-
-    Escenario: Votar
-        Cuando me logeo como "Ana"
-             Y voy a la pagina de dicha propuesta
-             Y hago click en el boton "SI"
-
-      Entonces veo el texto "Has votado SI a la propuesta 'pagar el rescate a los piratas'"
-             Y tenemos en bbdd un voto "SI"
-             Y tiene en bbdd como propuesta "pagar el rescate a los piratas"
-             Y tiene en bbdd como ciudadano "Ana"
+  Para que mi opinion se tenga en cuenta en las decisiones del parlamento
+  Como ciudadan@
+  Quiero poder votar
+  
+  Antecedentes: 
+    Dado una propuesta "Ruby en la Administración"
+       Y una ciudadana llamada "Ana"
+  
+  Escenario: Votar
+      Cuando me logeo como "Ana"
+           Y voy a la pagina de dicha propuesta
+           Y hago click en el boton "SI"
+           
+    Entonces veo el texto "Has votado SI a la propuesta 'Ruby en la Administración'"
+           Y la propuesta "Ruby en la Administración" tiene en bbdd un voto "SI"
+           Y la ciudadana "Ana" tiene en bbdd un voto "SI"
 </code></pre>
 
   <a href="pages/step-cinco.html">Siguiente paso</a>
   
   </body>
 </html>
-
-
