@@ -186,7 +186,7 @@ Convenciones generales:
 * asignación de valores con el verbo **tener** en tercera persona (p.e. "Dado que dichas Acelgas **tienen** como variedad Amarilla de Lyon")
 * todas las definiciones para "Cuando algo ocurre" (o *Then's*, ver más abajo) son válidas también como "Dado el contexto" incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
 
-#### Estoy en una página (alias de *Solicitud de una página*) \*
+#### Estoy en una página (alias de *Solicitud de una página*)
 [ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-una-pagina.feature)
 ##### Página específica opcionalmente indicada con un nombre coloquial
     Dado que estoy en la portada
@@ -263,6 +263,7 @@ Convenciones generales:
 
 * frases escritas en tiempo presente en primera persona del singular
 * todas las definiciones son válidas también para definir contexto (en "Dados" o "Givens") incorporándoles el prefijo "que" (p.e. "Dado que visito la portada").
+
 #### Solicitud de página
 [ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-visito-una-pagina.feature)
 ##### Página específica opcionalmente indicada con un nombre coloquial
@@ -303,7 +304,7 @@ Convenciones generales:
 ##### Página relativa a una visitada con anterioridad
     Cuando pulso el enlace a la siguiente página
 
-#### Pincho/pulso un bóton (*submit*) \*
+#### Pincho/pulso un bóton (*submit*)
     Cuando pulso en el botón Enviar
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-el-boton.feature)
 #### Pincho/pulso una serie de bótones y/o enlaces
@@ -312,16 +313,16 @@ Convenciones generales:
       | galería de huertos  |
       | cultivos de regadío |
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-pulso-los-siguientes-enlaces-y-botones.feature)
-#### Adjunto un fichero (*file*) \*
+#### Adjunto un fichero (*file*)
     Cuando adjunto el fichero "images/cucumber.jpg" en Fotografía actual
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-adjunto-el-fichero.feature)
-#### Elijo una opción (*radiobutton*) \*
+#### Elijo una opción (*radiobutton*)
     Cuando elijo el color "VERDE"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-elijo-de-radiobutton.feature)
-#### Marco (o desmarco) una casilla (*checkbox*) \*
+#### Marco (o desmarco) una casilla (*checkbox*)
     Cuando marco "color verde"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-marco-el-checkbox.feature)
-#### Relleno/completo un campo con un texto (*text* o *textarea*) \*
+#### Relleno/completo un campo con un texto (*text* o *textarea*)
      Cuando completo 'nombre' con 'Wadus'
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-relleno-el-campo.feature)
 #### Relleno/completo un campo (*text* o *textarea*) de un atributo anidado
@@ -334,23 +335,23 @@ Convenciones generales:
        | Color    | Verde    |
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-relleno-los-campos.feature)
 #### Selecciono opción/opciones
-##### Selecciono una opción de una lista (*select*) \*
+##### Selecciono una opción de una lista (*select*)
      Cuando selecciono "Hortalizas" en el listado de "Tipos de cultivo"
-##### Selecciono fecha y hora sin especificar en que campo \*
+##### Selecciono fecha y hora sin especificar en que campo
      Cuando selecciono 1 de septiembre de 1998, 12:46 como fecha y hora
-##### Selecciono fecha y hora para un campo concreto \*
+##### Selecciono fecha y hora para un campo concreto
      Cuando selecciono 2 de mayo de 1998, 12:46 como fecha y hora de "Cosechado"
-##### Selecciono una hora sin especificar en que campo \*
+##### Selecciono una hora sin especificar en que campo
      Cuando selecciono 6:45PM como hora
-##### Selecciono una hora para un campo concreto \*
+##### Selecciono una hora para un campo concreto
      Cuando selecciono 2:45PM como hora del "café"
-##### Selecciono fecha sin especificar en que campo \*
+##### Selecciono fecha sin especificar en que campo
      Cuando selecciono 1 de septiembre de 1998 como fecha
-##### Selecciono fecha para un campo concreto \*
+##### Selecciono fecha para un campo concreto
      Cuando selecciono 2 de marzo de 2009 como fecha para el comienzo de la poda
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-selecciono-en-listado.feature)
 
-#### Borro el enésimo recurso desde la página de su índice (index) \*\*
+#### Borro el enésimo recurso desde la página de su índice (index) 
      Cuando borro el Bancal en 6ª posición
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-borro-el-enesimo-recurso.feature)
 
@@ -379,7 +380,7 @@ Distinguimos entre los seis tipos de página que tienen sentido aquí (todos exc
 ##### Página de edición de un recurso
     Entonces debo estar en la página de edición del huerto "H-01"
 
-#### Veo (o no) un texto opcionalmente dentro de un selector concreto \*
+#### Veo (o no) un texto opcionalmente dentro de un selector concreto 
     Entonces debo ver el texto "IVA incluido"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-el-texto.feature)
 #### Veo (o no) una serie de textos expresados en una step-table (sin cabeceras)
@@ -398,7 +399,7 @@ Distinguimos entre los seis tipos de página que tienen sentido aquí (todos exc
              | h1             | Mundo Pepino           |
 [más ejemplos]/mundo-pepino/tree/master/features/es_ES/veo-etiquetas-con-valores.feature
 
-#### Veo (o no) un campo con un contenido concreto \*
+#### Veo (o no) un campo con un contenido concreto 
     Entonces debería ver el campo "nombre" con "Wadus"
 [más ejemplos]/mundo-pepino/tree/master/features/es_ES/veo-campo-con-valor.feature    
 
@@ -430,18 +431,18 @@ Distinguimos entre los seis tipos de página que tienen sentido aquí (todos exc
 ##### Página relativa a una visitada con anterioridad
     Entonces debo ver un enlace a la siguiente página
 
-#### Veo marcada (o desmarcada) una casilla (*checkbox*) \*
+#### Veo marcada (o desmarcada) una casilla (*checkbox*) 
     Entonces veo marcado "Acepto las condiciones del servicio"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-el-checkbox.feature)
 
-#### Veo una tabla con determinados valores en sus celdas \*
+#### Veo una tabla con determinados valores en sus celdas 
     Entonces veo la tabla "bancales" con el siguiente contenido:
       | nombre | longitud | cultivo |  matas |
       |  A-01  |    12    | Patatas |     16 |
       |  A-02  |    12    | Tomates |     18 |
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-una-tabla-con-determinado-contenido.feature)
 
-#### Veo un formulario con determinados campos convenientemente etiquetados \*
+#### Veo un formulario con determinados campos convenientemente etiquetados 
     Entonces veo un formulario con los siguientes campos:
       | Etiqueta   | Tipo      |
       | Login      | textfield |
@@ -477,8 +478,6 @@ Distinguimos entre los seis tipos de página que tienen sentido aquí (todos exc
 #### Tenemos en BBDD un número concreto de registros en una asociación **has\_many** de un registro mencionando anteriormente
     Entonces tiene en base de datos siete Bancales
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/mundo-pepino.feature)
-
-(\*) Los **asteriscos** al final de la definición hacen referencia a las **definiciones oficialmente comunes** generadas en inglés por `script/generate cucumber`. Dos asteríscos (\*\*) hacen referencia a una definición presente en la feature autogenerada por `script/generate feature`.
 
 ## Instalación
 
