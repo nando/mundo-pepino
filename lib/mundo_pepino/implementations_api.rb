@@ -94,7 +94,7 @@ module MundoPepino
                             field_for(parent_model, child_model.table_name) ||
                             child_model.table_name
       else
-        raise MundoPepino::ModelNotMapped.new(child)
+        raise MundoPepino::ModelNotMapped.new(field_raw)
       end
     end
 
