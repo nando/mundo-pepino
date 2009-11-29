@@ -20,6 +20,22 @@ module MundoPepino
         :force_creation => true
     end
 
+    # Params:
+    #   :model
+    #   :name
+    #   :field
+    #   :value
+    def given_resource_has_value_in_field(params)
+      if resource = last_mentioned_of(params[:model], params[:name])
+        if field = field_for(resource.class, params[:field])
+          resource.update_attribute field, real_value_for(params[:value])
+          pile_up resource
+        else
+          raise MundoPepino::FieldNotMapped.new(params[:field])
+        end
+      end
+    end
+
     def given_resource_has_many_children(params)
       children_model = convert_to_model(params[:children_field])
       last_mentioned_resources(params[:model], params[:name]) do |resource|

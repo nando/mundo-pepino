@@ -18,14 +18,10 @@ Dado /^(?:que tenemos )?(?:el|la|los|las|el\/la|los\/las) (?:siguientes? )?(.+):
 end 
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
-  if resource = last_mentioned_of(modelo, nombre)
-    if field = field_for(resource.class, campo)
-      resource.update_attribute field, real_value_for(valor)
-      pile_up resource
-    else
-      raise MundoPepino::FieldNotMapped.new(campo)
-    end
-  end
+  given_resource_has_value_in_field :model => modelo,
+    :name => nombre,
+    :field => campo,
+    :value => valor
 end
 
 Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
