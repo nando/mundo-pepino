@@ -78,6 +78,10 @@ module MundoPepino
       end
     end
   
+    def convert_to_model(raw_model)
+      raw_model.to_unquoted.to_model || raise(ModelNotMapped.new(raw_model))
+    end
+
     def convert_to_field(raw_field, model = nil)
       unless raw_field.nil? 
         if field = field_for(model, raw_field.to_unquoted)
@@ -223,9 +227,6 @@ module MundoPepino
     end
     def nested_field_prefix_prefix(parent_model, child_model)
       "#{parent_model.name.underscore}_#{child_model.name.pluralize.underscore}_attributes"
-    end
-    def model(raw_model)
-      raw_model.to_unquoted.to_model || raise(ModelNotMapped.new(raw_model))
     end
   end  
 end

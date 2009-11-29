@@ -9,7 +9,7 @@ module MundoPepino
     end
 
     def given_resource_has_many_children(params)
-      children_model = model(params[:children_field])
+      children_model = convert_to_model(params[:children_field])
       last_mentioned_resources(params[:model], params[:name]) do |resource|
         attribs = names_for_simple_creation(children_model, 
           params[:number_of_children].to_number, params[:children_names],
@@ -19,7 +19,7 @@ module MundoPepino
     end
 
     def given_resource_has_many_children_from_step_table(params)
-      children_model = model(params[:children_field])
+      children_model = convert_to_model(params[:children_field])
       last_mentioned_resources(params[:model], params[:name]) do |resource|
         options = parent_options(resource, children_model, params[:children_field])
         options[:model] = children_model
@@ -49,7 +49,7 @@ module MundoPepino
 
     # DB CHECKS
     def then_we_have_a_number_of_instances_in_our_database(params)
-      model = params[:model].to_unquoted.to_model
+      model = convert_to_model(params[:model])
       conditions = if params[:name]
         {:conditions => ["#{field_for(model)}=?", params[:name]]}
       else
