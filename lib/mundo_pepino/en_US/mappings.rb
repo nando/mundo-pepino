@@ -1,13 +1,11 @@
 module MundoPepino
   class << self
     def language_specific_mappings
-      String.add_mapper(:real_value, {
+      String.real_value_mappings = {
         /^tru(e|th)$/i  => true,
         /^false$/i       => false
-      }) { |value| value }  # "true".to_real_value # => true
-      String.add_mapper(:field)
-    
-      String.add_mapper(:number, { 
+      }
+      String.number_mappings = { 
         /^an?$/i    => 1,
         /^one$/i    => 1,
         /^first?$/i => 1,
@@ -24,13 +22,13 @@ module MundoPepino
         /^eight$/i  => 8,
         /^nine$/i   => 9,
         /^ten$/i    => 10 
-        }) { |string| string.to_i }
-      String.add_mapper(:crud_action,
+        }
+      String.crud_action_mappings = {
         /^creation$/i           => 'new',
-        /^changes?$/i                => 'edit',
-        /^modifications?$/i       => 'edit',
-        /^editions?$/i            => 'edit') { |action| action }
-      String.add_mapper(:month) { |month| month.capitalize }
+        /^changes?$/i           => 'edit',
+        /^modifications?$/i     => 'edit',
+        /^editions?$/i          => 'edit'
+      }
       String.url_mappings[/^the home\s?page/i] = self.world.root_path
     end
   end

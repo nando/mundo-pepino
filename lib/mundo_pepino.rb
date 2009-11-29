@@ -30,7 +30,17 @@ module MundoPepino
     end
 
     def common_mappings
-      String.add_mapper :model
+      String.add_mapper(:number) {|str| str.to_i}
+      String.add_mapper(:model) {|str|
+        begin
+          c = str.singularize.capitalize.constantize
+          c.superclass == ActiveRecord::Base ? c : nil
+        rescue
+          nil
+        end
+      }
+      String.add_mapper :field
+      String.add_mapper :crud_action
       String.add_mapper :relation_model
       String.add_mapper(:content_type,
         /\.png$/   => 'image/png',
@@ -48,7 +58,9 @@ module MundoPepino
           str
         end
       end
+      String.add_mapper(:month) {|month| month.capitalize}
       String.add_mapper(:url) {|str| str if str =~ /^\/.*$|^https?:\/\//i}
+      String.add_mapper(:real_value) {|value| value} # true, false...
     end
 
     def config

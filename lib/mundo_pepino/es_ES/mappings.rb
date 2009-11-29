@@ -2,13 +2,12 @@ module MundoPepino
   class << self
     include Matchers::Fragments
     def language_specific_mappings
-      String.add_mapper(:real_value, {
+      String.field_mappings[/^nombres?/i] = :name
+      String.real_value_mappings = {
         /^verdader[oa]$/i  => true,
         /^fals[ao]$/i      => false
-      }) { |value| value }
-      String.add_mapper(:field) { |str| :name if str =~ /^nombres?/i }
-      
-      String.add_mapper(:number, { 
+      }
+      String.number_mappings = { 
         /^un[oa]?$/i     => 1,
         /^primer[oa]?$/i => 1,
         :dos             => 2,
@@ -24,16 +23,17 @@ module MundoPepino
         :ocho            => 8,
         :nueve           => 9,
         :diez            => 10
-      }) { |string| string.to_i }
-      String.add_mapper(:crud_action,
+      }
+      String.crud_action_mappings = {
         /^alta(?: de (?:una? )?nuev[ao])?$/i         => 'new',
         /^creaci[óo]n(?: de (?:una? )?nuev[ao])?$/i  => 'new',
         /^nuev(?:o|a|o\/a|a\/o)$/i                   => 'new',
         /^inicio|comienzo$/i                         => 'new',
-        /^cambio$/i                => 'edit',
-        /^modificaci[oó]n(?:es)?$/i       => 'edit',
-        /^edici[oó]n$/i            => 'edit')
-      String.add_mapper(:month,
+        /^cambio$/i                                  => 'edit',
+        /^modificaci[oó]n(?:es)?$/i                  => 'edit',
+        /^edici[oó]n$/i                              => 'edit'
+      }
+      String.month_mappings = {
         :enero           => 'January',
         :febrero         => 'February',
         :marzo           => 'March',
@@ -45,7 +45,8 @@ module MundoPepino
         /^sep?tiembre$/i  => 'September',
         :octubre         => 'October',
         :noviembre       => 'November',
-        :diciembre       => 'December')
+        :diciembre       => 'December'
+      }
       String.url_mappings.merge!({
         /^la (?:portada|home\s?(?:page)?)$/i => lambda{MundoPepino.world.root_path},
         /^(#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i => 
