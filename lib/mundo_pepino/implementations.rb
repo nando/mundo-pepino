@@ -1,11 +1,23 @@
 module MundoPepino
   module Implementations
-
+    # Params:
+    #   :model (raw)
+    #   :number (f.e. "a", "three")
+    #   :name ("Foo") or :names ("Foo, Fu and Kunfu") 
     def given_we_have_a_number_of_instances_called(params)
       model = params[:model].to_unquoted.to_model || raise(ModelNotMapped.new(params[:model]))
       number = params[:number].to_number
       attribs = names_for_simple_creation(model, number, params[:name])
       add_resource(model, attribs, :force_creation => true)
+    end
+    
+    # Params:
+    #   :model (raw)
+    #   :table 
+    def given_we_have_the_following_instances_from_step_table(params)
+      model = convert_to_model(params[:model])
+      add_resource model, translated_hashes(params[:table].raw, :model => model),
+        :force_creation => true
     end
 
     def given_resource_has_many_children(params)
@@ -55,6 +67,7 @@ module MundoPepino
       resources.size.should == params[:number].to_number
       pile_up (resources.size == 1 ? resources.first : resources) if resources.size > 0
     end
+
     def then_resource_called_name_should_have_n_children(params)
       add_resource_from_database(params[:model], params[:name])
       last_mentioned_should_have_n_children(params[:children_field], params[:number])
