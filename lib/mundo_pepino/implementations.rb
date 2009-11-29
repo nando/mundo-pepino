@@ -35,6 +35,24 @@ module MundoPepino
         end
       end
     end
+    
+    # Params:
+    #   :model
+    #   :field
+    #   :value
+    def given_those_resources_have_value_in_field(params)
+      if res = last_mentioned_of(params[:model])
+        resources, field, values = resources_array_field_and_values(res, params[:field], params[:value])
+        if field
+          resources.each_with_index do |r, i| 
+            r.update_attribute field, real_value_for(values[i])
+          end
+          pile_up res
+        else
+          raise MundoPepino::FieldNotMapped.new(params[:field])
+        end
+      end
+    end
 
     def given_resource_has_many_children(params)
       children_model = convert_to_model(params[:children_field])

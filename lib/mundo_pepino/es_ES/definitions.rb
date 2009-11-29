@@ -25,17 +25,9 @@ Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ d
 end
 
 Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
-  if res = last_mentioned_of(modelo)
-    resources, field, values = resources_array_field_and_values(res, campo, valor)
-    if field
-      resources.each_with_index do |r, i| 
-        r.update_attribute field, real_value_for(values[i])
-      end
-      pile_up res
-    else
-      raise MundoPepino::FieldNotMapped.new(campo)
-    end
-  end
+  given_those_resources_have_value_in_field :model => modelo,
+    :field => campo,
+    :value => valor
 end
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, campo_hijos, nombres|

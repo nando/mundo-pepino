@@ -22,6 +22,8 @@ Feature: MP gives good feedback :through exceptions
 |given_resource_has_value_in_field                    |:model=>'unmapped'    |ModelNotMapped              |
 |given_resource_has_value_in_field                    |:name=>'U'            |NotFoundInHistoryNorDatabase|
 |given_resource_has_value_in_field                    |:field=>'foo'         |FieldNotMapped              |
+|given_those_resources_have_value_in_field            |:model=>'unmapped'    |ModelNotMapped              |
+|given_those_resources_have_value_in_field            |:field=>'foo'         |FieldNotMapped              |
 |given_resource_has_many_children                     |:model=>'unmapped'    |ModelNotMapped              |
 |given_resource_has_many_children                     |:name=>'U'            |NotFoundInHistoryNorDatabase|
 |given_resource_has_many_children                     |:children_field=>'foo'|ModelNotMapped              |
