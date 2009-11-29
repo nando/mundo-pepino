@@ -299,8 +299,10 @@ Entonces /^#{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |campo, valor
 end
 
 Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
-  add_resource_from_database(padre, nombre_del_padre)
-  last_mentioned_should_have_child(hijo, nombre_del_hijo)
+  then_resource_called_name_should_have_child :model => padre,
+    :name => nombre_del_padre,
+    :children_field => hijo,
+    :child_name => nombre_del_hijo
 end
 
 Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |modelo, nombre, numero, relacion|

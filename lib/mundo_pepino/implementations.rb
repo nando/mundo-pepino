@@ -115,5 +115,10 @@ module MundoPepino
     def then_that_resource_should_have_value_in_field(params)
       last_mentioned_should_have_value(params[:field], params[:value].to_real_value)
     end
+    
+    def then_resource_called_name_should_have_child(params)
+      add_resource_from_database(params[:model], params[:name])
+      last_mentioned_should_have_child(params[:children_field], params[:child_name])
+    end
   end
 end

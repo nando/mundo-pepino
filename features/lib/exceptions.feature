@@ -6,10 +6,11 @@ Feature: MP gives good feedback :through exceptions
         |key             |value      |
         |:model          |crop       |
         |:name           |My crop    |
-        |:children_field |lettuces   |
-        |:children_names |A, B and C |
         |:field          |name       |
         |:value          |My new crop|
+        |:children_field |lettuces   |
+        |:children_names |A, B and C |
+        |:child_name     |A          |
 
   Scenario Outline:
     Given the step implementation <step_implementation>
@@ -38,3 +39,6 @@ Feature: MP gives good feedback :through exceptions
 |then_resource_called_name_should_have_value_in_field |:name=>'U'            |NotFoundInDatabase          |
 |then_resource_called_name_should_have_value_in_field |:field=>'foo'         |FieldNotMapped              |
 |then_that_resource_should_have_value_in_field        |:field=>'foo'         |FieldNotMapped              |
+|then_resource_called_name_should_have_child          |:model=>'unmapped'    |ModelNotMapped              |
+|then_resource_called_name_should_have_child          |:name=>'U'            |NotFoundInDatabase          |
+|then_resource_called_name_should_have_child          |:children_field=>'foo'|ModelNotMapped              |
