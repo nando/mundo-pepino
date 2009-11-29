@@ -50,16 +50,10 @@ module MundoPepino
     # DB CHECKS
     def then_we_have_a_number_of_instances_in_our_database(params)
       model = convert_to_model(params[:model])
-      conditions = if params[:name]
-        {:conditions => ["#{field_for(model)}=?", params[:name]]}
-      else
-        {}
-      end
-      resources = model.find(:all, conditions)
+      conditions = params[:name] && {:conditions => ["#{field_for(model)}=?", params[:name]]}
+      resources = model.find(:all, conditions || {})
       resources.size.should == params[:number].to_number
-      if resources.size > 0
-        pile_up (resources.size == 1 ? resources.first : resources)
-      end
+      pile_up (resources.size == 1 ? resources.first : resources) if resources.size > 0
     end
     def then_resource_called_name_should_have_n_children(params)
       add_resource_from_database(params[:model], params[:name])

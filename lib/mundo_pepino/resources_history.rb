@@ -40,7 +40,7 @@ module MundoPepino
     end
   
     def add_resource_from_database(raw_model, name)
-      model = raw_model.to_unquoted.to_model
+      model = convert_to_model(raw_model)
       field = field_for(model)
       if resource = model.send("find_by_#{field}", name)
         pile_up resource
