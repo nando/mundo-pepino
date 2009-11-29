@@ -288,14 +288,14 @@ Entonces /^#{_tenemos_en_bbdd_} (#{_numero_}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](
 end
 
 Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
-  last_mentioned_should_have_value :model => modelo,
+  then_resource_called_name_should_have_value_in_field :model => modelo,
     :name => nombre,
     :field => campo,
     :value => valor
 end
 
 Entonces /^#{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |campo, valor|
-  last_mentioned_should_have_value(campo, valor.to_real_value)
+  then_that_resource_should_have_value_in_field :field => campo, :value => valor
 end
 
 Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
