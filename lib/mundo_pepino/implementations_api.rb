@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'nokogiri'
 
 module MundoPepino
@@ -94,7 +95,7 @@ module MundoPepino
                             field_for(parent_model, child_model.table_name) ||
                             child_model.table_name
       else
-        raise MundoPepino::ModelNotMapped.new(field_raw)
+        raise ModelNotMapped.new(field_raw)
       end
     end
 
@@ -222,6 +223,9 @@ module MundoPepino
     end
     def nested_field_prefix_prefix(parent_model, child_model)
       "#{parent_model.name.underscore}_#{child_model.name.pluralize.underscore}_attributes"
+    end
+    def model(raw_model)
+      raw_model.to_unquoted.to_model || raise(ModelNotMapped.new(raw_model))
     end
   end  
 end

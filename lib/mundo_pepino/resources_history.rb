@@ -22,55 +22,6 @@ module MundoPepino
       end
     end
 
-    class ResourceNotFound < RuntimeError
-      def initialize(resource_info=nil)
-        @resource_info = resource_info && " (#{resource_info})"
-      end
-      def message
-        "Resource not found#{@resource_info}"
-      end
-    end
-  
-    class WithoutResources < ResourceNotFound
-      def initialize
-        super 'there is no resources'
-      end
-    end
-
-    class NotFoundInDatabase < ResourceNotFound
-      def initialize(model, value='')
-        super "#{model} #{value} not found in database"
-      end
-    end
-
-    class NotMapped < RuntimeError
-      def initialize(type, string)
-        @type = type
-        @string = string
-      end
-      def message
-        "#{@type} not mapped '#{@string}'"
-      end
-    end
-
-    class ModelNotMapped < NotMapped
-      def initialize(string)
-        super('Model', string)
-      end
-    end
-
-    class FieldNotMapped < NotMapped
-      def initialize(string)
-        super('Field', string)
-      end
-    end
-
-    class CrudActionNotMapped < NotMapped
-      def initialize(string)
-        super('CRUD Action', string)
-      end
-    end
-
     # options: :force_creation 
     def add_resource(model, attribs=[], options = {})
       attributes = if attribs.is_a?(Hash)
@@ -94,7 +45,7 @@ module MundoPepino
       if resource = model.send("find_by_#{field}", name)
         pile_up resource
       else
-        NotFoundInDatabase.new(model, name)
+        raise NotFoundInDatabase.new(model, name)
       end
     end
 
@@ -129,7 +80,11 @@ module MundoPepino
           if mentioned = detect_first(resources_flatten, [model, with_name])
             mentioned
           else
-            add_resource_from_database(raw_model, with_name)
+            begin
+              add_resource_from_database(raw_model, with_name)
+            rescue
+              raise NotFoundInHistoryNorDatabase.new(model.name, with_name)
+            end
           end
         elsif(last_mentioned.mr_model == model)
           last_mentioned
@@ -148,6 +103,16 @@ module MundoPepino
   
     def last_mentioned_called(name)
       detect_first resources_flatten, name
+    end
+    
+    def last_mentioned_resources(model, name)
+      mentioned = last_mentioned_of(model.to_unquoted, name)
+      if mentioned.is_a?(Array)
+        mentioned.each {|m| yield m}
+      else
+        yield mentioned
+      end
+      pile_up mentioned
     end
   
     def recursive_group_search(model, resources)

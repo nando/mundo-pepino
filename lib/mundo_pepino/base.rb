@@ -1,4 +1,59 @@
 module MundoPepino
+  # Exceptions
+  class ResourceNotFound < RuntimeError
+    def initialize(resource_info=nil)
+      @resource_info = resource_info && " (#{resource_info})"
+    end
+    def message
+      "Resource not found#{@resource_info}"
+    end
+  end
+
+  class WithoutResources < ResourceNotFound
+    def initialize
+      super 'there is no resources'
+    end
+  end
+
+  class NotFoundInDatabase < ResourceNotFound
+    def initialize(model, value='')
+      super "#{model} called #{value||'nil'} not found in database"
+    end
+  end
+
+  class NotFoundInHistoryNorDatabase < ResourceNotFound
+    def initialize(model, value='')
+      super "#{model} called #{value||'nil'} not found in history nor database"
+    end
+  end
+
+  class NotMapped < RuntimeError
+    def initialize(type, string)
+      @type = type
+      @string = string
+    end
+    def message
+      "#{@type} not mapped '#{@string}'"
+    end
+  end
+
+  class ModelNotMapped < NotMapped
+    def initialize(string)
+      super('Model', string)
+    end
+  end
+
+  class FieldNotMapped < NotMapped
+    def initialize(string)
+      super('Field', string)
+    end
+  end
+
+  class CrudActionNotMapped < NotMapped
+    def initialize(string)
+      super('CRUD Action', string)
+    end
+  end
   module Base
     def parsed_attributes(raw_attributes)
       attributes = {}
@@ -70,4 +125,5 @@ module MundoPepino
       [attribs.keys.map{|s| "#{s}=?"}.join(' AND ')] + attribs.values
     end
   end
+  
 end

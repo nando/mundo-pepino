@@ -1,7 +1,10 @@
 # MundoPepino's step definitions in es_ES
 # Creación simple con nombre opcional
 Dado /^(?:que tenemos )?(#{_numero_}) (?!.+ #{_cuyo_})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
-  given_we_have_a_number_of_instances_called numero, modelo, nombre 
+  given_we_have_a_number_of_instances_called(
+    :number => numero,
+    :model => modelo,
+    :name => nombre)
 end
 
 # Creación con asignación de valor en campo
@@ -42,8 +45,8 @@ end
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, campo_hijos, nombres|
   given_resource_has_many_children(
-    :resource_model => modelo_padre,
-    :resource_name => nombre_del_padre,
+    :model => modelo_padre,
+    :name => nombre_del_padre,
     :number_of_children => numero,
     :children_field => campo_hijos,
     :children_names => nombres)
@@ -51,7 +54,7 @@ end
 
 Dado /^que dich[oa]s? (.+) tienen? (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, numero, campo_hijos, nombres|
   given_resource_has_many_children(
-    :resource_model => modelo_padre,
+    :model => modelo_padre,
     :number_of_children => numero,
     :children_field => campo_hijos,
     :children_names => nombres)
@@ -59,15 +62,15 @@ end
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, nombre_del_padre, campo_hijos, tabla|
   given_resource_has_many_children_from_step_table(
-    :resource_model => modelo_padre,
-    :resource_name  => nombre_del_padre,
+    :model => modelo_padre,
+    :name  => nombre_del_padre,
     :children_field => campo_hijos,
     :step_table => tabla)
 end
 
 Dado /^que dich[ao]s? (.+) tienen? (?:el|la|los|las) siguientes? (.+):$/i do |modelo_padre, campo_hijos, tabla|
   given_resource_has_many_children_from_step_table(
-    :resource_model => modelo_padre,
+    :model => modelo_padre,
     :children_field => campo_hijos,
     :step_table => tabla)
 end
@@ -76,7 +79,7 @@ end
 ###############################################################################
 
 Cuando /^(?:que )?#{_visito_} (.+)$/i do |pagina|
-  given_or_when_i_do_a_page_request pagina
+  given_or_when_i_do_a_page_request :page => pagina
 end
 
 Cuando /^(?:que )?#{_pulso_} (?:en )?el bot[oó]n (.+)$/i do |boton|
@@ -89,7 +92,9 @@ Cuando /^(?:que )?#{_pulso_} (?:en )?(#{_el_enlace_}) (.+?)(?:#{_que_existe_} #{
     Entonces "veo el enlace #{href}"
     Y "visito #{href}"
   else
-    given_or_when_i_follow_the_link enlace.to_unquoted.to_translated, selector
+    given_or_when_i_follow_the_link(
+      :link => enlace.to_unquoted.to_translated,
+      :selector => selector)
   end
 end
 
@@ -182,7 +187,9 @@ end
 
 #############################################################################
 Entonces /^(#{_veo_o_no_}) el texto (.+?)(?: #{_dentro_de_} ['"]?(.+?)["']?)?$/i do |should, text, selector|
-  then_i_see_or_not_the_text should, text, selector
+  then_i_see_or_not_the_text :should => should,
+    :text => text,
+    :selector => selector
 end
 
 Entonces /^(#{_leo_o_no_}) el texto (.+)?$/i do |should, text|
@@ -288,7 +295,9 @@ end
 
 #BBDD
 Entonces /^#{_tenemos_en_bbdd_} (#{_numero_}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
-  then_we_have_a_number_of_instances_in_our_database numero, modelo, nombre
+  then_we_have_a_number_of_instances_in_our_database :number => numero,
+    :model => modelo,
+    :name => nombre
 end
 
 Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
@@ -305,9 +314,11 @@ Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} una? (.+) ['"](.+)["']
   last_mentioned_should_have_child(hijo, nombre_del_hijo)
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |modelo_padre, nombre_del_padre, numero, modelo_hijo|
-  add_resource_from_database(modelo_padre, nombre_del_padre)
-  last_mentioned_should_have_n_children(modelo_hijo, numero)
+Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |modelo, nombre, numero, relacion|
+  then_resource_called_name_should_have_n_children :number => numero,
+    :model => modelo,
+    :name => nombre,
+    :children_field => relacion
 end
 
 Entonces /^#{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |hijo, nombre_del_hijo|
