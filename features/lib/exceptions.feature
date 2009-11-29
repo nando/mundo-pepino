@@ -34,3 +34,6 @@ Feature: MP gives good feedback :through exceptions
 |then_resource_called_name_should_have_n_children     |:model=>'unmapped'    |ModelNotMapped              |
 |then_resource_called_name_should_have_n_children     |:name=>'U'            |NotFoundInDatabase          |
 |then_resource_called_name_should_have_n_children     |:children_field=>'foo'|ModelNotMapped              |
+|then_resource_called_name_should_have_value_in_field |:model=>'unmapped'    |ModelNotMapped              |
+|then_resource_called_name_should_have_value_in_field |:name=>'U'            |NotFoundInDatabase          |
+|then_resource_called_name_should_have_value_in_field |:field=>'foo'         |FieldNotMapped              |

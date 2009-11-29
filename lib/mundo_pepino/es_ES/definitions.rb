@@ -288,8 +288,10 @@ Entonces /^#{_tenemos_en_bbdd_} (#{_numero_}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](
 end
 
 Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
-  add_resource_from_database(modelo, nombre)
-  last_mentioned_should_have_value(campo, valor.to_real_value)
+  last_mentioned_should_have_value :model => modelo,
+    :name => nombre,
+    :field => campo,
+    :value => valor
 end
 
 Entonces /^#{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |campo, valor|
