@@ -103,10 +103,14 @@ module MundoPepino
     end
 
     def then_resource_called_name_should_have_n_children(params)
-      add_resource_from_database(params[:model], params[:name])
+      add_resource_from_database params[:model], params[:name]
+      then_that_resource_should_have_n_children params
+    end
+
+    def then_that_resource_should_have_n_children(params) 
       last_mentioned_should_have_n_children(params[:children_field], params[:number])
     end
-  
+
     def then_resource_called_name_should_have_value_in_field(params)
       add_resource_from_database(params[:model], params[:name])
       then_that_resource_should_have_value_in_field params
@@ -117,7 +121,11 @@ module MundoPepino
     end
     
     def then_resource_called_name_should_have_child(params)
-      add_resource_from_database(params[:model], params[:name])
+      add_resource_from_database params[:model], params[:name]
+      then_that_resource_should_have_child params
+    end
+
+    def then_that_resource_should_have_child(params)
       last_mentioned_should_have_child(params[:children_field], params[:child_name])
     end
   end

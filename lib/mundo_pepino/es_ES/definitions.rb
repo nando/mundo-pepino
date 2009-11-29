@@ -313,11 +313,12 @@ Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)[
 end
 
 Entonces /^#{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |hijo, nombre_del_hijo|
-  last_mentioned_should_have_child(hijo, nombre_del_hijo)
+  then_that_resource_should_have_child :children_field => hijo, :child_name => nombre_del_hijo
 end
 
-Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, modelo_hijo|
-  last_mentioned_should_have_n_children(modelo_hijo, numero)
+Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, hijo|
+  then_that_resource_should_have_n_children :number => numero, :children_field => hijo
+#  last_mentioned_should_have_n_children(modelo_hijo, numero)
 end
 
 Entonces /^#{_debo_estar_en_} (.+)$/i do |pagina|
