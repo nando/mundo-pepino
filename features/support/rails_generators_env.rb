@@ -16,7 +16,6 @@ end
 require 'rubigen'
 require 'rubigen/helpers/generator_test_helper'
 include RubiGen::GeneratorTestHelper
-require 'rails_generator'
 
 SOURCES = Dir[File.dirname(__FILE__) + "/../../rails_generators"].map do |f|
   RubiGen::PathSource.new(:test, File.expand_path(f))
