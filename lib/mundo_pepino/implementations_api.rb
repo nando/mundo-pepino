@@ -122,6 +122,7 @@ module MundoPepino
     
     def last_mentioned_should_have_child(field_raw, name)
       children = last_mentioned_children(field_raw)
+      children = children.is_a?(Array) ? children : [children] #for has_one_associations
       child = if children.any?
         model = children.first.class
         model.send("find_by_#{field_for(model)}", name) 

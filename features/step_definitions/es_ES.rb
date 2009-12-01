@@ -24,7 +24,8 @@ MundoPepino.configure do |config|
     Flower,
     Session, 
     Delivery, 
-    User
+    User,
+    Profile
   ]
   config.model_mappings = {
     /^sesi[óo]n$/i              => Session,
@@ -42,7 +43,8 @@ MundoPepino.configure do |config|
     /^sesión(es)?$/i            => Session,
     /^remitentes?$/i            => User,
     /^usuari[ao]s?$/i           => User,
-    /^env[ií]os?$/i             => Delivery
+    /^env[ií]os?$/i             => Delivery,
+    /^perfil(es)?$/i            => Profile,
   }
   config.field_mappings = {
     /^[Ááa]reas?$/i              => :area,
@@ -76,7 +78,9 @@ MundoPepino.configure do |config|
     /^flor(?:es)? enviadas?$/i   => :sended_flowers,
     /^Flower::remitentes?$/i     => :from,
     /^Flower::flor(?:es)? enviadas?$/i => :from,
-    /^Flower::name$/             => :title
+    /^Flower::name$/i            => :title,
+    /^User::perfil$/i            => :profile,
+    /^Profile::name$/i           => :first_name
   }
   config.relation_model_mappings = {
     /^cucumbers$/        => Pepino,

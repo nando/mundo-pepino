@@ -55,6 +55,11 @@ module FixtureReplacement
     a.password = String.random
   end
 
+  attributes_for :profile do |a|
+    a.first_name = String.random
+    a.last_name = String.random
+  end
+
   attributes_for :flower do |a|
     a.title = String.random
     a.from = default_user
