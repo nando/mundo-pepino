@@ -228,7 +228,7 @@ Entonces /^(#{_veo_o_no_}) (?:un|el) enlace (?:al? |para )?(.+)?$/i do |should, 
 end
 
 #Entonces /^(#{_veo_o_no_}) el campo (.+) con el (?:valor|texto)? (.+)$/ do |should, campo, valor|
-Entonces /^(#{_veo_o_no_}) el campo (.+) con(?:\s{1})?(?:el valor|el texto)? ['"]?(.+?)["']$/ do |should, campo, valor|
+Entonces /^(#{_veo_o_no_}) el campo (.+) con(?: el (?:valor|texto))? ['"]?(.+?)["']$/ do |should, campo, valor|
   field_labeled(campo.to_unquoted).value.send shouldify(should), match(/#{valor.to_unquoted}/)
 end
 
