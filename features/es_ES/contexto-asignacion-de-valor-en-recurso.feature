@@ -1,6 +1,6 @@
 Característica: asignación de un valor en un recurso concreto
 
-  Escenario: Asignación de un valor en un campo de un recurso concreto
+  Escenario: Asignación de un valor en un campo (atributo, belongs_to o has_one) de un recurso concreto
   ########################################################################
   # Patrón: 
   #   Dado que el/la _modelo_ "_nombre_" tiene como _campo_ "_valor_" (_unidades_)?
@@ -25,7 +25,13 @@ Característica: asignación de un valor en un recurso concreto
        Y que dicho huerto tiene como abono "Hidrogenado"
        Y que la huerta "B" tiene como área "8" hectáreas
        Y que dicho huerto tiene como abono "Estiércol líquido"
+       Y que tenemos dos usuarios "jacinto y tomasa"
+       Y que el usuario "jacinto" tiene un perfil "Jacinto"
+       Y que la usuaria "tomasa" tiene 1 perfil
     Entonces el huerto "A" tiene en bbdd como área "12"
            Y tiene en bbdd como abono "Hidrogenado"
            Y el huerto "B" tiene en bbdd como área "8"
            Y tiene en bbdd como abono "Estiércol líquido"
+           Y tenemos en bbdd 2 perfiles
+           Y el usuario "jacinto" tiene en bbdd un perfil "Jacinto"
+           Y la usuaria "tomasa" tiene en bbdd un perfil

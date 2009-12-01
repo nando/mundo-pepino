@@ -95,9 +95,10 @@ module MundoPepino
     def last_mentioned_children(field_raw)
       if child_model = field_raw.to_model
         parent_model = last_mentioned.mr_model
-        last_mentioned.send field_for(parent_model, field_raw) ||
+        children = last_mentioned.send field_for(parent_model, field_raw) ||
                             field_for(parent_model, child_model.table_name) ||
                             child_model.table_name
+        children.is_a?(Array) ? children : [children] #for has_one_associations
       else
         raise ModelNotMapped.new(field_raw)
       end
@@ -122,7 +123,6 @@ module MundoPepino
     
     def last_mentioned_should_have_child(field_raw, name)
       children = last_mentioned_children(field_raw)
-      children = children.is_a?(Array) ? children : [children] #for has_one_associations
       child = if children.any?
         model = children.first.class
         model.send("find_by_#{field_for(model)}", name) 
