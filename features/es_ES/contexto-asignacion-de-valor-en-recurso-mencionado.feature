@@ -1,4 +1,4 @@
-Característica: asignación de un valor
+Característica: asignación de un valor en el/los último/s resurso/s mencionado/s
 
   Escenario: Asignación de un valor en un campo de los últimos recursos definidos
   ########################################################################
@@ -11,7 +11,8 @@ Característica: asignación de un valor
   #
   # Descripción:
   #     Asigna un _valor_ a un _campo_ del último o últimos recursos definidos
-  #   del _modelo_ mencionado
+  #   del _modelo_ mencionado. El campo puede ser un atributo normal, una
+  #   relación :belongs_to o una relación :has_one.
   #
   #     Dicha asignación se llevará a cabo de acuerdo con lo siguiente:
   #
@@ -28,7 +29,11 @@ Característica: asignación de un valor
   #     end
   #
   ########################################################################
-    Dado que tenemos tres huertos llamados "H-02, H-03 y H-04"
+    Dado que tenemos un usuario "jacinto"
+       Y que dicho usuario tiene un perfil "Jacinto"
+       Y que tenemos una usuaria "tomasa"
+       Y que dicha usuaria tiene 1 perfil
+       Y que tenemos tres huertos llamados "H-02, H-03 y H-04"
        Y que dichos huertos tienen como área "20, 32 y 12" hectáreas
        Y que dichos huertos tienen como abono "Nitrogenado de 2ª calidad"
        Y que tenemos un huerto llamado "H-01"
@@ -48,6 +53,9 @@ Característica: asignación de un valor
            Y tiene en bbdd como abono "Nitrogenado de 2ª calidad"
            Y el huerto "H-04" tiene en bbdd como área "12"
            Y tiene en bbdd como abono "Nitrogenado de 2ª calidad"
+           Y el usuario "jacinto" tiene en bbdd un perfil "Jacinto"
+           Y la usuaria "tomasa" tiene en bbdd un perfil
+           Y tenemos en bbdd 2 perfiles
 
   Escenario: Con nombre de relacion que no se corresponde con su modelo asociado
     Dado que tenemos un huerto llamado "de secano"
