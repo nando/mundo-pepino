@@ -1,3 +1,10 @@
+== 0.1.9 2009-12-7
+* Support for assignments in "has_one" child (of an explicit or refered
+  resource).
+* Revisited exceptions: tests & fixes
+* "Veo el _campo_ con _valor_" expanded (no need to use "el valor" or "el
+  texto" between de field and the value.
+
 == 0.1.8 2009-11-24
 * New page interpretation (es_ES):
   * Page of a mentioned resource of a given model. Examples:
