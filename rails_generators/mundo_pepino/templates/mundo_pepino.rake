@@ -1,4 +1,5 @@
 $:.unshift(RAILS_ROOT + '/vendor/plugins/cucumber/lib')
+$:.unshift(RAILS_ROOT + '/vendor/plugins/mundo-pepino/lib')
 gem 'cucumber', '> 0.3.101', '<= 0.4.4'
 require 'cucumber/rake/task'
 
