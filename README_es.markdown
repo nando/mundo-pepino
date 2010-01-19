@@ -4,6 +4,11 @@
 
 MundoPepino es un conjunto de pasos genéricos para testear una aplicación Rails utilizando Cucumber.
 
+# Atención
+
+Actualmente MundoPepino sólo funciona con Cucumber 0.4.4 o inferior.
+
+
 ## ¿Por qué un MundoPepino?
 
 Expresar el comportamiento de una aplicación utilizando lenguaje natural tiene que lidiar con el hecho de que una misma frase puede ser expresada de muchas formas diferentes. Este hecho puede conducirnos fácilmente hacia una explosión de definiciones que dificulte su mantenimiento y, por ende, el de la aplicación en la que son utilizadas.

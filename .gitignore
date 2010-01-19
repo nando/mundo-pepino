@@ -3,7 +3,6 @@ doc
 pkg
 features/support/app/log
 features/support/app/tmp
-features/support/app/vendor
 features/support/app/script
 features/support/app/db/development.sqlite3
 features/support/app/caracteristicas/

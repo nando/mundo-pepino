@@ -1,3 +1,7 @@
+== 0.1.10 2010-1-19
+
+* Cucumber dependency freezed to 0.4.4
+
 == 0.1.9 2009-12-7
 * Support for assignments in "has_one" child (of an explicit or refered
   resource).

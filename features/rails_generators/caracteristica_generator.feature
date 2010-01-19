@@ -4,6 +4,7 @@ Feature: caracteristica generator
     Given a Rails app
       And "mundo-pepino" in "." as one of its plugins
       And "string-mapper" in "features/support/app/vendor/plugins/string-mapper" as one of its plugins
+      And "cucumber-0.4.4" in "features/support/app/vendor/plugins/cucumber-0.4.4" as one of its plugins
       And I run executable "script/generate" with arguments "cucumber"
     
   Scenario Outline: generate caracteristica like README says
