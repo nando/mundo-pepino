@@ -140,7 +140,12 @@ Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: (?:en (?:el listado de )?|como
       select valor
     end
   rescue Webrat::NotFoundError
-    select(valor, :from => convert_to_field(campo)) # Sin label
+    begin
+      previous_exception = $!
+      select(valor, :from => convert_to_field(campo)) # Sin label
+    rescue
+      raise "#{previous_exception}\nand\n#{$!}"
+    end
   end
 end
 
