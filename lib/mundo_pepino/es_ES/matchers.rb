@@ -42,7 +42,7 @@ module MundoPepino
       end
       def _localizador_de_atributo_anidado_(capture=true)
         o,c = capture ? ['(', ')'] : ['', '']
-        "(?:(?:el|la) )?#{o}.+?#{c} de(?:l| la| su nuev[oa]) #{o}.+?#{c}(?: ['\"]#{o}[^\"']+#{c}[\"'])?"
+        "(?:(?:el|la) )?#{o}[^\"']+?#{c} de(?:l| la| su nuev[oa]) #{o}.+?#{c}(?: ['\"]#{o}[^\"']+#{c}[\"'])?"
       end
       def _dentro_de_
         'dentro de(?: la etiqueta|l selector)?'
