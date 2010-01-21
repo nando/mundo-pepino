@@ -72,7 +72,10 @@ module MundoPepino
     end
 
     def clean_models
-      config.models_to_clean.each { |model| model.destroy_all }
+      config.models_to_clean.each do |model|
+        model.destroy_all
+        model.delete_all if model.count > 0
+      end      
     end
 
     def user_specific_mappings
