@@ -10,7 +10,7 @@ Característica: Solicitud de una página ("cuando visito" o "dado que estoy en"
   #   Solicita la URL referida comprobando previamente si el valor de la 
   # misma ha sido mapeado en config.url_mappings.
   #
-  #   El valor por defecto definido en el mapeo de URLs (string.to_url) 
+  #   El valor por defecto definido en el mapeo de URLs
   # devuelve la propia cadena si no existe un mapeo concreto para ella y 
   # comienza por / o https?://. En caso contrario devuelve nulo.
   #

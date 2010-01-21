@@ -27,7 +27,7 @@ MundoPepino.configure do |config|
     # /^Orchard::longitud(es)?$/   => 'longitude'
   }
 
-  config.url_mappings = {
+  config.page_mappings = {
     # TRADUCCIÓN DE RUTAS/URLS AQUÍ
     # Hardcoded
     #/^la página de registro/i => '/users/new',

@@ -13,7 +13,7 @@ Característica: Comprobamos la existencia de un enlace en la página actual
   # previamente si el valor de la misma ha sido mapeado (en 
   # config.url_mappings).
   #
-  #   El valor por defecto definido en el mapeo de URLs (string.to_url) 
+  #   El valor por defecto definido en el mapeo de URLs
   # devuelve la propia cadena si no existe un mapeo concreto para ella y 
   # comienza por / o https?://. En caso contrario devuelve nulo.
   #

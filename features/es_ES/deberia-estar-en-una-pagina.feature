@@ -9,9 +9,9 @@ Característica: Debería encontrarme en una página de mi sitio
   #   Comprueba que nos encontramos en _pagina_ comprobando previamente
   # si el valor de la misma ha sido mapeado en config.url_mappings.
   #
-  #   El valor por defecto definido en el mapeo de URLs (string.to_url) 
-  # devuelve la propia cadena si no existe un mapeo concreto para ella y 
-  # comienza por / o https?://. En caso contrario devuelve nulo.
+  #   El valor por defecto definido en el mapeo de URLs devuelve la propia
+  # cadena si no existe un mapeo concreto para ella y comienza por / o
+  # https?://. En caso contrario devuelve nulo.
   #
   # Ejemplos:
   #

@@ -29,7 +29,7 @@ module MundoPepino
         /^modifications?$/i     => 'edit',
         /^editions?$/i          => 'edit'
       }
-      String.url_mappings[/^the home\s?page/i] = self.world.root_path
+      String.page_mappings[/^the home\s?page/i] = self.world.root_path
     end
   end
 end

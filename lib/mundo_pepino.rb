@@ -59,8 +59,11 @@ module MundoPepino
         end
       end
       String.add_mapper(:month) {|month| month.capitalize}
-      String.add_mapper(:url) {|str| str if str =~ /^\/.*$|^https?:\/\//i}
       String.add_mapper(:real_value) {|value| value} # true, false...
+      String.add_mapper(:user_page)
+      String.add_mapper(:page) do |str|
+        str.to_user_page || (str =~ /^\/.*$|^https?:\/\//i ? str : nil)
+      end
     end
 
     def config
@@ -75,14 +78,16 @@ module MundoPepino
       config.models_to_clean.each do |model|
         model.destroy_all
         model.delete_all if model.count > 0
-      end      
-    end
+        end      
+      end
 
     def user_specific_mappings
       config.model_mappings.each {|k,v| String.model_mappings[k] = v}
       config.relation_model_mappings.each {|k,v| String.relation_model_mappings[k] = v}
       config.field_mappings.each {|k,v| String.field_mappings[k] = v}
-      config.url_mappings.each {|k,v| String.url_mappings[k] = v}
+      # url_mappings are deprecated, use page_mappings instead
+      config.url_mappings.each {|k,v| String.user_page_mappings[k] = v}
+      config.page_mappings.each {|k,v| String.user_page_mappings[k] = v}
     end
   end
 end

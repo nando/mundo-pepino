@@ -74,7 +74,7 @@ module MundoPepino
     end
 
     def given_or_when_i_do_a_page_request(params)
-      do_visit params[:page].to_unquoted.to_url
+      do_visit params[:page].to_unquoted.to_page
     end
 
     def given_or_when_i_follow_the_link(params)

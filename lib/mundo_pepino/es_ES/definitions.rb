@@ -75,7 +75,7 @@ end
 
 Cuando /^(?:que )?#{_pulso_} (?:en )?(#{_el_enlace_}) (.+?)(?:#{_que_existe_} #{_dentro_de_} ['"]?(.+?)["']?)?$/i do |el_enlace, enlace, selector|
   if selector.nil? and 
-     href = (enlace.to_url || "#{el_enlace} #{enlace}".to_url)
+     href = (enlace.to_page || "#{el_enlace} #{enlace}".to_page)
     Entonces "veo el enlace #{href}"
     Y "visito #{href}"
   else
@@ -228,7 +228,7 @@ end
 
 Entonces /^(#{_veo_o_no_}) (?:un|el) enlace (?:al? |para )?(.+)?$/i do |should, pagina|
   lambda {
-    response.should have_tag('a[href=?]', pagina.to_unquoted.to_url)
+    response.should have_tag('a[href=?]', pagina.to_unquoted.to_page)
   }.send(not_shouldify(should), raise_error)
 end
 
@@ -327,5 +327,5 @@ Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, hij
 end
 
 Entonces /^#{_debo_estar_en_} (.+)$/i do |pagina|
-  URI.parse(current_url).path.should == pagina.to_unquoted.to_url
+  URI.parse(current_url).path.should == pagina.to_unquoted.to_page
 end

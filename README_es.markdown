@@ -59,10 +59,10 @@ Para que MundoPepino sepa que cuando hablamos de *Huerto* nos estamos refiriendo
         /^huertos?$/i => Orchard
       }
       config.field_mappings = { ... }
-      config.url_mappings = { ... }
+      config.page_mappings = { ... }
     end
 
-De forma similar se pueden definir mapeos para los atributos (*field_mappings*, p.e `/^usado$/i => :used`) y las rutas de la aplicación (*url_mappings*, p.e. `/^la portada$/ => "/"`).
+De forma similar se pueden definir mapeos para los atributos (*field_mappings*, p.e `/^usado$/i => :used`) y las rutas de la aplicación (*page_mappings*, p.e. `/^la portada$/ => "/"`).
 
 Del mapeo de atributos lo más destacable es la convención de que, si no se le indica lo contrario, el nombre del campo que guarda el *nombre* de cualquier modelo es **name**. Este mapeo nos permite escribir frases como `Dado que tengo un usuario llamado "Casimiro"` sin necesidad de hacer referencia al nombre del campo en el que debe guardarse *Casimiro*.
 
