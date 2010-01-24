@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>ConfRails2009: Testing sin tests... - Step Cuatro</title>
+  </head>
+  <body>
+      <div id="content" class="site">
+
+        
+<div class="wikistyle">
+
+  <h1>Testing sin escribir tests con Cucumber y MundoPepino</h1>
+  <h2>Step Cuatro: Introducing MundoPepino </h2>
+<p>
+Vamos a ver si MundoPepino es capaz de entender nuestra feature de la portada. Para ello comentamos el código de las definiciones de nuestros steps.
+</p>
+<p>
+Para ello lanzamos:
+</p>
+<pre><code>
+script/generate mundo_pepino_steps
+rake db:migrate
+rake caracteristicas
+</code></pre>
+
+<p>Convenciones más importantes del MundoPepino:</p>
+<ul>
+<li>Primera persona del singular para todo lo que puedo hacer como un usuario (nos ponemos en su piel)
+</li>
+<li>Primera persona del plural para todo lo que no puedo hacer como un usuario (p.e. creación y recuperación atacando directamente a la base de datos).
+</li>
+<li>Se utiliza el campo "name" para crear y buscar recursos en la base de datos.
+</li>
+<li>Las comillas (dobles o simples) son opcionales salvo para expresar un valor (p.e. Dado que tenemos un usuario "Pepe")
+</li>
+<li>"Dado que" para lidiar con género y número (Dados, Dada, Dada) sin tener que tocar las palabras reservadas que trae Cucumber.
+</li>
+</ul>
+
+  <a href="step-cinco.html">Siguiente paso</a>
+  
+  </body>
+</html>
