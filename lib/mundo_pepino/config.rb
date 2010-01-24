@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module MundoPepino
   class Config
     attr_accessor :models_to_clean,
