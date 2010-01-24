@@ -33,6 +33,9 @@ Característica: etiqueta/selector con valor
   #
   ########################################################################
     Cuando visito la portada
+    Entonces debo ver la etiqueta TITLE
+    Entonces debo ver el tag TITLE con el valor "Mundo Pepino (orchards all around!)"
+    Entonces debo ver la etiqueta TITLE con el valor "Mundo Pepino"
     Entonces debo ver el tag H1
     Entonces debo ver un tag H1
     Entonces debo ver la etiqueta "H1"

@@ -208,7 +208,7 @@ end
 Entonces /^(#{_veo_o_no_}) #{_la_etiqueta_} (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
     if value
-      response.should have_tag(tag.to_unquoted, /.*#{value.to_translated}.*/i)
+      response.should have_tag(tag.to_unquoted, /.*#{Regexp.escape(value.to_translated)}.*/i)
     else
       response.should have_tag(tag.to_unquoted)
     end
