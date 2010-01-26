@@ -78,18 +78,20 @@ module MundoPepino
     end
 
     def given_or_when_i_follow_the_link(params)
-      if params[:selector]
-        click_link_within params[:selector], params[:link]
-      else
+      if params[:selector].blank?
         click_link params[:link]
+      else
+        click_link_within params[:selector], params[:link]
       end
     end
 
     def then_i_see_or_not_the_text(params)
-      within params[:selector] || 'html' do
-        response.send(
-          shouldify(params[:should]), 
-          contain(params[:text].to_unquoted.to_translated.to_regexp))
+      if params[:selector].blank?
+        should_or_not_contain_text params
+      else
+        within params[:selector] do
+          should_or_not_contain_text params
+        end
       end
     end
 

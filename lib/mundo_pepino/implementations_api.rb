@@ -226,8 +226,15 @@ module MundoPepino
       end
       # TODO: raise too many nested resources
     end
+
     def nested_field_prefix_prefix(parent_model, child_model)
       "#{parent_model.name.underscore}_#{child_model.name.pluralize.underscore}_attributes"
+    end
+
+    def should_or_not_contain_text(params)
+      response.send(
+        shouldify(params[:should]), 
+        contain(params[:text].to_unquoted.to_translated.to_regexp))
     end
   end  
 end
