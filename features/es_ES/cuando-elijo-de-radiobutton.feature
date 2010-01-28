@@ -3,16 +3,23 @@ Característica: elijo radiobutton
   Escenario: Elijo una opción de un radiobutton 
   ########################################################################
   # Patrón: 
-  #   Cuando elijo (el/la)? _campo_ "_valor_"
+  #   Cuando elijo _texto_de_label_
+  # O:
+  #   Cuando elijo (el/la/como)? _campo_ "_valor_"
   #
-  # Ejemplos:
-  #   Cuando elijo color "verde"
+  # Ejemplos con texto de label asociada:
+  #   Cuando elijo "Verde"
+  #   Cuando elijo Pakistaní
+  #
+  # Ejemplos con composición de id a partir de campo y valor:
   #   Cuando elijo el color "VERDE"
+  #   Cuando elijo como color "verde"
   #   Cuando elijo la nacionalidad "Pakistaní"
   #
   # Descripción:
-  #   Selecciona la opción _valor_ del radio button _campo_.  
-  # 
+  #   Selecciona un radio button por medio de una label o componiendo
+  # su id a partir del nombre del campo y su valor.
+  #
   #   Para localizar la opción combina ambos valores de forma similar
   # a como hace el helper de Rails radio_button_tag para construir su ID.
   # Por un lado _campo_:
@@ -30,12 +37,12 @@ Característica: elijo radiobutton
     Entonces veo el tag div#nationality con el valor "Pakistaní"
     
     Cuando visito la portada
-         Y elijo Color "VERDE"
+         Y elijo "Verde"
          Y pincho el botón "Galleta de la fortuna"
     Entonces veo el tag div#color con el valor "verde"
     
   Escenario: Elijo una opción de un radiobutton (desde Given) 
     Dado que visito la portada
-       Y que elijo Color "VERDE"
+       Y que elijo como color "VERDE"
     Cuando pincho el botón "Galleta de la fortuna"
     Entonces veo el tag div#color con el valor "verde"

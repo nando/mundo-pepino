@@ -56,6 +56,12 @@ module MundoPepino
       def _la_etiqueta_
         '(?:en )?(?:(?:una?|el|la) (?:selector|etiqueta|tag))'
       end
+      def _como_
+        'la|el|como'
+      end
+      def _relleno_
+        '(?:completo|relleno)'
+      end
     end
   end
 end

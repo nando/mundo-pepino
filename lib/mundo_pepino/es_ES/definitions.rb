@@ -100,30 +100,34 @@ Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?(?:enlaces|botones)(?: 
   end
 end
 
-Cuando /^(?:que )?(?:completo|relleno) (?!#{_localizador_de_atributo_anidado_(false)})(.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
+Cuando /^(?:que )?#{_relleno_} (?!#{_localizador_de_atributo_anidado_(false)})(.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
   find_field_and_do_with_webrat :fill_in, campo, :with => valor
 end
 
-Cuando /^(?:que )?(?:completo|relleno)(?: los(?: siguientes)? campos)?:$/i do |tabla|
+Cuando /^(?:que )?#{_relleno_}(?: los(?: siguientes)? campos)?:$/i do |tabla|
   tabla.raw[1..-1].each do |row|
     Cuando "relleno \"#{row[0].gsub('"', '\"')}\" con \"#{row[1].gsub('"', '\"')}\""
   end
 end
 
-Cuando /^(?:que )?(?:completo|relleno) #{_localizador_de_atributo_anidado_} con (?:el valor )?['"](.+)["']$/i do |campo, modelo, nombre, valor|
+Cuando /^(?:que )?#{_relleno_} #{_localizador_de_atributo_anidado_} con (?:el valor )?['"](.+)["']$/i do |campo, modelo, nombre, valor|
   field_id = nested_field_id(last_mentioned, modelo, campo, nombre)
   find_field_and_do_with_webrat :fill_in, field_id, :with => valor
 end
 
-Cuando /^(?:que )?elijo (?:la|el)? ?(.+) ['"](.+)["']$/i do |campo, valor|
+Cuando /^(?:que )?elijo (?:#{_como_}) ?(.+) ['"](.+)["']$/i do |campo, valor|
   choose(convert_to_field(campo).to_s + '_' + valor.downcase.to_underscored)
 end
 
-Cuando /^(?:que )?marco (?:la|el)? ?(.+)$/i do |campo|
+Cuando /^(?:que )?elijo (?!#{_como_} )(.+)$/i do |texto_de_label|
+  choose texto_de_label.to_unquoted
+end
+
+Cuando /^(?:que )?marco (?:#{_como_})? ?(.+)$/i do |campo|
   find_field_and_do_with_webrat :check, campo
 end
 
-Cuando /^(?:que )?desmarco (?:la|el)? ?(.+)$/i do |campo|
+Cuando /^(?:que )?desmarco (?:#{_como_})? ?(.+)$/i do |campo|
   find_field_and_do_with_webrat :uncheck, campo
 end
 

@@ -322,7 +322,7 @@ Convenciones generales:
     Cuando adjunto el fichero "images/cucumber.jpg" en Fotografía actual
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-adjunto-el-fichero.feature)
 #### Elijo una opción (*radiobutton*)
-    Cuando elijo el color "VERDE"
+    Cuando elijo "Tomates verdes"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/cuando-elijo-de-radiobutton.feature)
 #### Marco (o desmarco) una casilla (*checkbox*)
     Cuando marco "color verde"
