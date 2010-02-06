@@ -42,8 +42,8 @@ module MundoPepino
     def add_resource_from_database(raw_model, name)
       model = convert_to_model(raw_model)
       field = field_for(model)
-      if resource = model.send("find_by_#{field}", name)
-        pile_up resource
+      if resource = model.send("find_by_#{field}", name, :select => :id)
+        pile_up model.find(resource.id)
       else
         raise NotFoundInDatabase.new(model, name)
       end
