@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación en campo has_many :through desde fit table en un recurso concreto
 
   Escenario: Asignación en campo has_many :through desde fit table en un recurso concreto

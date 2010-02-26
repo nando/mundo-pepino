@@ -1,4 +1,5 @@
-Característica: asignación simple de instancias en campo has_many :through 
+# language: es
+Característica: asignación simple de instancias en campo has_many :through
 
   Escenario: Asignación a un solo padre
   ########################################################################

@@ -1,3 +1,4 @@
+# language: es
 Característica: marco el checkbox
 
   Escenario: Marco (o desmarco) una casilla (*checkbox*)  

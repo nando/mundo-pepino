@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación simple de instancias en campo has_many polimórfico
 
   Escenario: Asignación simple de un campo has_many polimórfico

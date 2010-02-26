@@ -1,3 +1,4 @@
+# language: es
 Característica: elijo radiobutton
 
   Escenario: Elijo una opción de un radiobutton 

@@ -1,3 +1,4 @@
+# language: es
 Característica: creación desde step-table
 
   Escenario: Creación de uno o varios recursos a partir de una "step table"

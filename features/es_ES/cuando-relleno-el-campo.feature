@@ -1,3 +1,4 @@
+# language: es
 Característica: relleno el campo
 
   Escenario: Relleno un campo con un texto (*text* o *textarea*)  

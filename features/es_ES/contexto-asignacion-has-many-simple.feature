@@ -1,4 +1,5 @@
-Característica: asignación simple de instancias en campo has_many 
+# language: es
+Característica: asignación simple de instancias en campo has_many
 
   Escenario: Asignación simple de un campo has_many
   ########################################################################

@@ -1,3 +1,4 @@
+# language: es
 Característica: selecciono en listado/s
 
   Escenario: Selecciono una opción de una lista (*select*) 

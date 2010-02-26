@@ -1,3 +1,4 @@
+# language: es
 Característica: veo (o no) selectores y (opcionalmente) valores con step-table
 
   Escenario: Veo (o no) los siguientes selectores

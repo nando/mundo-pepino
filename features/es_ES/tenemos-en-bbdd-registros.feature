@@ -1,3 +1,4 @@
+# language: es
 Característica: Tenemos en BBDD uno o más registros de un modelo
 
   Escenario: Tenemos en BBDD uno o más registros de un modelo opcionalmente con un nombre concreto

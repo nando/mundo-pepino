@@ -1,3 +1,4 @@
+# language: es
 Característica: Veo un formulario con determinados campos
   Escenario: Veo un formulario con determinados campos convenientemente etiquetados
   # Patrón:

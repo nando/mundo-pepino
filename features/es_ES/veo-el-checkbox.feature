@@ -1,3 +1,4 @@
+# language: es
 Característica: veo el checkbox en un estado
 
   Escenario: Veo marcada (o desmarcada) una casilla (*checkbox*)  

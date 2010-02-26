@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación simple de instancias en campo has_many :through en un recurso concreto
 
   Escenario: Asignación simple de instancias en campo has_many :through en un recurso concreto

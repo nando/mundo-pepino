@@ -1,3 +1,4 @@
+# language: es
 Característica: Comprobamos la existencia de un enlace en la página actual
 
   Escenario: Veo un enlace a una URL específica opcionalmente indicada con un nombre coloquial

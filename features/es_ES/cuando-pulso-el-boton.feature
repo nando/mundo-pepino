@@ -1,3 +1,4 @@
+# language: es
 Característica: pulso el botón
 
   Escenario: Pincho en un bóton (*submit*)

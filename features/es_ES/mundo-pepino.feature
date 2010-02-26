@@ -1,3 +1,4 @@
+# language: es
 Característica: implementación de pasos habituales
   Para escribir sólo la definición de los pasos específicos de mi proyecto
   Como usuario de Cucumber

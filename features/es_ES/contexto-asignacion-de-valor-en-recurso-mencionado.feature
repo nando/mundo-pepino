@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación de un valor en el/los último/s resurso/s mencionado/s
 
   Escenario: Asignación de un valor en un campo de los últimos recursos definidos

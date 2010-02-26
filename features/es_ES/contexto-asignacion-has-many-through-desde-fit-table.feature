@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación en campo has_many :through desde fit table
 
   Escenario: Asignación en un solo padre

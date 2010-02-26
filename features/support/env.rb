@@ -1,7 +1,12 @@
 # Sets up the Rails environment for Cucumber
 ENV["RAILS_ENV"] ||= "cucumber"
 require File.expand_path(File.dirname(__FILE__) + '/app/config/environment')
+
+require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
+require 'cucumber/rails/rspec'
 require 'cucumber/rails/world'
+require 'cucumber/rails/active_record'
+require 'cucumber/web/tableish'
 
 # Whether or not to run each scenario within a database transaction.
 #
@@ -17,11 +22,9 @@ Cucumber::Rails::World.use_transactional_fixtures = true
 # per-scenario basis, simply tagging it with @allow-rescue
 ActionController::Base.allow_rescue = false
 
-# Comment out the next line if you don't want Cucumber Unicode support
-require 'cucumber/formatter/unicode'
-
 require 'webrat'
-require 'cucumber/webrat/element_locator' # Lets you do table.diff!(element_at('#my_table_or_dl_or_ul_or_ol').to_table)
+require 'webrat/core/matchers'
+require 'cucumber/webrat/element_locator' # Deprecated in favor of #tableish - remove this line if you don't use #element_at or #table_at
 
 Webrat.configure do |config|
   config.mode = :rails
@@ -29,4 +32,3 @@ Webrat.configure do |config|
 end
 
 require 'cucumber/rails/rspec'
-require 'webrat/core/matchers'

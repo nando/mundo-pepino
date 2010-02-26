@@ -1,3 +1,4 @@
+# language: es
 Característica: Borro el enésimo recurso desde su índice (**)
 
   Escenario: Borro el enésimo recurso desde la página de su índice (index)

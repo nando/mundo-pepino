@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación de valores para un campo has_many polimórfico
 
   Escenario: Asignación de valores para un campo has_many polimórfico

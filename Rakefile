@@ -9,7 +9,7 @@ require 'rake'
 
 unless ARGV.any? {|a| a =~ /^gems/}
   begin
-    gem 'cucumber', '> 0.3.101', '<= 0.4.4'
+    gem 'cucumber', '> 0.3.101', '<= 0.5.0'
     require 'cucumber/rake/task'
     namespace :mundo_pepino do
       build_tasks = [:lib, :rails_generators, :en_US, :es_ES]
@@ -51,7 +51,8 @@ if ENV['BUILDING_NEWGEM']
     self.rubyforge_name = self.name # TODO this is default value
     self.extra_deps = [
       ['rails', '>=2.0.0'],
-      ['cucumber', '<= 0.4.4'],
+      ['cucumber', '<= 0.5.0'],
+      ['cucumber-rails', '<= 0.2.0'],
       ['webrat', '>=0.5.3'],
       ['rspec', '>=1.2.6'],
       ['rspec-rails', '>=1.2.6'],

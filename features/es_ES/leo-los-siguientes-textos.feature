@@ -1,3 +1,4 @@
+# language: es
 Característica: leo (o no) una serie de textos expresados en step-table
 
   Escenario: Leo (o no) los siguientes textos

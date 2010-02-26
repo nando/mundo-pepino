@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación de valores para un campo has_many polimórfico de un recurso concreto
 
   Escenario: Asignación de valores para un campo has_many polimórfico de un recurso concreto

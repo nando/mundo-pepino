@@ -1,3 +1,4 @@
+# language: es
 Característica: pulso una secuencia de enlaces y/o botones
 
   Escenario: Pincho/pulso una secuencia de enlaces

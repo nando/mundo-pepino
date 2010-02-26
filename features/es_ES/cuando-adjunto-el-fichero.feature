@@ -1,3 +1,4 @@
+# language: es
 Característica: adjunto el fichero
   ATENCIÓN: Este test falla con Rails 2.3.2 debido al escapado que aplica
   ActionController::Integration::Session a las claves de los atributos en

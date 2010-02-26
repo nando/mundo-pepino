@@ -1,3 +1,4 @@
+# language: es
 Característica: etiqueta/selector con valor
 
   Escenario: Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto 

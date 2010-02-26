@@ -1,3 +1,4 @@
+# language: es
 Característica: Debería encontrarme en una página de mi sitio
 
   Escenario: Debería estar en una URL específica op. indicada con un nombre coloquial

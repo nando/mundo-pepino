@@ -1,3 +1,4 @@
+# language: es
 Característica: pulso el enlace opcionalmente dentro de un selector
 
   Esquema del escenario: Pincho/pulso en un enlace/enlace

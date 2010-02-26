@@ -1,3 +1,4 @@
+# language: es
 Característica: leo (o no) un texto
 
   Escenario: Leo (o no) un texto 

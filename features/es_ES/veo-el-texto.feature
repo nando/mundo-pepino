@@ -1,3 +1,4 @@
+# language: es
 Característica: veo (o no) un texto opcionalmente dentro de un selector
 
   Escenario: Veo (o no) un texto

@@ -1,3 +1,4 @@
+# language: es
 Característica: Creación de recurso/s con un valor en alguno de sus campos
   ########################################################################
   # Patrón: 

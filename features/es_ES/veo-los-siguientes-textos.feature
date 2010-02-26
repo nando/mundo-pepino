@@ -1,3 +1,4 @@
+# language: es
 Característica: veo (o no) una serie de textos expresados en step-table
 
   Escenario: Veo (o no) los siguientes textos

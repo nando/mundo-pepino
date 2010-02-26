@@ -24,7 +24,8 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, [">= 2.0.0"])
-      s.add_runtime_dependency(%q<cucumber>, ["<= 0.4.4"])
+      s.add_runtime_dependency(%q<cucumber>, ["<= 0.5.0"])
+      s.add_runtime_dependency(%q<cucumber-rails>, ["<= 0.2.0"])
       s.add_runtime_dependency(%q<webrat>, [">= 0.5.3"])
       s.add_runtime_dependency(%q<rspec>, [">= 1.2.6"])
       s.add_runtime_dependency(%q<rspec-rails>, [">= 1.2.6"])
@@ -33,7 +34,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<hoe>, [">= 2.3.3"])
     else
       s.add_dependency(%q<rails>, [">= 2.0.0"])
-      s.add_dependency(%q<cucumber>, ["<= 0.4.4"])
+      s.add_dependency(%q<cucumber>, ["<= 0.5.0"])
+      s.add_runtime_dependency(%q<cucumber-rails>, ["<= 0.2.0"])
       s.add_dependency(%q<webrat>, [">= 0.5.3"])
       s.add_dependency(%q<rspec>, [">= 1.2.6"])
       s.add_dependency(%q<rspec-rails>, [">= 1.2.6"])
@@ -43,7 +45,8 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<rails>, [">= 2.0.0"])
-    s.add_dependency(%q<cucumber>, ["<= 0.4.4"])
+    s.add_dependency(%q<cucumber>, ["<= 0.5.0"])
+    s.add_runtime_dependency(%q<cucumber-rails>, ["<= 0.2.0"])
     s.add_dependency(%q<webrat>, [">= 0.5.3"])
     s.add_dependency(%q<rspec>, [">= 1.2.6"])
     s.add_dependency(%q<rspec-rails>, [">= 1.2.6"])

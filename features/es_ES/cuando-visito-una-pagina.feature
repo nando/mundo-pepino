@@ -1,4 +1,5 @@
-Característica: Solicitud de una página ("cuando visito" o "dado que estoy en") 
+# language: es
+Característica: Solicitud de una página ("cuando visito" o "dado que estoy en")
 
   Esquema del escenario: Carga de URL específica opcionalmente indicada con un nombre coloquial
   ########################################################################

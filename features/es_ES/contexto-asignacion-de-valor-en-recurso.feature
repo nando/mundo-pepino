@@ -1,3 +1,4 @@
+# language: es
 Característica: asignación de un valor en un recurso concreto
 
   Escenario: Asignación de un valor en un campo (atributo, belongs_to o has_one) de un recurso concreto

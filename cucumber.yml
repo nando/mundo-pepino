@@ -1,4 +1,4 @@
 lib: -r features/support/env.rb -r features/step_definitions/lib_steps.rb features/lib/
-es_ES: --require features/support/env.rb --require features/step_definitions/es_ES.rb --language es features/es_ES/
-en_US: --require features/support/env.rb --require features/step_definitions/en_US.rb --language en features/en_US/
+es_ES: --require features/support/env.rb --require features/step_definitions/es_ES.rb features/es_ES/
+en_US: --require features/support/env.rb --require features/step_definitions/en_US.rb features/en_US/
 rails_generators: -r features/support/rails_generators_env.rb -r features/step_definitions/rails_generators_steps.rb features/rails_generators/

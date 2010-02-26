@@ -1,3 +1,4 @@
+# language: es
 Característica: Veo una tabla con un contenido concreto
   Escenario: Veo una tabla con un contenido concreto en sus celdas
   # Patrón:

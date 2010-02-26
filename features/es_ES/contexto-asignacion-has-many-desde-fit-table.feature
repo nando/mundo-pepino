@@ -1,3 +1,4 @@
+# language: es
 Característica: Asignación en un campo has_many desde fit-tables
 
   Esquema del escenario: Asignación de campo has_many desde fit-table

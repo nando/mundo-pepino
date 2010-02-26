@@ -1,3 +1,4 @@
+# language: es
 Característica: debería ver un campo con un valor concreto
 
   Escenario: Debería ver un campo de texto con un valor concreto 
