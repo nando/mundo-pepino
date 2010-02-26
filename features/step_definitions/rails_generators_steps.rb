@@ -45,6 +45,13 @@ Then /^I should see '([^\']*)'$/ do |text|
   actual_output.should contain(text)
 end
 
+Then /^I should see '([^\']*)' in (.+)$/ do |text, path|
+  in_project_folder do
+    content = File.read(path)
+    content.should contain(text)
+  end
+end
+
 Given /^I replace "(.+)" with "(.+)" in (.+)$/ do |from, to, path|
   in_project_folder do
     content = File.read(path).gsub(from, to)

@@ -30,3 +30,17 @@ Feature: caracteristica generator
       |     generator      |
       | mundo_pepino       |
       | mundo_pepino_steps |
+    
+
+  Scenario Outline: generate característica setting language: es at the begging of the file
+    Given I run executable "script/generate" with arguments "<generator>"
+
+     When I run executable "script/generate" with arguments "caracteristica Orchard Huerto name:string:nombre"
+
+     Then I should see '# language: es' in features/gestion_de_huertos.feature
+
+  Examples:
+    |     generator      |
+    | mundo_pepino       |
+    | mundo_pepino_steps |
+
