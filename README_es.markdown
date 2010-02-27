@@ -497,10 +497,11 @@ Como plugin (ver dependencias más abajo):
 ### Dependencias
   Si instalamos la gema junto con ella deberían quedar instaladas todas sus dependencias.
 
-  Si instalamos mundo-pepino como plugin debemos tener instaladas las gemas o plugins de **cucumber**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo, para instalar todas ellas como plugins:
+  Si instalamos mundo-pepino como plugin debemos tener instaladas las gemas o plugins de **cucumber**, **cucumber-rails**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo, para instalar todas ellas como plugins:
 
     gem install term-ansicolor treetop diff-lcs nokogiri # dependencias de Cucumber
     script/plugin install git://github.com/aslakhellesoy/cucumber.git
+    script/plugin install git://github.com/aslakhellesoy/cucumber-rails.git
     script/plugin install git://github.com/brynary/webrat.git
     script/plugin install git://github.com/dchelimsky/rspec.git
     script/plugin install git://github.com/dchelimsky/rspec-rails.git
