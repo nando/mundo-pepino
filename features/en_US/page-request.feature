@@ -1,3 +1,4 @@
+#language: en
 Feature: Then I see a text
 
   Scenario Outline: Then I see a text

@@ -1,3 +1,4 @@
+# language: en
 Feature: MP gives good feedback :through exceptions
   Background:
       Given a crop called 'My crop'

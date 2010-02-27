@@ -1,3 +1,4 @@
+# language: en
 Feature: Then I see a text
 
   Scenario: Then I see a text

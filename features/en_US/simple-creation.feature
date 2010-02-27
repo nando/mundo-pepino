@@ -1,3 +1,4 @@
+# language: en
 Feature: Simple creation
 
   Scenario: Creation of one or more instances of a model with optional name/s
