@@ -121,6 +121,10 @@ module Capextensions
     options[:text] = content unless content.nil?
     have_css(path, options)
   end
+
+  def contain(content)
+    have_text(content)
+  end
 end
 
 World(Capextensions)
