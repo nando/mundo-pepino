@@ -129,6 +129,42 @@ module MundoPepino
       end
       children.detect {|c| c.id == child.id}.should_not be_nil
     end
+
+    def find_field_and_do(action, raw_field, options = nil)
+      if defined?(Webrat)
+        # Webrat
+        find_field_and_do_with_webrat(action, raw_field, options)
+      else
+        # Capybara
+        find_field_and_do_with_capybara(action, raw_field, options)
+      end
+    end
+
+    def find_field_and_do_with_capybara(action, raw_field, options = nil)
+      do_with_capybara action, raw_field.to_unquoted.to_translated, options # a pelo (localización vía labels)
+    rescue Capybara::ElementNotFound 
+      field = convert_to_field(raw_field, last_mentioned_model)
+      begin
+        do_with_capybara action, field.to_s, options # campo traducido tal cual...
+      rescue Capybara::ElementNotFound
+        #TODO cucumber -p capybara_es_ES features/es_ES/tenemos-en-bbdd-registros.feature:50 # Scenario: dos campos has_many del mismo modelo
+        # se busca un campo "name" tenemos "for=session_name" y el texto del label es 'Name' capybara es casesensitive
+        raise $! if field.to_s.capitalize == field.to_s
+        do_with_capybara action, field.to_s.capitalize, options 
+      end
+    end
+
+    def do_with_capybara(action, field, options)
+      if options
+        if options[:path] # and options[:content_type]
+          self.send action, field, options[:path]#, options[:content_type]
+        else
+          self.send action, field, options
+        end
+      else
+        self.send action, field
+      end
+    end
     
     def find_field_and_do_with_webrat(action, raw_field, options = nil)
       do_with_webrat action, raw_field.to_unquoted.to_translated, options # a pelo (localización vía labels)
@@ -210,7 +246,13 @@ module MundoPepino
 
     def nested_field_id_prefix(parent_resource, resource)
       preprefix = nested_field_prefix_prefix(parent_resource.mr_model, resource.class)
-      Nokogiri::HTML.parse(response.body).xpath(
+      if defined?(Webrat)
+        html = response.body
+      else
+        html = body
+      end
+
+      Nokogiri::HTML.parse(html).xpath(
         "//input[@type='hidden' and @value=#{resource.id}]"
       ).each do |input|
         return "#{preprefix}_#{$1}_" if input.attributes['id'].to_s =~ /#{preprefix}_([0-9]+)_id/
@@ -220,8 +262,14 @@ module MundoPepino
     def new_nested_field_id(parent_resource, model, field)
       preprefix = nested_field_prefix_prefix(parent_resource.mr_model, model)
       (0..MAX_NESTED_RESOURCES).each do |index|
-        if Nokogiri::HTML.parse(response.body).css("##{preprefix}_#{index}_id").empty?
-          return "#{preprefix}_#{index}_#{field}"
+        if defined?(Webrat)
+          if Nokogiri::HTML.parse(response.body).css("##{preprefix}_#{index}_id").empty?
+            return "#{preprefix}_#{index}_#{field}"
+          end
+        else
+          if Nokogiri::HTML.parse(body).css("##{preprefix}_#{index}_id").empty?
+            return "#{preprefix}_#{index}_#{field}"
+          end
         end
       end
       # TODO: raise too many nested resources
@@ -232,9 +280,17 @@ module MundoPepino
     end
 
     def should_or_not_contain_text(params)
-      response.send(
-        shouldify(params[:should]), 
-        contain(params[:text].to_unquoted.to_translated.to_regexp))
+      if defined?(Webrat)
+        response.send(
+                shouldify(params[:should]),
+                contain(params[:text].to_unquoted.to_translated.to_regexp))
+      else
+        #TODO capybara README recommends have_content
+        page.send(
+                shouldify(params[:should]),
+                have_text(params[:text].to_unquoted.to_translated.to_regexp)
+                )
+      end
     end
   end  
 end

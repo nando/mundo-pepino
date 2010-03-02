@@ -52,6 +52,7 @@ module CommonHelpers
 end
 
 World(CommonHelpers)
+
 module Matchers
   def contain(expected)
     simple_matcher("contain #{expected.inspect}") do |given, matcher|

@@ -70,6 +70,7 @@ Cuando /^(?:que )?#{_visito_} (.+)$/i do |pagina|
 end
 
 Cuando /^(?:que )?#{_pulso_} (?:en )?el bot[oó]n (.+)$/i do |boton|
+  #TODO features/es_ES/cuando-adjunto-el-fichero.feature:22 # Capybara is case sensitive
   click_button(boton.to_unquoted.to_translated)
 end
 
@@ -101,7 +102,7 @@ Cuando /^(?:que )?#{_pulso_} (?:en )?los (?:siguientes )?(?:enlaces|botones)(?: 
 end
 
 Cuando /^(?:que )?#{_relleno_} (?!#{_localizador_de_atributo_anidado_(false)})(.+) con (?:el valor )?['"](.+)["']$/i do |campo, valor|
-  find_field_and_do_with_webrat :fill_in, campo, :with => valor
+  find_field_and_do :fill_in, campo, :with => valor
 end
 
 Cuando /^(?:que )?#{_relleno_}(?: los(?: siguientes)? campos)?:$/i do |tabla|
@@ -112,7 +113,7 @@ end
 
 Cuando /^(?:que )?#{_relleno_} #{_localizador_de_atributo_anidado_} con (?:el valor )?['"](.+)["']$/i do |campo, modelo, nombre, valor|
   field_id = nested_field_id(last_mentioned, modelo, campo, nombre)
-  find_field_and_do_with_webrat :fill_in, field_id, :with => valor
+  find_field_and_do :fill_in, field_id, :with => valor
 end
 
 Cuando /^(?:que )?elijo (?:#{_como_}) ?(.+) ['"](.+)["']$/i do |campo, valor|
@@ -124,31 +125,45 @@ Cuando /^(?:que )?elijo (?!#{_como_} )(.+)$/i do |texto_de_label|
 end
 
 Cuando /^(?:que )?marco (?:#{_como_})? ?(.+)$/i do |campo|
-  find_field_and_do_with_webrat :check, campo
+  find_field_and_do :check, campo
 end
 
 Cuando /^(?:que )?desmarco (?:#{_como_})? ?(.+)$/i do |campo|
-  find_field_and_do_with_webrat :uncheck, campo
+  find_field_and_do :uncheck, campo
 end
 
 Cuando /^(?:que )?adjunto el fichero ['"](.*)["'] (?:a|en) (.*)$/ do |ruta, campo|
-  find_field_and_do_with_webrat :attach_file, campo, 
+  find_field_and_do :attach_file, campo, 
     {:path => ruta, :content_type => ruta.to_content_type}
 end
 
 Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: (?:en (?:el listado de )?|como )(?!#{_fecha_y_o_hora_})(.+))?$/i do |valor, campo|
   begin
+    # TODO
+    # Y selecciono "Hortalizas" en el listado de "Tipos de cultivo"  # lib/mundo_pepino/es_ES/definitions.rb:139
+    # En la página el label es -> "Tipo de cultivo"
     if campo
-      select valor, :from => campo.to_unquoted.to_translated  # Vía label
+      select valor, :from => campo.to_unquoted.to_translated # Vía label
     else
-      select valor
+      # TODO capybara always need a :from
+      #features/es_ES/cuando-selecciono-en-listado.feature:4 # Scenario: Selecciono una opción de una lista (*select*)
+      # Y selecciono "Hortalizas" debo pasar un string vacio por como capybara construye el objeto locator en concreto
+      # el uso de un función s(string) que sanitiza strings
+      if defined?(Webrat)
+        select valor
+      else
+        select valor, :from => ""
+      end
     end
-  rescue Webrat::NotFoundError
-    begin
-      previous_exception = $!
-      select(valor, :from => convert_to_field(campo)) # Sin label
-    rescue
-      raise "#{previous_exception}\nand\n#{$!}"
+  rescue StandardError => e
+    if (defined?(Webrat) && e.is_a?(Webrat::NotFoundError)) || (defined?(Capybara) && e.is_a?(Capybara::ElementNotFound))
+      begin
+        previous_exception = $!
+        # TODO added to_s to capybara pass the steps
+        select(valor, :from => convert_to_field(campo).to_s) # Sin label
+      rescue
+        raise "#{previous_exception}\nand\n#{$!}"
+      end
     end
   end
 end
@@ -192,7 +207,7 @@ Entonces /^(#{_leo_o_no_}) el texto (.+)?$/i do |should, text|
   begin
     HTML::FullSanitizer.new.sanitize(response.body).send(shouldify(should)) =~ /#{Regexp.escape(text.to_unquoted.to_translated)}/m
   rescue Spec::Expectations::ExpectationNotMetError
-    webrat.save_and_open_page
+    defined?(Webrat) ? webrat.save_and_open_page : save_and_open_page 
     raise
   end
 end
@@ -211,6 +226,11 @@ end
 
 Entonces /^(#{_veo_o_no_}) #{_la_etiqueta_} (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
   lambda {
+    # TODO tag in upcase must not be used
+    # features/es_ES/veo-etiqueta-con-valor.feature:4
+    tag = tag.downcase # Capybara is casesensitive
+    # For capybara page.should have_css(tag.to_unquoted, :text => /.*#{Regexp.escape(value.to_translated)}.*/i)
+
     if value
       response.should have_tag(tag.to_unquoted, /.*#{Regexp.escape(value.to_translated)}.*/i)
     else
@@ -232,7 +252,10 @@ end
 
 Entonces /^(#{_veo_o_no_}) (?:un|el) enlace (?:al? |para )?(.+)?$/i do |should, pagina|
   lambda {
-    response.should have_tag('a[href=?]', pagina.to_unquoted.to_page)
+    # TODO
+    # In webrat response.should have_tag('a[href=?]', pagina.to_unquoted.to_page)
+    # For capybara page.should page.should have_css("a[href='#{pagina.to_unquoted.to_page}']")
+    response.should have_tag("a[href='#{pagina.to_unquoted.to_page}']")
   }.send(not_shouldify(should), raise_error)
 end
 
@@ -242,12 +265,18 @@ Entonces /^(#{_veo_o_no_}) el campo (.+) con(?: el (?:valor|texto))? ['"]?(.+?)[
 end
 
 Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
-  field_labeled(campo.to_unquoted).send shouldify(should), be_checked
+  # TODO 
+  if defined?(Webrat)
+    field_labeled(campo.to_unquoted).send shouldify(should), be_checked
+  else
+    has_checked_field?(campo.to_unquoted).send shouldify(should), be_true
+  end
 end
 
 Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, table_id, valores|
   table_id = "##{table_id.to_unquoted}" if table_id
   shouldified = shouldify(should)
+  #TODO For capybara page instead response and have_css instead have_selector
   response.send shouldified, have_selector("table#{table_id}")
 
   if have_selector("table#{table_id} tbody").matches?(response)
@@ -260,7 +289,7 @@ Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|l
 
   valores.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.send shouldified, 
+      response.send shouldified,
       have_selector("table#{table_id} #{tbody} tr:nth-child(#{i+start_row})>td:nth-child(#{j+1})") { |td|
         td.inner_text.should =~ /#{cell == '.*' ? cell : Regexp.escape((cell||"").to_translated)}/
       }
@@ -280,10 +309,10 @@ Entonces /^(#{_veo_o_no_}) un formulario con (?:el|los) (?:siguientes? )?(?:camp
           with_tag('div') do
             with_tag "label", label
             with_tag "input[type='radio']"
-          end  
+          end
         when "select", "textarea":
           field_labeled(label).element.name.should == type
-        else  
+        else
           field_labeled(label).element.attributes['type'].to_s.should == type
       end
     end

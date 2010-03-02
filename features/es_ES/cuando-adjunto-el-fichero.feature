@@ -13,11 +13,11 @@ Característica: adjunto el fichero
   ########################################################################
     Cuando visito la portada
          Y adjunto el fichero "Rakefile" en Fichero Adjunto
-         Y pincho en el botón "Galleta de la fortuna"
+         Y pincho en el botón "Galleta de la Fortuna"
     Entonces veo en la etiqueta div#file_filename el valor "Rakefile"
 
   Escenario: Adjunto un fichero local en un campo de formulario (como Given)
     Dado que visito la portada
        Y que adjunto el fichero "Rakefile" en Fichero Adjunto
-    Cuando pincho en el botón "Galleta de la fortuna"
+    Cuando pincho en el botón "Galleta de la Fortuna"
     Entonces veo en la etiqueta div#file_filename el valor "Rakefile"

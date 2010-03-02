@@ -17,22 +17,22 @@ Característica: selecciono en listado/s
   ########################################################################
     Cuando visito la portada
          Y selecciono "Hortalizas" en el listado de "Tipos de cultivo"
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
 
     Cuando visito la portada
          Y selecciono 'Frutales' en Tipos de Cultivo
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#orchard_type con el valor "Frutales"
 
     Cuando visito la portada
          Y selecciono 'Frutales' como Tipos de Cultivo
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#orchard_type con el valor "Frutales"
 
     Cuando visito la portada
          Y selecciono 'Hortalizas'
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
 
   Escenario: Selecciono una fecha y hora sin indicar un campo específico
@@ -57,12 +57,12 @@ Característica: selecciono en listado/s
   # (continua más abajo)
     Cuando visito la portada
          Y selecciono "25 de diciembre de 2008, 10:00" como fecha y hora
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#fecha-preferida con el valor "25/12/2008"
            Y veo el tag div#hora-preferida con el valor "10:00"
     Cuando visito la portada
          Y selecciono 1 de setiembre de 1998, 12:46" como fecha y hora
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#fecha-preferida con el valor "1/9/1998"
            Y veo el tag div#hora-preferida con el valor "12:46"
 
@@ -100,7 +100,7 @@ Característica: selecciono en listado/s
     Cuando visito la portada
          Y selecciono "23 de noviembre de 2004, 11:20" como fecha y hora Preferida
          Y selecciono 25 de enero de 2005, 10:30 como fecha y hora de "Alternativa"
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#fecha-preferida con el valor "23/11/2004"
            Y veo el tag div#hora-preferida con el valor "11:20"
            Y veo el tag div#fecha-alternativa con el valor "25/1/2005"
@@ -126,12 +126,12 @@ Característica: selecciono en listado/s
   # (continua más abajo)
     Cuando visito la portada
          Y selecciono 16:23 como hora
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#hora-preferida con el valor "16:23"
 
     Cuando visito la portada
          Y selecciono "4:23PM" como hora
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#hora-preferida con el valor "16:23"
 
   Escenario: Selecciono una hora para un campo específico
@@ -180,12 +180,12 @@ Característica: selecciono en listado/s
   # (continua más abajo)
     Cuando visito la portada
          Y selecciono "28 de marzo de 2005" como fecha
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#fecha-preferida con el valor "28/3/2005"
 
     Cuando visito la portada
          Y selecciono "2 de agosto de 2008" como la fecha
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#fecha-preferida con el valor "2/8/2008"
 
   Escenario: Selecciono una fecha para un campo específico
@@ -210,7 +210,7 @@ Característica: selecciono en listado/s
     Cuando visito la portada
          Y selecciono 1 de octubre de 2009 como fecha para la vendimia
          Y selecciono 15 de marzo de 2010 como fecha de "poda"
-         Y pulso el botón "Galleta de la fortuna"
+         Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#fecha-de-vendimia con el valor "1/10/2009"
            Y veo el tag div#fecha-de-poda con el valor "15/3/2010"
 
@@ -220,7 +220,7 @@ Característica: selecciono en listado/s
        Y que selecciono "23 de noviembre de 2009, 11:20" como fecha y hora "Alternativa"
        Y que selecciono 1 de marzo de 2009 como fecha de la poda
        Y que selecciono 'Hortalizas'
-    Cuando pulso el botón "Galleta de la fortuna"
+    Cuando pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
            Y veo el tag div#fecha-preferida con el valor "25/1/2009"
            Y veo el tag div#hora-preferida con el valor "10:30"

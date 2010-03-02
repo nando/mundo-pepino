@@ -21,21 +21,21 @@ Característica: relleno el campo
   ########################################################################
     Cuando visito la portada
          Y relleno "campo de texto" con "Fertilizador"
-         Y pincho en el botón "Galleta de la fortuna"
+         Y pincho en el botón "Galleta de la Fortuna"
     Entonces veo el tag div#text_field con el valor "Fertilizador"
     Cuando visito la portada
          Y completo Campo de texto con el valor "Berenjenas"
-         Y pincho en el botón "Galleta de la fortuna"
+         Y pincho en el botón "Galleta de la Fortuna"
     Entonces veo el tag div#text_field con el valor "Berenjenas"
     
     Cuando visito la portada
          Y completo "área de texto" con el valor "Garbanzos"
-         Y pincho en el botón "Galleta de la fortuna"
+         Y pincho en el botón "Galleta de la Fortuna"
     Entonces veo el tag div#textarea con el valor "Garbanzos"
 
   Escenario: Relleno un campo con un texto (desde Given)
     Dado que visito la portada
        Y que completo "área de texto" con el valor "Garbanzos"
-    Cuando pincho en el botón "Galleta de la fortuna"
+    Cuando pincho en el botón "Galleta de la Fortuna"
     Entonces veo el tag div#textarea con el valor "Garbanzos"
     

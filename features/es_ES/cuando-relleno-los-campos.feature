@@ -24,7 +24,7 @@ Característica: relleno los campos
       | Campo          | Valor        |
       | campo de texto | Fertilizador |
       | área de texto  | Garbanzos    |
-    Y pincho en el botón "Galleta de la fortuna"
+    Y pincho en el botón "Galleta de la Fortuna"
     Entonces veo el tag div#text_field con el valor "Fertilizador"
            Y veo el tag div#textarea con el valor "Garbanzos"
   Ejemplos:

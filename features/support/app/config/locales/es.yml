@@ -158,5 +158,5 @@ es:
   app:
     welcome:
       title: 'Portada de Mundo Pepino'
-      cookie_fortune: 'Galleta de la fortuna'
+      cookie_fortune: 'Galleta de la Fortuna'
       interpolated: 'Mensaje con {{name}}'

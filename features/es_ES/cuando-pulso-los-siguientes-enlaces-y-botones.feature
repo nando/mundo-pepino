@@ -39,12 +39,12 @@ Característica: pulso una secuencia de enlaces y/o botones
     Dado que visito la home
        Y que pulso en los siguientes enlaces y botones:
          | tipo    | nombre                |
-         | botón   | Galleta de la fortuna |
+         | botón   | Galleta de la Fortuna |
          | enlace  | Volver                |
        Y que pulso en los siguientes botones y enlaces:
          | tipo    | nombre                |
-         | botón   | Galleta de la fortuna |
+         | botón   | Galleta de la Fortuna |
          | enlace  | Volver                |
-         | botón   | Galleta de la fortuna |
+         | botón   | Galleta de la Fortuna |
     Entonces veo la etiqueta H1 con el valor "Sorry, not implemented yet"
     

@@ -34,16 +34,16 @@ Característica: elijo radiobutton
   ########################################################################
     Cuando visito la portada
          Y elijo la nacionalidad "Pakistaní"
-         Y pincho el botón "Galleta de la fortuna"
+         Y pincho el botón "Galleta de la Fortuna"
     Entonces veo el tag div#nationality con el valor "Pakistaní"
     
     Cuando visito la portada
          Y elijo "Verde"
-         Y pincho el botón "Galleta de la fortuna"
+         Y pincho el botón "Galleta de la Fortuna"
     Entonces veo el tag div#color con el valor "verde"
     
   Escenario: Elijo una opción de un radiobutton (desde Given) 
     Dado que visito la portada
        Y que elijo como color "VERDE"
-    Cuando pincho el botón "Galleta de la fortuna"
+    Cuando pincho el botón "Galleta de la Fortuna"
     Entonces veo el tag div#color con el valor "verde"
