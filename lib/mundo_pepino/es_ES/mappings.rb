@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module MundoPepino
   class << self
     include Matchers::Fragments

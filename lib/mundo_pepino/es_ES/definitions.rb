@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # MundoPepino's step definitions in es_ES
 # Creación simple con nombre opcional
 Dado /^(?:que tenemos )?(#{_numero_}) (?!.+ #{_cuyo_})(.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
@@ -303,14 +304,14 @@ Entonces /^(#{_veo_o_no_}) un formulario con (?:el|los) (?:siguientes? )?(?:camp
     elementos.raw[1..-1].each do |row|
       label, type = row[0].to_translated, row[1]
       case type
-        when "submit":
+        when "submit" then
           with_tag "input[type='submit'][value='#{label}']"
-        when "radio":
+        when "radio" then
           with_tag('div') do
             with_tag "label", label
             with_tag "input[type='radio']"
           end
-        when "select", "textarea":
+        when "select", "textarea" then
           field_labeled(label).element.name.should == type
         else
           field_labeled(label).element.attributes['type'].to_s.should == type
