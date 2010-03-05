@@ -1,3 +1,9 @@
+== 0.2.0 2010-3-5
+
+* Two great features by Paco Guzman (thanks Paco!!!)
+  * Ready for Cucumber 0.6.2
+  * Capybara support
+
 == 0.1.10 2010-1-19
 
 * Cucumber dependency freezed to 0.4.4

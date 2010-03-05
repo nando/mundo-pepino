@@ -9,10 +9,11 @@ require 'rake'
 
 unless ARGV.any? {|a| a =~ /^gems/}
   begin
-    gem 'cucumber', '> 0.3.101', '<= 0.5.0'
+    gem 'cucumber', '>= 0.6.2'
     require 'cucumber/rake/task'
     namespace :mundo_pepino do
-      build_tasks = [:lib, :rails_generators, :en_US, :es_ES, :capybara_en_US, :capybara_es_ES]
+      #build_tasks = [:lib, :rails_generators, :en_US, :es_ES, :capybara_en_US, :capybara_es_ES]
+      build_tasks = [:lib, :rails_generators, :en_US, :es_ES, :capybara_en_US]
       build_tasks.each do |lang|
         Cucumber::Rake::Task.new(lang) do |t|
           t.cucumber_opts = "--profile #{lang} --format pretty"
@@ -51,12 +52,12 @@ if ENV['BUILDING_NEWGEM']
     self.rubyforge_name = self.name # TODO this is default value
     self.extra_deps = [
       ['rails', '>=2.0.0'],
-      ['cucumber', '<= 0.5.0'],
-      ['cucumber-rails', '<= 0.2.0'],
-      ['webrat', '>=0.5.3'],
-      ['rspec', '>=1.2.6'],
-      ['rspec-rails', '>=1.2.6'],
-      ['nokogiri', '>= 1.2.0'],
+      ['cucumber', '>= 0.6.2'],
+      ['cucumber-rails', '>= 0.3.0'],
+      ['webrat', '>=0.7.0'],
+      ['rspec', '>=1.3.0'],
+      ['rspec-rails', '>=1.3.0'],
+      ['nokogiri', '>= 1.4.1'],
       ['string-mapper','>= 0.1.2.1']
     ]
   end
