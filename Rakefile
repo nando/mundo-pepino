@@ -19,9 +19,6 @@ unless ARGV.any? {|a| a =~ /^gems/}
         end
       end
 
-      # TODO: enable this task:
-      build_tasks.delete :capybara_es_ES
-  
       desc 'Run all MundoPepino features on every supported language'
       task :all => build_tasks
     end
