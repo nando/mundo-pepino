@@ -12,13 +12,15 @@ unless ARGV.any? {|a| a =~ /^gems/}
     gem 'cucumber', '>= 0.6.2'
     require 'cucumber/rake/task'
     namespace :mundo_pepino do
-      #build_tasks = [:lib, :rails_generators, :en_US, :es_ES, :capybara_en_US, :capybara_es_ES]
-      build_tasks = [:lib, :rails_generators, :en_US, :es_ES, :capybara_en_US]
+      build_tasks = [:lib, :rails_generators, :en_US, :es_ES, :capybara_en_US, :capybara_es_ES]
       build_tasks.each do |lang|
         Cucumber::Rake::Task.new(lang) do |t|
           t.cucumber_opts = "--profile #{lang} --format pretty"
         end
       end
+
+      # TODO: enable this task:
+      build_tasks.delete :capybara_es_ES
   
       desc 'Run all MundoPepino features on every supported language'
       task :all => build_tasks
