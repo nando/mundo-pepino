@@ -1,3 +1,4 @@
+# encoding: UTF-8 
 require 'mundo_pepino/es_ES'
 
 # Hack to manage that Webrat uses strftime(%B) to select months at forms

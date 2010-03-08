@@ -1,3 +1,4 @@
+# encoding: UTF-8 
 # build stuff
 require(File.join(File.dirname(__FILE__), 'features', 'support', 'app', 'config', 'boot'))
 require 'rake'
