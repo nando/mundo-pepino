@@ -275,14 +275,13 @@ Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |sh
 end
 
 Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, table_id, valores|
-  table_id = "##{table_id.to_unquoted}" if table_id
+  table_id = "[@id = '#{table_id.to_unquoted}']" if table_id
   shouldified = shouldify(should)
-  #TODO For capybara page instead response and have_css instead have_selector
-  response.send shouldified, have_selector("table#{table_id}")
+  response.send shouldified, have_xpath("//table#{table_id}")
 
-  if have_selector("table#{table_id} tbody").matches?(response)
+  if have_xpath("//table#{table_id}/tbody").matches?(response)
     start_row = 1
-    tbody = "tbody"
+    tbody = "/tbody"
   else
     start_row = 2
     tbody = ""
@@ -290,8 +289,8 @@ Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|l
 
   valores.raw[1..-1].each_with_index do |row, i|
     row.each_with_index do |cell, j|
-      response.send shouldified,
-      have_selector("table#{table_id} #{tbody} tr:nth-child(#{i+start_row})>td:nth-child(#{j+1})") { |td|
+      response.send shouldified, 
+      have_xpath("//table#{table_id}#{tbody}/tr[position() = #{i+start_row} ]/td[position() = #{j+1}]") { |td|
         td.inner_text.should =~ /#{cell == '.*' ? cell : Regexp.escape((cell||"").to_translated)}/
       }
     end
