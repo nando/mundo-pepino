@@ -595,6 +595,19 @@ Y posteriormente en las vistas llamamos al helper con algo parecido a:
 
     <%= pepino.datetime_select :harvested_at, :use_month_names => Meses %>
 
+#### [Capybara](http://github.com/jnicklas/capybara/)
+De fábrica MundoPepino utiliza webrat para los steps mas comunes.
+
+Opcionalmente MundoPepino puede utilizar Capybara que tiene muchas ventajas frente a webrat.
+
+Para ello por un lado tenemos que instalar la gema (para más información sobre Capybara consultar (aquí)[http://github.com/jnicklas/capybara/]):
+
+    gem install capybara
+
+...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio `features/support`) tenemos que requerir la librería.
+
+require  File.expand_path(File.dirname(__FILE__) + '/../../vendor/plugins/mundo-pepino/features/support/capybara/capextensions')
+
 ## Uso
 ### generate mundo\_pepino
 
