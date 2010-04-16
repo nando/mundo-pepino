@@ -11,6 +11,14 @@ require 'mundo_pepino/config'
 
 require 'string-mapper'
 
+if defined?(Capybara)
+  require  'mundo_pepino/capybara/extensions'
+else
+  unless defined?(Webrat)
+    raise "MundoPepino depends on Capybara or Webrat. Please load any of them and try again. Thanks!"
+  end
+end
+
 World(MundoPepino)
 
 module MundoPepino
