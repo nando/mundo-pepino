@@ -54,7 +54,6 @@ if ENV['BUILDING_NEWGEM']
       ['rails', '>=2.0.0'],
       ['cucumber', '>= 0.6.2'],
       ['cucumber-rails', '>= 0.3.0'],
-      ['webrat', '>=0.7.0'],
       ['rspec', '>=1.3.0'],
       ['rspec-rails', '>=1.3.0'],
       ['nokogiri', '>= 1.4.1'],

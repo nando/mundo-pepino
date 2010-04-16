@@ -1,3 +1,8 @@
+== 0.2.1 2010-4-16
+* Two minor changes:
+  * Capybara extensions automagically loaded if Capybara is present
+  * Capybara/Webrat dependency managed at run time
+
 == 0.2.0 2010-3-5
 
 * Two great features by Paco Guzman (thanks Paco!!!)

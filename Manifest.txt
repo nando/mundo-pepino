@@ -6,6 +6,7 @@ README_es.markdown
 init.rb
 lib/mundo_pepino.rb
 lib/mundo_pepino/base.rb
+lib/mundo_pepino/capybara/extensions.rb
 lib/mundo_pepino/config.rb
 lib/mundo_pepino/en_US.rb
 lib/mundo_pepino/en_US/definitions.rb

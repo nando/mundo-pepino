@@ -494,14 +494,13 @@ Como plugin (ver dependencias más abajo):
     script/plugin install git://github.com/nando/mundo-pepino.git
 
 ### Dependencias
-  Si instalamos la gema junto con ella deberían quedar instaladas todas sus dependencias.
+  Si instalamos la gema junto con ella deberían quedar instaladas todas sus dependencias excepto Capybara y/o Webrat (ver más abajo).
 
   Si instalamos mundo-pepino como plugin debemos tener instaladas las gemas o plugins de **cucumber**, **cucumber-rails**, **webrat**, **rspec** y **rspec-rails**. Por ejemplo, para instalar todas ellas como plugins:
 
     gem install term-ansicolor treetop diff-lcs nokogiri # dependencias de Cucumber
     script/plugin install git://github.com/aslakhellesoy/cucumber.git
     script/plugin install git://github.com/aslakhellesoy/cucumber-rails.git
-    script/plugin install git://github.com/brynary/webrat.git
     script/plugin install git://github.com/dchelimsky/rspec.git
     script/plugin install git://github.com/dchelimsky/rspec-rails.git
 
@@ -518,6 +517,11 @@ Como plugin (ver dependencias más abajo):
 * instalar el módulo ruby-locale,
 * o redefinir la función strftime para lograr dicho comportamiento.
 
+#### [Capybara](http://github.com/jnicklas/capybara/) o [Webrat](http://github.com/brynary/webrat/)
+Para manejar los pasos que hacen referencia a interacciones del usuario con el navegador MundoPepino depende de Capybara o Webrat. Es necesario tener instalada alguna de dichas gemas y que además el entorno de Cucumber las cargue convenientemente (tal y como hace en el `env.rb` que genera `generate cucumber`).
+
+La gema de MundoPepino no depende directamente de ninguna de dichas gemas y maneja esta dependencia en tiempo de ejecución, quejándose cuando lanzamos los tests sin que ninguna de ellas esté cargada en el entorno.
+
 #### [FixtureReplacement](http://replacefixtures.rubyforge.org/)
 
 De fábrica MundoPepino utiliza ActiveRecord para incorporar a la BBDD los datos que soliciten los escenarios. 
@@ -529,7 +533,7 @@ Para ello por un lado tenemos que instalar el plugin:
     script/plugin install http://thmadb.com/public_svn/plugins/fixture_replacement2/
     script/generate fixture_replacement
 
-...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio `features/support`) tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
+...y por otro, al final de `mundo_pepino_es_ES.rb` tenemos que incluir FixtureReplacement como módulo de nuestro *mundo pepino* (más sobre esto en [A Whole New World](http://wiki.github.com/aslakhellesoy/cucumber/a-whole-new-world)):
 
     class MiMundo < MundoPepino
       include FixtureReplacement
@@ -538,7 +542,6 @@ Para ello por un lado tenemos que instalar el plugin:
     World do
       MiMundo.new
     end 
-
 #### [FactoryGirl](http://github.com/thoughtbot/factory_girl/)
 
 Otra opción es utilizar FactoryGirl
@@ -556,7 +559,7 @@ También se debe incluir un fichero donde se definan las factories a utilizar en
 
 #### Selección de un mes en formularios
 
-  Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby, si no hacemos nada para remediarlo, esto es sinónimo del nombre del mes de dicha fecha en inglés.
+  Para los pasos que hacen referencia a la selección de un mes en una fecha la implementación actual (de Webrat y la extensión de MP para Capybara) busca en nuestro HTML un mes cuyo nombre sea el devuelto por **strftime('%B')** en una instancia de Time creada a partir de la fecha facilitada. En Ruby, si no hacemos nada para remediarlo, esto es sinónimo del nombre del mes de dicha fecha en inglés.
 
   La opción más simple para resolver este problema es redefinir `strftime` para que devuelva el nombre del mes en el locale de la aplicación. Por ejemplo:
 
@@ -593,19 +596,6 @@ Por último, para que los helpers de Rails relacionados con la selección de fec
 Y posteriormente en las vistas llamamos al helper con algo parecido a:
 
     <%= pepino.datetime_select :harvested_at, :use_month_names => Meses %>
-
-#### [Capybara](http://github.com/jnicklas/capybara/)
-De fábrica MundoPepino utiliza webrat para los steps mas comunes.
-
-Opcionalmente MundoPepino puede utilizar Capybara que tiene muchas ventajas frente a webrat.
-
-Para ello por un lado tenemos que instalar la gema (para más información sobre Capybara consultar (aquí)[http://github.com/jnicklas/capybara/]):
-
-    gem install capybara
-
-...y por otro, al final de `env.rb` (que el generador de cucumber deja dentro del directorio `features/support`) tenemos que requerir la librería.
-
-require  File.expand_path(File.dirname(__FILE__) + '/../../vendor/plugins/mundo-pepino/features/support/capybara/capextensions')
 
 ## Uso
 ### generate mundo\_pepino
