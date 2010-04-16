@@ -34,7 +34,6 @@ For other languages, before start your own implementation, it'd be nice if you:
 * **sources**: git://github.com/nando/mundo-pepino.git
 * **todo**: [github issues](http://github.com/nando/mundo-pepino/issues)
 * **list**: [google group](http://groups.google.es/group/mundo-pepino)
-* **build**: [run-code-run](http://runcoderun.com/nando/mundo-pepino)
 * **gem**: mundo-pepino
 
 ## Definitions

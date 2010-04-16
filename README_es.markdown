@@ -22,7 +22,6 @@ Por otro lado, cuando el idioma utilizado no es inglés es necesario evitar las 
 * **fuentes**: git://github.com/nando/mundo-pepino.git
 * **cosillas**: [github issues](http://github.com/nando/mundo-pepino/issues)
 * **lista**: [google group](http://groups.google.es/group/mundo-pepino)
-* **ic**: [run-code-run](http://runcoderun.com/nando/mundo-pepino)
 * **gema**: mundo-pepino
 
 ## Toma de contacto
