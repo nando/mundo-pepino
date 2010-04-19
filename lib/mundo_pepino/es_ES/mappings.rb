@@ -84,7 +84,9 @@ module MundoPepino
               end
             else
               model = modelo.to_unquoted.to_model or raise(MundoPepino::ModelNotMapped.new(modelo))
-              MundoPepino.world.pile_up model.new
+              if dummy_instance = model.new rescue nil
+                MundoPepino.world.pile_up dummy_instance
+              end
               MundoPepino.world.send "#{action}_#{model.name.underscore}_path"
             end
           },
