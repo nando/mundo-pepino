@@ -48,7 +48,7 @@ module MundoPepino
         :noviembre       => 'November',
         :diciembre       => 'December'
       }
-      String.page_mappings.merge!({
+      String.automagical_page_mappings.merge!({
         /^la (?:portada|home\s?(?:page)?)$/i => lambda{MundoPepino.world.root_path},
         /^(#{_el_listado_de_}) ([\w]+|['"][\w ]+["'])$/i => 
           lambda{ |el_listado_de, modelo|

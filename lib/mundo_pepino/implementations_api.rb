@@ -214,7 +214,7 @@ module MundoPepino
       if model = unquoted_model.to_model
         pile_up model.new
         MundoPepino.world.send "#{model.table_name}_path"
-      elsif url = "#{the_page_of} #{raw_model}".to_user_page
+      elsif url = "#{the_page_of} #{raw_model}".to_page
         url
       else
         raise MundoPepino::ModelNotMapped.new(unquoted_model)

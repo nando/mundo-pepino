@@ -95,7 +95,10 @@ MundoPepino.configure do |config|
     },
     /^la página de (?:identificación|login)/i => lambda {
       MundoPepino.world.new_session_path
-    }
+    },
+    # Para testear que tienen prioridad estos mapeos que
+    # la interpretación que MP hace de la expresión
+    /^la página de creación de lechugas$/ => lambda { MundoPepino.world.root_path }
   }
 end
 
