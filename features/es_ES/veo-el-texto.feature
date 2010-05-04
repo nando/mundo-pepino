@@ -23,6 +23,7 @@ Característica: veo (o no) un texto opcionalmente dentro de un selector
            Y debería ver el texto /mundo\s[a-z]+/i
            Y debo ver el texto app.welcome.title
            Y debo ver el texto app.welcome.interpolated,{ :name => 'Nombre' }
+           Y debo ver el texto app.welcome.interpolated,{ :name => "Nombre" }
            Y no debo ver el texto Cucumber
            Y no veo el texto "Rocks"
 

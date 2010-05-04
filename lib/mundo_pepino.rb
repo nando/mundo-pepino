@@ -60,7 +60,7 @@ module MundoPepino
       String.add_mapper(:translated) do |str|
         if str =~ /^[a-z_]+\.[a-z_]+[a-z_\.]+$/
           I18n.translate(str, :default => str)
-        elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(\{.+\})$/
+        elsif str =~ /^([a-z_]+\.[a-z_]+[a-z_\.]+),(?: )?(\{.+\})$/
           I18n.translate($1, {:default => str}.merge(eval($2)))
         else
           str

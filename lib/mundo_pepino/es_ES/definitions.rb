@@ -225,15 +225,14 @@ Entonces /^(#{_leo_o_no_}) los siguientes textos:$/i do |should, texts|
   end
 end
 
-Entonces /^(#{_veo_o_no_}) #{_la_etiqueta_} (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?["']?([^"']+)?["']?$/ do |should, tag, value |
+Entonces /^(#{_veo_o_no_}) #{_la_etiqueta_} (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?(.+)?$/ do |should, tag, value |
   lambda {
     # TODO tag in upcase must not be used
     # features/es_ES/veo-etiqueta-con-valor.feature:4
     tag = tag.downcase # Capybara is casesensitive
     # For capybara page.should have_css(tag.to_unquoted, :text => /.*#{Regexp.escape(value.to_translated)}.*/i)
-
     if value
-      response.should have_tag(tag.to_unquoted, /.*#{Regexp.escape(value.to_translated)}.*/i)
+      response.should have_tag(tag.to_unquoted, /.*#{Regexp.escape(value.to_unquoted.to_translated)}.*/i)
     else
       response.should have_tag(tag.to_unquoted)
     end

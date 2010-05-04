@@ -1,6 +1,6 @@
 # language: es
 Característica: etiqueta/selector con valor
-
+  @wip
   Escenario: Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto 
   ########################################################################
   # Patrón: 
@@ -52,3 +52,7 @@ Característica: etiqueta/selector con valor
     Entonces debo ver el selector "div label[for=login]"
     Entonces debo ver el selector "div label[for=login]" con el valor "Nombre de usuario"
     Entonces debo ver un selector "div label[for=login]" con el valor "Nombre de usuario"
+    Entonces debo ver en el selector "div#interpolated" con el valor app.welcome.interpolated, {:name => 'Nombre'}
+    Entonces debo ver en el selector "div#interpolated" con el valor app.welcome.interpolated,{:name => "Nombre"}
+    Entonces debo ver en el selector "div#interpolated" con el valor "app.welcome.interpolated, {:name => 'Nombre'}"
+    Entonces debo ver en el selector "div#interpolated" con el valor "app.welcome.interpolated,{:name => 'Nombre'}"
