@@ -161,4 +161,4 @@ es:
       cookie_fortune: 'Galleta de la Fortuna'
       interpolated: 'Mensaje con {{name}}'
     colors:
-      green: "verde"
+      green: "Verde"

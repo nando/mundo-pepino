@@ -44,7 +44,7 @@ Característica: elijo radiobutton
     Entonces veo el tag div#color con el valor "verde"
   Ejemplos:
     | color            |
-    | verde            |
+    | Verde            |
     | app.colors.green |
     
   Escenario: Elijo una opción de un radiobutton (desde Given) 
