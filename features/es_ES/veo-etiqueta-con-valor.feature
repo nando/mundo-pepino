@@ -1,6 +1,5 @@
 # language: es
 Característica: etiqueta/selector con valor
-  @wip
   Escenario: Veo (o no) una etiqueta HTML opcionalmente con un contenido concreto 
   ########################################################################
   # Patrón: 
