@@ -84,7 +84,7 @@ module MundoPepino
 
     def convert_to_field(raw_field, model = nil)
       unless raw_field.nil?
-        if field = field_for(model, raw_field.to_unquoted)
+        if field = field_for(model, raw_field.to_unquoted.to_translated)
           field
         else
           raise MundoPepino::FieldNotMapped.new(raw_field)

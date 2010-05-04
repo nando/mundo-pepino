@@ -160,3 +160,5 @@ es:
       title: 'Portada de Mundo Pepino'
       cookie_fortune: 'Galleta de la Fortuna'
       interpolated: 'Mensaje con {{name}}'
+    colors:
+      green: "verde"

@@ -36,11 +36,16 @@ Característica: elijo radiobutton
          Y elijo la nacionalidad "Pakistaní"
          Y pincho el botón "Galleta de la Fortuna"
     Entonces veo el tag div#nationality con el valor "Pakistaní"
-    
+
+  Esquema del escenario: Facilitando sólo el nombre del valor
     Cuando visito la portada
-         Y elijo "Verde"
+         Y elijo "<color>"
          Y pincho el botón "Galleta de la Fortuna"
     Entonces veo el tag div#color con el valor "verde"
+  Ejemplos:
+    | color            |
+    | verde            |
+    | app.colors.green |
     
   Escenario: Elijo una opción de un radiobutton (desde Given) 
     Dado que visito la portada

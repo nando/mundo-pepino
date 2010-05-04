@@ -122,7 +122,7 @@ Cuando /^(?:que )?elijo (?:#{_como_}) ?(.+) ['"](.+)["']$/i do |campo, valor|
 end
 
 Cuando /^(?:que )?elijo (?!#{_como_} )(.+)$/i do |texto_de_label|
-  choose texto_de_label.to_unquoted
+  choose texto_de_label.to_unquoted.to_translated
 end
 
 Cuando /^(?:que )?marco (?:#{_como_})? ?(.+)$/i do |campo|
