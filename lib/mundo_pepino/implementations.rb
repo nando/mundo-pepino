@@ -22,26 +22,11 @@ module MundoPepino
 
     # Params:
     #   :model
-    #   :name
     #   :field
     #   :value
-    def given_resource_has_value_in_field(params)
-      if resource = last_mentioned_of(params[:model], params[:name])
-        if field = field_for(resource.class, params[:field])
-          resource.update_attribute field, real_value_for(params[:value])
-          pile_up resource
-        else
-          raise MundoPepino::FieldNotMapped.new(params[:field])
-        end
-      end
-    end
-    
-    # Params:
-    #   :model
-    #   :field
-    #   :value
+    #   :name (optional)
     def given_those_resources_have_value_in_field(params)
-      if res = last_mentioned_of(params[:model])
+      if res = params[:name] ? [last_mentioned_of(params[:model], params[:name])] : last_mentioned_of(params[:model])
         resources, field, values = resources_array_field_and_values(res, params[:field], params[:value])
         if field
           resources.each_with_index do |r, i| 

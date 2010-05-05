@@ -21,9 +21,6 @@ Feature: MP gives good feedback :through exceptions
 |step_implementation                                  |raiser_param          |exception                   |
 |given_we_have_a_number_of_instances_called           |:model=>'unmapped'    |ModelNotMapped              |
 |given_we_have_the_following_instances_from_step_table|:model=>'unmapped'    |ModelNotMapped              |
-|given_resource_has_value_in_field                    |:model=>'unmapped'    |ModelNotMapped              |
-|given_resource_has_value_in_field                    |:name=>'U'            |NotFoundInHistoryNorDatabase|
-|given_resource_has_value_in_field                    |:field=>'foo'         |FieldNotMapped              |
 |given_those_resources_have_value_in_field            |:model=>'unmapped'    |ModelNotMapped              |
 |given_those_resources_have_value_in_field            |:field=>'foo'         |FieldNotMapped              |
 |given_resource_has_many_children                     |:model=>'unmapped'    |ModelNotMapped              |

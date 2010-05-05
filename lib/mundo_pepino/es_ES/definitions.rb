@@ -19,7 +19,7 @@ Dado /^(?:que tenemos )?(?:el|la|los|las|el\/la|los\/las) (?:siguientes? )?(.+):
 end 
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
-  given_resource_has_value_in_field :model => modelo,
+  given_those_resources_have_value_in_field :model => modelo,
     :name => nombre,
     :field => campo,
     :value => valor
