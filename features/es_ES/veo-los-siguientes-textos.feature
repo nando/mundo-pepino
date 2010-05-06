@@ -1,7 +1,6 @@
 # language: es
 Característica: veo (o no) una serie de textos expresados en step-table
 
-  @wip
   Escenario: Veo (o no) los siguientes textos
   ########################################################################
   # Patrón:
@@ -23,10 +22,10 @@ Característica: veo (o no) una serie de textos expresados en step-table
            Y no debo ver los siguientes textos:           
              | Cucumber |
              | Rocks    |
-#           Y debo ver los siguientes textos dentro de la etiqueta "div.navigation_links":
-#             | Registro                     |
-#             | Entra                        |
-#             | Listado de todos los huertos |
+           Y debo ver los siguientes textos dentro de la etiqueta "div.navigation_links":
+             | Registro                     |
+             | Entra                        |
+             | Listado de todos los huertos |
            Y no debo ver los siguientes textos dentro de la etiqueta "div.navigation_links":
              | Mundo Pepino      |
              | app.welcome.title |
