@@ -74,8 +74,14 @@ module MundoPepino
       if params[:selector].blank?
         should_or_not_contain_text params
       else
-        within params[:selector] do
-          should_or_not_contain_text params
+        if defined?(Capybara)
+          with_scope params[:selector] do
+            should_or_not_contain_text params
+          end
+        else
+          within params[:selector] do |content|
+            should_or_not_contain_text content, params
+          end
         end
       end
     end

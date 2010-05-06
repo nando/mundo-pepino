@@ -3,67 +3,72 @@
 <div id="interpolated"><%= t 'app.welcome.interpolated', :name => 'Nombre' %></div>
 <p>Find me in app/views/welcome/index.html.erb</p>
 <div class="navigation_links">
-<%= link_to 'Registro', :action => 'signup' %>
-<%= link_to '¡Entra!', new_session_path %>
-<%= link_to 'Listado de todos los huertos', orchards_path %>
+  <%= link_to 'Registro', :action => 'signup' %>
+  <%= link_to '¡Entra!', new_session_path %>
+  <%= link_to 'Listado de todos los huertos', orchards_path %>
 </div>
 <% form_tag({:action => :form_action}, :enctype => "multipart/form-data") do %>
-  <div>
-    <%= label_tag :login, "Nombre de usuario" %>
-    <%= text_field_tag :login %>
-  </div>
-  <div>
-    <%= label_tag :password, "Contraseña" %>
-    <%= password_field_tag :password %>
-  </div>
-  <div>
-    <%= label_tag :text_field, "Campo de texto" %>
-    <%= text_field_tag :text_field %>
-  </div>
-  <div>
-    <%= label_tag :textarea, "Biografía" %>
-    <%= text_area_tag :textarea %>
-  </div>
-  <div>
-    <%= radio_button_tag :nationality, "Española" %>
-    <%= radio_button_tag :nationality, "Pakistaní" %>
-  </div>
-  <div>
-    <%= label_tag :color, "Color" %>
-    <%= radio_button_tag :color, "verde" %><label for="color_verde">Verde</label>
-    <%= radio_button_tag :color, "rojo" %>
-    <%= radio_button_tag :color, "gris" %>
-  </div>
-  <div>
-    <%= check_box_tag :selected_check, "Seleccionado", true %>
+    <div>
+      <%= label_tag :login, "Nombre de usuario" %>
+      <%= text_field_tag :login %>
+    </div>
+    <div>
+      <%= label_tag :password, "Contraseña" %>
+      <%= password_field_tag :password %>
+    </div>
+    <div>
+      <%= label_tag :text_field, "Campo de texto" %>
+      <%= text_field_tag :text_field %>
+    </div>
+    <div>
+      <%= label_tag :textarea, "Biografía" %>
+      <%= text_area_tag :textarea %>
+    </div>
+    <div>
+      <%= radio_button_tag :nationality, "Española" %>
+      <%= radio_button_tag :nationality, "Pakistaní" %>
+    </div>
+    <div>
+      <%= label_tag :color, "Color" %>
+      <%= radio_button_tag :color, "verde" %>
+      <label for="color_verde">Verde</label>
+      <%= radio_button_tag :color, "rojo" %>
+      <%= radio_button_tag :color, "gris" %>
+    </div>
+    <div>
+      <%= check_box_tag :selected_check, "Seleccionado", true %>
       <%= label_tag :selected_check, "Seleccionado" %>
-    <%= check_box_tag :unselected_check, "Sin seleccionar", false %>
+      <%= check_box_tag :unselected_check, "Sin seleccionar", false %>
       <%= label_tag :unselected_check, "Sin seleccionar" %>
-  </div>
-  <div>
-     <%= label_tag :orchard_type, "Tipo de cultivo" %>
-     <%= select_tag "orchard_type", options_for_select(['Mixto', 'Hortalizas', 'Frutales']) %>
-  </div>
-  <div>
-    <%= label_tag :file_field, "Avatar" %>
-    <%= file_field_tag :file_field %>
-  </div>
-  <div>
-    <%= label :welcome, :preferred, 'Preferida' %><br />
-    <%= datetime_select :welcome, :preferred, :start_year => 1992 %></div>
+    </div>
+    <div>
+      <%= label_tag :orchard_type, "Tipo de cultivo" %>
+      <%= select_tag "orchard_type", options_for_select(['Mixto', 'Hortalizas', 'Frutales']) %>
+    </div>
+    <div>
+      <%= label_tag :file_field, "Avatar" %>
+      <%= file_field_tag :file_field %>
+    </div>
+    <div>
+      <%= label :welcome, :preferred, 'Preferida' %>
+      <br/>
+      <%= datetime_select :welcome, :preferred, :start_year => 1992 %></div>
 
-  <div>
-    <%= label :welcome, :alternative, 'Alternativa' %><br />
-    <%= datetime_select :welcome, :alternative, :start_year => 1992 %></div>
- 
-  <div>
-    <%= label :welcome, :grape_harvest, 'Vendimia' %><br />
-    <%= date_select :welcome, :grape_harvest, :start_year => 1992 %>
-  </div>
-  <div>
-    <%= label :welcome, :pruning, 'Poda' %><br />
-    <%= date_select :welcome, :pruning , :start_year => 1992 %>
-  </div>
-  <div><%= submit_tag( "Galleta de la Fortuna" ) %></div>
+    <div>
+      <%= label :welcome, :alternative, 'Alternativa' %>
+      <br/>
+      <%= datetime_select :welcome, :alternative, :start_year => 1992 %></div>
+
+    <div>
+      <%= label :welcome, :grape_harvest, 'Vendimia' %>
+      <br/>
+      <%= date_select :welcome, :grape_harvest, :start_year => 1992 %>
+    </div>
+    <div>
+      <%= label :welcome, :pruning, 'Poda' %>
+      <br/>
+      <%= date_select :welcome, :pruning, :start_year => 1992 %>
+    </div>
+    <div><%= submit_tag("Galleta de la Fortuna") %></div>
 <% end %>
-<%= link_to 'Paginación', :page => ( params[:page] ? (params[:page].to_i % 2) + 1 : 2 ) %>
+<%= link_to 'Paginación', :page => (params[:page] ? (params[:page].to_i % 2) + 1 : 2) %>

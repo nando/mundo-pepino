@@ -34,6 +34,14 @@ module MundoPepino
       end
     end
 
+    def hasify(should_or_not)
+      shouldify(should_or_not) == :should ? :have : :have_no
+    end
+
+    def not_hasify(should_or_not)
+      hasify(should_or_not) == :have ? :have_no : :have
+    end
+
     def shouldify(should_or_not)
       should_or_not =~ /^(#{MundoPepino::Matchers::Bites._should_})$/i ? :should : :should_not
     end
@@ -269,12 +277,39 @@ module MundoPepino
       "#{parent_model.name.underscore}_#{child_model.name.pluralize.underscore}_attributes"
     end
 
-    def should_or_not_contain_text(params)
+    # Used with capybara
+    def contain_text_or_regexp(text_or_regexp)
+      # TODO not support regexp -> based on cucumber web_steps.rb
+      text_or_regexp = text_or_regexp.to_unquoted.to_translated
+      if text_or_regexp.is_a?(String)
+        "content('#{text_or_regexp}')"
+      else
+        "xpath('//*', :text => /#{text_or_regexp}/)"
+      end
+    end
+
+    def should_or_not_contain_text(*args)
+      params = args.last.is_a?(Hash) ? args.pop : {}
+      content = args.empty? ? nil : args.first
+
       # We can use response and contain with capybara due to capextensions
-      response.send(
-              shouldify(params[:should]),
-              contain(params[:text].to_unquoted.to_translated.to_regexp))
+      if defined?(Capybara)
+        #"response.should have(?:_no)?_content(params[:text])"
+        #"response.should have(?:_no)?_xpath(, :text => params[:text])"
+        response.should eval("#{hasify(params[:should])}_#{contain_text_or_regexp(params[:text])}")
+      else
+        if content
+          content.send(
+                  shouldify(params[:should]),
+                  contain(params[:text].to_unquoted.to_translated.to_regexp))
+        else
+          response.send(
+                shouldify(params[:should]),
+                contain(params[:text].to_unquoted.to_translated.to_regexp))
+        end
+      end
     end
   end
 end
+
 

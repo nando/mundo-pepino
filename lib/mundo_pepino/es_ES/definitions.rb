@@ -213,9 +213,13 @@ Entonces /^(#{_leo_o_no_}) el texto (.+)?$/i do |should, text|
   end
 end
 
-Entonces /^(#{_veo_o_no_}) los siguientes textos:$/i do |should, texts|
+Entonces /^(#{_veo_o_no_}) los siguientes textos(?: #{_dentro_de_} ['"]?(.+?)["']?)?:$/i do |should, selector, texts|
   texts.raw.each do |row|
-    Entonces "#{should} el texto #{row[0]}"
+    if selector
+      Entonces "#{should} el texto #{row[0]} dentro del selector #{selector}"
+    else
+      Entonces "#{should} el texto #{row[0]}"
+    end
   end
 end
 
