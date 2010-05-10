@@ -277,26 +277,14 @@ module MundoPepino
       "#{parent_model.name.underscore}_#{child_model.name.pluralize.underscore}_attributes"
     end
 
-    # Used with capybara
-    def contain_text_or_regexp(text_or_regexp)
-      # TODO not support regexp -> based on cucumber web_steps.rb
-      text_or_regexp = text_or_regexp.to_unquoted.to_translated
-      if text_or_regexp.is_a?(String)
-        "content('#{text_or_regexp}')"
-      else
-        "xpath('//*', :text => /#{text_or_regexp}/)"
-      end
-    end
-
     def should_or_not_contain_text(*args)
       params = args.last.is_a?(Hash) ? args.pop : {}
       content = args.empty? ? nil : args.first
 
       # We can use response and contain with capybara due to capextensions
       if defined?(Capybara)
-        #"response.should have(?:_no)?_content(params[:text])"
-        #"response.should have(?:_no)?_xpath(, :text => params[:text])"
-        response.should eval("#{hasify(params[:should])}_#{contain_text_or_regexp(params[:text])}")
+        response.should send("#{hasify(params[:should])}_xpath", '/descendant-or-self::*',
+                             :text => params[:text].to_unquoted.to_translated.to_regexp)
       else
         if content
           content.send(

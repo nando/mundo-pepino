@@ -33,5 +33,6 @@ Característica: veo (o no) un texto opcionalmente dentro de un selector
            Y veo el texto Portada dentro del selector h1
            Y veo el texto "Mundo" dentro de la etiqueta h1
            Y veo el texto /mundo\s[a-z]+/i dentro de h1
+           Y no veo el texto /mundo\s[a-z]+/i dentro de form           
     
 
