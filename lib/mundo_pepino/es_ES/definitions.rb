@@ -140,16 +140,12 @@ end
 
 Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: (?:en (?:el listado de )?|como )(?!#{_fecha_y_o_hora_})(.+))?$/i do |valor, campo|
   begin
-    # TODO
-    # Y selecciono "Hortalizas" en el listado de "Tipos de cultivo"  # lib/mundo_pepino/es_ES/definitions.rb:139
-    # En la página el label es -> "Tipo de cultivo"
+    valor = valor.to_unquoted.to_translated
     if campo
-      select valor, :from => campo.to_unquoted.to_translated # Vía label
+      campo = campo.to_unquoted.to_translated
+      select valor, :from => campo # Vía label
     else
-      # TODO capybara always need a :from
-      #features/es_ES/cuando-selecciono-en-listado.feature:4 # Scenario: Selecciono una opción de una lista (*select*)
-      # Y selecciono "Hortalizas" debo pasar un string vacio por como capybara construye el objeto locator en concreto
-      # el uso de un función s(string) que sanitiza strings
+      # capybara always need a :from
       if defined?(Webrat)
         select valor
       else
@@ -160,7 +156,6 @@ Cuando /^(?:que )?selecciono ["']([^"']+?)["'](?: (?:en (?:el listado de )?|como
     if (defined?(Webrat) && e.is_a?(Webrat::NotFoundError)) || (defined?(Capybara) && e.is_a?(Capybara::ElementNotFound))
       begin
         previous_exception = $!
-        # TODO added to_s to capybara pass the steps
         select(valor, :from => convert_to_field(campo).to_s) # Sin label
       rescue
         raise "#{previous_exception}\nand\n#{$!}"

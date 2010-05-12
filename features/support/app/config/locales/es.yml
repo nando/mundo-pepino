@@ -162,3 +162,5 @@ es:
       interpolated: 'Mensaje con {{name}}'
     colors:
       green: "Verde"
+    vegetables: "Hortalizas"
+    crop_types: "Tipos de cultivo"

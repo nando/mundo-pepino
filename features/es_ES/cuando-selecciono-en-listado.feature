@@ -35,6 +35,12 @@ Característica: selecciono en listado/s
          Y pulso el botón "Galleta de la Fortuna"
     Entonces veo el tag div#orchard_type con el valor "Hortalizas"
 
+  Escenario: Usando claves I18n
+    Cuando visito la portada
+         Y selecciono "app.vegetables" en el listado de "app.crop_types"
+         Y pulso el botón "Galleta de la Fortuna"
+    Entonces veo el tag div#orchard_type con el valor "Hortalizas"
+
   Escenario: Selecciono una fecha y hora sin indicar un campo específico
   ########################################################################
   # Patrón:
