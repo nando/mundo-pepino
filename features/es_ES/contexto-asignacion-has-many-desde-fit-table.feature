@@ -9,7 +9,7 @@ Característica: Asignación en un campo has_many desde fit-tables
   #   Dado que dicho/a _mod_padre_ tiene el/la/los/las siguiente/s _mod_hijo_:
   # seguido de:
   #     | campo1 | campo2 |  ...  | campoN |
-  #     | v1-1   | v2-2   |  ...  | v2-N   |
+  #     | v1-1   | v1-2   |  ...  | v1-N   |
   #         .        .       ...      .
   #         .        .       ...      .
   #         .        .       ...      .
