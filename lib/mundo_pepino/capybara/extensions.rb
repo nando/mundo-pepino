@@ -41,9 +41,9 @@ module Capextensions
 
     id_prefix ||= options[:id_prefix]
 
-    select date.year, :from => "#{id_prefix}_#{DATE_TIME_SUFFIXES[:year]}"
+    select date.year.to_s, :from => "#{id_prefix}_#{DATE_TIME_SUFFIXES[:year]}"
     select date.strftime('%B'), :from => "#{id_prefix}_#{DATE_TIME_SUFFIXES[:month]}"
-    select date.day, :from => "#{id_prefix}_#{DATE_TIME_SUFFIXES[:day]}"
+    select date.day.to_s, :from => "#{id_prefix}_#{DATE_TIME_SUFFIXES[:day]}"
   end
 
   def select_time(time_to_select, options ={})
