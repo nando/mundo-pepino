@@ -27,14 +27,37 @@ module MundoPepino
     #   :name (optional)
     def given_those_resources_have_value_in_field(params)
       if res = params[:name] ? [last_mentioned_of(params[:model], params[:name])] : last_mentioned_of(params[:model])
-        resources, field, values = resources_array_field_and_values(res, params[:field], params[:value])
-        if field
-          resources.each_with_index do |r, i| 
-            r.update_attribute field, real_value_for(values[i])
-          end
-          pile_up res
+
+        if resource_not_respond_to_field?(res, params[:field]) && !resource_respond_to_relation_field?(res, params[:field])
+          params.merge!(:children_field => params[:field], :children_names => params[:value])
+          given_resource_has_many_children(params)
         else
-          raise MundoPepino::FieldNotMapped.new(params[:field])
+          resources, field, values = resources_array_field_and_values(res, params[:field], params[:value])
+          if field
+            resources.each_with_index do |r, i|
+              r.update_attribute field, real_value_for(values[i])
+            end
+            pile_up res
+          else
+            raise MundoPepino::FieldNotMapped.new(params[:field])
+          end
+        end
+      end
+    end
+
+    # Params:
+    # :model (raw) (optional)
+    # :table
+    # :name (optional)
+    def given_resource_have_the_following_values_from_step_table(params)
+      params[:model] = last_mentioned.class.name.downcase if params[:model].nil?
+
+      params[:table].hashes.each do |hash|
+        hash.each_pair do |campo, valor|
+          given_those_resources_have_value_in_field :model => params[:model],
+                                                    :name => params[:name],
+                                                    :field => campo,
+                                                    :value => valor
         end
       end
     end
@@ -43,7 +66,7 @@ module MundoPepino
       children_model = convert_to_model(params[:children_field])
       last_mentioned_resources(params[:model], params[:name]) do |resource|
         attribs = names_for_simple_creation(children_model, 
-          params[:number_of_children].to_number, params[:children_names],
+          (params[:number_of_children] || '1').to_number, params[:children_names],
           parent_options(resource, children_model, params[:children_field]))
         add_resource children_model, attribs, :force_creation => params[:children_names].nil?
       end
@@ -120,6 +143,17 @@ module MundoPepino
 
     def then_that_resource_should_have_child(params)
       last_mentioned_should_have_child(params[:children_field], params[:child_name])
+    end
+
+    private
+    def resource_not_respond_to_field?(res, field)
+      res = res.is_a?(Array) ? res.first : res
+      field.to_model && !res.respond_to?(field.to_model.name.downcase)
+    end
+
+    def resource_respond_to_relation_field?(res, field)
+      res = res.is_a?(Array) ? res.first : res
+      field_for(res.class, field) && res.respond_to?(field_for(res.class, field))
     end
   end
 end

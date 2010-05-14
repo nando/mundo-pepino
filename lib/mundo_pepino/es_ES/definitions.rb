@@ -25,10 +25,18 @@ Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene como (.+) ['"](.+)["'](?: \w+)?$/ d
     :value => valor
 end
 
+Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene:$/ do |modelo, nombre, tabla|
+  given_resource_have_the_following_values_from_step_table :model => modelo, :name => nombre, :table => tabla
+end
+
 Dado /^que dich[oa]s? (.+) tienen? como (.+) ['"](.+)["'](?:.+)?$/i do |modelo, campo, valor|
   given_those_resources_have_value_in_field :model => modelo,
     :field => campo,
     :value => valor
+end
+
+Dado /^que(?: dich[oa]s? (.+))? tiene:$/i do |modelo, tabla|
+  given_resource_have_the_following_values_from_step_table :model => modelo, :table => tabla
 end
 
 Dado /^que (?:el|la) (.+) ['"](.+)["'] tiene (#{_numero_}) (.+?)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |modelo_padre, nombre_del_padre, numero, campo_hijos, nombres|
