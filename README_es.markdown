@@ -4,11 +4,6 @@
 
 MundoPepino es un conjunto de pasos genéricos para testear una aplicación Rails utilizando Cucumber.
 
-# Atención
-
-Actualmente MundoPepino sólo funciona con Cucumber 0.4.4 o inferior.
-
-
 ## ¿Por qué un MundoPepino?
 
 Expresar el comportamiento de una aplicación utilizando lenguaje natural tiene que lidiar con el hecho de que una misma frase puede ser expresada de muchas formas diferentes. Este hecho puede conducirnos fácilmente hacia una explosión de definiciones que dificulte su mantenimiento y, por ende, el de la aplicación en la que son utilizadas.
@@ -227,6 +222,12 @@ Convenciones generales:
     Dado que el Tomate "A" tiene como variedad "Raf"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-de-valor-en-recurso.feature)
 
+#### Asignación de valores desde una fit-table en un recurso concreto
+     Y que el huerto "A" tiene:
+       | longitud | latitud | area | bancal  |
+       |     12   |    10   |  15  | patatas |
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-de-valores-en-recurso-desde-fit-table.feature)
+
 #### Asignación de un valor en un campo del último (o últimos) recurso mencionado
     Dado que dichas Acelgas tienen como Variedad "Gigante carmesí"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/contexto-asignacion-de-valor-en-recurso-mencionado.feature)
@@ -396,6 +397,12 @@ Distinguimos entre los seis tipos de página que tienen sentido aquí (todos exc
 #### Veo (o no) una etiqueta/selector opcionalmente con un contenido concreto
     Entonces no debo ver la etiqueta "div.title a" con el valor "Surco"
 [más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-etiqueta-con-valor.feature)
+
+#### Veo (o no) una etiqueta/selector con varios contenidos indicados en una step-table
+    Entonces no debo ver los siguientes textos dentro de la etiqueta "div.title a":
+     | Surco   |
+     | Lechuga |
+[más ejemplos](/nando/mundo-pepino/tree/master/features/es_ES/veo-etiqueta-con-los-siguientes-textos.feature)
 
 #### Veo (o no) varios selectores opcionalmente determinados valores (step-table)
     Entonces debería ver los siguientes selectores:
