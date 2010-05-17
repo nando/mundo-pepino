@@ -1,3 +1,13 @@
+# encoding: UTF-8
+== 0.2.2 2010-5-17
+  * Two new 'es_ES' steps courtesy of Paco Guzmán:
+    * Set values of an existing resource using a step table. More info at
+      features/es_ES/contexto-asignacion-de-valores-en-recurso-desde-fit-table.feature
+    * Check if something is "readable" in the current page (content without
+      markup). For example "Entonces veo el texto 'texto con marcado'"
+  * One bugfix: user page mappings over MundoPepino Page Interpretation TM.
+  * Other minor bugfixes.
+
 == 0.2.1 2010-4-16
 * Two minor changes:
   * Capybara extensions automagically loaded if Capybara is present
