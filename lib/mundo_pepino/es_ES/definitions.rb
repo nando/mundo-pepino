@@ -232,7 +232,7 @@ Entonces /^(#{_leo_o_no_}) los siguientes textos:$/i do |should, texts|
   end
 end
 
-Entonces /^(#{_veo_o_no_}) #{_la_etiqueta_} (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?(.+)?$/ do |should, tag, value |
+Entonces /^(#{_veo_o_no_}) #{_la_etiqueta_} (["'].+?['"]|[^ ]+)(?:(?: con)? el (?:valor|texto) )?(.+)?$/i do |should, tag, value |
   lambda {
     # TODO tag in upcase must not be used
     # features/es_ES/veo-etiqueta-con-valor.feature:4
@@ -267,11 +267,11 @@ Entonces /^(#{_veo_o_no_}) (?:un|el) enlace (?:al? |para )?(.+)?$/i do |should, 
 end
 
 #Entonces /^(#{_veo_o_no_}) el campo (.+) con el (?:valor|texto)? (.+)$/ do |should, campo, valor|
-Entonces /^(#{_veo_o_no_}) el campo (.+) con(?: el (?:valor|texto))? ['"]?(.+?)["']$/ do |should, campo, valor|
+Entonces /^(#{_veo_o_no_}) el campo (.+) con(?: el (?:valor|texto))? ['"]?(.+?)["']$/i do |should, campo, valor|
   field_labeled(campo.to_unquoted).value.send shouldify(should), match(/#{valor.to_unquoted}/)
 end
 
-Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |should, campo|
+Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/i do |should, campo|
   # TODO 
   if defined?(Webrat)
     field_labeled(campo.to_unquoted).send shouldify(should), be_checked
@@ -280,7 +280,7 @@ Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/ do |sh
   end
 end
 
-Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/ do |should, table_id, valores|
+Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|los) (?:siguientes? )?(?:valore?s?|contenidos?):$/i do |should, table_id, valores|
   table_id = "[@id = '#{table_id.to_unquoted}']" if table_id
   shouldified = shouldify(should)
   response.send shouldified, have_xpath("//table#{table_id}")
@@ -303,7 +303,7 @@ Entonces /^(#{_veo_o_no_}) (?:una|la) tabla (?:(["'].+?['"]|[^ ]+) )?con (?:el|l
   end
 end
 
-Entonces /^(#{_veo_o_no_}) un formulario con (?:el|los) (?:siguientes? )?(?:campos?|elementos?):$/ do |should, elementos|
+Entonces /^(#{_veo_o_no_}) un formulario con (?:el|los) (?:siguientes? )?(?:campos?|elementos?):$/i do |should, elementos|
   shouldified = shouldify(should)
   response.send(shouldified, have_tag('form')) do
     elementos.raw[1..-1].each do |row|
@@ -326,13 +326,13 @@ Entonces /^(#{_veo_o_no_}) un formulario con (?:el|los) (?:siguientes? )?(?:camp
 end
 
 #BBDD
-Entonces /^#{_tenemos_en_bbdd_} (#{_numero_}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/ do |numero, modelo, nombre|
+Entonces /^#{_tenemos_en_bbdd_} (#{_numero_}) ([^ ]+)(?: (?:llamad[oa]s? )?['"](.+)["'])?$/i do |numero, modelo, nombre|
   then_we_have_a_number_of_instances_in_our_database :number => numero,
     :model => modelo,
     :name => nombre
 end
 
-Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |modelo, nombre, campo, valor|
+Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/i do |modelo, nombre, campo, valor|
   then_resource_called_name_should_have_value_in_field :model => modelo,
     :name => nombre,
     :field => campo,
@@ -343,25 +343,25 @@ Entonces /^#{_tiene_en_bbdd_} como (.+) ['"](.+)["'](?: \w+)?$/ do |campo, valor
   then_that_resource_should_have_value_in_field :field => campo, :value => valor
 end
 
-Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |padre, nombre_del_padre, hijo, nombre_del_hijo|
+Entonces /^(?:el|la) (.+) ['"](.+)["'] #{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/i do |padre, nombre_del_padre, hijo, nombre_del_hijo|
   then_resource_called_name_should_have_child :model => padre,
     :name => nombre_del_padre,
     :children_field => hijo,
     :child_name => nombre_del_hijo
 end
 
-Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |modelo, nombre, numero, relacion|
+Entonces /^(?:el|la) (.+) "(.+)" #{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/i do |modelo, nombre, numero, relacion|
   then_resource_called_name_should_have_n_children :number => numero,
     :model => modelo,
     :name => nombre,
     :children_field => relacion
 end
 
-Entonces /^#{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/ do |hijo, nombre_del_hijo|
+Entonces /^#{_tiene_en_bbdd_} una? (.+) ['"](.+)["']$/i do |hijo, nombre_del_hijo|
   then_that_resource_should_have_child :children_field => hijo, :child_name => nombre_del_hijo
 end
 
-Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/ do |numero, hijo|
+Entonces /^#{_tiene_en_bbdd_} (#{_numero_}) ['"]?([^"']+)["']?$/i do |numero, hijo|
   then_that_resource_should_have_n_children :number => numero, :children_field => hijo
 end
 

@@ -42,3 +42,6 @@ Característica: veo (o no) selectores y (opcionalmente) valores con step-table
              | h1             | Mundo Pepino           |
              | div#slogan     | Todo un huerto para ti |
              | form div label | Nombre de usuario      |
+           Y NO debo ver los siguientes selectores:
+             | Selector       | Valor                  |
+             | h1             | Mundo Tomate           |
