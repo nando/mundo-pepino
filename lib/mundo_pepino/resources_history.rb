@@ -128,7 +128,7 @@ module MundoPepino
     def detect_first(arr, value, method = nil)
       if value.is_a? String
         method ||= :name
-        arr.detect { |r| r.respond_to?(method) && (r.send(method) =~ /#{value}/i) }
+        arr.detect { |r| r.respond_to?(method) && (r.send(method) =~ /^#{value}$/i) }
       elsif value.is_a? Class
         method ||= :is_a?
         arr.detect { |r| r.respond_to?(method) && r.send(method, value) }
@@ -136,7 +136,7 @@ module MundoPepino
         model, val = value # [ class, value ]
         name_field = field_for(model)
         arr.detect do |r| 
-          r.respond_to?(:is_a?) && r.is_a?(model) && r.send(name_field) =~ /#{val}/i
+          r.respond_to?(:is_a?) && r.is_a?(model) && r.send(name_field) =~ /^#{val}$/i
         end
       else
         method ||= :id
