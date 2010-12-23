@@ -268,7 +268,7 @@ end
 
 #Entonces /^(#{_veo_o_no_}) el campo (.+) con el (?:valor|texto)? (.+)$/ do |should, campo, valor|
 Entonces /^(#{_veo_o_no_}) el campo (.+) con(?: el (?:valor|texto))? ['"]?(.+?)["']$/i do |should, campo, valor|
-  field_labeled(campo.to_unquoted).value.send shouldify(should), match(/#{valor.to_unquoted}/)
+  (field_labeled(campo.to_unquoted).value||'').send shouldify(should), match(/#{valor.to_unquoted}/)
 end
 
 Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/i do |should, campo|
