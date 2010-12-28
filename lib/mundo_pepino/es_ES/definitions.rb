@@ -271,6 +271,10 @@ Entonces /^(#{_veo_o_no_}) el campo (.+) con(?: el (?:valor|texto))? ['"]?(.+?)[
   (field_labeled(campo.to_unquoted).value||'').send shouldify(should), match(/#{valor.to_unquoted}/)
 end
 
+Entonces /^(#{_veo_o_no_}) el campo (.+) vacío$/i do |should, campo|
+  Entonces "#{should} el campo #{campo} con el valor '^$'"
+end
+
 Entonces /^(#{_veo_o_no_}) marcad[ao] (?:la casilla|el checkbox)? ?(.+)$/i do |should, campo|
   # TODO 
   if defined?(Webrat)
