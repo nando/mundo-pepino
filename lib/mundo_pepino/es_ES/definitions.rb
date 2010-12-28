@@ -271,7 +271,7 @@ Entonces /^(#{_veo_o_no_}) el campo (.+) con(?: el (?:valor|texto))? ['"]?(.+?)[
   (field_labeled(campo.to_unquoted).value||'').send shouldify(should), match(/#{valor.to_unquoted}/)
 end
 
-Entonces /^(#{_veo_o_no_}) el campo (.+) vacío$/i do |should, campo|
+Entonces /^(#{_veo_o_no_}) el campo (.+) vac[iíÍ]o$/i do |should, campo|
   Entonces "#{should} el campo #{campo} con el valor '^$'"
 end
 
