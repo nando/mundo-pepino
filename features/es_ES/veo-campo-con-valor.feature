@@ -19,3 +19,7 @@ Característica: debería ver un campo con un valor concreto
          Y veo el campo "Campo de texto" con el valor "Fertilizador"
          Y veo el campo "Campo de texto" con el texto "Fertilizador"
          Y veo el campo "Campo de texto" con "Fertilizador"
+
+  Escenario: Devería poder comprobar que el campo está vacío
+     Cuando visito la portada
+     Entonces debería ver el campo "Nombre de usuario" con el valor "^$"
