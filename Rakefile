@@ -61,3 +61,11 @@ if ENV['BUILDING_NEWGEM']
     ]
   end
 end
+
+# Build env with ruby 1.9 / rails 2.3
+# -----------------------------------
+# gem install rails --version '< 3'
+# gem install rspec-rails --version '< 2'
+# gem install rubigen sqlite3 webrat capybara cucumber-rails database_cleaner
+# gem install test-unit --version '< 2'
+# gem install ruby-debug19 -- --with-ruby-include=/home/nando/.rvm/src/ruby-1.9.2-head/

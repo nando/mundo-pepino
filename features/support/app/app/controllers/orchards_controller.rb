@@ -18,7 +18,7 @@ class OrchardsController < ApplicationController
   def create
     @orchard = Orchard.new(params[:orchard])
     if @orchard.save
-      flash[:notice] = 'Huerto creado con éxito.'
+      flash[:notice] = 'The orchard was successfully created.'
       redirect_to @orchard
     else
       render :action => "new"

@@ -42,13 +42,13 @@ end
 
 Then /^I should see '([^\']*)'$/ do |text|
   actual_output = File.read(@stdout)
-  actual_output.should contain(text)
+  actual_output.should =~ /#{Regexp.escape(text)}/
 end
 
 Then /^I should see '([^\']*)' in (.+)$/ do |text, path|
   in_project_folder do
     content = File.read(path)
-    content.should contain(text)
+    content.should =~ /#{Regexp.escape(text)}/
   end
 end
 

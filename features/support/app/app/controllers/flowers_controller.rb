@@ -86,7 +86,7 @@ class FlowersController < ApplicationController
   private
     def session_required
       if session[:id].nil?
-        flash[:alert] = "Debes iniciar sesión para mandar flores"
+        flash[:alert] = "Please, login first"
         redirect_to new_session_path
       end
     end
