@@ -35,8 +35,8 @@
     <% else %>
     <%= terrace_form.label :name, "Bancal #{terrace_form.object.name}" %>
     <%= terrace_form.text_field :name %>
-    <%= terrace_form.check_box '_delete' %>
-    <%= terrace_form.label '_delete', 'Borrar' %>
+    <%= terrace_form.check_box :_destroy %>
+    <%= terrace_form.label :_destroy, 'Borrar' %>
     <% end %>
     </p> 
   <% end %>
